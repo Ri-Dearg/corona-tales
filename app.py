@@ -13,7 +13,7 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def story_page():
-    return render_template('index.html')
+    return render_template('index.html', stories=mongo.db.stories.find())
 
 
 if __name__ == '__main__':

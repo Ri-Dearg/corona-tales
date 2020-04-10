@@ -12,3 +12,11 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+.no-m-bot {
+    margin-bottom: 0;
+}
+
+.no-pad-bot {
+  padding-bottom: 0 !important;
+}
