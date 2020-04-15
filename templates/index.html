@@ -19,7 +19,7 @@
 
 		<div class="section">
 			<!-- Function to place each story as a card -->
-			{% for story in stories %}
+			{% for story in storylist %}
 			<!--   Story Section   -->
 			<div class="row">
 				<div class="col s12">
@@ -520,13 +520,12 @@
 							<input id="date" name="date" type="text" class="datepicker" required>
 							<label for="date">When?</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="chips chips-autocomplete no-autoinit input-field col s6">
                             <i class="material-icons prefix">label</i>
-                            <div class="chips chips-autocomplete no-autoinit">
-							    <input id="tags" name="tags" required>
-                            </div>
-						</div>
+                            <input id="tags" name="tags" placeholder="Up to 15 tags" required>
+                        </div>
                         <div class="input-field col s6">
+                            <i class="material-icons prefix">palette</i>
                             <select id="color" name="color" required>
                                 <option value="" disabled selected>Color</option>
                                 <option value="red">Red</option>

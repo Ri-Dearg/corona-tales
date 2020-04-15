@@ -10,15 +10,24 @@ app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 
 mongo = PyMongo(app)
 
+stories = mongo.db.stories
+
+taglist = set()
+
+for story in stories.find():
+    tags = story["tags"]
+    for tag in tags:
+        taglist.add(tag)
+
 
 @app.route('/')
 def story_page():
-    return render_template('index.html', stories=mongo.db.stories.find())
+    storylist = stories.find()
+    return render_template('index.html', storylist=storylist, taglist=taglist)
 
 
 @app.route('/create_story', methods=['POST'])
 def create_story():
-    stories = mongo.db.stories
     stories.insert_one(request.form.to_dict())
     return redirect(url_for('story_page'))
 

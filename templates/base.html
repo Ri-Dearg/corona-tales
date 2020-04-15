@@ -87,7 +87,22 @@
                 .catch( error => {
                     console.error( error );
                 } );
+		</script>
+
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+            var chips = document.querySelectorAll('.chips');
+            var instances = M.Chips.init(chips, {limit: 15, 
+                                                autocompleteOptions: { data: {
+                                                    {% for tag in taglist %}
+                                                        {{ tag }}: null,
+                                                    {% endfor %}
+                                                            },
+                                                    limit: 10}
+            });
+        });
         </script>
+
     </body>
 
 </html>
