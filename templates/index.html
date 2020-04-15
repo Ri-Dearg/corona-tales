@@ -30,21 +30,20 @@
 								<span class="card-title col s6 right-align">{{ story.date }}</span>
 								<div class="col s12">
 									<p>{{ story.first_name.title() }} {{ story.last_name.title() }}<br>
-                                Age {{ story.age }} <br>
-                                {{ story.country.title() }}<br><br>
-                                {{ story.text }}</p><br>
+                                    Age {{ story.age }} <br>
+                                    {{ story.country.title() }}</p>
+                                    {{ story.text|safe }} <br>
+                                </div>
+                                <div class="card-action col s12">
+                                    <p>Tags: {% for tag in story.tags %}{{ tag }}, {% endfor %}</p>
+                                </div>
                             </div>
-										<div class="card-action col s12">
-											<p>Tags: {% for tag in story.tags %}{{ tag }}, {% endfor %}</p>
-										</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				{% endfor %}
-			</div>
-		</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
 
 		<div class="fixed-action-btn">
 			<a href="#modal1" class="btn-floating btn-large modal-trigger red">
@@ -522,40 +521,39 @@
 							<label for="date">When?</label>
                         </div>
                         <div class="input-field col s6">
-							<i class="material-icons prefix">label</i>
-							<input id="tags" name="tags" type="text" required>
-							<label for="tags">Choose any tag</label>
+                            <i class="material-icons prefix">label</i>
+                            <div class="chips chips-autocomplete no-autoinit">
+							    <input id="tags" name="tags" required>
+                            </div>
 						</div>
-						<div class="input-field col s6">
+                        <div class="input-field col s6">
                             <select id="color" name="color" required>
                                 <option value="" disabled selected>Color</option>
-								<option value="red">Red</option>
-								<option value="pink">Pink</option>
+                                <option value="red">Red</option>
+                                <option value="deep-orange">Deep Orange</option>
+                                <option value="orange">Orange</option>								
+                                <option value="amber">Amber</option>
+								<option value="yellow">Yello</option>
+								<option value="lime">Lime</option>
+								<option value="light-green">Light Green</option>
+								<option value="green">Green</option>
+								<option value="teal">Teal</option>
+								<option value="cyan">Cyan</option>
+								<option value="light-blue">Light Blue</option>
+								<option value="blue">Blue</option>
+								<option value="indigo">Indigo</option>
+								<option value="deep-purple">Deep Purple</option>
 								<option value="purple">Purple</option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								</select>
+								<option value="pink">Pink</option>
+                            </select>
                         </div>
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">title</i>
+                            <i class="material-icons prefix">import_contacts</i>
                             <input id="title" name="title" type="text" required>                            
                             <label for="title">Story Title</label>
                         </div>
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">import_contacts</i>
-                            <textarea id="text" name="text" class="materialize-textarea"></textarea>
-                            <label for="text">Share your tale</label>
+                            <textarea id="editor" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
                         </div>
                         <input type="hidden" id="featured" name="featured" value="false">
 						<button class="btn waves-effect waves-light right" type="submit">Post

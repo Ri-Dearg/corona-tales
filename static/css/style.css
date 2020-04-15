@@ -20,3 +20,14 @@
 .no-pad-bot {
   padding-bottom: 0 !important;
 }
+
+
+/* fix for no bullet points in editor */
+.ck.ck-content ul,
+.ck.ck-content ul li{
+  list-style-type: inherit;
+}
+
+.ck.ck-content ul {
+  padding-left: 40px;
+}

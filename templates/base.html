@@ -12,6 +12,9 @@
         <!-- Materialise CSS -->
         <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css">
         <link href="static/css/style.css" type="text/css" rel="stylesheet">
+
+        <!-- CKEditor CDN -->
+        <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
         
         <title>Corona Stories</title>
 
@@ -74,6 +77,17 @@
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="static/js/materialize.min.js"></script>
         <script src="static/js/init.js"></script>
+
+        <!-- CK Editor Script -->
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor' ), {
+                    removePlugins: [ 'Image', 'EasyImage', 'ImageUpload', 'Link', 'MediaEmbed' ]
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
     </body>
 
 </html>
