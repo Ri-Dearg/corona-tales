@@ -10,26 +10,35 @@ function initTags(tagCreate) {
         
         var instances = M.Chips.init(chips, {
             limit: 15,
-            placeholder: 'Enter a Tag', 
-            secondaryPlaceholder: '+Tag',
+            placeholder: 'Write a Tag', 
+            secondaryPlaceholder: 'Press Enter',
             autocompleteOptions: {
                 data: tagCreate,
                 limit: 8,
             }
         });
 
-        function addTags(length, array) {
-            for (i=0; i < length; i++) {
-                console.log(array[i].tag);
-                $("#create-story").append(`<input type="hidden" name="tags" value="${array[i].tag}">`);
-            }
+        function addTags(arrayLength, array) {
+
+                for (i=0; i < arrayLength; i++) {
+                    $("#create-story").append(`<input type="hidden" name="tags" value="${array[i].tag}">`);
+                }
+                return true
         }
         
         $("#create-story").on('submit', function(event) {
             var tagDict = M.Chips.getInstance($('.chips')).chipsData
             var tagDictLength = Object.keys((M.Chips.getInstance($('.chips')).chipsData)).length
 
-            addTags(tagDictLength, tagDict)
+            if (tagDictLength === 0) {
+                event.preventDefault();
+                alert('Please Enter a Tag');
+                return false
+            }
+
+            else {
+                addTags(tagDictLength, tagDict)
+            }
     });
     })
 };
