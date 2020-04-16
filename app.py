@@ -3,8 +3,10 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
+
 app = Flask(__name__)
 
+app.config["SECRET_KEY"] = os.getenv('SECRET_KEY')
 app.config['MONGO_DBNAME'] = 'corona_tales'
 app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 
@@ -17,7 +19,6 @@ taglist = set()
 
 @app.route('/')
 def story_page():
-
     for story in stories.find():
         tags = story["tags"]
         for tag in tags:
@@ -25,6 +26,12 @@ def story_page():
 
     storylist = stories.find()
     return render_template('index.html', storylist=storylist, taglist=taglist)
+
+
+@app.route('/signup')
+def signup():
+
+    return render_template('signup.html')
 
 
 @app.route('/create_story', methods=['POST'])
