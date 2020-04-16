@@ -10,8 +10,10 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <!-- Materialise CSS -->
-        <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css">
-        <link href="static/css/style.css" type="text/css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/lib/materialize.min.css')}}">
+
+
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 
         <!-- CKEditor CDN -->
         <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
@@ -74,35 +76,24 @@
         </footer>
 
         <!-- Materialize Javascript-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="static/js/materialize.min.js"></script>
-        <script src="static/js/init.js"></script>
+        <script src="{{url_for('static', filename='js/lib/jquery-3.5.0.min.js')}}"></script>
+        <script  src="{{url_for('static', filename='/js/lib/materialize.min.js')}}"></script>
+        <script src="{{url_for('static', filename='/js/script.js')}}"></script>
 
         <!-- CK Editor Script -->
+        <script src="{{url_for('static', filename='js/ckeditor.js')}}"></script>
+
+        <script src="{{url_for('static', filename='js/script.js')}}"></script>
+
         <script>
-            ClassicEditor
-                .create( document.querySelector( '#editor' ), {
-                    removePlugins: [ 'Image', 'EasyImage', 'ImageUpload', 'Link', 'MediaEmbed' ]
-                } )
-                .catch( error => {
-                    console.error( error );
-                } );
-		</script>
-
-		<script>
-		document.addEventListener('DOMContentLoaded', function() {
-            var chips = document.querySelectorAll('.chips');
-            var instances = M.Chips.init(chips, {limit: 15, 
-                                                autocompleteOptions: { data: {
-                                                    {% for tag in taglist %}
-                                                        {{ tag }}: null,
-                                                    {% endfor %}
-                                                            },
-                                                    limit: 10}
-            });
-        });
+            var tagList = {
+                {% for tag in taglist %}
+                    "{{ tag }}": null,
+                {% endfor %}
+            }
+            
+            initTags(tagList)
         </script>
-
     </body>
 
 </html>

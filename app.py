@@ -14,21 +14,22 @@ stories = mongo.db.stories
 
 taglist = set()
 
-for story in stories.find():
-    tags = story["tags"]
-    for tag in tags:
-        taglist.add(tag)
-
 
 @app.route('/')
 def story_page():
+
+    for story in stories.find():
+        tags = story["tags"]
+        for tag in tags:
+            taglist.add(tag)
+
     storylist = stories.find()
     return render_template('index.html', storylist=storylist, taglist=taglist)
 
 
 @app.route('/create_story', methods=['POST'])
 def create_story():
-    stories.insert_one(request.form.to_dict())
+    stories.insert_one(request.form.to_dict(flat=False))
     return redirect(url_for('story_page'))
 
 

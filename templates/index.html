@@ -23,16 +23,16 @@
 			<!--   Story Section   -->
 			<div class="row">
 				<div class="col s12">
-					<div class="card {{ story.color }} accent-1 hoverable">
+					<div class="card {{ story.color[0] }} accent-1 hoverable">
 						<div class="card-content no-pad-bot">
 							<div class="row no-m-bot">
-								<span class="card-title col s6">{{ story.title }}</span>
-								<span class="card-title col s6 right-align">{{ story.date }}</span>
+								<span class="card-title col s6">{{ story.title[0] }}</span>
+								<span class="card-title col s6 right-align">{{ story.date[0] }}</span>
 								<div class="col s12">
-									<p>{{ story.first_name.title() }} {{ story.last_name.title() }}<br>
-                                    Age {{ story.age }} <br>
-                                    {{ story.country.title() }}</p>
-                                    {{ story.text|safe }} <br>
+									<p>{{ story.first_name[0].title() }} {{ story.last_name[0].title() }}<br>
+                                    Age {{ story.age[0] }} <br>
+                                    {{ story.country[0].title() }}</p>
+                                    {{ story.text[0]|safe }} <br>
                                 </div>
                                 <div class="card-action col s12">
                                     <p>Tags: {% for tag in story.tags %}{{ tag }}, {% endfor %}</p>
@@ -61,22 +61,22 @@
 			<div class="modal-content">
 				<h4>Write your story.</h4>
 				<div class="row">
-					<form action="{{ url_for('create_story') }}" method="POST" class="col s12">
-						<div class="input-field col s6">
+					<form action="{{ url_for('create_story') }}" method="POST" class="col s12" id="create-story">
+						<div class="input-field validate col s6">
 							<i class="material-icons prefix">face</i>
 							<input id="first_name" name="first_name" type="text" required>
 							<label for="first_name">First Name</label>
 						</div>
-						<div class="input-field col s6">
+						<div class="input-field validate col s6">
 							<input id="last_name" name="last_name" type="text" required>
 							<label for="last_name">Last Name</label>
 						</div>
-						<div class="input-field col s6">
+						<div class="input-field validate col s6">
 							<i class="material-icons prefix">perm_identity</i>
 							<input id="age" name="age" type="number" min="1" max="120" required>
 							<label for="age">Age</label>
 						</div>
-                        <div class="input-field col s6">
+                        <div class="input-field validate col s6">
                             <i class="material-icons prefix">event</i>
 							<select id="country" name="country" required>
 	                        <option value="" disabled selected>Country</option>
@@ -326,7 +326,7 @@
 	                        <option value="Zimbabwe">Zimbabwe</option>
 	                        </select>
 						</div>
-                        <div class="input-field col s6">
+                        <div class="input-field validate col s6">
                             <i class="material-icons prefix">language</i>
                             <select id="language" name="language" required>
                                 <option value="" disabled selected>Story language</option>
@@ -515,16 +515,14 @@
                                 <option value="ko">한국어&nbsp;(韓國語)</option>
                             </select>
 						</div>
-						<div class="input-field col s6">
+						<div class="input-field validate col s6">
 							<i class="material-icons prefix">event</i>
 							<input id="date" name="date" type="text" class="datepicker" required>
-							<label for="date">When?</label>
+							<label for="date">When was it?</label>
                         </div>
-                        <div class="chips chips-autocomplete no-autoinit input-field col s6">
-                            <i class="material-icons prefix">label</i>
-                            <input id="tags" name="tags" placeholder="Up to 15 tags" required>
+                        <div class="chips chips-autocomplete no-autoinit chips-placeholder col s6 validate">
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field  validate col s6">
                             <i class="material-icons prefix">palette</i>
                             <select id="color" name="color" required>
                                 <option value="" disabled selected>Color</option>
@@ -532,7 +530,7 @@
                                 <option value="deep-orange">Deep Orange</option>
                                 <option value="orange">Orange</option>								
                                 <option value="amber">Amber</option>
-								<option value="yellow">Yello</option>
+								<option value="yellow">Yellow</option>
 								<option value="lime">Lime</option>
 								<option value="light-green">Light Green</option>
 								<option value="green">Green</option>
@@ -546,16 +544,16 @@
 								<option value="pink">Pink</option>
                             </select>
                         </div>
-                        <div class="input-field col s12">
+                        <div class="input-field validate col s12">
                             <i class="material-icons prefix">import_contacts</i>
                             <input id="title" name="title" type="text" required>                            
                             <label for="title">Story Title</label>
                         </div>
-                        <div class="input-field col s12">
+                        <div class="col s12">
                             <textarea id="editor" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
                         </div>
-                        <input type="hidden" id="featured" name="featured" value="false">
-						<button class="btn waves-effect waves-light right" type="submit">Post
+                        <input type="hidden" id="featured" name="featured" value="false">                       
+						<button id="post-story" class="btn waves-effect waves-light right" type="submit">Post
 	                        <i class="material-icons right">playlist_add</i>
                         </button>
 					</form>
