@@ -1,9 +1,14 @@
-from flask import (Blueprint, current_app, render_template, url_for, request,
+from flask import (Blueprint, render_template, url_for, request,
                    redirect, flash)
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_user
+from .extensions import mongo
+from .models import User
 
 auth = Blueprint('auth', __name__,
                  template_folder='templates')
+
+users = mongo.db.users
 
 
 @auth.route('/signup')
@@ -16,12 +21,9 @@ def signup():
 def signup_form():
 
     username = request.form.get('username')
-
-    users = current_app.config['users']
     user = users.find_one({"username": username})
 
     if user:
-
         flash('Username is taken')
         return redirect(url_for('auth.signup'))
 
@@ -46,14 +48,14 @@ def login_form():
     username = request.form.get('username')
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
-
-    users = current_app.config['users']
     user = users.find_one({"username": username})
-    print(user)
 
     if not user or not check_password_hash(user["password"], password):
         flash('The login details are incorrect')
         return redirect(url_for('auth.login'))
+
+    log_user = User(user.get('username'), password, _id=user.get('_id'))
+    login_user(log_user, remember=remember)
 
     return redirect(url_for('base.profile'))
 

@@ -1,6 +1,8 @@
 import os
 from flask import Flask
-from flask_pymongo import PyMongo
+from flask_login import LoginManager
+from .extensions import mongo
+from bson.objectid import ObjectId
 
 
 def create_app():
@@ -11,9 +13,19 @@ def create_app():
     app.config['MONGO_DBNAME'] = 'corona_tales'
     app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 
+    mongo.init_app(app)
+
     app.config['taglist'] = set()
-    app.config['stories'] = PyMongo(app).db.stories
-    app.config['users'] = PyMongo(app).db.users
+
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
+
+    from .models import User
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.get_by_id(ObjectId(user_id))
 
     from .base import base as base_blueprint
     app.register_blueprint(base_blueprint)
