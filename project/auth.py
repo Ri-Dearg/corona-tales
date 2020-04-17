@@ -5,13 +5,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 auth = Blueprint('auth', __name__,
                  template_folder='templates')
 
-taglist = set()
-
-
-@auth.route('/login')
-def login():
-    return 'Login'
-
 
 @auth.route('/signup')
 def signup():
@@ -39,6 +32,30 @@ def signup_form():
     users.insert_one(account)
 
     return redirect(url_for('base.story_page'))
+
+
+@auth.route('/login')
+def login():
+
+    return render_template("login.html")
+
+
+@auth.route('/login', methods=['POST'])
+def login_form():
+
+    username = request.form.get('username')
+    password = request.form.get('password')
+    remember = True if request.form.get('remember') else False
+
+    users = current_app.config['users']
+    user = users.find_one({"username": username})
+    print(user)
+
+    if not user or not check_password_hash(user["password"], password):
+        flash('The login details are incorrect')
+        return redirect(url_for('auth.login'))
+
+    return redirect(url_for('base.profile'))
 
 
 @auth.route('/logout')

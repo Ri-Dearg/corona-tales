@@ -29,3 +29,8 @@ def create_story():
     stories.insert_one(request.form.to_dict(flat=False))
     return redirect(url_for('base.story_page'))
 
+
+@base.route('/profile')
+def profile():
+
+    return render_template("profile.html")
