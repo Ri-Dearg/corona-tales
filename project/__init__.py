@@ -11,11 +11,15 @@ def create_app():
     app.config['MONGO_DBNAME'] = 'corona_tales'
     app.config["MONGO_URI"] = os.getenv('MONGO_URI')
 
-    with app.app_context():
-        app.config['stories'] = PyMongo(app).db.stories
+    app.config['taglist'] = set()
+    app.config['stories'] = PyMongo(app).db.stories
+    app.config['users'] = PyMongo(app).db.users
 
     from .base import base as base_blueprint
     app.register_blueprint(base_blueprint)
+
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
 
     if __name__ == '__main__':
         app.run(host=os.environ.get('IP'),
