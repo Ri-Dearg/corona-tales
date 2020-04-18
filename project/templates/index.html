@@ -26,7 +26,7 @@
 
 		<div class="section">
 			<!-- Function to place each story as a card -->
-			{% for story in storylist %}
+			{% for story in story_list %}
 			<!--   Story Section   -->
 			<div class="row">
 				<div class="col s12">
@@ -559,7 +559,11 @@
                         <div class="col s12">
                             <textarea id="editor" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
                         </div>
-                        <input type="hidden" id="featured" name="featured" value="false">                       
+                        <input type="hidden" id="featured" name="featured" value="false"> 
+                                
+                        {% if current_user.is_authenticated %}
+                            <input type="hidden" id="username" name="username" value="{{ username }}">
+                        {% endif %}              
 						<button id="post-story" class="btn waves-effect waves-light right" type="submit">Post
 	                        <i class="material-icons right">playlist_add</i>
                         </button>

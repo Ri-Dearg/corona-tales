@@ -7,11 +7,11 @@ base = Blueprint('base', __name__,
                  template_folder='templates')
 
 stories = mongo.db.stories
-
+story_list = stories.find()
 
 @base.route('/')
 def story_page():
-
+    
     taglist = current_app.config['taglist']
 
     for story in stories.find():
@@ -19,8 +19,8 @@ def story_page():
         for tag in tags:
             taglist.add(tag)
 
-    storylist = stories.find()
-    return render_template('index.html', storylist=storylist, taglist=taglist)
+    return render_template('index.html', story_list=story_list, taglist=taglist,
+                           username=current_user.username)
 
 
 @base.route('/create_story', methods=['POST'])
@@ -34,4 +34,7 @@ def create_story():
 @login_required
 def profile():
 
-    return render_template("profile.html", name=current_user.username)
+    user_stories = stories.find({'username': current_user.username})
+
+    return render_template("profile.html", username=current_user.username,
+                           userstories=user_stories)
