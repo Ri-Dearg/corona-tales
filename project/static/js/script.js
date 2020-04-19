@@ -1,18 +1,49 @@
+function initTags(tagCreate) {
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        var chips = document.querySelectorAll('.chips');
+
+            var instances = M.Chips.init(chips, {
+                limit: 15,
+                placeholder: 'Tags (Press Enter)',
+                secondaryPlaceholder: '+Tag',
+                autocompleteOptions: {
+                    data: tagCreate,
+                    limit: 8,
+                }
+            });
+        });
+}
+
+function initFab() {
+    document.addEventListener('DOMContentLoaded', function () {
+        var sideFab = document.querySelectorAll('.horizontal-button');
+        var instances = M.FloatingActionButton.init(sideFab, {
+            direction: 'left'
+        });
+    });
+}
+
+function createEditor(id) {
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector(`#${id}`), {
+                removePlugins: ['Image', 'EasyImage', 'ImageUpload', 'Link', 'MediaEmbed', 'Heading']
+            })
+            .then(editor => {
+                newEditor = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    })
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
 
     $("select[required]").css({ position: 'absolute', display: 'inline', height: 0, padding: 0, width: 0 });
 
-    ClassicEditor
-        .create(document.querySelector('#editor'), {
-            removePlugins: ['Image', 'EasyImage', 'ImageUpload', 'Link', 'MediaEmbed', 'Heading']
-        })
-        .then(editor => {
-            newEditor = editor;
-        })
-        .catch(error => {
-            console.error(error);
-        });
 
     function addTags(arrayLength, array) {
 
@@ -39,19 +70,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-function initTags(tagCreate) {
-    document.addEventListener('DOMContentLoaded', function () {
-        var chips = document.querySelectorAll('.chips');
-
-        var instances = M.Chips.init(chips, {
-            limit: 15,
-            placeholder: 'Tags (Press Enter)',
-            secondaryPlaceholder: '+Tag',
-            autocompleteOptions: {
-                data: tagCreate,
-                limit: 8,
-            }
-        });
-    });
-}
