@@ -10,18 +10,29 @@ stories = mongo.db.stories
 story_list = stories.find()
 
 
-@base.route('/')
-def story_page():
+def get_tags():
 
     taglist = current_app.config['taglist']
 
-    for story in stories.find():
+    for story in story_list:
         tags = story["tags"]
         for tag in tags:
             taglist.add(tag)
 
+    return taglist
+
+
+@base.route('/')
+def story_page():
+
+    taglist = get_tags()
+
+    if current_user.is_authenticated:
+        return render_template('index.html', story_list=story_list,
+                               taglist=taglist, username=current_user.username)
+
     return render_template('index.html', story_list=story_list,
-                           taglist=taglist, username=current_user.username)
+                           taglist=taglist)
 
 
 @base.route('/create_story', methods=['POST'])
@@ -37,5 +48,7 @@ def profile():
 
     user_stories = stories.find({'username': current_user.username})
 
+    taglist = get_tags()
+
     return render_template("profile.html", username=current_user.username,
-                           user_stories=user_stories)
+                           user_stories=user_stories, taglist=taglist)
