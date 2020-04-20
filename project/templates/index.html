@@ -528,7 +528,7 @@
 							<input id="date" name="date" type="text" class="datepicker" required>
 							<label for="date">When was it?</label>
                         </div>
-                        <div class="chips chips-autocomplete no-autoinit chips-placeholder col s6 validate">
+                        <div id="chipsindex" class="chips chips-autocomplete no-autoinit chips-placeholder col s6 validate">
                         </div>
                         <div class="input-field  validate col s6">
                             <i class="material-icons prefix">palette</i>
@@ -580,15 +580,14 @@
 
             {% block javascript %}
         <script>
-            initStoryModal('index');
-
             var tagList = {
                 {% for tag in taglist %}
                     "{{ tag }}": null,
                 {% endfor %}
             };
             
-            initTags(tagList);
+            initTags(tagList, 'index');
+            initStoryModal('index');
             formValid('index');
         </script>
         	{% endblock %}

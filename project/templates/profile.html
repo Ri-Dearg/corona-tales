@@ -510,13 +510,7 @@
 							<input name="date" type="text" class="datepicker date" value="{{ story.date[0] }}" required>
 							<label for="date">When was it?</label>
 						</div>
-						<div class="chips chips-autocomplete no-autoinit chips-placeholder col s6 validate">
-                            {% for tag in story.tags %}
-                                <div class="chip">
-                                    {{ tag }}
-                                    <i class="close material-icons">close</i>
-                                </div>
-                            {% endfor %}
+						<div id="chips{{ story._id }}" class="chips chips-autocomplete no-autoinit chips-placeholder col s6 validate">
 						</div>
 						<div class="input-field validate col s6">
 							<i class="material-icons prefix">palette</i>
@@ -566,18 +560,19 @@
 
 	{% block javascript %}
 	<script>
-		{% for story in user_stories %}
-                initStoryModal('{{ story._id }}', {{ story.text|safe }})
+        var tagList = {
+            {% for tag in taglist %}
+                "{{ tag }}": null,
+            {% endfor %}
+        }
+
+        {% for story in user_stories %}
+                initTags(tagList, '{{ story._id }}')
+                initStoryModal('{{ story._id }}', {{ story.text|safe }}, {{ story.tags|safe }})
+                formValid('{{ story._id }}');
         {% endfor %}
 
-            initFab()
-
-            var tagList = {
-                {% for tag in taglist %}
-                    "{{ tag }}": null,
-                {% endfor %}
-            }
+        initFab()
             
-            initTags(tagList)
 	</script>
 	{% endblock %}

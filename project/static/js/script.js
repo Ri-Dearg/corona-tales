@@ -1,7 +1,7 @@
-function initTags(tagCreate) {
+function initTags(tagCreate, id) {
     document.addEventListener('DOMContentLoaded', function () {
 
-        var chips = document.querySelectorAll('.chips');
+        var chips = document.querySelectorAll(`#chips${id}`);
 
         var instances = M.Chips.init(chips, {
             limit: 15,
@@ -15,7 +15,7 @@ function initTags(tagCreate) {
     });
 }
 
-function initStoryModal(id, content) {
+function initStoryModal(id, content, tagList) {
     document.addEventListener('DOMContentLoaded', function () {
         var modals = document.querySelector(`#modal${id}`);
         var instances = M.Modal.init(modals, {
@@ -30,6 +30,16 @@ function initStoryModal(id, content) {
                     .catch(error => {
                         console.error(error);
                     });
+
+                if (tagList !== undefined) {
+                    var instance = M.Chips.getInstance(document.querySelector(`#chips${id}`))
+                    for (i = 0; i < tagList.length; i++) {
+                        console.log(instance)
+                        instance.addChip({
+                            tag: tagList[i]
+                        });
+                    }
+                }
             },
             onOpenEnd: function () {
                 if (content !== undefined) {
@@ -78,7 +88,7 @@ function formValid(formId) {
 function addTags(formId, arrayLength, array) {
 
     for (i = 0; i < arrayLength; i++) {
-        $(`#form${formId}`).append(`<input type="hidden" name="tags" value="${array[i].tag}">`);
+        $(`#form${formId}`).append(`<input type="hidden" name="tags[]" value="${array[i].tag}">`);
     }
     return true
 }
