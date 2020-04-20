@@ -1,1 +1,1 @@
-web: python setup.py build [install]
+web: gunicorn "project:create_app()"
