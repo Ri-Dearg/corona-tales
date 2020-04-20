@@ -6,6 +6,11 @@
  * Made By MaterializeCSS.com
  */
 
+.normal-size {
+    font-size: 3rem;
+    margin: 0.5rem 0;
+}
+
 .icon-block {
   padding: 0 15px;
 }
@@ -21,6 +26,10 @@
   padding-bottom: 0 !important;
 }
 
+.section {
+    padding-left: 20px;
+    padding-right: 20px;
+}
 
 /* fix for no bullet points in editor */
 .ck.ck-content ul,
