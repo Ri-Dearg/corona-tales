@@ -21,6 +21,10 @@
   padding-bottom: 0 !important;
 }
 
+.section {
+    padding-left: 15px;
+    padding-right: 15px;
+}
 
 /* fix for no bullet points in editor */
 .ck.ck-content ul,

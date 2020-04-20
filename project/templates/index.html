@@ -2,8 +2,7 @@
 {% block content %}
 <div class="container">
 
-	<div class="section no-pad-bot" id="index-banner">
-		<!-- Header -->
+		<div class="section white z-depth-3">
 		<h1 class="header center">Corona Tales</h1><br>
 		<div class="row center">
 			<!-- Updating Map from Datawrapper.com -->
@@ -22,9 +21,9 @@
 			</script>
 		</div>
 		<br><br>
-    </div>
 
-		<div class="section">
+
+
 			<!-- Function to place each story as a card -->
             {% set _stub = story_list.rewind() %}
 			{% for story in story_list %}
@@ -55,15 +54,23 @@
             {% endfor %}
         </div>
 
-		<div class="fixed-action-btn" id="buttonindex">
-			<a href="#modalindex" class="btn-floating btn-large modal-trigger red">
-				<i class="large material-icons">mode_edit</i>
+		<div class="fixed-action-btn no-autoinit" id="buttonindex">
+			<a class="btn-floating btn-large red darken-1 tooltipped" data-position="left" data-tooltip="Menu">
+				<i class="large material-icons">menu</i>
 			</a>
 			<ul>
-				<li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-				<li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-				<li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-				<li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+				<li><a href="{{ url_for('base.about') }}" class="btn-floating blue darken-1 tooltipped" data-position="left" data-tooltip="Help"><i class="material-icons">help</i></a></li>
+                <li>
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('base.profile') }}" class="btn-floating green darken-1 tooltipped" data-position="left" data-tooltip="Profile">
+                {% endif %}
+                {% if not current_user.is_authenticated %}
+                <a href="{{ url_for('auth.login') }}" class="btn-floating green darken-1 tooltipped" data-position="left" data-tooltip="Login">
+                {% endif %}
+                <i class="material-icons">account_circle</i></a>
+                </li>
+                <li><a href="#" class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="Search"><i class="material-icons">search</i></a></li>
+                <li><a href="#modalindex" class="btn-floating orange darken-1 modal-trigger tooltipped" data-position="left" data-tooltip="Post a Story"><i class="material-icons">mode_edit</i></a></li>
 			</ul>
 		</div>
 
@@ -78,11 +85,12 @@
 							<label for="first_name">First Name</label>
 						</div>
 						<div class="input-field validate col s6">
+                            <i class="material-icons prefix">group</i>
 							<input id="last_name" name="last_name" type="text" required>
 							<label for="last_name">Last Name</label>
 						</div>
 						<div class="input-field validate col s6">
-							<i class="material-icons prefix">perm_identity</i>
+							<i class="material-icons prefix">cake</i>
 							<input id="age" name="age" type="number" min="1" max="120" required>
 							<label for="age">Age</label>
 						</div>
@@ -587,9 +595,9 @@
                     "{{ tag }}": null,
                 {% endfor %}
             };
-            
             initTags(tagList, 'index');
             initStoryModal('index');
             formValid('index');
+            initFab()
         </script>
         	{% endblock %}

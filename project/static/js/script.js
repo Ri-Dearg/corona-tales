@@ -57,7 +57,12 @@ function initFab() {
     document.addEventListener('DOMContentLoaded', function () {
         var sideFab = document.querySelectorAll('.horizontal-button');
         var instances = M.FloatingActionButton.init(sideFab, {
-            direction: 'left'
+            direction: 'left',
+            hoverEnabled: false
+        });
+        var indexFab = document.querySelector('#buttonindex');
+        var instance = M.FloatingActionButton.init(indexFab, {
+            hoverEnabled: false
         });
     });
 }

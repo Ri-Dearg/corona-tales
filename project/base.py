@@ -61,6 +61,8 @@ def profile():
 
     user_stories = stories.find({'username': current_user.username})
 
+    # Change order of function when adding create story to profile page
+
     if user_stories:
         taglist = get_tags()
 

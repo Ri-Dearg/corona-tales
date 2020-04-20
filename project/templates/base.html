@@ -22,7 +22,7 @@
 
     </head>
 
-    <body>
+    <body class="light-blue lighten-5">
 	<div class="navbar-fixed">
 		<nav class="teal accent-4" role="navigation">
 			<div class="nav-wrapper container">
@@ -52,16 +52,16 @@
 			{% if current_user.is_authenticated %}
 			<li><a href="{{ url_for('base.profile') }}">Profile</a></li>
 			{% endif %}
-			<li><a href="{{ url_for('base.about') }}">Contact</a></li>
+			<li><a href="{{ url_for('base.about') }}">About</a></li>
+            <li><a href="{{ url_for('base.contact') }}">Contact</a></li>
 		</ul>
         
-            {% block content %}
-            {% endblock %}
+        {% block content %}
+        {% endblock %}
 
         <!-- Materialize Javascript-->
         <script src="{{url_for('static', filename='js/lib/jquery-3.5.0.min.js')}}"></script>
         <script  src="{{url_for('static', filename='/js/lib/materialize.min.js')}}"></script>
-
         <script src="{{url_for('static', filename='js/script.js')}}"></script>
             
         {% block javascript %}
