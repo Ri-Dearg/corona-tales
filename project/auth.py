@@ -33,7 +33,7 @@ def signup_form():
                                                   method='sha256')}
     users.insert_one(account)
 
-    return redirect(url_for('base.story_page'))
+    return redirect(url_for('auth.login'))
 
 
 @auth.route('/login')

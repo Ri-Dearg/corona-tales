@@ -49,10 +49,13 @@ def profile():
 
     user_stories = stories.find({'username': current_user.username})
 
-    taglist = get_tags()
+    if user_stories:
+        taglist = get_tags()
 
-    return render_template("profile.html", username=current_user.username,
-                           user_stories=user_stories, taglist=taglist)
+        return render_template("profile.html", username=current_user.username,
+                               user_stories=user_stories, taglist=taglist)
+
+    return render_template("profile.html", username=current_user.username)
 
 
 @base.route('/edit_story/<story_id>', methods=["POST"])
@@ -67,7 +70,7 @@ def edit_story(story_id):
                         'country.0': request.form.get('country'),
                         'language.0': request.form.get('language'),
                         'date.0': request.form.get('date'),
-                        'tags': request.form.getlist('tags[]'),
+                        'tags': request.form.getlist('tags'),
                         'color.0': request.form.get('color'),
                         'title.0': request.form.get('title'),
                         'text.0': request.form.get('text'),
