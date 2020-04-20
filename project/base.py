@@ -43,6 +43,18 @@ def create_story():
     return redirect(url_for('base.story_page'))
 
 
+@base.route('/about')
+def about():
+
+    return render_template('about.html')
+
+
+@base.route('/contact')
+def contact():
+
+    return render_template('contact.html')
+
+
 @base.route('/profile')
 @login_required
 def profile():
