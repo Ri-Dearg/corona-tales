@@ -32,7 +32,9 @@ function initStoryModal(id, content) {
                     });
             },
             onOpenEnd: function () {
-                newEditor.setData(content[0])
+                if (content !== undefined) {
+                    newEditor.setData(content[0])
+                }
             },
             onCloseEnd: function () {
                 newEditor.destroy()
@@ -50,32 +52,37 @@ function initFab() {
     });
 }
 
-function addTags(arrayLength, array) {
+function formValid(formId) {
+    document.addEventListener('DOMContentLoaded', function () {
+
+        $("select[required]").css({ position: 'absolute', display: 'inline', height: 0, padding: 0, width: 0 });
+
+        $(`#form${formId}`).on('submit', function (event) {
+            var tagDict = M.Chips.getInstance($('.chips')).chipsData
+            var tagDictLength = Object.keys((M.Chips.getInstance($('.chips')).chipsData)).length
+            var editorData = newEditor.getData().length;
+
+            if (tagDictLength === 0 || editorData === 0) {
+                event.preventDefault();
+                alert('Please fill all fields');
+                return false
+            }
+
+            else {
+                addTags(formId, tagDictLength, tagDict)
+            }
+        });
+    });
+}
+
+function addTags(formId, arrayLength, array) {
 
     for (i = 0; i < arrayLength; i++) {
-        $("#create-story").append(`<input type="hidden" name="tags" value="${array[i].tag}">`);
+        $(`#form${formId}`).append(`<input type="hidden" name="tags" value="${array[i].tag}">`);
     }
     return true
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
-
-    $("select[required]").css({ position: 'absolute', display: 'inline', height: 0, padding: 0, width: 0 });
-
-    $("#create-story").on('submit', function (event) {
-        var tagDict = M.Chips.getInstance($('.chips')).chipsData
-        var tagDictLength = Object.keys((M.Chips.getInstance($('.chips')).chipsData)).length
-        var editorData = newEditor.getData().length;
-
-        if (tagDictLength === 0 || editorData === 0) {
-            event.preventDefault();
-            alert('Please fill all fields');
-            return false
-        }
-
-        else {
-            addTags(tagDictLength, tagDict)
-        }
-    });
-});
+})

@@ -2,6 +2,7 @@ from flask import (Blueprint, current_app, render_template, url_for, request,
                    redirect)
 from flask_login import login_required, current_user
 from .extensions import mongo
+from bson.objectid import ObjectId
 
 base = Blueprint('base', __name__,
                  template_folder='templates')
@@ -52,3 +53,24 @@ def profile():
 
     return render_template("profile.html", username=current_user.username,
                            user_stories=user_stories, taglist=taglist)
+
+
+@base.route('/edit_story/<story_id>', methods=["POST"])
+@login_required
+def edit_story(story_id):
+    stories.update({'_id': ObjectId(story_id)},
+                   {'$set':
+                    {
+                        "first_name.0": request.form.get('first_name'),
+                        'last_name.0': request.form.get('last_name'),
+                        'age.0': request.form.get('age'),
+                        'country.0': request.form.get('country'),
+                        'language.0': request.form.get('language'),
+                        'date.0': request.form.get('date'),
+                        'color.0': request.form.get('color'),
+                        'title.0': request.form.get('title'),
+                        'text.0': request.form.get('text'),
+                    }
+                    })
+
+    return redirect(url_for('base.profile'))

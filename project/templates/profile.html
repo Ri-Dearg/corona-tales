@@ -45,11 +45,11 @@
 			</div>
 		</div>
 
-		<div id="modal{{ story._id }}" class="modal">
+		<div id="modal{{ story._id }}" class="modal submit-modal">
 			<div class="modal-content">
 				<h4>Write your story.</h4>
 				<div class="row">
-					<form action="{{ url_for('base.create_story') }}" method="POST" class="col s12 edit-story">
+					<form action="{{ url_for('base.edit_story', story_id=story._id) }}" method="POST" class="col s12 edit-story" id="form{{ story._id }}">
 						<div class="input-field validate col s6">
 							<i class="material-icons prefix">face</i>
 							<input class="first_name" name="first_name" type="text" value="{{ story.first_name[0] }}" required>
@@ -511,6 +511,12 @@
 							<label for="date">When was it?</label>
 						</div>
 						<div class="chips chips-autocomplete no-autoinit chips-placeholder col s6 validate">
+                            {% for tag in story.tags %}
+                                <div class="chip">
+                                    {{ tag }}
+                                    <i class="close material-icons">close</i>
+                                </div>
+                            {% endfor %}
 						</div>
 						<div class="input-field validate col s6">
 							<i class="material-icons prefix">palette</i>
