@@ -28,7 +28,7 @@
 										<li><a href="#modal{{ story._id }}"
 												class="btn-floating red modal-trigger"><i class="material-icons">insert_chart</i></a>
 										</li>
-										<li><a
+										<li><a href="{{ url_for('base.delete_story', story_id=story._id) }}"
 												class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a>
 										</li>
 										<li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>

@@ -78,3 +78,11 @@ def edit_story(story_id):
                     })
 
     return redirect(url_for('base.profile'))
+
+
+@base.route('/delete_story/<story_id>',)
+@login_required
+def delete_story(story_id):
+    mongo.db.stories.remove({'_id': ObjectId(story_id)})
+
+    return redirect(url_for('base.profile'))
