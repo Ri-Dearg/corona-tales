@@ -73,7 +73,7 @@ function initFab() {
         if (indexTap != null) {
             var instancesFeature = M.TapTarget.init(indexTap, {});
                 instancesFeature.open()
-                setTimeout(function(){ instancesFeature.close(); }, 7000)
+                setTimeout(function(){ instancesFeature.close(); }, 4000)
         }
     });
 }

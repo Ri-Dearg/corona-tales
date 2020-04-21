@@ -3,25 +3,25 @@
 <div class="container">
 
 		<section class="section white z-depth-3">
-		<h5 class="center-align heading">A simple site to share stories and experiences related to the Corona Virus pandemic.</h5>
-        <br>
-        <div class="row center">
-			<!-- Updating Map from Datawrapper.com -->
-			<iframe title="Coronavirus COVID-19 confirmed &amp;amp; recovered cases" aria-label="World Symbol map"
-				id="datawrapper-chart-nTild" src="//datawrapper.dwcdn.net/nTild/3/" scrolling="no" frameborder="0"
-				style="width: 0; min-width: 100% !important; border: none;" height="525"></iframe>
+            <h5 class="center-align heading">A simple site to share stories and experiences related to the Corona Virus pandemic.</h5>
+            <br>
+            <div class="row center">
+                <!-- Updating Map from Datawrapper.com -->
+                <iframe title="Coronavirus COVID-19 confirmed &amp;amp; recovered cases" aria-label="World Symbol map"
+                    id="datawrapper-chart-nTild" src="//datawrapper.dwcdn.net/nTild/3/" scrolling="no" frameborder="0"
+                    style="width: 0; min-width: 100% !important; border: none;" height="525"></iframe>
 
-			<script type="text/javascript">
-				!function(){
-                    "use strict";window.addEventListener("message",function(a){
-                        if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){
-                            var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")
-                        }
-                    })
-                }();
-			</script>
-		</div>
-		<br><br>
+                <script type="text/javascript">
+                    !function(){
+                        "use strict";window.addEventListener("message",function(a){
+                            if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){
+                                var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")
+                            }
+                        })
+                    }();
+                </script>
+            </div>
+            <br><br>
 
 
 
@@ -38,11 +38,11 @@
 							<div class="row no-m-bot">
 								<span class="card-title col s12 m6 heading">{{ story.title[0] }}</span>
 								<span class="card-title col s12 m6 heading hide-on-small-only right-align">{{ story.date[0] }}</span>
-                                <span class="card-title col s12 m6 heading show-on-small">{{ story.date[0] }}</span>
+                                <span class="card-title col s12 m6 heading hide-on-med-and-up">{{ story.date[0] }}</span>
 								<div class="col s12">
-									<p>{{ story.first_name[0].title() }} {{ story.last_name[0].title() }}<br>
-                                    Age {{ story.age[0] }} <br>
-                                    {{ story.country[0].title() }}</p>
+									<p>By {{ story.first_name[0].title() }} {{ story.last_name[0].title() }},<br>
+                                    Age {{ story.age[0] }}, <br>
+                                    In {{ story.country[0].title() }}.</p><br>
                                     {{ story.text[0]|safe }} <br>
                                 </div>
                                 <div class="card-action col s12">
@@ -57,7 +57,7 @@
         </section>
 
 		<div class="fixed-action-btn no-autoinit" id="buttonindex">
-			<a class="btn-floating btn-large red darken-1 tooltipped" data-position="left" data-tooltip="Menu" id="fab-index">
+			<a href="#" class="btn-floating btn-large red darken-1 tooltipped" data-position="left" data-tooltip="Menu" id="fab-index">
 				<i class="large material-icons">menu</i>
 			</a>
 			<ul>

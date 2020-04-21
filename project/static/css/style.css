@@ -66,6 +66,12 @@ nav .brand-logo {
 }
 }
 
+.horizontal-button {
+position:absolute; 
+bottom:-29px; 
+right:10px"
+}
+
 /* fix for no bullet points in editor */
 .ck.ck-content ul,
 .ck.ck-content ul li{
