@@ -36,8 +36,9 @@
 					<article class="card {{ story.color[0] }} accent-1 hoverable">
 						<div class="card-content no-pad-bot">
 							<div class="row no-m-bot">
-								<span class="card-title col s6 heading">{{ story.title[0] }}</span>
-								<span class="card-title col s6 right-align">{{ story.date[0] }}</span>
+								<span class="card-title col s12 m6 heading">{{ story.title[0] }}</span>
+								<span class="card-title col s12 m6 heading hide-on-small-only right-align">{{ story.date[0] }}</span>
+                                <span class="card-title col s12 m6 heading show-on-small">{{ story.date[0] }}</span>
 								<div class="col s12">
 									<p>{{ story.first_name[0].title() }} {{ story.last_name[0].title() }}<br>
                                     Age {{ story.age[0] }} <br>
