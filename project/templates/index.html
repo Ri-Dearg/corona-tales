@@ -3,14 +3,9 @@
 <div class="container">
 
 		<div class="section white z-depth-3">
-<<<<<<< HEAD
 		<h4 class="center-align">A simple site to share stories and experiences related to the Corona Virus pandemic.</h4>
         <br>
         <div class="row center">
-=======
-		<h1 class="header center">Corona Tales</h1><br>
-		<div class="row center">
->>>>>>> 8d3c42f3dc241309d74ff3bf9387306266dba2bd
 			<!-- Updating Map from Datawrapper.com -->
 			<iframe title="Coronavirus COVID-19 confirmed &amp;amp; recovered cases" aria-label="World Symbol map"
 				id="datawrapper-chart-nTild" src="//datawrapper.dwcdn.net/nTild/3/" scrolling="no" frameborder="0"
@@ -61,11 +56,11 @@
         </div>
 
 		<div class="fixed-action-btn no-autoinit" id="buttonindex">
-			<a class="btn-floating btn-large red darken-1 tooltipped" data-position="left" data-tooltip="Menu">
+			<a class="btn-floating btn-large red darken-1 tooltipped" data-position="left" data-tooltip="Menu" id="fab-index">
 				<i class="large material-icons">menu</i>
 			</a>
 			<ul>
-				<li><a href="{{ url_for('base.about') }}" class="btn-floating blue darken-1 tooltipped" data-position="left" data-tooltip="Help"><i class="material-icons">help</i></a></li>
+				<li><a href="#modal-help" class="btn-floating blue darken-1 modal-trigger tooltipped" data-position="left" data-tooltip="Help"><i class="material-icons">help</i></a></li>
                 <li>
                 {% if current_user.is_authenticated %}
                 <a href="{{ url_for('base.profile') }}" class="btn-floating green darken-1 tooltipped" data-position="left" data-tooltip="Profile">
@@ -78,6 +73,13 @@
                 <li><a href="#" class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="Search"><i class="material-icons">search</i></a></li>
                 <li><a href="#modalindex" class="btn-floating orange darken-1 modal-trigger tooltipped" data-position="left" data-tooltip="Post a Story"><i class="material-icons">mode_edit</i></a></li>
 			</ul>
+		</div>
+
+		<div class="tap-target no-autoinit purple darken-1" data-target="fab-index">
+			<div class="tap-target-content">
+				<h5 class="white-text">Post a Story here!</h5>
+				<p class="white-text">Use this menu to post a story, search, login or get help.</p>
+			</div>
 		</div>
 
 		<div id="modalindex" class="modal no-autoinit">
@@ -591,6 +593,17 @@
 
 			</div>
 		</div>
+
+        <div id="modal-help" class="modal">
+            <div class="modal-content">
+                <h4>What's Up?</h4>
+                <p>In the midst of this pandemic many people have simultaneously become more isolated and more connected to one another. While the experience of the pandemic is essentially shared globally , it has taken a completely different form and shape for each individual depending on their own circumstances.</p>
+                <p> The site was designed with this in mind. A space where everyone can share a little slice of their experience with others, a way to share that bit of unique experience with others wherever they are.</p>
+                <p>The process is simple, click the orange button with the pencil to open the form, fill all fields, and use the editor to write a story with whatever formatting you like. Post and it will be shared and searchable to everyone! There is no need to create an account to post but if you wish to save, edit or delete your stories afterwards, you'll have to make one. For privacy, the account requires only a username and password, no email or ther personal information. This way the stories can remain essetially anonymous.</p>
+                <p>I hope you enjoy this little project!</p>
+                <p>For more information, please feel free to check the <a href="{{ url_for('base.about') }}" class="modal-close">About Page</a> or <a href="{{ url_for('base.contact') }}" class="modal-close">Contact Us</a></p>
+            </div>
+        </div>
 
 		{% endblock %}
 

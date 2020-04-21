@@ -1,3 +1,4 @@
 .theia/
 .env
 .gitpod.yml
+ckeditor5-build-classic/

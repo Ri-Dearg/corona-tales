@@ -56,14 +56,18 @@ function initStoryModal(id, content, tagList) {
 function initFab() {
     document.addEventListener('DOMContentLoaded', function () {
         var sideFab = document.querySelectorAll('.horizontal-button');
-        var instances = M.FloatingActionButton.init(sideFab, {
+        var instanceUser = M.FloatingActionButton.init(sideFab, {
             direction: 'left',
             hoverEnabled: false
         });
         var indexFab = document.querySelector('#buttonindex');
-        var instance = M.FloatingActionButton.init(indexFab, {
+        var instanceIndex = M.FloatingActionButton.init(indexFab, {
             hoverEnabled: false
         });
+        var indexTap = document.querySelector('.tap-target');
+        var instancesFeature = M.TapTarget.init(indexTap, {});
+            instancesFeature.open()
+            setTimeout(function(){ instancesFeature.close(); }, 7000)
     });
 }
 

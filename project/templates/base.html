@@ -16,7 +16,7 @@
         <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 
         <!-- CKEditor CDN -->
-        <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
+        <script src="../static/js/ckeditor5/build/ckeditor.js"></script>
         
         <title>Corona Stories</title>
 
@@ -26,7 +26,7 @@
 	<div class="navbar-fixed">
 		<nav class="teal accent-4" role="navigation">
 			<div class="nav-wrapper">
-				<a href="#" class="brand-logo center"><h1 class="normal-size">Corona Tales</h1></a>
+				<a href="{{ url_for('base.story_page') }}" class="brand-logo center"><h1 class="normal-size">Corona Tales</h1></a>
 				<a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 				<ul class="right hide-on-med-and-down">
 					{% if not current_user.is_authenticated %}
@@ -35,13 +35,13 @@
 					{% endif %}
 					{% if current_user.is_authenticated %}
 					<li><a href="{{ url_for('base.profile') }}">Profile</a></li>
+					<li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
 					{% endif %}
 					<li><a href="{{ url_for('base.about') }}">About</a></li>
                     <li><a href="{{ url_for('base.contact') }}">Contact</a></li>
 				</ul>
 			</div>
 		</nav>
-
 	</div>
 
         <ul class="sidenav" id="mobile-nav">
