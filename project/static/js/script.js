@@ -56,18 +56,25 @@ function initStoryModal(id, content, tagList) {
 function initFab() {
     document.addEventListener('DOMContentLoaded', function () {
         var sideFab = document.querySelectorAll('.horizontal-button');
-        var instanceUser = M.FloatingActionButton.init(sideFab, {
-            direction: 'left',
-            hoverEnabled: false
-        });
         var indexFab = document.querySelector('#buttonindex');
-        var instanceIndex = M.FloatingActionButton.init(indexFab, {
-            hoverEnabled: false
-        });
         var indexTap = document.querySelector('.tap-target');
-        var instancesFeature = M.TapTarget.init(indexTap, {});
-            instancesFeature.open()
-            setTimeout(function(){ instancesFeature.close(); }, 7000)
+
+        if (sideFab != null) {
+            var instanceUser = M.FloatingActionButton.init(sideFab, {
+                direction: 'left',
+                hoverEnabled: false
+            })
+        };
+        if (indexFab != null) {
+            var instanceIndex = M.FloatingActionButton.init(indexFab, {
+                hoverEnabled: false
+            })
+        };
+        if (indexTap != null) {
+            var instancesFeature = M.TapTarget.init(indexTap, {});
+                instancesFeature.open()
+                setTimeout(function(){ instancesFeature.close(); }, 7000)
+        }
     });
 }
 
@@ -104,4 +111,5 @@ function addTags(formId, arrayLength, array) {
 
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
+
 })

@@ -2,8 +2,8 @@
 {% block content %}
 <div class="container">
 
-		<div class="section white z-depth-3">
-		<h4 class="center-align">A simple site to share stories and experiences related to the Corona Virus pandemic.</h4>
+		<section class="section white z-depth-3">
+		<h5 class="center-align heading">A simple site to share stories and experiences related to the Corona Virus pandemic.</h5>
         <br>
         <div class="row center">
 			<!-- Updating Map from Datawrapper.com -->
@@ -29,14 +29,14 @@
             {% set _stub = story_list.rewind() %}
 			{% for story in story_list %}
 			<!--   Story Section   -->
-            <hr>
+            <hr class="{{ story.color[0] }}">
             <br>
             <div class="row">
 				<div class="col s12">
 					<article class="card {{ story.color[0] }} accent-1 hoverable">
 						<div class="card-content no-pad-bot">
 							<div class="row no-m-bot">
-								<span class="card-title col s6">{{ story.title[0] }}</span>
+								<span class="card-title col s6 heading">{{ story.title[0] }}</span>
 								<span class="card-title col s6 right-align">{{ story.date[0] }}</span>
 								<div class="col s12">
 									<p>{{ story.first_name[0].title() }} {{ story.last_name[0].title() }}<br>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             {% endfor %}
-        </div>
+        </section>
 
 		<div class="fixed-action-btn no-autoinit" id="buttonindex">
 			<a class="btn-floating btn-large red darken-1 tooltipped" data-position="left" data-tooltip="Menu" id="fab-index">
@@ -66,7 +66,7 @@
                 <a href="{{ url_for('base.profile') }}" class="btn-floating green darken-1 tooltipped" data-position="left" data-tooltip="Profile">
                 {% endif %}
                 {% if not current_user.is_authenticated %}
-                <a href="{{ url_for('auth.login') }}" class="btn-floating green darken-1 tooltipped" data-position="left" data-tooltip="Login">
+                <a href="#modal-signup-login" class="btn-floating green darken-1 tooltipped modal-trigger" data-position="left" data-tooltip="Signup / Login">
                 {% endif %}
                 <i class="material-icons">account_circle</i></a>
                 </li>
@@ -87,22 +87,22 @@
 				<h4>Write your story.</h4>
 				<div class="row">
 					<form action="{{ url_for('base.create_story') }}" method="POST" class="col s12" id="formindex">
-						<div class="input-field validate col s6">
+						<div class="input-field validate col s12 m6">
 							<i class="material-icons prefix">face</i>
 							<input id="first_name" name="first_name" type="text" required>
 							<label for="first_name">First Name</label>
 						</div>
-						<div class="input-field validate col s6">
+						<div class="input-field validate col s12 m6">
                             <i class="material-icons prefix">group</i>
 							<input id="last_name" name="last_name" type="text" required>
 							<label for="last_name">Last Name</label>
 						</div>
-						<div class="input-field validate col s6">
+						<div class="input-field validate col s12 m6">
 							<i class="material-icons prefix">cake</i>
 							<input id="age" name="age" type="number" min="1" max="120" required>
 							<label for="age">Age</label>
 						</div>
-                        <div class="input-field validate col s6">
+                        <div class="input-field validate col s12 m6">
                             <i class="material-icons prefix">flag</i>
 							<select id="country" name="country" required>
 	                        <option value="" disabled selected>Country</option>
@@ -352,203 +352,202 @@
 	                        <option value="Zimbabwe">Zimbabwe</option>
 	                        </select>
 						</div>
-                        <div class="input-field validate col s6">
+                        <div class="input-field validate col s12 m6">
                             <i class="material-icons prefix">language</i>
-                            <select id="language-choice" name="language" required>
-                                <option value="" disabled selected>Story language</option>
-                                <option value="om">Afaan Oromoo</option>
-                                <option value="aa">Afaraf</option>
-                                <option value="af">Afrikaans</option>
-                                <option value="ak">Akan</option>
-                                <option value="an">Aragonés</option>
-                                <option value="ig">Asụsụ Igbo</option>
-                                <option value="gn">Avañe'ẽ</option>
-                                <option value="ae">Avesta</option>
-                                <option value="ay">Aymar Aru</option>
-                                <option value="az">Azərbaycan Dili</option>
-                                <option value="id">Bahasa Indonesia</option>
-                                <option value="ms">Bahasa Melayu</option>
-                                <option value="bm">Bamanankan</option>
-                                <option value="jv">Basa Jawa</option>
-                                <option value="su">Basa Sunda</option>
-                                <option value="bi">Bislama</option>
-                                <option value="bs">Bosanski Jezik</option>
-                                <option value="br">Brezhoneg</option>
-                                <option value="ca">Català</option>
-                                <option value="ch">Chamoru</option>
-                                <option value="ny">Chicheŵa</option>
-                                <option value="sn">Chishona</option>
-                                <option value="co">Corsu</option>
-                                <option value="cy">Cymraeg</option>
-                                <option value="da">Dansk</option>
-                                <option value="se">Davvisámegiella</option>
-                                <option value="de">Deutsch</option>
-                                <option value="nv">Diné Bizaad</option>
-                                <option value="et">Eesti</option>
-                                <option value="na">Ekakairũ Naoero</option>
-                                <option value="en">English</option>
-                                <option value="es">Español</option>
-                                <option value="eo">Esperanto</option>
-                                <option value="eu">Euskara</option>
-                                <option value="ee">Eʋegbe</option>
-                                <option value="to">Faka Tonga</option>
-                                <option value="mg">Fiteny Malagasy</option>
-                                <option value="fr">Français</option>
-                                <option value="fy">Frysk</option>
-                                <option value="ff">Fulfulde</option>
-                                <option value="fo">Føroyskt</option>
-                                <option value="ga">Gaeilge</option>
-                                <option value="gv">Gaelg</option>
-                                <option value="sm">Gagana Fa'a Samoa</option>
-                                <option value="gl">Galego</option>
-                                <option value="sq">Gjuha Shqipe</option>
-                                <option value="gd">Gàidhlig</option>
-                                <option value="ki">Gĩkũyũ</option>
-                                <option value="ha">Hausa</option>
-                                <option value="ho">Hiri Motu</option>
-                                <option value="hr">Hrvatski Jezik</option>
-                                <option value="io">Ido</option>
-                                <option value="rw">Ikinyarwanda</option>
-                                <option value="rn">Ikirundi</option>
-                                <option value="ia">Interlingua</option>
-                                <option value="nd">Isindebele</option>
-                                <option value="nr">Isindebele</option>
-                                <option value="xh">Isixhosa</option>
-                                <option value="zu">Isizulu</option>
-                                <option value="it">Italiano</option>
-                                <option value="ik">Iñupiaq</option>
-                                <option value="pl">Polski</option>
-                                <option value="mh">Kajin M̧ajeļ</option>
-                                <option value="kl">Kalaallisut</option>
-                                <option value="kr">Kanuri</option>
-                                <option value="kw">Kernewek</option>
-                                <option value="kg">Kikongo</option>
-                                <option value="sw">Kiswahili</option>
-                                <option value="ht">Kreyòl Ayisyen</option>
-                                <option value="kj">Kuanyama</option>
-                                <option value="ku">Kurdî</option>
-                                <option value="la">Latine</option>
-                                <option value="lv">Latviešu Valoda</option>
-                                <option value="lt">Lietuvių Kalba</option>
-                                <option value="ro">Limba Română</option>
-                                <option value="li">Limburgs</option>
-                                <option value="ln">Lingála</option>
-                                <option value="lg">Luganda</option>
-                                <option value="lb">Lëtzebuergesch</option>
-                                <option value="hu">Magyar</option>
-                                <option value="mt">Malti</option>
-                                <option value="nl">Nederlands</option>
-                                <option value="no">Norsk</option>
-                                <option value="nb">Norsk Bokmål</option>
-                                <option value="nn">Norsk Nynorsk</option>
-                                <option value="uz">O'zbek</option>
-                                <option value="oc">Occitan</option>
-                                <option value="ie">Interlingue</option>
-                                <option value="hz">Otjiherero</option>
-                                <option value="ng">Owambo</option>
-                                <option value="pt">Português</option>
-                                <option value="ty">Reo Tahiti</option>
-                                <option value="rm">Rumantsch Grischun</option>
-                                <option value="qu">Runa Simi</option>
-                                <option value="sc">Sardu</option>
-                                <option value="za">Saɯ Cueŋƅ</option>
-                                <option value="st">Sesotho</option>
-                                <option value="tn">Setswana</option>
-                                <option value="ss">Siswati</option>
-                                <option value="sl">Slovenski Jezik</option>
-                                <option value="sk">Slovenčina</option>
-                                <option value="so">Soomaaliga</option>
-                                <option value="fi">Suomi</option>
-                                <option value="sv">Svenska</option>
-                                <option value="mi">Te Reo Māori</option>
-                                <option value="vi">Tiếng Việt</option>
-                                <option value="lu">Tshiluba</option>
-                                <option value="ve">Tshivenḓa</option>
-                                <option value="tw">Twi</option>
-                                <option value="tk">Türkmen</option>
-                                <option value="tr">Türkçe</option>
-                                <option value="ug">Uyƣurqə</option>
-                                <option value="vo">Volapük</option>
-                                <option value="fj">Vosa Vakaviti</option>
-                                <option value="wa">Walon</option>
-                                <option value="tl">Wikang Tagalog</option>
-                                <option value="wo">Wollof</option>
-                                <option value="ts">Xitsonga</option>
-                                <option value="yo">Yorùbá</option>
-                                <option value="sg">Yângâ Tî Sängö</option>
-                                <option value="is">ÍSlenska</option>
-                                <option value="cs">čEština</option>
-                                <option value="el">ελληνικά</option>
-                                <option value="av">авар мацӀ</option>
-                                <option value="ab">аҧсуа бызшәа</option>
-                                <option value="ba">башҡорт теле</option>
-                                <option value="be">беларуская мова</option>
-                                <option value="bg">български език</option>
-                                <option value="os">ирон æвзаг</option>
-                                <option value="kv">коми кыв</option>
-                                <option value="ky">Кыргызча</option>
-                                <option value="mk">македонски јазик</option>
-                                <option value="mn">монгол</option>
-                                <option value="ce">нохчийн мотт</option>
-                                <option value="ru">Русский язык</option>
-                                <option value="sr">српски језик</option>
-                                <option value="tt">татар теле</option>
-                                <option value="tg">тоҷикӣ</option>
-                                <option value="uk">українська мова</option>
-                                <option value="cv">чӑваш чӗлхи</option>
-                                <option value="cu">ѩзыкъ словѣньскъ</option>
-                                <option value="kk">қазақ тілі</option>
-                                <option value="hy">Հայերեն</option>
-                                <option value="yi">ייִדיש</option>
-                                <option value="he">עברית</option>
-                                <option value="ur">اردو</option>
-                                <option value="ar">العربية</option>
-                                <option value="fa">فارسی</option>
-                                <option value="ps">پښتو</option>
-                                <option value="ks">कश्मीरी</option>
-                                <option value="ne">नेपाली</option>
-                                <option value="pi">पाऴि</option>
-                                <option value="bh">भोजपुरी</option>
-                                <option value="mr">मराठी</option>
-                                <option value="sa">संस्कृतम्</option>
-                                <option value="sd">सिन्धी</option>
-                                <option value="hi">हिन्दी</option>
-                                <option value="as">অসমীয়া</option>
-                                <option value="bn">বাংলা</option>
-                                <option value="pa">ਪੰਜਾਬੀ</option>
-                                <option value="gu">ગુજરાતી</option>
-                                <option value="or">ଓଡ଼ିଆ</option>
-                                <option value="ta">தமிழ்</option>
-                                <option value="te">తెలుగు</option>
-                                <option value="kn">ಕನ್ನಡ</option>
-                                <option value="ml">മലയാളം</option>
-                                <option value="si">සිංහල</option>
-                                <option value="th">ไทย</option>
-                                <option value="lo">ພາສາລາວ</option>
-                                <option value="bo">བོད་ཡིག</option>
-                                <option value="dz">རྫོང་ཁ</option>
-                                <option value="my">ဗမာစာ</option>
-                                <option value="ka">ქართული</option>
-                                <option value="ti">ትግርኛ</option>
-                                <option value="am">አማርኛ</option>
-                                <option value="iu">ᐃᓄᒃᑎᑐᑦ</option>
-                                <option value="oj">ᐊᓂᔑᓈᐯᒧᐎᓐ</option>
-                                <option value="cr">ᓀᐦᐃᔭᐍᐏᐣ</option>
-                                <option value="km">ខ្មែរ</option>
-                                <option value="zh">中文&nbsp;(Zhōngwén)</option>
-                                <option value="ja">日本語&nbsp;(にほんご)</option>
-                                <option value="ii">ꆈꌠ꒿ Nuosuhxop</option>
-                                <option value="ko">한국어&nbsp;(韓國語)</option>
+							<select class="language-choice" name="language" required>
+                                <option value="" disabled>Story language</option>
+                                <option value="Afaan Oromoo">Afaan Oromoo</option>
+                                <option value="Afaraf">Afaraf</option>
+                                <option value="Afrikaans">Afrikaans</option>
+                                <option value="Akan">Akan</option>
+                                <option value="Aragonés">Aragonés</option>
+                                <option value="Asụsụ Igbo">Asụsụ Igbo</option>
+                                <option value="Avañe'ẽ">Avañe'ẽ</option>
+                                <option value="Avesta">Avesta</option>
+                                <option value="Aymar Aru">Aymar Aru</option>
+                                <option value="Azərbaycan Dili">Azərbaycan Dili</option>
+                                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                                <option value="Bahasa Melayu">Bahasa Melayu</option>
+                                <option value="Bamanankan">Bamanankan</option>
+                                <option value="Basa Jawa">Basa Jawa</option>
+                                <option value="Basa Sunda">Basa Sunda</option>
+                                <option value="Bislama">Bislama</option>
+                                <option value="Bosanski Jezik">Bosanski Jezik</option>
+                                <option value="Brezhoneg">Brezhoneg</option>
+                                <option value="Català">Català</option>
+                                <option value="Chamoru">Chamoru</option>
+                                <option value="Chicheŵa">Chicheŵa</option>
+                                <option value="Chishona">Chishona</option>
+                                <option value="Corsu">Corsu</option>
+                                <option value="Cymraeg">Cymraeg</option>
+                                <option value="Dansk">Dansk</option>
+                                <option value="Davvisámegiella">Davvisámegiella</option>
+                                <option value="Deutsch">Deutsch</option>
+                                <option value="Diné Bizaad">Diné Bizaad</option>
+                                <option value="Eesti">Eesti</option>
+                                <option value="Ekakairũ Naoero">Ekakairũ Naoero</option>
+                                <option value="English">English</option>
+                                <option value="Español">Español</option>
+                                <option value="Esperanto">Esperanto</option>
+                                <option value="Euskara">Euskara</option>
+                                <option value="Eʋegbe">Eʋegbe</option>
+                                <option value="Faka Tonga">Faka Tonga</option>
+                                <option value="Fiteny Malagasy">Fiteny Malagasy</option>
+                                <option value="Français">Français</option>
+                                <option value="Frysk">Frysk</option>
+                                <option value="Fulfulde">Fulfulde</option>
+                                <option value="Føroyskt">Føroyskt</option>
+                                <option value="Gaeilge">Gaeilge</option>
+                                <option value="Gaelg">Gaelg</option>
+                                <option value="Gagana Fa'a Samoa">Gagana Fa'a Samoa</option>
+                                <option value="Galego">Galego</option>
+                                <option value="Gjuha Shqipe">Gjuha Shqipe</option>
+                                <option value="Gàidhlig">Gàidhlig</option>
+                                <option value="Gĩkũyũ">Gĩkũyũ</option>
+                                <option value="Hausa">Hausa</option>
+                                <option value="Hiri Motu">Hiri Motu</option>
+                                <option value="Hrvatski Jezik">Hrvatski Jezik</option>
+                                <option value="Ido">Ido</option>
+                                <option value="Ikinyarwanda">Ikinyarwanda</option>
+                                <option value="Ikirundi">Ikirundi</option>
+                                <option value="Interlingua">Interlingua</option>
+                                <option value="Isindebele">Isindebele</option>
+                                <option value="Isixhosa">Isixhosa</option>
+                                <option value="Isizulu">Isizulu</option>
+                                <option value="Italiano">Italiano</option>
+                                <option value="Iñupiaq">Iñupiaq</option>
+                                <option value="Polski">Polski</option>
+                                <option value="Kajin M̧ajeļ">Kajin M̧ajeļ</option>
+                                <option value="Kalaallisut">Kalaallisut</option>
+                                <option value="Kanuri">Kanuri</option>
+                                <option value="Kernewek">Kernewek</option>
+                                <option value="Kikongo">Kikongo</option>
+                                <option value="Kiswahili">Kiswahili</option>
+                                <option value="Kreyòl Ayisyen">Kreyòl Ayisyen</option>
+                                <option value="Kuanyama">Kuanyama</option>
+                                <option value="Kurdî">Kurdî</option>
+                                <option value="Latine">Latine</option>
+                                <option value="Latviešu Valoda">Latviešu Valoda</option>
+                                <option value="Lietuvių Kalba">Lietuvių Kalba</option>
+                                <option value="Limba Română">Limba Română</option>
+                                <option value="Limburgs">Limburgs</option>
+                                <option value="Lingála">Lingála</option>
+                                <option value="Luganda">Luganda</option>
+                                <option value="Lëtzebuergesch">Lëtzebuergesch</option>
+                                <option value="Magyar">Magyar</option>
+                                <option value="Malti">Malti</option>
+                                <option value="Nederlands">Nederlands</option>
+                                <option value="Norsk">Norsk</option>
+                                <option value="Norsk Bokmål">Norsk Bokmål</option>
+                                <option value="Norsk Nynorsk">Norsk Nynorsk</option>
+                                <option value="O'zbek">O'zbek</option>
+                                <option value="Occitan">Occitan</option>
+                                <option value="Interlingue">Interlingue</option>
+                                <option value="Otjiherero">Otjiherero</option>
+                                <option value="Owambo">Owambo</option>
+                                <option value="Português">Português</option>
+                                <option value="Reo Tahiti">Reo Tahiti</option>
+                                <option value="Rumantsch Grischun">Rumantsch Grischun</option>
+                                <option value="Runa Simi">Runa Simi</option>
+                                <option value="Sardu">Sardu</option>
+                                <option value="Saɯ Cueŋƅ">Saɯ Cueŋƅ</option>
+                                <option value="Sesotho">Sesotho</option>
+                                <option value="Setswana">Setswana</option>
+                                <option value="Siswati">Siswati</option>
+                                <option value="Slovenski Jezik">Slovenski Jezik</option>
+                                <option value="Slovenčina">Slovenčina</option>
+                                <option value="Soomaaliga">Soomaaliga</option>
+                                <option value="Suomi">Suomi</option>
+                                <option value="Svenska">Svenska</option>
+                                <option value="Te Reo Māori">Te Reo Māori</option>
+                                <option value="Tiếng Việt">Tiếng Việt</option>
+                                <option value="Tshiluba">Tshiluba</option>
+                                <option value="Tshivenḓa">Tshivenḓa</option>
+                                <option value="Twi">Twi</option>
+                                <option value="Türkmen">Türkmen</option>
+                                <option value="Türkçe">Türkçe</option>
+                                <option value="Uyƣurqə">Uyƣurqə</option>
+                                <option value="Volapük">Volapük</option>
+                                <option value="Vosa Vakaviti">Vosa Vakaviti</option>
+                                <option value="Walon">Walon</option>
+                                <option value="Wikang Tagalog">Wikang Tagalog</option>
+                                <option value="Wollof">Wollof</option>
+                                <option value="Xitsonga">Xitsonga</option>
+                                <option value="Yorùbá">Yorùbá</option>
+                                <option value="Yângâ Tî Sängö">Yângâ Tî Sängö</option>
+                                <option value="ÍSlenska">ÍSlenska</option>
+                                <option value="čEština">čEština</option>
+                                <option value="ελληνικά">ελληνικά</option>
+                                <option value="авар мацӀ">авар мацӀ</option>
+                                <option value="аҧсуа бызшәа">аҧсуа бызшәа</option>
+                                <option value="башҡорт теле">башҡорт теле</option>
+                                <option value="беларуская мова">беларуская мова</option>
+                                <option value="български език">български език</option>
+                                <option value="ирон æвзаг">ирон æвзаг</option>
+                                <option value="коми кыв">коми кыв</option>
+                                <option value="Кыргызча">Кыргызча</option>
+                                <option value="македонски јазик">македонски јазик</option>
+                                <option value="монгол">монгол</option>
+                                <option value="нохчийн мотт">нохчийн мотт</option>
+                                <option value="Русский язык">Русский язык</option>
+                                <option value="српски језик">српски језик</option>
+                                <option value="татар теле">татар теле</option>
+                                <option value="тоҷикӣ">тоҷикӣ</option>
+                                <option value="українська мова">українська мова</option>
+                                <option value="чӑваш чӗлхи">чӑваш чӗлхи</option>
+                                <option value="ѩзыкъ словѣньскъ">ѩзыкъ словѣньскъ</option>
+                                <option value="қазақ тілі">қазақ тілі</option>
+                                <option value="Հայերեն">Հայերեն</option>
+                                <option value="ייִדיש">ייִדיש</option>
+                                <option value="עברית">עברית</option>
+                                <option value="اردو">اردو</option>
+                                <option value="العربية">العربية</option>
+                                <option value="فارسی">فارسی</option>
+                                <option value="پښتو">پښتو</option>
+                                <option value="कश्मीरी">कश्मीरी</option>
+                                <option value="ेपाली">नेपाली</option>
+                                <option value="ाऴि">पाऴि</option>
+                                <option value="भोजपुरी">भोजपुरी</option>
+                                <option value="मराठी">मराठी</option>
+                                <option value="ंस्कृतम्">संस्कृतम्</option>
+                                <option value="िन्धी">सिन्धी</option>
+                                <option value="िन्दी">हिन्दी</option>
+                                <option value="অসমীয়া">অসমীয়া</option>
+                                <option value="াংলা">বাংলা</option>
+                                <option value="ਪੰਜਾਬੀ">ਪੰਜਾਬੀ</option>
+                                <option value="ુજરાતી">ગુજરાતી</option>
+                                <option value="ଓଡ଼ିଆ">ଓଡ଼ିଆ</option>
+                                <option value="தமிழ்">தமிழ்</option>
+                                <option value="ెలుగు">తెలుగు</option>
+                                <option value="ಕನ್ನಡ">ಕನ್ನಡ</option>
+                                <option value="മലയാളം">മലയാളം</option>
+                                <option value="ිංහල">සිංහල</option>
+                                <option value="ไทย">ไทย</option>
+                                <option value="ພາສາລາວ">ພາສາລາວ</option>
+                                <option value="ོད་ཡིག">བོད་ཡིག</option>
+                                <option value="ོང་ཁ">རྫོང་ཁ</option>
+                                <option value="ဗမာစာ">ဗမာစာ</option>
+                                <option value="ქართული">ქართული</option>
+                                <option value="ትግርኛ">ትግርኛ</option>
+                                <option value="አማርኛ">አማርኛ</option>
+                                <option value="ᐃᓄᒃᑎᑐᑦ">ᐃᓄᒃᑎᑐᑦ</option>
+                                <option value="ᐊᓂᔑᓈᐯᒧᐎᓐ">ᐊᓂᔑᓈᐯᒧᐎᓐ</option>
+                                <option value="ᓀᐦᐃᔭᐍᐏᐣ">ᓀᐦᐃᔭᐍᐏᐣ</option>
+                                <option value="ខ្មែរ">ខ្មែរ</option>
+                                <option value="中文&nbsp;(Zhōngwén)">中文&nbsp;(Zhōngwén)</option>
+                                <option value="日本語&nbsp;(にほんご)">日本語&nbsp;(にほんご)</option>
+                                <option value="ꆈꌠ꒿ Nuosuhxop">ꆈꌠ꒿ Nuosuhxop</option>
+                                <option value="한국어&nbsp;(韓國語)">한국어&nbsp;(韓國語)</option>
                             </select>
 						</div>
-						<div class="input-field validate col s6">
+						<div class="input-field validate col s12 m6">
 							<i class="material-icons prefix">event</i>
 							<input id="date" name="date" type="text" class="datepicker" required>
 							<label for="date">When was it?</label>
                         </div>
-                        <div id="chipsindex" class="chips chips-autocomplete no-autoinit chips-placeholder col s6 validate">
+                        <div id="chipsindex" class="chips chips-autocomplete no-autoinit chips-placeholder col s12 m6 validate">
                         </div>
-                        <div class="input-field  validate col s6">
+                        <div class="input-field  validate col s12 m6">
                             <i class="material-icons prefix">palette</i>
                             <select id="color" name="color" required>
                                 <option value="" disabled selected>Color</option>
@@ -584,7 +583,7 @@
                             <input type="hidden" id="username" name="username" value="{{ username }}">
                         {% endif %}              
 						<button id="post-story" class="btn waves-effect waves-light right" type="submit">Post
-	                        <i class="material-icons right">playlist_add</i>
+	                        <i class="material-icons right">post_add</i>
                         </button>
 					</form>
 				</div>
@@ -595,8 +594,8 @@
 		</div>
 
         <div id="modal-help" class="modal">
-            <div class="modal-content">
-                <h4>What's Up?</h4>
+            <div class="modal-content flow-text">
+                <h4 class="heading">What's Up?</h4>
                 <p>In the midst of this pandemic many people have simultaneously become more isolated and more connected to one another. While the experience of the pandemic is essentially shared globally , it has taken a completely different form and shape for each individual depending on their own circumstances.</p>
                 <p> The site was designed with this in mind. A space where everyone can share a little slice of their experience with others, a way to share that bit of unique experience with others wherever they are.</p>
                 <p>The process is simple, click the orange button with the pencil to open the form, fill all fields, and use the editor to write a story with whatever formatting you like. Post and it will be shared and searchable to everyone! There is no need to create an account to post but if you wish to save, edit or delete your stories afterwards, you'll have to make one. For privacy, the account requires only a username and password, no email or ther personal information. This way the stories can remain essetially anonymous.</p>

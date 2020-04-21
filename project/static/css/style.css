@@ -6,13 +6,41 @@
  * Made By MaterializeCSS.com
  */
 
-.normal-size {
+
+html {
+    font-family: 'Josefin Slab', serif;
+    font-size: 1.1rem 
+}
+
+.heading {
+font-family: 'IM Fell English SC', serif;
+}
+
+/*.normal-size {
     font-size: 3rem;
     margin: 0.5rem 0;
+}*/
+
+hr {
+    height: 0.1rem
+}
+
+.row form.col {
+    padding: 0;
+}
+
+.sidenav li>a {
+    font-size: 1.2rem
+}
+
+@media only screen and (max-width: 600px) {
+nav .brand-logo {
+    font-size: 8vw;
+}
 }
 
 .icon-block {
-  padding: 0 15px;
+  padding: 0 0.9rem;
 }
 .icon-block .material-icons {
 	font-size: inherit;
@@ -27,8 +55,8 @@
 }
 
 .section {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
 }
 
 /* fix for no bullet points in editor */
@@ -38,5 +66,5 @@
 }
 
 .ck.ck-content ul {
-  padding-left: 40px;
+  padding-left: 2.5rem;
 }

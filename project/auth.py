@@ -11,12 +11,6 @@ auth = Blueprint('auth', __name__,
 users = mongo.db.users
 
 
-@auth.route('/signup')
-def signup():
-
-    return render_template('signup.html')
-
-
 @auth.route('/signup', methods=['POST'])
 def signup_form():
 
@@ -24,22 +18,16 @@ def signup_form():
     user = users.find_one({"username": username})
 
     if user:
-        flash('Username is taken')
-        return redirect(url_for('auth.signup'))
+        flash('Username is taken, please try another')
+        return redirect(url_for('base.story_page'))
 
     account = {'username': request.form.get('username'),
                'password': generate_password_hash(request.form.get
                                                   ('password'),
                                                   method='sha256')}
     users.insert_one(account)
-
-    return redirect(url_for('auth.login'))
-
-
-@auth.route('/login')
-def login():
-
-    return render_template("login.html")
+    flash('Account created successfully! Please Login.')
+    return redirect(url_for('base.story_page'))
 
 
 @auth.route('/login', methods=['POST'])
@@ -52,7 +40,7 @@ def login_form():
 
     if not user or not check_password_hash(user["password"], password):
         flash('The login details are incorrect')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('base.story_page'))
 
     log_user = User(user.get('username'), password, _id=user.get('_id'))
     login_user(log_user, remember=remember)
