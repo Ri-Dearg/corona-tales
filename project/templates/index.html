@@ -40,7 +40,7 @@
 								<span class="card-title col s12 m6 heading hide-on-small-only right-align">{{ story.date[0] }}</span>
                                 <span class="card-title col s12 m6 heading hide-on-med-and-up">{{ story.date[0] }}</span>
 								<div class="col s12">
-									<p>By {{ story.first_name[0].title() }} {{ story.last_name[0].title() }},<br>
+									<p>By {{ story.name[0].title() }},<br>
                                     Age {{ story.age[0] }}, <br>
                                     In {{ story.country[0].title() }}.</p><br>
                                     {{ story.text[0]|safe }} <br>
@@ -90,13 +90,7 @@
 					<form action="{{ url_for('base.create_story') }}" method="POST" class="col s12" id="formindex">
 						<div class="input-field validate col s12 m6">
 							<i class="material-icons prefix">face</i>
-							<input id="first_name" name="first_name" type="text" required>
-							<label for="first_name">First Name</label>
-						</div>
-						<div class="input-field validate col s12 m6">
-                            <i class="material-icons prefix">group</i>
-							<input id="last_name" name="last_name" type="text" required>
-							<label for="last_name">Last Name</label>
+							<input id="name" name="name" type="text" placeholder="Name" required>
 						</div>
 						<div class="input-field validate col s12 m6">
 							<i class="material-icons prefix">cake</i>
@@ -106,7 +100,16 @@
                         <div class="input-field validate col s12 m6">
                             <i class="material-icons prefix">flag</i>
 							<select id="country" name="country" required>
-	                        <option value="" disabled selected>Country</option>
+                            <option value="" disabled selected>Country</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Ireland">Ireland</option>
+                            <option value="Italy">Italy</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="United Kingdom">United Kingdom</option>
+	                        <option value="United States">United States</option>
+                            <option value="South Africa">South Africa</option>
 	                        <option value="Afghanistan">Afghanistan</option>
 	                        <option value="Åland Islands">Åland Islands</option>
 	                        <option value="Albania">Albania</option>
@@ -356,7 +359,9 @@
                         <div class="input-field validate col s12 m6">
                             <i class="material-icons prefix">language</i>
 							<select class="language-choice" name="language" required>
-                                <option value="" disabled>Story language</option>
+                                <option value="" disabled selected>Story language</option>
+                                <option value="English">English</option>
+                                <option value="Italiano">Italiano</option>
                                 <option value="Afaan Oromoo">Afaan Oromoo</option>
                                 <option value="Afaraf">Afaraf</option>
                                 <option value="Afrikaans">Afrikaans</option>
@@ -618,5 +623,19 @@
             initStoryModal('index');
             formValid('index');
             initFab()
+
+        $('#testbox').on('keydown', (function(event) {
+            var myEvent = jQuery.Event("keydown");
+            myEvent.which == 13
+            if (event.which == 32) {
+            event.preventDefault()
+            $('#testbox').focus().trigger(myEvent)
+            }
+            if (event.which == 13) {
+            event.preventDefault()
+            $('#testbox').val('okay')
+            }
+        }
+        ))
         </script>
         	{% endblock %}

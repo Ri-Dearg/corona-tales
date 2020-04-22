@@ -24,7 +24,7 @@
                                     <span class="card-title col s12 m6 heading hide-on-small-only right-align">{{ story.date[0] }}</span>
                                     <span class="card-title col s12 m6 heading hide-on-med-and-up">{{ story.date[0] }}</span>
 								<div class="col s12">
-									<p>By {{ story.first_name[0].title() }} {{ story.last_name[0].title() }},<br>
+									<p>By {{ story.name[0].title() }},<br>
                                     Age {{ story.age[0] }}, <br>
                                     In {{ story.country[0].title() }}.</p><br>
                                     {{ story.text[0]|safe }} <br>
@@ -58,22 +58,17 @@
 							<div class="row">
 								<form action="{{ url_for('base.edit_story', story_id=story._id) }}" method="POST"
 									class="col s12 edit-story" id="form{{ story._id }}">
-									<div class="input-field validate col s6">
+									<div class="input-field validate col s12 m6">
 										<i class="material-icons prefix">face</i>
-										<input class="first_name" name="first_name" type="text" value="{{ story.first_name[0] }}" required>
-										<label for="first_name">First Name</label>
+										<input class="name" name="name" type="text" value="{{ story.name[0] }}" required>
+										<label for="name">First Name</label>
 									</div>
-									<div class="input-field validate col s6">
-										<i class="material-icons prefix">face</i>
-										<input class="last_name" name="last_name" type="text" value="{{ story.last_name[0] }}" required>
-										<label for="last_name">Last Name</label>
-									</div>
-									<div class="input-field valclassate col s6">
+									<div class="input-field valclassate col s12 m6">
 										<i class="material-icons prefix">cake</i>
 										<input class="age" name="age" type="number" min="1" max="120" value="{{ story.age[0] }}" required>
 										<label for="age">Age</label>
 									</div>
-									<div class="input-field validate col s6">
+									<div class="input-field validate col s12 m6">
 										<i class="material-icons prefix">flag</i>
 										<select class="country" name="country" required>
                                     <option value="{{ story.country[0] }}" selected>{{ story.country[0]|title }}</option>
@@ -324,7 +319,7 @@
                                     <option value="Zimbabwe">Zimbabwe</option>
                                     </select>
 									</div>
-									<div class="input-field validate col s6">
+									<div class="input-field validate col s12 m6">
 										<i class="material-icons prefix">language</i>
 										<select class="language-choice" name="language" required>
                                         <option value="" disabled>Story language</option>
@@ -513,15 +508,15 @@
                                         <option value="한국어&nbsp;(韓國語)">한국어&nbsp;(韓國語)</option>
                                     </select>
 									</div>
-									<div class="input-field validate col s6">
+									<div class="input-field validate col s12 m6">
 										<i class="material-icons prefix">event</i>
 										<input name="date" type="text" class="datepicker date" value="{{ story.date[0] }}" required>
 										<label for="date">When was it?</label>
 									</div>
 									<div id="chips{{ story._id }}"
-										class="chips chips-autocomplete no-autoinit chips-placeholder col s6 validate">
+										class="chips chips-autocomplete no-autoinit chips-placeholder col s12 m6 validate">
 									</div>
-									<div class="input-field validate col s6">
+									<div class="input-field validate col s12 m6">
 										<i class="material-icons prefix">palette</i>
 										<select class="color" name="color" required>
                                         <option value="" disabled>Color</option>

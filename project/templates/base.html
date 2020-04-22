@@ -69,22 +69,20 @@
 						<li class="tab col s6"><a href="#login-tab">Login</a></li>
 					</ul>
 				</div>
+                <div class="row">
 				<div id="signup-tab" class="col s12">
 					<form action="{{ url_for('auth.signup_form') }}" method="POST" id="form-signup">
 						<div class="input-field validate col s12">
 							<i class="material-icons prefix">face</i>
-							<input id="username-signup" name="username" type="text" minlength="5" maxlength="30" required>
-							<label for="username">Create Username</label>
+							<input id="username-signup" name="username" type="text" minlength="5" maxlength="30" placeholder="Create Username" required>
 						</div>
 						<div class="input-field validate col s12">
 							<i class="material-icons prefix">done</i>
-							<input id="password-signup" name="password" type="password" minlength="8" required>
-							<label for="password">Create Password</label>
+							<input id="password-signup" name="password" type="password" minlength="8" placeholder="Create Password" required>
 						</div>
 						<div class="input-field validate col s12">
 							<i class="material-icons prefix">done_all</i>
-							<input id="password-verify" name="password-verify" type="password" minlength="8" required>
-							<label for="password-verify">Repeat Password</label>
+							<input id="password-verify" name="password-verify" type="password" minlength="8" placeholder="Repeat Password" required>
 						</div>
 						<div class="modal-footer">
 							<button id="button-signup" class="btn waves-effect waves-light right teal accent-4" type="submit">Join
@@ -93,18 +91,18 @@
                         </div>
 					</form>
 				</div>
+                </div>
 			</div>
+            <div class="row">
 			<div id="login-tab" class="col s12">
 				<form action="{{ url_for('auth.login_form') }}" method="POST" id="form-login">
 					<div class="input-field validate col s12">
 						<i class="material-icons prefix">face</i>
-						<input id="username-login" name="username" type="text" minlength="5" maxlength="30" required>
-						<label for="username">Username</label>
+						<input id="username-login" name="username" type="text" minlength="5" maxlength="30" placeholder="Username" required>
 					</div>
 					<div class="input-field validate col s12">
 						<i class="material-icons prefix">vpn_key</i>
-						<input id="password-login" name="password" type="password" minlength="8" required>
-						<label for="password">Password</label>
+						<input id="password-login" name="password" type="password" minlength="8" placeholder="Password" required>
 					</div>
 					<div class="modal-footer">
 						<button id="button-login" class="btn waves-effect waves-light right teal accent-4" type="submit">Login
@@ -113,12 +111,13 @@
 					</div>
 				</form>
 			</div>
+            </div>
 		</div>
 	</div>
 	</div>
 	<!-- Materialize Javascript-->
 	<script src="{{url_for('static', filename='js/lib/jquery-3.5.0.min.js')}}"></script>
-	<script src="{{url_for('static', filename='/js/lib/materialize.min.js')}}"></script>
+	<script src="{{url_for('static', filename='/js/lib/materialize.js')}}"></script>
 	<script src="{{url_for('static', filename='js/script.js')}}"></script>
 
 	{% block javascript %}

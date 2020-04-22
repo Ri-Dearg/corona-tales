@@ -5,7 +5,7 @@ function initTags(tagCreate, id) {
 
         var instances = M.Chips.init(chips, {
             limit: 15,
-            placeholder: 'Tags (Press Enter)',
+            placeholder: 'Tags (Press Space)',
             secondaryPlaceholder: '+Tag',
             autocompleteOptions: {
                 data: tagCreate,
