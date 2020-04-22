@@ -5,11 +5,21 @@ function initTags(tagCreate, id) {
 
         var instances = M.Chips.init(chips, {
             limit: 15,
-            placeholder: 'Tags (Press Space)',
+            placeholder: 'Add Tags',
             secondaryPlaceholder: '+Tag',
             autocompleteOptions: {
                 data: tagCreate,
                 limit: 8,
+            }
+        });
+
+        document.querySelector(`#chips${id}`).addEventListener('keydown', function (e) {
+          //  var keyCode = e.data.charCodeAt(0);
+          var pressEnter = new KeyboardEvent('keydown', {'code': 'Enter'})
+            if (event.code == 'Space' || event.code == 'Enter') {
+              console.log('whatever')
+                e.preventDefault();
+                e.currentTarget.dispatchEvent(new KeyboardEvent('keydown', { "code": "Enter" }));
             }
         });
     });
@@ -112,4 +122,11 @@ function addTags(formId, arrayLength, array) {
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
 
+    var singupLogin = document.querySelector('#modal-signup-login');
+    var modalTab = M.Modal.init(singupLogin, {
+        onOpenStart: function() {
+            var formTabs = document.querySelector('#form-tabs')
+            var instance = M.Tabs.init(formTabs, {})
+        }
+    });
 })

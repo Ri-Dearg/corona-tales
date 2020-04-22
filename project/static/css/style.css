@@ -16,6 +16,10 @@ html {
 font-family: 'IM Fell English SC', serif;
 }
 
+.mini-text {
+    font-size: 0.7rem
+}
+
 hr {
     height: 0.1rem
 }
@@ -32,11 +36,15 @@ hr {
 nav .brand-logo {
     font-size: 8vw;
 }
-}
 
 .modal {
     max-height: 85%;
-    width: 80%; 
+    width: 90%; 
+}
+
+.modal .modal-content {
+    padding: 12px
+}
 }
 
 .icon-block {

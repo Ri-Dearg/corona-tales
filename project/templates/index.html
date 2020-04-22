@@ -2,619 +2,636 @@
 {% block content %}
 <div class="container">
 
-		<section class="section white z-depth-3">
-            <h5 class="center-align heading">A simple site to share stories and experiences related to the Corona Virus pandemic.</h5>
-            <br>
-            <div class="row center">
-                <!-- Updating Map from Datawrapper.com -->
-                <iframe title="Coronavirus COVID-19 confirmed &amp;amp; recovered cases" aria-label="World Symbol map"
-                    id="datawrapper-chart-nTild" src="//datawrapper.dwcdn.net/nTild/3/" scrolling="no" frameborder="0"
-                    style="width: 0; min-width: 100% !important; border: none;" height="525"></iframe>
+	<section class="section white z-depth-3">
+		<h5 class="center-align heading">A simple site for Sharing.</h5>
+		<br>
+		<div class="row center">
+			<!-- Updating Map from Datawrapper.com -->
+			<iframe title="Coronavirus COVID-19 confirmed &amp;amp; recovered cases" aria-label="World Symbol map"
+				id="datawrapper-chart-nTild" src="//datawrapper.dwcdn.net/nTild/3/" scrolling="no" frameborder="0"
+				style="width: 0; min-width: 100% !important; border: none;" height="525"></iframe>
 
-                <script type="text/javascript">
-                    !function(){
+			<script type="text/javascript">
+				!function(){
                         "use strict";window.addEventListener("message",function(a){
                             if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){
                                 var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")
                             }
                         })
                     }();
-                </script>
-            </div>
-            <br><br>
+			</script>
+		</div>
+		<br><br>
 
 
 
-			<!-- Function to place each story as a card -->
-            {% set _stub = story_list.rewind() %}
-			{% for story in story_list %}
-			<!--   Story Section   -->
-            <hr class="{{ story.color[0] }}">
-            <br>
-            <div class="row">
-				<div class="col s12">
-					<article class="card {{ story.color[0] }} accent-1 hoverable">
-						<div class="card-content no-pad-bot">
-							<div class="row no-m-bot">
-								<span class="card-title col s12 m6 heading">{{ story.title[0] }}</span>
-								<span class="card-title col s12 m6 heading hide-on-small-only right-align">{{ story.date[0] }}</span>
-                                <span class="card-title col s12 m6 heading hide-on-med-and-up">{{ story.date[0] }}</span>
-								<div class="col s12">
-									<p>By {{ story.name[0].title() }},<br>
+		<!-- Function to place each story as a card -->
+		{% set _stub = story_list.rewind() %}
+		{% for story in story_list %}
+		<!--   Story Section   -->
+		<hr class="{{ story.color[0] }}">
+		<br>
+		<div class="row">
+			<div class="col s12">
+				<article class="card {{ story.color[0] }} accent-1 hoverable">
+					<div class="card-content no-pad-bot">
+						<div class="row no-m-bot">
+							<span class="card-title col s12 m6 heading">{{ story.title[0] }}</span>
+							<span class="card-title col s12 m6 heading hide-on-small-only right-align">{{ story.date[0] }}</span>
+							<span class="card-title col s12 m6 heading hide-on-med-and-up">{{ story.date[0] }}</span>
+							<div class="col s12">
+								<p>By {{ story.name[0].title() }},<br>
                                     Age {{ story.age[0] }}, <br>
                                     In {{ story.country[0].title() }}.</p><br>
                                     {{ story.text[0]|safe }} <br>
                                 </div>
-                                <div class="card-action col s12">
-                                    <p>Tags: {% for tag in story.tags %}{{ tag }}, {% endfor %}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-            {% endfor %}
-        </section>
-
-		<div class="fixed-action-btn no-autoinit" id="buttonindex">
-			<a href="#" class="btn-floating btn-large red darken-1 tooltipped" data-position="left" data-tooltip="Menu" id="fab-index">
-				<i class="large material-icons">menu</i>
-			</a>
-			<ul>
-				<li><a href="#modal-help" class="btn-floating blue darken-1 modal-trigger tooltipped" data-position="left" data-tooltip="Help"><i class="material-icons">help</i></a></li>
-                <li>
-                {% if current_user.is_authenticated %}
-                <a href="{{ url_for('base.profile') }}" class="btn-floating green darken-1 tooltipped" data-position="left" data-tooltip="Profile">
-                {% endif %}
-                {% if not current_user.is_authenticated %}
-                <a href="#modal-signup-login" class="btn-floating green darken-1 tooltipped modal-trigger" data-position="left" data-tooltip="Signup / Login">
-                {% endif %}
-                <i class="material-icons">account_circle</i></a>
-                </li>
-                <li><a href="#" class="btn-floating yellow darken-1 tooltipped" data-position="left" data-tooltip="Search"><i class="material-icons">search</i></a></li>
-                <li><a href="#modalindex" class="btn-floating orange darken-1 modal-trigger tooltipped" data-position="left" data-tooltip="Post a Story"><i class="material-icons">mode_edit</i></a></li>
-			</ul>
-		</div>
-
-		<div class="tap-target no-autoinit purple darken-1" data-target="fab-index">
-			<div class="tap-target-content">
-				<h5 class="white-text">Post a Story here!</h5>
-				<p class="white-text">Use this menu to post a story, search, login or get help.</p>
+									<div class="card-action col s12">
+										<p>Tags: {% for tag in story.tags %}{{ tag }}, {% endfor %}</p>
+									</div>
+							</div>
+						</div>
+				</article>
 			</div>
 		</div>
+		{% endfor %}
+	</section>
 
-		<div id="modalindex" class="modal no-autoinit">
-			<div class="modal-content">
-				<h4>Write your story.</h4>
-				<div class="row">
-					<form action="{{ url_for('base.create_story') }}" method="POST" class="col s12" id="formindex">
-						<div class="input-field validate col s12 m6">
-							<i class="material-icons prefix">face</i>
-							<input id="name" name="name" type="text" placeholder="Name" required>
-						</div>
+	<div class="fixed-action-btn no-autoinit" id="buttonindex">
+		<a href="#" class="btn-floating btn-large red darken-1 tooltipped" data-position="left" data-tooltip="Menu"
+			id="fab-index">
+			<i class="large material-icons">menu</i>
+		</a>
+		<ul>
+			<li><a href="#modal-help" class="btn-floating blue darken-1 modal-trigger tooltipped" data-position="left"
+					data-tooltip="Help"><i class="material-icons">help</i></a></li>
+			<li>
+				{% if current_user.is_authenticated %}
+				<a href="{{ url_for('base.profile') }}" class="btn-floating green darken-1 tooltipped"
+					data-position="left" data-tooltip="Profile">
+					{% endif %}
+					{% if not current_user.is_authenticated %}
+					<a href="#modal-signup-login" class="btn-floating green darken-1 tooltipped modal-trigger"
+						data-position="left" data-tooltip="Signup / Login">
+						{% endif %}
+						<i class="material-icons">account_circle</i></a>
+			</li>
+			<li><a href="#" class="btn-floating yellow darken-1 tooltipped" data-position="left"
+					data-tooltip="Search"><i class="material-icons">search</i></a></li>
+			<li><a href="#modalindex" class="btn-floating orange darken-1 modal-trigger tooltipped" data-position="left"
+					data-tooltip="Post a Story"><i class="material-icons">mode_edit</i></a></li>
+		</ul>
+	</div>
+
+	<div class="tap-target no-autoinit purple darken-1" data-target="fab-index">
+		<div class="tap-target-content">
+			<h5 class="white-text">Post a Story here!</h5>
+			<p class="white-text">Use this menu to post a story, search, login or get help.</p>
+		</div>
+	</div>
+
+	<div id="modalindex" class="modal no-autoinit">
+		<div class="modal-content">
+			<h5>Write your story.</h5>
+			<p class="mini-text">Please fill all fields.</p>
+			<div class="row">
+				<form action="{{ url_for('base.create_story') }}" method="POST" class="col s12" id="formindex">
+					<div class="input-field validate col s12 m6">
+						<i class="material-icons prefix">face</i>
+						<input id="name" name="name" type="text" placeholder="Name" required>
+										</div>
 						<div class="input-field validate col s12 m6">
 							<i class="material-icons prefix">cake</i>
 							<input id="age" name="age" type="number" min="1" max="120" required>
 							<label for="age">Age</label>
 						</div>
-                        <div class="input-field validate col s12 m6">
-                            <i class="material-icons prefix">flag</i>
+						<div class="input-field validate col s12 m6">
+							<i class="material-icons prefix">flag</i>
 							<select id="country" name="country" required>
-                            <option value="" disabled selected>Country</option>
-                            <option value="Canada">Canada</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Ireland">Ireland</option>
-                            <option value="Italy">Italy</option>
-                            <option value="New Zealand">New Zealand</option>
-                            <option value="South Africa">South Africa</option>
-                            <option value="United Kingdom">United Kingdom</option>
-	                        <option value="United States">United States</option>
-                            <option value="South Africa">South Africa</option>
-	                        <option value="Afghanistan">Afghanistan</option>
-	                        <option value="Åland Islands">Åland Islands</option>
-	                        <option value="Albania">Albania</option>
-	                        <option value="Algeria">Algeria</option>
-	                        <option value="American Samoa">American Samoa</option>
-	                        <option value="Andorra">Andorra</option>
-	                        <option value="Angola">Angola</option>
-	                        <option value="Anguilla">Anguilla</option>
-	                        <option value="Antarctica">Antarctica</option>
-	                        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-	                        <option value="Argentina">Argentina</option>
-	                        <option value="Armenia">Armenia</option>
-	                        <option value="Aruba">Aruba</option>
-	                        <option value="Australia">Australia</option>
-	                        <option value="Austria">Austria</option>
-	                        <option value="Azerbaijan">Azerbaijan</option>
-	                        <option value="Bahamas">Bahamas</option>
-	                        <option value="Bahrain">Bahrain</option>
-	                        <option value="Bangladesh">Bangladesh</option>
-	                        <option value="Barbados">Barbados</option>
-	                        <option value="Belarus">Belarus</option>
-	                        <option value="Belgium">Belgium</option>
-	                        <option value="Belize">Belize</option>
-	                        <option value="Benin">Benin</option>
-	                        <option value="Bermuda">Bermuda</option>
-	                        <option value="Bhutan">Bhutan</option>
-	                        <option value="Bolivia">Bolivia</option>
-	                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
-	                        <option value="Botswana">Botswana</option>
-	                        <option value="Bouvet Island">Bouvet Island</option>
-	                        <option value="Brazil">Brazil</option>
-	                        <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
-	                        <option value="Brunei Darussalam">Brunei Darussalam</option>
-	                        <option value="Bulgaria">Bulgaria</option>
-	                        <option value="Burkina Faso">Burkina Faso</option>
-	                        <option value="Burundi">Burundi</option>
-	                        <option value="Cambodia">Cambodia</option>
-	                        <option value="Cameroon">Cameroon</option>
-	                        <option value="Canada">Canada</option>
-	                        <option value="Cape Verde">Cape Verde</option>
-	                        <option value="Cayman Islands">Cayman Islands</option>
-	                        <option value="Central African Republic">Central African Republic</option>
-	                        <option value="Chad">Chad</option>
-	                        <option value="Chile">Chile</option>
-	                        <option value="China">China</option>
-	                        <option value="Christmas Island">Christmas Island</option>
-	                        <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
-	                        <option value="Colombia">Colombia</option>
-	                        <option value="Comoros">Comoros</option>
-	                        <option value="Congo">Congo</option>
-	                        <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The</option>
-	                        <option value="Cook Islands">Cook Islands</option>
-	                        <option value="Costa Rica">Costa Rica</option>
-	                        <option value="Cote D'ivoire">Cote D'ivoire</option>
-	                        <option value="Croatia">Croatia</option>
-	                        <option value="Cuba">Cuba</option>
-	                        <option value="Cyprus">Cyprus</option>
-	                        <option value="Czech Republic">Czech Republic</option>
-	                        <option value="Denmark">Denmark</option>
-	                        <option value="Djibouti">Djibouti</option>
-	                        <option value="Dominica">Dominica</option>
-	                        <option value="Dominican Republic">Dominican Republic</option>
-	                        <option value="Ecuador">Ecuador</option>
-	                        <option value="Egypt">Egypt</option>
-	                        <option value="El Salvador">El Salvador</option>
-	                        <option value="Equatorial Guinea">Equatorial Guinea</option>
-	                        <option value="Eritrea">Eritrea</option>
-	                        <option value="Estonia">Estonia</option>
-	                        <option value="Ethiopia">Ethiopia</option>
-	                        <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
-	                        <option value="Faroe Islands">Faroe Islands</option>
-	                        <option value="Fiji">Fiji</option>
-	                        <option value="Finland">Finland</option>
-	                        <option value="France">France</option>
-	                        <option value="French Guiana">French Guiana</option>
-	                        <option value="French Polynesia">French Polynesia</option>
-	                        <option value="French Southern Territories">French Southern Territories</option>
-	                        <option value="Gabon">Gabon</option>
-	                        <option value="Gambia">Gambia</option>
-	                        <option value="Georgia">Georgia</option>
-	                        <option value="Germany">Germany</option>
-	                        <option value="Ghana">Ghana</option>
-	                        <option value="Gibraltar">Gibraltar</option>
-	                        <option value="Greece">Greece</option>
-	                        <option value="Greenland">Greenland</option>
-	                        <option value="Grenada">Grenada</option>
-	                        <option value="Guadeloupe">Guadeloupe</option>
-	                        <option value="Guam">Guam</option>
-	                        <option value="Guatemala">Guatemala</option>
-	                        <option value="Guernsey">Guernsey</option>
-	                        <option value="Guinea">Guinea</option>
-	                        <option value="Guinea-bissau">Guinea-bissau</option>
-	                        <option value="Guyana">Guyana</option>
-	                        <option value="Haiti">Haiti</option>
-	                        <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
-	                        <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
-	                        <option value="Honduras">Honduras</option>
-	                        <option value="Hong Kong">Hong Kong</option>
-	                        <option value="Hungary">Hungary</option>
-	                        <option value="Iceland">Iceland</option>
-	                        <option value="India">India</option>
-	                        <option value="Indonesia">Indonesia</option>
-	                        <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
-	                        <option value="Iraq">Iraq</option>
-	                        <option value="Ireland">Ireland</option>
-	                        <option value="Isle of Man">Isle of Man</option>
-	                        <option value="Israel">Israel</option>
-	                        <option value="Italy">Italy</option>
-	                        <option value="Jamaica">Jamaica</option>
-	                        <option value="Japan">Japan</option>
-	                        <option value="Jersey">Jersey</option>
-	                        <option value="Jordan">Jordan</option>
-	                        <option value="Kazakhstan">Kazakhstan</option>
-	                        <option value="Kenya">Kenya</option>
-	                        <option value="Kiribati">Kiribati</option>
-	                        <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
-	                        <option value="Korea, Republic of">Korea, Republic of</option>
-	                        <option value="Kuwait">Kuwait</option>
-	                        <option value="Kyrgyzstan">Kyrgyzstan</option>
-	                        <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
-	                        <option value="Latvia">Latvia</option>
-	                        <option value="Lebanon">Lebanon</option>
-	                        <option value="Lesotho">Lesotho</option>
-	                        <option value="Liberia">Liberia</option>
-	                        <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
-	                        <option value="Liechtenstein">Liechtenstein</option>
-	                        <option value="Lithuania">Lithuania</option>
-	                        <option value="Luxembourg">Luxembourg</option>
-	                        <option value="Macao">Macao</option>
-	                        <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav Republic of</option>
-	                        <option value="Madagascar">Madagascar</option>
-	                        <option value="Malawi">Malawi</option>
-	                        <option value="Malaysia">Malaysia</option>
-	                        <option value="Maldives">Maldives</option>
-	                        <option value="Mali">Mali</option>
-	                        <option value="Malta">Malta</option>
-	                        <option value="Marshall Islands">Marshall Islands</option>
-	                        <option value="Martinique">Martinique</option>
-	                        <option value="Mauritania">Mauritania</option>
-	                        <option value="Mauritius">Mauritius</option>
-	                        <option value="Mayotte">Mayotte</option>
-	                        <option value="Mexico">Mexico</option>
-	                        <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
-	                        <option value="Moldova, Republic of">Moldova, Republic of</option>
-	                        <option value="Monaco">Monaco</option>
-	                        <option value="Mongolia">Mongolia</option>
-	                        <option value="Montenegro">Montenegro</option>
-	                        <option value="Montserrat">Montserrat</option>
-	                        <option value="Morocco">Morocco</option>
-	                        <option value="Mozambique">Mozambique</option>
-	                        <option value="Myanmar">Myanmar</option>
-	                        <option value="Namibia">Namibia</option>
-	                        <option value="Nauru">Nauru</option>
-	                        <option value="Nepal">Nepal</option>
-	                        <option value="Netherlands">Netherlands</option>
-	                        <option value="Netherlands Antilles">Netherlands Antilles</option>
-	                        <option value="New Caledonia">New Caledonia</option>
-	                        <option value="New Zealand">New Zealand</option>
-	                        <option value="Nicaragua">Nicaragua</option>
-	                        <option value="Niger">Niger</option>
-	                        <option value="Nigeria">Nigeria</option>
-	                        <option value="Niue">Niue</option>
-	                        <option value="Norfolk Island">Norfolk Island</option>
-	                        <option value="Northern Mariana Islands">Northern Mariana Islands</option>
-	                        <option value="Norway">Norway</option>
-	                        <option value="Oman">Oman</option>
-	                        <option value="Pakistan">Pakistan</option>
-	                        <option value="Palau">Palau</option>
-	                        <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
-	                        <option value="Panama">Panama</option>
-	                        <option value="Papua New Guinea">Papua New Guinea</option>
-	                        <option value="Paraguay">Paraguay</option>
-	                        <option value="Peru">Peru</option>
-	                        <option value="Philippines">Philippines</option>
-	                        <option value="Pitcairn">Pitcairn</option>
-	                        <option value="Poland">Poland</option>
-	                        <option value="Portugal">Portugal</option>
-	                        <option value="Puerto Rico">Puerto Rico</option>
-	                        <option value="Qatar">Qatar</option>
-	                        <option value="Reunion">Reunion</option>
-	                        <option value="Romania">Romania</option>
-	                        <option value="Russian Federation">Russian Federation</option>
-	                        <option value="Rwanda">Rwanda</option>
-	                        <option value="Saint Helena">Saint Helena</option>
-	                        <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
-	                        <option value="Saint Lucia">Saint Lucia</option>
-	                        <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
-	                        <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
-	                        <option value="Samoa">Samoa</option>
-	                        <option value="San Marino">San Marino</option>
-	                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
-	                        <option value="Saudi Arabia">Saudi Arabia</option>
-	                        <option value="Senegal">Senegal</option>
-	                        <option value="Serbia">Serbia</option>
-	                        <option value="Seychelles">Seychelles</option>
-	                        <option value="Sierra Leone">Sierra Leone</option>
-	                        <option value="Singapore">Singapore</option>
-	                        <option value="Slovakia">Slovakia</option>
-	                        <option value="Slovenia">Slovenia</option>
-	                        <option value="Solomon Islands">Solomon Islands</option>
-	                        <option value="Somalia">Somalia</option>
-	                        <option value="South Africa">South Africa</option>
-	                        <option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich Islands</option>
-	                        <option value="Spain">Spain</option>
-	                        <option value="Sri Lanka">Sri Lanka</option>
-	                        <option value="Sudan">Sudan</option>
-	                        <option value="Suriname">Suriname</option>
-	                        <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
-	                        <option value="Swaziland">Swaziland</option>
-	                        <option value="Sweden">Sweden</option>
-	                        <option value="Switzerland">Switzerland</option>
-	                        <option value="Syrian Arab Republic">Syrian Arab Republic</option>
-	                        <option value="Taiwan, Province of China">Taiwan, Province of China</option>
-	                        <option value="Tajikistan">Tajikistan</option>
-	                        <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
-	                        <option value="Thailand">Thailand</option>
-	                        <option value="Timor-leste">Timor-leste</option>
-	                        <option value="Togo">Togo</option>
-	                        <option value="Tokelau">Tokelau</option>
-	                        <option value="Tonga">Tonga</option>
-	                        <option value="Trinidad and Tobago">Trinidad and Tobago</option>
-	                        <option value="Tunisia">Tunisia</option>
-	                        <option value="Turkey">Turkey</option>
-	                        <option value="Turkmenistan">Turkmenistan</option>
-	                        <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
-	                        <option value="Tuvalu">Tuvalu</option>
-	                        <option value="Uganda">Uganda</option>
-	                        <option value="Ukraine">Ukraine</option>
-	                        <option value="United Arab Emirates">United Arab Emirates</option>
-	                        <option value="United Kingdom">United Kingdom</option>
-	                        <option value="United States">United States</option>
-	                        <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
-	                        <option value="Uruguay">Uruguay</option>
-	                        <option value="Uzbekistan">Uzbekistan</option>
-	                        <option value="Vanuatu">Vanuatu</option>
-	                        <option value="Venezuela">Venezuela</option>
-	                        <option value="Viet Nam">Viet Nam</option>
-	                        <option value="Virgin Islands, British">Virgin Islands, British</option>
-	                        <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
-	                        <option value="Wallis and Futuna">Wallis and Futuna</option>
-	                        <option value="Western Sahara">Western Sahara</option>
-	                        <option value="Yemen">Yemen</option>
-	                        <option value="Zambia">Zambia</option>
-	                        <option value="Zimbabwe">Zimbabwe</option>
-	                        </select>
+				                            <option value="" disabled selected>Country</option>
+				                            <option value="Canada">Canada</option>
+				                            <option value="Australia">Australia</option>
+				                            <option value="Ireland">Ireland</option>
+				                            <option value="Italy">Italy</option>
+				                            <option value="New Zealand">New Zealand</option>
+				                            <option value="South Africa">South Africa</option>
+				                            <option value="United Kingdom">United Kingdom</option>
+					                        <option value="United States">United States</option>
+				                            <option value="South Africa">South Africa</option>
+					                        <option value="Afghanistan">Afghanistan</option>
+					                        <option value="Åland Islands">Åland Islands</option>
+					                        <option value="Albania">Albania</option>
+					                        <option value="Algeria">Algeria</option>
+					                        <option value="American Samoa">American Samoa</option>
+					                        <option value="Andorra">Andorra</option>
+					                        <option value="Angola">Angola</option>
+					                        <option value="Anguilla">Anguilla</option>
+					                        <option value="Antarctica">Antarctica</option>
+					                        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+					                        <option value="Argentina">Argentina</option>
+					                        <option value="Armenia">Armenia</option>
+					                        <option value="Aruba">Aruba</option>
+					                        <option value="Australia">Australia</option>
+					                        <option value="Austria">Austria</option>
+					                        <option value="Azerbaijan">Azerbaijan</option>
+					                        <option value="Bahamas">Bahamas</option>
+					                        <option value="Bahrain">Bahrain</option>
+					                        <option value="Bangladesh">Bangladesh</option>
+					                        <option value="Barbados">Barbados</option>
+					                        <option value="Belarus">Belarus</option>
+					                        <option value="Belgium">Belgium</option>
+					                        <option value="Belize">Belize</option>
+					                        <option value="Benin">Benin</option>
+					                        <option value="Bermuda">Bermuda</option>
+					                        <option value="Bhutan">Bhutan</option>
+					                        <option value="Bolivia">Bolivia</option>
+					                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+					                        <option value="Botswana">Botswana</option>
+					                        <option value="Bouvet Island">Bouvet Island</option>
+					                        <option value="Brazil">Brazil</option>
+					                        <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+					                        <option value="Brunei Darussalam">Brunei Darussalam</option>
+					                        <option value="Bulgaria">Bulgaria</option>
+					                        <option value="Burkina Faso">Burkina Faso</option>
+					                        <option value="Burundi">Burundi</option>
+					                        <option value="Cambodia">Cambodia</option>
+					                        <option value="Cameroon">Cameroon</option>
+					                        <option value="Canada">Canada</option>
+					                        <option value="Cape Verde">Cape Verde</option>
+					                        <option value="Cayman Islands">Cayman Islands</option>
+					                        <option value="Central African Republic">Central African Republic</option>
+					                        <option value="Chad">Chad</option>
+					                        <option value="Chile">Chile</option>
+					                        <option value="China">China</option>
+					                        <option value="Christmas Island">Christmas Island</option>
+					                        <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+					                        <option value="Colombia">Colombia</option>
+					                        <option value="Comoros">Comoros</option>
+					                        <option value="Congo">Congo</option>
+					                        <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The</option>
+					                        <option value="Cook Islands">Cook Islands</option>
+					                        <option value="Costa Rica">Costa Rica</option>
+					                        <option value="Cote D'ivoire">Cote D'ivoire</option>
+					                        <option value="Croatia">Croatia</option>
+					                        <option value="Cuba">Cuba</option>
+					                        <option value="Cyprus">Cyprus</option>
+					                        <option value="Czech Republic">Czech Republic</option>
+					                        <option value="Denmark">Denmark</option>
+					                        <option value="Djibouti">Djibouti</option>
+					                        <option value="Dominica">Dominica</option>
+					                        <option value="Dominican Republic">Dominican Republic</option>
+					                        <option value="Ecuador">Ecuador</option>
+					                        <option value="Egypt">Egypt</option>
+					                        <option value="El Salvador">El Salvador</option>
+					                        <option value="Equatorial Guinea">Equatorial Guinea</option>
+					                        <option value="Eritrea">Eritrea</option>
+					                        <option value="Estonia">Estonia</option>
+					                        <option value="Ethiopia">Ethiopia</option>
+					                        <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+					                        <option value="Faroe Islands">Faroe Islands</option>
+					                        <option value="Fiji">Fiji</option>
+					                        <option value="Finland">Finland</option>
+					                        <option value="France">France</option>
+					                        <option value="French Guiana">French Guiana</option>
+					                        <option value="French Polynesia">French Polynesia</option>
+					                        <option value="French Southern Territories">French Southern Territories</option>
+					                        <option value="Gabon">Gabon</option>
+					                        <option value="Gambia">Gambia</option>
+					                        <option value="Georgia">Georgia</option>
+					                        <option value="Germany">Germany</option>
+					                        <option value="Ghana">Ghana</option>
+					                        <option value="Gibraltar">Gibraltar</option>
+					                        <option value="Greece">Greece</option>
+					                        <option value="Greenland">Greenland</option>
+					                        <option value="Grenada">Grenada</option>
+					                        <option value="Guadeloupe">Guadeloupe</option>
+					                        <option value="Guam">Guam</option>
+					                        <option value="Guatemala">Guatemala</option>
+					                        <option value="Guernsey">Guernsey</option>
+					                        <option value="Guinea">Guinea</option>
+					                        <option value="Guinea-bissau">Guinea-bissau</option>
+					                        <option value="Guyana">Guyana</option>
+					                        <option value="Haiti">Haiti</option>
+					                        <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
+					                        <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+					                        <option value="Honduras">Honduras</option>
+					                        <option value="Hong Kong">Hong Kong</option>
+					                        <option value="Hungary">Hungary</option>
+					                        <option value="Iceland">Iceland</option>
+					                        <option value="India">India</option>
+					                        <option value="Indonesia">Indonesia</option>
+					                        <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+					                        <option value="Iraq">Iraq</option>
+					                        <option value="Ireland">Ireland</option>
+					                        <option value="Isle of Man">Isle of Man</option>
+					                        <option value="Israel">Israel</option>
+					                        <option value="Italy">Italy</option>
+					                        <option value="Jamaica">Jamaica</option>
+					                        <option value="Japan">Japan</option>
+					                        <option value="Jersey">Jersey</option>
+					                        <option value="Jordan">Jordan</option>
+					                        <option value="Kazakhstan">Kazakhstan</option>
+					                        <option value="Kenya">Kenya</option>
+					                        <option value="Kiribati">Kiribati</option>
+					                        <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+					                        <option value="Korea, Republic of">Korea, Republic of</option>
+					                        <option value="Kuwait">Kuwait</option>
+					                        <option value="Kyrgyzstan">Kyrgyzstan</option>
+					                        <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+					                        <option value="Latvia">Latvia</option>
+					                        <option value="Lebanon">Lebanon</option>
+					                        <option value="Lesotho">Lesotho</option>
+					                        <option value="Liberia">Liberia</option>
+					                        <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+					                        <option value="Liechtenstein">Liechtenstein</option>
+					                        <option value="Lithuania">Lithuania</option>
+					                        <option value="Luxembourg">Luxembourg</option>
+					                        <option value="Macao">Macao</option>
+					                        <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav Republic of</option>
+					                        <option value="Madagascar">Madagascar</option>
+					                        <option value="Malawi">Malawi</option>
+					                        <option value="Malaysia">Malaysia</option>
+					                        <option value="Maldives">Maldives</option>
+					                        <option value="Mali">Mali</option>
+					                        <option value="Malta">Malta</option>
+					                        <option value="Marshall Islands">Marshall Islands</option>
+					                        <option value="Martinique">Martinique</option>
+					                        <option value="Mauritania">Mauritania</option>
+					                        <option value="Mauritius">Mauritius</option>
+					                        <option value="Mayotte">Mayotte</option>
+					                        <option value="Mexico">Mexico</option>
+					                        <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
+					                        <option value="Moldova, Republic of">Moldova, Republic of</option>
+					                        <option value="Monaco">Monaco</option>
+					                        <option value="Mongolia">Mongolia</option>
+					                        <option value="Montenegro">Montenegro</option>
+					                        <option value="Montserrat">Montserrat</option>
+					                        <option value="Morocco">Morocco</option>
+					                        <option value="Mozambique">Mozambique</option>
+					                        <option value="Myanmar">Myanmar</option>
+					                        <option value="Namibia">Namibia</option>
+					                        <option value="Nauru">Nauru</option>
+					                        <option value="Nepal">Nepal</option>
+					                        <option value="Netherlands">Netherlands</option>
+					                        <option value="Netherlands Antilles">Netherlands Antilles</option>
+					                        <option value="New Caledonia">New Caledonia</option>
+					                        <option value="New Zealand">New Zealand</option>
+					                        <option value="Nicaragua">Nicaragua</option>
+					                        <option value="Niger">Niger</option>
+					                        <option value="Nigeria">Nigeria</option>
+					                        <option value="Niue">Niue</option>
+					                        <option value="Norfolk Island">Norfolk Island</option>
+					                        <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+					                        <option value="Norway">Norway</option>
+					                        <option value="Oman">Oman</option>
+					                        <option value="Pakistan">Pakistan</option>
+					                        <option value="Palau">Palau</option>
+					                        <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+					                        <option value="Panama">Panama</option>
+					                        <option value="Papua New Guinea">Papua New Guinea</option>
+					                        <option value="Paraguay">Paraguay</option>
+					                        <option value="Peru">Peru</option>
+					                        <option value="Philippines">Philippines</option>
+					                        <option value="Pitcairn">Pitcairn</option>
+					                        <option value="Poland">Poland</option>
+					                        <option value="Portugal">Portugal</option>
+					                        <option value="Puerto Rico">Puerto Rico</option>
+					                        <option value="Qatar">Qatar</option>
+					                        <option value="Reunion">Reunion</option>
+					                        <option value="Romania">Romania</option>
+					                        <option value="Russian Federation">Russian Federation</option>
+					                        <option value="Rwanda">Rwanda</option>
+					                        <option value="Saint Helena">Saint Helena</option>
+					                        <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+					                        <option value="Saint Lucia">Saint Lucia</option>
+					                        <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+					                        <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
+					                        <option value="Samoa">Samoa</option>
+					                        <option value="San Marino">San Marino</option>
+					                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+					                        <option value="Saudi Arabia">Saudi Arabia</option>
+					                        <option value="Senegal">Senegal</option>
+					                        <option value="Serbia">Serbia</option>
+					                        <option value="Seychelles">Seychelles</option>
+					                        <option value="Sierra Leone">Sierra Leone</option>
+					                        <option value="Singapore">Singapore</option>
+					                        <option value="Slovakia">Slovakia</option>
+					                        <option value="Slovenia">Slovenia</option>
+					                        <option value="Solomon Islands">Solomon Islands</option>
+					                        <option value="Somalia">Somalia</option>
+					                        <option value="South Africa">South Africa</option>
+					                        <option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich Islands</option>
+					                        <option value="Spain">Spain</option>
+					                        <option value="Sri Lanka">Sri Lanka</option>
+					                        <option value="Sudan">Sudan</option>
+					                        <option value="Suriname">Suriname</option>
+					                        <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+					                        <option value="Swaziland">Swaziland</option>
+					                        <option value="Sweden">Sweden</option>
+					                        <option value="Switzerland">Switzerland</option>
+					                        <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+					                        <option value="Taiwan, Province of China">Taiwan, Province of China</option>
+					                        <option value="Tajikistan">Tajikistan</option>
+					                        <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+					                        <option value="Thailand">Thailand</option>
+					                        <option value="Timor-leste">Timor-leste</option>
+					                        <option value="Togo">Togo</option>
+					                        <option value="Tokelau">Tokelau</option>
+					                        <option value="Tonga">Tonga</option>
+					                        <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+					                        <option value="Tunisia">Tunisia</option>
+					                        <option value="Turkey">Turkey</option>
+					                        <option value="Turkmenistan">Turkmenistan</option>
+					                        <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+					                        <option value="Tuvalu">Tuvalu</option>
+					                        <option value="Uganda">Uganda</option>
+					                        <option value="Ukraine">Ukraine</option>
+					                        <option value="United Arab Emirates">United Arab Emirates</option>
+					                        <option value="United Kingdom">United Kingdom</option>
+					                        <option value="United States">United States</option>
+					                        <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+					                        <option value="Uruguay">Uruguay</option>
+					                        <option value="Uzbekistan">Uzbekistan</option>
+					                        <option value="Vanuatu">Vanuatu</option>
+					                        <option value="Venezuela">Venezuela</option>
+					                        <option value="Viet Nam">Viet Nam</option>
+					                        <option value="Virgin Islands, British">Virgin Islands, British</option>
+					                        <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+					                        <option value="Wallis and Futuna">Wallis and Futuna</option>
+					                        <option value="Western Sahara">Western Sahara</option>
+					                        <option value="Yemen">Yemen</option>
+					                        <option value="Zambia">Zambia</option>
+					                        <option value="Zimbabwe">Zimbabwe</option>
+					                        </select>
 						</div>
-                        <div class="input-field validate col s12 m6">
-                            <i class="material-icons prefix">language</i>
+						<div class="input-field validate col s12 m6">
+							<i class="material-icons prefix">language</i>
 							<select class="language-choice" name="language" required>
-                                <option value="" disabled selected>Story language</option>
-                                <option value="English">English</option>
-                                <option value="Italiano">Italiano</option>
-                                <option value="Afaan Oromoo">Afaan Oromoo</option>
-                                <option value="Afaraf">Afaraf</option>
-                                <option value="Afrikaans">Afrikaans</option>
-                                <option value="Akan">Akan</option>
-                                <option value="Aragonés">Aragonés</option>
-                                <option value="Asụsụ Igbo">Asụsụ Igbo</option>
-                                <option value="Avañe'ẽ">Avañe'ẽ</option>
-                                <option value="Avesta">Avesta</option>
-                                <option value="Aymar Aru">Aymar Aru</option>
-                                <option value="Azərbaycan Dili">Azərbaycan Dili</option>
-                                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
-                                <option value="Bahasa Melayu">Bahasa Melayu</option>
-                                <option value="Bamanankan">Bamanankan</option>
-                                <option value="Basa Jawa">Basa Jawa</option>
-                                <option value="Basa Sunda">Basa Sunda</option>
-                                <option value="Bislama">Bislama</option>
-                                <option value="Bosanski Jezik">Bosanski Jezik</option>
-                                <option value="Brezhoneg">Brezhoneg</option>
-                                <option value="Català">Català</option>
-                                <option value="Chamoru">Chamoru</option>
-                                <option value="Chicheŵa">Chicheŵa</option>
-                                <option value="Chishona">Chishona</option>
-                                <option value="Corsu">Corsu</option>
-                                <option value="Cymraeg">Cymraeg</option>
-                                <option value="Dansk">Dansk</option>
-                                <option value="Davvisámegiella">Davvisámegiella</option>
-                                <option value="Deutsch">Deutsch</option>
-                                <option value="Diné Bizaad">Diné Bizaad</option>
-                                <option value="Eesti">Eesti</option>
-                                <option value="Ekakairũ Naoero">Ekakairũ Naoero</option>
-                                <option value="English">English</option>
-                                <option value="Español">Español</option>
-                                <option value="Esperanto">Esperanto</option>
-                                <option value="Euskara">Euskara</option>
-                                <option value="Eʋegbe">Eʋegbe</option>
-                                <option value="Faka Tonga">Faka Tonga</option>
-                                <option value="Fiteny Malagasy">Fiteny Malagasy</option>
-                                <option value="Français">Français</option>
-                                <option value="Frysk">Frysk</option>
-                                <option value="Fulfulde">Fulfulde</option>
-                                <option value="Føroyskt">Føroyskt</option>
-                                <option value="Gaeilge">Gaeilge</option>
-                                <option value="Gaelg">Gaelg</option>
-                                <option value="Gagana Fa'a Samoa">Gagana Fa'a Samoa</option>
-                                <option value="Galego">Galego</option>
-                                <option value="Gjuha Shqipe">Gjuha Shqipe</option>
-                                <option value="Gàidhlig">Gàidhlig</option>
-                                <option value="Gĩkũyũ">Gĩkũyũ</option>
-                                <option value="Hausa">Hausa</option>
-                                <option value="Hiri Motu">Hiri Motu</option>
-                                <option value="Hrvatski Jezik">Hrvatski Jezik</option>
-                                <option value="Ido">Ido</option>
-                                <option value="Ikinyarwanda">Ikinyarwanda</option>
-                                <option value="Ikirundi">Ikirundi</option>
-                                <option value="Interlingua">Interlingua</option>
-                                <option value="Isindebele">Isindebele</option>
-                                <option value="Isixhosa">Isixhosa</option>
-                                <option value="Isizulu">Isizulu</option>
-                                <option value="Italiano">Italiano</option>
-                                <option value="Iñupiaq">Iñupiaq</option>
-                                <option value="Polski">Polski</option>
-                                <option value="Kajin M̧ajeļ">Kajin M̧ajeļ</option>
-                                <option value="Kalaallisut">Kalaallisut</option>
-                                <option value="Kanuri">Kanuri</option>
-                                <option value="Kernewek">Kernewek</option>
-                                <option value="Kikongo">Kikongo</option>
-                                <option value="Kiswahili">Kiswahili</option>
-                                <option value="Kreyòl Ayisyen">Kreyòl Ayisyen</option>
-                                <option value="Kuanyama">Kuanyama</option>
-                                <option value="Kurdî">Kurdî</option>
-                                <option value="Latine">Latine</option>
-                                <option value="Latviešu Valoda">Latviešu Valoda</option>
-                                <option value="Lietuvių Kalba">Lietuvių Kalba</option>
-                                <option value="Limba Română">Limba Română</option>
-                                <option value="Limburgs">Limburgs</option>
-                                <option value="Lingála">Lingála</option>
-                                <option value="Luganda">Luganda</option>
-                                <option value="Lëtzebuergesch">Lëtzebuergesch</option>
-                                <option value="Magyar">Magyar</option>
-                                <option value="Malti">Malti</option>
-                                <option value="Nederlands">Nederlands</option>
-                                <option value="Norsk">Norsk</option>
-                                <option value="Norsk Bokmål">Norsk Bokmål</option>
-                                <option value="Norsk Nynorsk">Norsk Nynorsk</option>
-                                <option value="O'zbek">O'zbek</option>
-                                <option value="Occitan">Occitan</option>
-                                <option value="Interlingue">Interlingue</option>
-                                <option value="Otjiherero">Otjiherero</option>
-                                <option value="Owambo">Owambo</option>
-                                <option value="Português">Português</option>
-                                <option value="Reo Tahiti">Reo Tahiti</option>
-                                <option value="Rumantsch Grischun">Rumantsch Grischun</option>
-                                <option value="Runa Simi">Runa Simi</option>
-                                <option value="Sardu">Sardu</option>
-                                <option value="Saɯ Cueŋƅ">Saɯ Cueŋƅ</option>
-                                <option value="Sesotho">Sesotho</option>
-                                <option value="Setswana">Setswana</option>
-                                <option value="Siswati">Siswati</option>
-                                <option value="Slovenski Jezik">Slovenski Jezik</option>
-                                <option value="Slovenčina">Slovenčina</option>
-                                <option value="Soomaaliga">Soomaaliga</option>
-                                <option value="Suomi">Suomi</option>
-                                <option value="Svenska">Svenska</option>
-                                <option value="Te Reo Māori">Te Reo Māori</option>
-                                <option value="Tiếng Việt">Tiếng Việt</option>
-                                <option value="Tshiluba">Tshiluba</option>
-                                <option value="Tshivenḓa">Tshivenḓa</option>
-                                <option value="Twi">Twi</option>
-                                <option value="Türkmen">Türkmen</option>
-                                <option value="Türkçe">Türkçe</option>
-                                <option value="Uyƣurqə">Uyƣurqə</option>
-                                <option value="Volapük">Volapük</option>
-                                <option value="Vosa Vakaviti">Vosa Vakaviti</option>
-                                <option value="Walon">Walon</option>
-                                <option value="Wikang Tagalog">Wikang Tagalog</option>
-                                <option value="Wollof">Wollof</option>
-                                <option value="Xitsonga">Xitsonga</option>
-                                <option value="Yorùbá">Yorùbá</option>
-                                <option value="Yângâ Tî Sängö">Yângâ Tî Sängö</option>
-                                <option value="ÍSlenska">ÍSlenska</option>
-                                <option value="čEština">čEština</option>
-                                <option value="ελληνικά">ελληνικά</option>
-                                <option value="авар мацӀ">авар мацӀ</option>
-                                <option value="аҧсуа бызшәа">аҧсуа бызшәа</option>
-                                <option value="башҡорт теле">башҡорт теле</option>
-                                <option value="беларуская мова">беларуская мова</option>
-                                <option value="български език">български език</option>
-                                <option value="ирон æвзаг">ирон æвзаг</option>
-                                <option value="коми кыв">коми кыв</option>
-                                <option value="Кыргызча">Кыргызча</option>
-                                <option value="македонски јазик">македонски јазик</option>
-                                <option value="монгол">монгол</option>
-                                <option value="нохчийн мотт">нохчийн мотт</option>
-                                <option value="Русский язык">Русский язык</option>
-                                <option value="српски језик">српски језик</option>
-                                <option value="татар теле">татар теле</option>
-                                <option value="тоҷикӣ">тоҷикӣ</option>
-                                <option value="українська мова">українська мова</option>
-                                <option value="чӑваш чӗлхи">чӑваш чӗлхи</option>
-                                <option value="ѩзыкъ словѣньскъ">ѩзыкъ словѣньскъ</option>
-                                <option value="қазақ тілі">қазақ тілі</option>
-                                <option value="Հայերեն">Հայերեն</option>
-                                <option value="ייִדיש">ייִדיש</option>
-                                <option value="עברית">עברית</option>
-                                <option value="اردو">اردو</option>
-                                <option value="العربية">العربية</option>
-                                <option value="فارسی">فارسی</option>
-                                <option value="پښتو">پښتو</option>
-                                <option value="कश्मीरी">कश्मीरी</option>
-                                <option value="ेपाली">नेपाली</option>
-                                <option value="ाऴि">पाऴि</option>
-                                <option value="भोजपुरी">भोजपुरी</option>
-                                <option value="मराठी">मराठी</option>
-                                <option value="ंस्कृतम्">संस्कृतम्</option>
-                                <option value="िन्धी">सिन्धी</option>
-                                <option value="िन्दी">हिन्दी</option>
-                                <option value="অসমীয়া">অসমীয়া</option>
-                                <option value="াংলা">বাংলা</option>
-                                <option value="ਪੰਜਾਬੀ">ਪੰਜਾਬੀ</option>
-                                <option value="ુજરાતી">ગુજરાતી</option>
-                                <option value="ଓଡ଼ିଆ">ଓଡ଼ିଆ</option>
-                                <option value="தமிழ்">தமிழ்</option>
-                                <option value="ెలుగు">తెలుగు</option>
-                                <option value="ಕನ್ನಡ">ಕನ್ನಡ</option>
-                                <option value="മലയാളം">മലയാളം</option>
-                                <option value="ිංහල">සිංහල</option>
-                                <option value="ไทย">ไทย</option>
-                                <option value="ພາສາລາວ">ພາສາລາວ</option>
-                                <option value="ོད་ཡིག">བོད་ཡིག</option>
-                                <option value="ོང་ཁ">རྫོང་ཁ</option>
-                                <option value="ဗမာစာ">ဗမာစာ</option>
-                                <option value="ქართული">ქართული</option>
-                                <option value="ትግርኛ">ትግርኛ</option>
-                                <option value="አማርኛ">አማርኛ</option>
-                                <option value="ᐃᓄᒃᑎᑐᑦ">ᐃᓄᒃᑎᑐᑦ</option>
-                                <option value="ᐊᓂᔑᓈᐯᒧᐎᓐ">ᐊᓂᔑᓈᐯᒧᐎᓐ</option>
-                                <option value="ᓀᐦᐃᔭᐍᐏᐣ">ᓀᐦᐃᔭᐍᐏᐣ</option>
-                                <option value="ខ្មែរ">ខ្មែរ</option>
-                                <option value="中文&nbsp;(Zhōngwén)">中文&nbsp;(Zhōngwén)</option>
-                                <option value="日本語&nbsp;(にほんご)">日本語&nbsp;(にほんご)</option>
-                                <option value="ꆈꌠ꒿ Nuosuhxop">ꆈꌠ꒿ Nuosuhxop</option>
-                                <option value="한국어&nbsp;(韓國語)">한국어&nbsp;(韓國語)</option>
-                            </select>
+				                                <option value="" disabled selected>Story language</option>
+				                                <option value="English">English</option>
+				                                <option value="Italiano">Italiano</option>
+				                                <option value="Afaan Oromoo">Afaan Oromoo</option>
+				                                <option value="Afaraf">Afaraf</option>
+				                                <option value="Afrikaans">Afrikaans</option>
+				                                <option value="Akan">Akan</option>
+				                                <option value="Aragonés">Aragonés</option>
+				                                <option value="Asụsụ Igbo">Asụsụ Igbo</option>
+				                                <option value="Avañe'ẽ">Avañe'ẽ</option>
+				                                <option value="Avesta">Avesta</option>
+				                                <option value="Aymar Aru">Aymar Aru</option>
+				                                <option value="Azərbaycan Dili">Azərbaycan Dili</option>
+				                                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+				                                <option value="Bahasa Melayu">Bahasa Melayu</option>
+				                                <option value="Bamanankan">Bamanankan</option>
+				                                <option value="Basa Jawa">Basa Jawa</option>
+				                                <option value="Basa Sunda">Basa Sunda</option>
+				                                <option value="Bislama">Bislama</option>
+				                                <option value="Bosanski Jezik">Bosanski Jezik</option>
+				                                <option value="Brezhoneg">Brezhoneg</option>
+				                                <option value="Català">Català</option>
+				                                <option value="Chamoru">Chamoru</option>
+				                                <option value="Chicheŵa">Chicheŵa</option>
+				                                <option value="Chishona">Chishona</option>
+				                                <option value="Corsu">Corsu</option>
+				                                <option value="Cymraeg">Cymraeg</option>
+				                                <option value="Dansk">Dansk</option>
+				                                <option value="Davvisámegiella">Davvisámegiella</option>
+				                                <option value="Deutsch">Deutsch</option>
+				                                <option value="Diné Bizaad">Diné Bizaad</option>
+				                                <option value="Eesti">Eesti</option>
+				                                <option value="Ekakairũ Naoero">Ekakairũ Naoero</option>
+				                                <option value="English">English</option>
+				                                <option value="Español">Español</option>
+				                                <option value="Esperanto">Esperanto</option>
+				                                <option value="Euskara">Euskara</option>
+				                                <option value="Eʋegbe">Eʋegbe</option>
+				                                <option value="Faka Tonga">Faka Tonga</option>
+				                                <option value="Fiteny Malagasy">Fiteny Malagasy</option>
+				                                <option value="Français">Français</option>
+				                                <option value="Frysk">Frysk</option>
+				                                <option value="Fulfulde">Fulfulde</option>
+				                                <option value="Føroyskt">Føroyskt</option>
+				                                <option value="Gaeilge">Gaeilge</option>
+				                                <option value="Gaelg">Gaelg</option>
+				                                <option value="Gagana Fa'a Samoa">Gagana Fa'a Samoa</option>
+				                                <option value="Galego">Galego</option>
+				                                <option value="Gjuha Shqipe">Gjuha Shqipe</option>
+				                                <option value="Gàidhlig">Gàidhlig</option>
+				                                <option value="Gĩkũyũ">Gĩkũyũ</option>
+				                                <option value="Hausa">Hausa</option>
+				                                <option value="Hiri Motu">Hiri Motu</option>
+				                                <option value="Hrvatski Jezik">Hrvatski Jezik</option>
+				                                <option value="Ido">Ido</option>
+				                                <option value="Ikinyarwanda">Ikinyarwanda</option>
+				                                <option value="Ikirundi">Ikirundi</option>
+				                                <option value="Interlingua">Interlingua</option>
+				                                <option value="Isindebele">Isindebele</option>
+				                                <option value="Isixhosa">Isixhosa</option>
+				                                <option value="Isizulu">Isizulu</option>
+				                                <option value="Italiano">Italiano</option>
+				                                <option value="Iñupiaq">Iñupiaq</option>
+				                                <option value="Polski">Polski</option>
+				                                <option value="Kajin M̧ajeļ">Kajin M̧ajeļ</option>
+				                                <option value="Kalaallisut">Kalaallisut</option>
+				                                <option value="Kanuri">Kanuri</option>
+				                                <option value="Kernewek">Kernewek</option>
+				                                <option value="Kikongo">Kikongo</option>
+				                                <option value="Kiswahili">Kiswahili</option>
+				                                <option value="Kreyòl Ayisyen">Kreyòl Ayisyen</option>
+				                                <option value="Kuanyama">Kuanyama</option>
+				                                <option value="Kurdî">Kurdî</option>
+				                                <option value="Latine">Latine</option>
+				                                <option value="Latviešu Valoda">Latviešu Valoda</option>
+				                                <option value="Lietuvių Kalba">Lietuvių Kalba</option>
+				                                <option value="Limba Română">Limba Română</option>
+				                                <option value="Limburgs">Limburgs</option>
+				                                <option value="Lingála">Lingála</option>
+				                                <option value="Luganda">Luganda</option>
+				                                <option value="Lëtzebuergesch">Lëtzebuergesch</option>
+				                                <option value="Magyar">Magyar</option>
+				                                <option value="Malti">Malti</option>
+				                                <option value="Nederlands">Nederlands</option>
+				                                <option value="Norsk">Norsk</option>
+				                                <option value="Norsk Bokmål">Norsk Bokmål</option>
+				                                <option value="Norsk Nynorsk">Norsk Nynorsk</option>
+				                                <option value="O'zbek">O'zbek</option>
+				                                <option value="Occitan">Occitan</option>
+				                                <option value="Interlingue">Interlingue</option>
+				                                <option value="Otjiherero">Otjiherero</option>
+				                                <option value="Owambo">Owambo</option>
+				                                <option value="Português">Português</option>
+				                                <option value="Reo Tahiti">Reo Tahiti</option>
+				                                <option value="Rumantsch Grischun">Rumantsch Grischun</option>
+				                                <option value="Runa Simi">Runa Simi</option>
+				                                <option value="Sardu">Sardu</option>
+				                                <option value="Saɯ Cueŋƅ">Saɯ Cueŋƅ</option>
+				                                <option value="Sesotho">Sesotho</option>
+				                                <option value="Setswana">Setswana</option>
+				                                <option value="Siswati">Siswati</option>
+				                                <option value="Slovenski Jezik">Slovenski Jezik</option>
+				                                <option value="Slovenčina">Slovenčina</option>
+				                                <option value="Soomaaliga">Soomaaliga</option>
+				                                <option value="Suomi">Suomi</option>
+				                                <option value="Svenska">Svenska</option>
+				                                <option value="Te Reo Māori">Te Reo Māori</option>
+				                                <option value="Tiếng Việt">Tiếng Việt</option>
+				                                <option value="Tshiluba">Tshiluba</option>
+				                                <option value="Tshivenḓa">Tshivenḓa</option>
+				                                <option value="Twi">Twi</option>
+				                                <option value="Türkmen">Türkmen</option>
+				                                <option value="Türkçe">Türkçe</option>
+				                                <option value="Uyƣurqə">Uyƣurqə</option>
+				                                <option value="Volapük">Volapük</option>
+				                                <option value="Vosa Vakaviti">Vosa Vakaviti</option>
+				                                <option value="Walon">Walon</option>
+				                                <option value="Wikang Tagalog">Wikang Tagalog</option>
+				                                <option value="Wollof">Wollof</option>
+				                                <option value="Xitsonga">Xitsonga</option>
+				                                <option value="Yorùbá">Yorùbá</option>
+				                                <option value="Yângâ Tî Sängö">Yângâ Tî Sängö</option>
+				                                <option value="ÍSlenska">ÍSlenska</option>
+				                                <option value="čEština">čEština</option>
+				                                <option value="ελληνικά">ελληνικά</option>
+				                                <option value="авар мацӀ">авар мацӀ</option>
+				                                <option value="аҧсуа бызшәа">аҧсуа бызшәа</option>
+				                                <option value="башҡорт теле">башҡорт теле</option>
+				                                <option value="беларуская мова">беларуская мова</option>
+				                                <option value="български език">български език</option>
+				                                <option value="ирон æвзаг">ирон æвзаг</option>
+				                                <option value="коми кыв">коми кыв</option>
+				                                <option value="Кыргызча">Кыргызча</option>
+				                                <option value="македонски јазик">македонски јазик</option>
+				                                <option value="монгол">монгол</option>
+				                                <option value="нохчийн мотт">нохчийн мотт</option>
+				                                <option value="Русский язык">Русский язык</option>
+				                                <option value="српски језик">српски језик</option>
+				                                <option value="татар теле">татар теле</option>
+				                                <option value="тоҷикӣ">тоҷикӣ</option>
+				                                <option value="українська мова">українська мова</option>
+				                                <option value="чӑваш чӗлхи">чӑваш чӗлхи</option>
+				                                <option value="ѩзыкъ словѣньскъ">ѩзыкъ словѣньскъ</option>
+				                                <option value="қазақ тілі">қазақ тілі</option>
+				                                <option value="Հայերեն">Հայերեն</option>
+				                                <option value="ייִדיש">ייִדיש</option>
+				                                <option value="עברית">עברית</option>
+				                                <option value="اردو">اردو</option>
+				                                <option value="العربية">العربية</option>
+				                                <option value="فارسی">فارسی</option>
+				                                <option value="پښتو">پښتو</option>
+				                                <option value="कश्मीरी">कश्मीरी</option>
+				                                <option value="ेपाली">नेपाली</option>
+				                                <option value="ाऴि">पाऴि</option>
+				                                <option value="भोजपुरी">भोजपुरी</option>
+				                                <option value="मराठी">मराठी</option>
+				                                <option value="ंस्कृतम्">संस्कृतम्</option>
+				                                <option value="िन्धी">सिन्धी</option>
+				                                <option value="िन्दी">हिन्दी</option>
+				                                <option value="অসমীয়া">অসমীয়া</option>
+				                                <option value="াংলা">বাংলা</option>
+				                                <option value="ਪੰਜਾਬੀ">ਪੰਜਾਬੀ</option>
+				                                <option value="ુજરાતી">ગુજરાતી</option>
+				                                <option value="ଓଡ଼ିଆ">ଓଡ଼ିଆ</option>
+				                                <option value="தமிழ்">தமிழ்</option>
+				                                <option value="ెలుగు">తెలుగు</option>
+				                                <option value="ಕನ್ನಡ">ಕನ್ನಡ</option>
+				                                <option value="മലയാളം">മലയാളം</option>
+				                                <option value="ිංහල">සිංහල</option>
+				                                <option value="ไทย">ไทย</option>
+				                                <option value="ພາສາລາວ">ພາສາລາວ</option>
+				                                <option value="ོད་ཡིག">བོད་ཡིག</option>
+				                                <option value="ོང་ཁ">རྫོང་ཁ</option>
+				                                <option value="ဗမာစာ">ဗမာစာ</option>
+				                                <option value="ქართული">ქართული</option>
+				                                <option value="ትግርኛ">ትግርኛ</option>
+				                                <option value="አማርኛ">አማርኛ</option>
+				                                <option value="ᐃᓄᒃᑎᑐᑦ">ᐃᓄᒃᑎᑐᑦ</option>
+				                                <option value="ᐊᓂᔑᓈᐯᒧᐎᓐ">ᐊᓂᔑᓈᐯᒧᐎᓐ</option>
+				                                <option value="ᓀᐦᐃᔭᐍᐏᐣ">ᓀᐦᐃᔭᐍᐏᐣ</option>
+				                                <option value="ខ្មែរ">ខ្មែរ</option>
+				                                <option value="中文&nbsp;(Zhōngwén)">中文&nbsp;(Zhōngwén)</option>
+				                                <option value="日本語&nbsp;(にほんご)">日本語&nbsp;(にほんご)</option>
+				                                <option value="ꆈꌠ꒿ Nuosuhxop">ꆈꌠ꒿ Nuosuhxop</option>
+				                                <option value="한국어&nbsp;(韓國語)">한국어&nbsp;(韓國語)</option>
+				                            </select>
 						</div>
 						<div class="input-field validate col s12 m6">
 							<i class="material-icons prefix">event</i>
 							<input id="date" name="date" type="text" class="datepicker" required>
 							<label for="date">When was it?</label>
-                        </div>
-                        <div id="chipsindex" class="chips chips-autocomplete no-autoinit chips-placeholder col s12 m6 validate">
-                        </div>
-                        <div class="input-field  validate col s12 m6">
-                            <i class="material-icons prefix">palette</i>
-                            <select id="color" name="color" required>
-                                <option value="" disabled selected>Color</option>
-                                <option value="red">Red</option>
-                                <option value="deep-orange">Deep Orange</option>
-                                <option value="orange">Orange</option>								
-                                <option value="amber">Amber</option>
-								<option value="yellow">Yellow</option>
-								<option value="lime">Lime</option>
-								<option value="light-green">Light Green</option>
-								<option value="green">Green</option>
-								<option value="teal">Teal</option>
-								<option value="cyan">Cyan</option>
-								<option value="light-blue">Light Blue</option>
-								<option value="blue">Blue</option>
-								<option value="indigo">Indigo</option>
-								<option value="deep-purple">Deep Purple</option>
-								<option value="purple">Purple</option>
-								<option value="pink">Pink</option>
-                            </select>
-                        </div>
-                        <div class="input-field validate col s12">
-                            <i class="material-icons prefix">import_contacts</i>
-                            <input id="title" name="title" type="text" required>                            
-                            <label for="title">Story Title</label>
-                        </div>
-                        <div class="col s12">
-                            <textarea id="editorindex" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
-                        </div>
-                        <input type="hidden" id="featured" name="featured" value="false"> 
-                                
+						</div>
+						<div class="input-field  validate col s12 m6">
+							<i class="material-icons prefix">palette</i>
+							<select id="color" name="color" required>
+											                                <option value="" disabled selected>Color</option>
+											                                <option value="red">Red</option>
+											                                <option value="deep-orange">Deep Orange</option>
+											                                <option value="orange">Orange</option>								
+											                                <option value="amber">Amber</option>
+																			<option value="yellow">Yellow</option>
+																			<option value="lime">Lime</option>
+																			<option value="light-green">Light Green</option>
+																			<option value="green">Green</option>
+																			<option value="teal">Teal</option>
+																			<option value="cyan">Cyan</option>
+																			<option value="light-blue">Light Blue</option>
+																			<option value="blue">Blue</option>
+																			<option value="indigo">Indigo</option>
+																			<option value="deep-purple">Deep Purple</option>
+																			<option value="purple">Purple</option>
+																			<option value="pink">Pink</option>
+											                            </select>
+						</div>
+						<div class="input-field validate col s12">
+							<i class="material-icons prefix">import_contacts</i>
+							<input id="title" name="title" type="text" required>
+							<label for="title">Story Title</label>
+						</div>
+						<div class="col s12">
+							<textarea id="editorindex" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
+						</div>
+						<div id="chipsindex"
+							class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">
+						</div>
+						<input type="hidden" id="featured" name="featured" value="false">
                         {% if current_user.is_authenticated %}
-                            <input type="hidden" id="username" name="username" value="{{ username }}">
-                        {% endif %}              
-						<button id="post-story" class="btn waves-effect waves-light right" type="submit">Post
-	                        <i class="material-icons right">post_add</i>
+						<input type="hidden" id="username" name="username" value="{{ username }}">
+                        {% endif %}
+                        </div>
+						<div class="modal-footer">
+							<button id="post-story" class="btn waves-effect waves-light right" type="submit">Post
+                            <i class="material-icons right">post_add</i>
                         </button>
-					</form>
-				</div>
-			</div>
-			<div class="modal-footer">
-
+				</form>
 			</div>
 		</div>
+	</div>
 
-        <div id="modal-help" class="modal">
-            <div class="modal-content flow-text">
-                <h4 class="heading">What's Up?</h4>
-                <p>In the midst of this pandemic many people have simultaneously become more isolated and more connected to one another. While the experience of the pandemic is essentially shared globally , it has taken a completely different form and shape for each individual depending on their own circumstances.</p>
-                <p> The site was designed with this in mind. A space where everyone can share a little slice of their experience with others, a way to share that bit of unique experience with others wherever they are.</p>
-                <p>The process is simple, click the orange button with the pencil to open the form, fill all fields, and use the editor to write a story with whatever formatting you like. Post and it will be shared and searchable to everyone! There is no need to create an account to post but if you wish to save, edit or delete your stories afterwards, you'll have to make one. For privacy, the account requires only a username and password, no email or ther personal information. This way the stories can remain essetially anonymous.</p>
-                <p>I hope you enjoy this little project!</p>
-                <p>For more information, please feel free to check the <a href="{{ url_for('base.about') }}" class="modal-close">About Page</a> or <a href="{{ url_for('base.contact') }}" class="modal-close">Contact Us</a></p>
-            </div>
-        </div>
+	<div id="modal-help" class="modal">
+		<div class="modal-content flow-text">
+			<h4 class="heading">What's Up?</h4>
+			<p>In the midst of this pandemic many people have simultaneously become more isolated and more connected to
+				one
+				another. While the experience of the pandemic is essentially shared globally , it has taken a completely
+				different form and shape for each individual depending on their own circumstances.</p>
+			<p> The site was designed with this in mind. A space where everyone can share a little slice of their
+				experience with others, a way to share that bit of unique experience with others wherever they are.</p>
+			<p>The process is simple, click the orange button with the pencil to open the form, fill all fields, and use
+				the editor to write a story with whatever formatting you like. Post and it will be shared and searchable
+				to everyone! There is no need to create an account to post but if you wish to save, edit or delete your
+				stories afterwards, you'll have to make one. For privacy, the account requires only a username and
+				password, no email or ther personal information. This way the stories can remain essetially anonymous.
+			</p>
+			<p>I hope you enjoy this little project!</p>
+			<p>For more information, please feel free to check the <a href="{{ url_for('base.about') }}"
+					class="modal-close">About Page</a> or <a href="{{ url_for('base.contact') }}"
+					class="modal-close">Contact Us</a></p>
+		</div>
+	</div>
 
-		{% endblock %}
+	{% endblock %}
 
-            {% block javascript %}
-        <script>
-            var tagList = {
+	{% block javascript %}
+	<script>
+		var tagList = {
                 {% for tag in taglist %}
                     "{{ tag }}": null,
                 {% endfor %}
@@ -637,5 +654,5 @@
             }
         }
         ))
-        </script>
-        	{% endblock %}
+	</script>
+	{% endblock %}
