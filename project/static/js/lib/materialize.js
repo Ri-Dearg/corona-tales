@@ -1088,7 +1088,7 @@ M.version = '1.0.0';
 
 M.keys = {
   TAB: 9,
-  ENTER: 13,
+  ENTER: 32,
   ESC: 27,
   ARROW_UP: 38,
   ARROW_DOWN: 40
@@ -2026,7 +2026,7 @@ $jscomp.polyfill = function (e, r, p, m) {
     }, {
       key: "_handleCollapsibleKeydown",
       value: function _handleCollapsibleKeydown(e) {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 32) {
           this._handleCollapsibleClickBound(e);
         }
       }
@@ -6610,7 +6610,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         var val = this.el.value.toLowerCase();
 
         // Don't capture enter or arrow key usage.
-        if (e.keyCode === 13 || e.keyCode === 38 || e.keyCode === 40) {
+        if (e.keyCode === 32 || e.keyCode === 38 || e.keyCode === 40) {
           return;
         }
 
