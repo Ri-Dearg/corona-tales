@@ -43,7 +43,7 @@
 								<p>By {{ story.name[0].title() }},<br>
                                     Age {{ story.age[0] }}, <br>
                                     In {{ story.country[0].title() }}.</p><br>
-                                    {{ story.text[0]|safe }} <br>
+                                    <p>{{ story.text[0]|safe }}</p> <br>
                                 </div>
 									<div class="card-action col s12">
 										<p>Tags: {% for tag in story.tags %}{{ tag }}, {% endfor %}</p>
@@ -67,13 +67,12 @@
 			<li>
 				{% if current_user.is_authenticated %}
 				<a href="{{ url_for('base.profile') }}" class="btn-floating green darken-1 tooltipped"
-					data-position="left" data-tooltip="Profile">
+					data-position="left" data-tooltip="Profile"><i class="material-icons">account_circle</i></a>
 					{% endif %}
 					{% if not current_user.is_authenticated %}
 					<a href="#modal-signup-login" class="btn-floating green darken-1 tooltipped modal-trigger"
-						data-position="left" data-tooltip="Signup / Login">
-						{% endif %}
-						<i class="material-icons">account_circle</i></a>
+						data-position="left" data-tooltip="Signup / Login"><i class="material-icons">account_circle</i></a>
+                    {% endif %}
 			</li>
 			<li><a href="#" class="btn-floating yellow darken-1 tooltipped" data-position="left"
 					data-tooltip="Search"><i class="material-icons">search</i></a></li>
@@ -561,24 +560,24 @@
 						<div class="input-field  validate col s12 m6">
 							<i class="material-icons prefix">palette</i>
 							<select id="color" name="color" required>
-											                                <option value="" disabled selected>Color</option>
-											                                <option value="red">Red</option>
-											                                <option value="deep-orange">Deep Orange</option>
-											                                <option value="orange">Orange</option>								
-											                                <option value="amber">Amber</option>
-																			<option value="yellow">Yellow</option>
-																			<option value="lime">Lime</option>
-																			<option value="light-green">Light Green</option>
-																			<option value="green">Green</option>
-																			<option value="teal">Teal</option>
-																			<option value="cyan">Cyan</option>
-																			<option value="light-blue">Light Blue</option>
-																			<option value="blue">Blue</option>
-																			<option value="indigo">Indigo</option>
-																			<option value="deep-purple">Deep Purple</option>
-																			<option value="purple">Purple</option>
-																			<option value="pink">Pink</option>
-											                            </select>
+                                <option value="" disabled selected>Color</option>
+                                <option value="red">Red</option>
+                                <option value="deep-orange">Deep Orange</option>
+                                <option value="orange">Orange</option>								
+                                <option value="amber">Amber</option>
+                                <option value="yellow">Yellow</option>
+                                <option value="lime">Lime</option>
+                                <option value="light-green">Light Green</option>
+                                <option value="green">Green</option>
+                                <option value="teal">Teal</option>
+                                <option value="cyan">Cyan</option>
+                                <option value="light-blue">Light Blue</option>
+                                <option value="blue">Blue</option>
+                                <option value="indigo">Indigo</option>
+                                <option value="deep-purple">Deep Purple</option>
+                                <option value="purple">Purple</option>
+                                <option value="pink">Pink</option>
+                            </select>
 						</div>
 						<div class="input-field validate col s12">
 							<i class="material-icons prefix">import_contacts</i>
@@ -589,19 +588,21 @@
 							<textarea id="editorindex" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
 						</div>
 						<input type="hidden" id="featured" name="featured" value="false">
-                        {% if current_user.is_authenticated %}
+                        <input type="hidden" id="time" name="time" value="">
+						{% if current_user.is_authenticated %}
 						<input type="hidden" id="username" name="username" value="{{ username }}">
                         {% endif %}
+                        						</form>
                         </div>
-                        </form>
-                        						<div id="chipsindex"
-							class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">
+
+						<div id="chipsindex" class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">
 						</div>
+		</div>
 						<div class="modal-footer">
 							<button id="post-story" form="formindex" class="btn waves-effect waves-light right" type="submit">Post
-                            <i class="material-icons right">post_add</i>
-                        </button>
-			</div>
+						                            <i class="material-icons right">post_add</i>
+						                        </button>
+						</div>
 		</div>
 	</div>
 

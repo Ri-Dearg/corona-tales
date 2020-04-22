@@ -12,16 +12,6 @@ function initTags(tagCreate, id) {
                 limit: 8,
             }
         });
-
-        document.querySelector(`#chips${id}`).addEventListener('keydown', function (e) {
-          //  var keyCode = e.data.charCodeAt(0);
-          var pressEnter = new KeyboardEvent('keydown', {'code': 'Enter'})
-           // if (event.code == 'Space' || event.code == 'Enter') {
-              console.log(event.keyCode)
-              //  e.preventDefault();
-               // e.currentTarget.dispatchEvent(new KeyboardEvent('keydown', { "code": "Enter" }));
-            }
-        );
     });
 }
 
@@ -98,6 +88,9 @@ function formValid(formId) {
             var tagDictLength = Object.keys((M.Chips.getInstance($('.chips')).chipsData)).length
             var editorData = newEditor.getData().length;
 
+            var now = Date.now()
+            document.querySelector("#time").value = now;
+
             if (tagDictLength === 0 || editorData === 0) {
                 event.preventDefault();
                 alert('Please fill all fields');
@@ -124,9 +117,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var singupLogin = document.querySelector('#modal-signup-login');
     var modalTab = M.Modal.init(singupLogin, {
-        onOpenStart: function() {
+        onOpenEnd: function() {
             var formTabs = document.querySelector('#form-tabs')
             var instance = M.Tabs.init(formTabs, {})
         }
     });
 })
+
