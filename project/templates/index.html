@@ -588,19 +588,19 @@
 						<div class="col s12">
 							<textarea id="editorindex" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
 						</div>
-						<div id="chipsindex"
-							class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">
-						</div>
 						<input type="hidden" id="featured" name="featured" value="false">
                         {% if current_user.is_authenticated %}
 						<input type="hidden" id="username" name="username" value="{{ username }}">
                         {% endif %}
                         </div>
+                        </form>
+                        						<div id="chipsindex"
+							class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">
+						</div>
 						<div class="modal-footer">
-							<button id="post-story" class="btn waves-effect waves-light right" type="submit">Post
+							<button id="post-story" form="formindex" class="btn waves-effect waves-light right" type="submit">Post
                             <i class="material-icons right">post_add</i>
                         </button>
-				</form>
 			</div>
 		</div>
 	</div>
