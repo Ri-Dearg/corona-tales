@@ -597,17 +597,25 @@
 
   <div id="modal-delete-story" class="modal">
     <div class="modal-content center-align no-pad-bot">
+      <div class="row">
       <h5 class="heading">Delete Stories</h5>
       <p>Do you want to delete all of your stories?</p>
       <p>The stories will be <strong>unrecoverable</strong> <br>
       <strong>Continue?</strong></p>
+      <form action="{{ url_for('auth.delete_stories') }}" method="POST" id="form-delete-story">
+      <div class="input-field validate col s6 offset-s3">
+        <i class="material-icons prefix">vpn_key</i>
+        <input id="password-delete-story" name="password" type="password" minlength="8" placeholder="Password" required>
+      </div>
+      </form>
+      </div>
     </div>
     <div class="modal-footer mar-bot-24">
         <div class="center-align">
 
-      <a href="#!"><button type="submit" class="btn modal-close waves-effect waves-light red darken-1">Delete Stories
+      <button type="submit" form="form-delete-story" class="btn modal-close waves-effect waves-light red darken-1">Delete Stories
 								                            <i class="material-icons right">highlight_off</i>
-								                        </button></a>
+        </button>
     </div>
         </div>
 

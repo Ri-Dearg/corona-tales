@@ -1,7 +1,7 @@
 from flask import (Blueprint, url_for, request,
                    redirect, flash)
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from .extensions import mongo
 from .models import User
 
@@ -19,7 +19,7 @@ def signup_form():
     user = users.find_one({"user_id": userID})
 
     if user:
-        flash('Username is taken, please try another', 'error')
+        flash('Username is taken, please try another', 'sorry')
         return redirect(url_for('base.story_page'))
 
     account = {'username': username,
@@ -43,13 +43,13 @@ def login_form():
     remember = True if request.form.get('remember') else False
 
     if not user or not check_password_hash(user["password"], password):
-        flash('The login details are incorrect', 'error')
+        flash('The login details are incorrect', 'sorry')
         return redirect(url_for('base.story_page'))
 
     log_user = User(userID, username, password, _id=user.get('_id'))
     login_user(log_user, remember=remember)
 
-    flash('You have logged in', 'success')
+    flash('Welcome, {{ username }}', 'success')
 
     return redirect(url_for('base.profile'))
 
@@ -60,3 +60,19 @@ def logout():
     flash('You have logged out', 'success')
     logout_user()
     return redirect(url_for('base.story_page'))
+
+
+@auth.route('/delete_stories', methods=['POST'])
+@login_required
+def delete_stories():
+
+    password = request.form.get('password')
+    userID = current_user.user_id
+    user = users.find_one({"user_id": userID})
+
+    if not check_password_hash(user["password"], password):
+        flash('The password is incorrect', 'sorry')
+        return redirect(url_for('base.profile'))
+
+    mongo.db.stories.remove({'user_id': userID})
+    return redirect(url_for('base.profile'))
