@@ -89,8 +89,13 @@ nav .brand-logo {
 	font-size: inherit;
 }
 
-.no-m-bot {
+.no-m-bot,
+.title {
     margin-bottom: 0;
+}
+
+.mar-bot-24 {
+    margin-bottom: 24px !important;
 }
 
 .no-pad-bot {
