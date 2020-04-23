@@ -19,10 +19,15 @@ font-family: 'IM Fell English SC', serif;
 .mini-text {
     font-size: 0.7rem
 }
+strong { 
+    font-weight: bold;
+}
 
 hr {
     height: 0.1rem
 }
+
+
 
 .row form.col {
     padding: 0;

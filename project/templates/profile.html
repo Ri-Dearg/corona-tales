@@ -62,10 +62,10 @@
 
 				<div id="modal{{ story._id }}" class="modal submit-modal">
 					<div class="modal-content">
-						<h4>Write your story.</h4>
+                        <h5>Write your story.</h5>
+                        <p class="mini-text">Please fill all fields.</p>
 						<div class="row">
-							<form action="{{ url_for('base.edit_story', story_id=story._id) }}" method="POST"
-								class="col s12 edit-story" id="form{{ story._id }}">
+							<form action="{{ url_for('base.edit_story', story_id=story._id) }}" method="POST" class="col s12 edit-story" id="form{{ story._id }}">
 								<div class="input-field validate col s12 m6">
 									<i class="material-icons prefix">face</i>
 									<input id="name{{ story._id }}" name="name" type="text" value="{{ story.name[0] }}" placeholder="Name" required>
@@ -551,6 +551,7 @@
 								<div class="col s12">
 									<textarea id="editor{{ story._id }}" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
 								</div>
+                                <input type="hidden" id="edit-time{{ story._id }}" name="edit-time" value="">
 							</form>
 							<div id="chips{{ story._id }}"
 								class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">

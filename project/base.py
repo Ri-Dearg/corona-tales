@@ -30,7 +30,7 @@ def story_page():
 
     if current_user.is_authenticated:
         return render_template('index.html', story_list=story_list,
-                               taglist=taglist, username=current_user.username)
+                               taglist=taglist, user_id=current_user.user_id)
 
     return render_template('index.html', story_list=story_list,
                            taglist=taglist)
@@ -59,17 +59,17 @@ def contact():
 @login_required
 def profile():
 
-    user_stories = stories.find({'username': current_user.username})
+    user_stories = stories.find({'user_id': current_user.user_id})
 
     # Change order of function when adding create story to profile page
 
     if user_stories:
         taglist = get_tags()
 
-        return render_template("profile.html", username=current_user.username,
+        return render_template("profile.html", user_id=current_user.user_id,
                                user_stories=user_stories, taglist=taglist)
 
-    return render_template("profile.html", username=current_user.username)
+    return render_template("profile.html", user_id=current_user.user_id)
 
 
 @base.route('/edit_story/<story_id>', methods=["POST"])
@@ -78,8 +78,7 @@ def edit_story(story_id):
     stories.update({'_id': ObjectId(story_id)},
                    {'$set':
                     {
-                        "first_name.0": request.form.get('first_name'),
-                        'last_name.0': request.form.get('last_name'),
+                        "name.0": request.form.get('name'),
                         'age.0': request.form.get('age'),
                         'country.0': request.form.get('country'),
                         'language.0': request.form.get('language'),
@@ -88,6 +87,7 @@ def edit_story(story_id):
                         'color.0': request.form.get('color'),
                         'title.0': request.form.get('title'),
                         'text.0': request.form.get('text'),
+                        'edit_time.0': request.form.get('edit-time'),
                     }
                     })
 

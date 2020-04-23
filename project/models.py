@@ -4,7 +4,8 @@ import uuid
 
 
 class User(UserMixin):
-    def __init__(self, username, password, _id=None):
+    def __init__(self, username, password, user_id, _id=None):
+        self.user_id = user_id
         self.username = username
         self.password = password
         self._id = uuid.uuid4().hex if _id is None else _id

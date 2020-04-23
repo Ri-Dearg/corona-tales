@@ -15,18 +15,20 @@ users = mongo.db.users
 def signup_form():
 
     username = request.form.get('username')
-    user = users.find_one({"username": username})
+    userID = username.upper()
+    user = users.find_one({"user_id": userID})
 
     if user:
-        flash('Username is taken, please try another')
+        flash('Username is taken, please try another', 'error')
         return redirect(url_for('base.story_page'))
 
-    account = {'username': request.form.get('username'),
+    account = {'username': username,
+               'user_id': username.upper(),
                'password': generate_password_hash(request.form.get
                                                   ('password'),
                                                   method='sha256')}
     users.insert_one(account)
-    flash('Account created successfully! Please Login.')
+    flash('Account created successfully! Please Login.', 'success')
     return redirect(url_for('base.story_page'))
 
 
@@ -34,15 +36,16 @@ def signup_form():
 def login_form():
 
     username = request.form.get('username')
+    userID = request.form.get('username').upper()
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
-    user = users.find_one({"username": username})
+    user = users.find_one({"user_id": userID})
 
     if not user or not check_password_hash(user["password"], password):
-        flash('The login details are incorrect')
+        flash('The login details are incorrect', 'error')
         return redirect(url_for('base.story_page'))
 
-    log_user = User(user.get('username'), password, _id=user.get('_id'))
+    log_user = User(userID, username, password, _id=user.get('_id'))
     login_user(log_user, remember=remember)
 
     return redirect(url_for('base.profile'))

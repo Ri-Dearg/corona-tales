@@ -34,7 +34,6 @@ function initStoryModal(id, content, tagList) {
                 if (tagList !== undefined) {
                     var instance = M.Chips.getInstance(document.querySelector(`#chips${id}`))
                     for (i = 0; i < tagList.length; i++) {
-                        console.log(instance)
                         instance.addChip({
                             tag: tagList[i]
                         });
@@ -84,16 +83,25 @@ function formValid(formId) {
         $("select[required]").css({ position: 'absolute', display: 'inline', height: 0, padding: 0, width: 0 });
 
         $(`#form${formId}`).on('submit', function (event) {
-            var tagDict = M.Chips.getInstance($('.chips')).chipsData
-            var tagDictLength = Object.keys((M.Chips.getInstance($('.chips')).chipsData)).length
-            var editorData = newEditor.getData().length;
+            var tagDict = M.Chips.getInstance($(`#chips${formId}`)).chipsData
+            var tagDictLength = Object.keys((M.Chips.getInstance($(`#chips${formId}`)).chipsData)).length
+            var editorData = newEditor.getData().length
 
             var now = Date.now()
-            document.querySelector("#time").value = now;
+            var inputTime = document.querySelector("#time")
+            var editTime = document.querySelector(`#edit-time${formId}`)
+
+            if (inputTime != null) {
+                inputTime.value = now;
+            }
+            
+            if (editTime != null) {
+                editTime.value = now
+            }
 
             if (tagDictLength === 0 || editorData === 0) {
                 event.preventDefault();
-                alert('Please fill all fields');
+                alert('Please fill Tags and Stories');
                 return false
             }
 
@@ -117,10 +125,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var singupLogin = document.querySelector('#modal-signup-login');
     var modalTab = M.Modal.init(singupLogin, {
-        onOpenEnd: function() {
+        onOpenEnd: function () {
             var formTabs = document.querySelector('#form-tabs')
             var instance = M.Tabs.init(formTabs, {})
         }
     });
+
+    $('#form-signup').on('submit', function (event) {
+        var passFirst = document.querySelector("#password-signup").value
+        var passSecond = document.querySelector("#password-verify").value
+
+        if (passFirst != passSecond) {
+            alert('Passwords do not match. Please Try again.')
+            return false
+        }
+    })
 })
 

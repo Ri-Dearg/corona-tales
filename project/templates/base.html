@@ -2,130 +2,133 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<!-- Google Font Icons -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Google Font Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	<!-- Materialise CSS -->
-	<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/lib/materialize.min.css')}}">
+    <!-- Materialise CSS -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/lib/materialize.min.css')}}">
 
-	<link
-		href="https://fonts.googleapis.com/css2?family=Eczar&family=IM+Fell+DW+Pica&family=IM+Fell+English+SC&display=swap"
-		rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Eczar&family=IM+Fell+DW+Pica&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
 
-	<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 
-	<!-- CKEditor CDN -->
-	<script src="../static/js/ckeditor5/build/ckeditor.js"></script>
+    <!-- CKEditor CDN -->
+    <script src="../static/js/ckeditor5/build/ckeditor.js"></script>
 
-	<title>Corona Stories</title>
+    <title>Corona Stories</title>
 
 </head>
 
 <body class="light-blue lighten-5">
-	<div class="navbar-fixed">
-		<nav class="navbar-fixed teal accent-4">
-			<div class="nav-wrapper">
-				<a href="{{ url_for('base.story_page') }}" class="brand-logo center heading">Corona Tales</a>
-				<a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-				<ul class="right hide-on-med-and-down">
+    <div class="navbar-fixed">
+        <nav class="navbar-fixed teal accent-4">
+            <div class="nav-wrapper">
+                <a href="{{ url_for('base.story_page') }}" class="brand-logo center heading">Corona Tales</a>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('base.story_page') }}">Home</a></li>
-					{% if not current_user.is_authenticated %}
-					<li><a href="#modal-signup-login" class="modal-trigger">Signup / Login</a></li>
-					{% endif %}
-					{% if current_user.is_authenticated %}
-					<li><a href="{{ url_for('base.profile') }}">Profile</a></li>
-					<li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-					{% endif %}
-					<li><a href="{{ url_for('base.about') }}">About</a></li>
-					<li><a href="{{ url_for('base.contact') }}">Contact</a></li>
-				</ul>
-			</div>
-		</nav>
-	</div>
+                    {% if not current_user.is_authenticated %}
+                    <li><a href="#modal-signup-login" class="modal-trigger">Signup / Login</a></li>
+                    {% endif %} {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('base.profile') }}">Profile</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('base.about') }}">About</a></li>
+                    <li><a href="{{ url_for('base.contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
-	<ul class="sidenav" id="mobile-nav">
+    <ul class="sidenav" id="mobile-nav">
         <li><a href="{{ url_for('base.story_page') }}">Home</a></li>
-		{% if not current_user.is_authenticated %}
-		<li><a href="#modal-signup-login" class="modal-trigger">Signup / Login</a></li>
-		{% endif %}
-		{% if current_user.is_authenticated %}
-		<li><a href="{{ url_for('base.profile') }}">Profile</a></li>
-		<li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-		{% endif %}
-		<li><a href="{{ url_for('base.about') }}">About</a></li>
-		<li><a href="{{ url_for('base.contact') }}">Contact</a></li>
-	</ul>
+        {% if not current_user.is_authenticated %}
+        <li><a href="#modal-signup-login" class="modal-trigger">Signup / Login</a></li>
+        {% endif %} {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('base.profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+        {% endif %}
+        <li><a href="{{ url_for('base.about') }}">About</a></li>
+        <li><a href="{{ url_for('base.contact') }}">Contact</a></li>
+    </ul>
 
-	{% block content %}
-	{% endblock %}
-	<div id="modal-signup-login" class="modal no-autoinit">
-		<div class="modal-content">
-			<div class="row">
-				<div class="col s12">
-					<ul class="tabs" id="form-tabs">
-						<li class="tab col s6"><a href="#signup-tab" class="active">Signup</a></li>
-						<li class="tab col s6"><a href="#login-tab">Login</a></li>
-					</ul>
-				</div>
-				<div class="container">
-					<div class="row">
-						<div id="signup-tab" class="col s12">
-							<form action="{{ url_for('auth.signup_form') }}" method="POST" id="form-signup">
-								<div class="input-field validate col s12">
-									<i class="material-icons prefix">face</i>
-									<input id="username-signup" name="username" type="text" minlength="5" maxlength="30" placeholder="Create Username" required>
-														        </div>
-									<div class="input-field validate col s12">
-										<i class="material-icons prefix">done</i>
-										<input id="password-signup" name="password" type="password" minlength="8" placeholder="Create Password" required>
-														</div>
-										<div class="input-field validate col s12">
-											<i class="material-icons prefix">done_all</i>
-											<input id="password-verify" name="password-verify" type="password" minlength="8" placeholder="Repeat Password" required>
-														</div>
-											<div class="modal-footer">
-												<button id="button-signup" class="btn waves-effect waves-light right teal accent-4" type="submit">Join
-								                                <i class="material-icons right">send</i>
-								                            </button>
-											</div>
-							</form>
-						</div>
-					</div>
-				<div class="row">
-					<div id="login-tab" class="col s12">
-						<form action="{{ url_for('auth.login_form') }}" method="POST" id="form-login">
-							<div class="input-field validate col s12">
-								<i class="material-icons prefix">face</i>
-								<input id="username-login" name="username" type="text" minlength="5" maxlength="30" placeholder="Username" required>
-                            </div>
-								<div class="input-field validate col s12">
-									<i class="material-icons prefix">vpn_key</i>
-									<input id="password-login" name="password" type="password" minlength="8" placeholder="Password" required>
-                            </div>
-									<div class="modal-footer">
-										<button id="button-login" class="btn waves-effect waves-light right teal accent-4" type="submit">Login
-                                            <i class="material-icons right">send</i>
-                                        </button>
-                                    </div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
-	<!-- Materialize Javascript-->
-	<script src="{{url_for('static', filename='js/lib/jquery-3.5.0.min.js')}}"></script>
-	<script src="{{url_for('static', filename='/js/lib/materialize.js')}}"></script>
-	<script src="{{url_for('static', filename='js/script.js')}}"></script>
+    {% block content %} {% endblock %}
+    <div id="modal-signup-login" class="modal no-autoinit">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs" id="form-tabs">
+                        <li class="tab col s6"><a href="#signup-tab" class="active">Signup</a></li>
+                        <li class="tab col s6"><a href="#login-tab">Login</a></li>
+                    </ul>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div id="signup-tab" class="col s12">
+                            <form action="{{ url_for('auth.signup_form') }}" method="POST" id="form-signup">
+                                <div class="input-field validate col s12">
+                                    <i class="material-icons prefix">face</i>
+                                    <input id="username-signup" name="username" type="text" minlength="5" maxlength="30" placeholder="Create Username" required>
+                                </div>
+                                <div class="input-field validate col s12">
+                                    <i class="material-icons prefix">done</i>
+                                    <input id="password-signup" name="password" type="password" minlength="8" placeholder="Create Password" required>
+                                </div>
+                                <div class="input-field validate col s12">
+                                    <i class="material-icons prefix">done_all</i>
+                                    <input id="password-verify" name="password-verify" type="password" minlength="8" placeholder="Repeat Password" required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="button-signup" class="btn waves-effect waves-light right teal accent-4" type="submit">Join
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="login-tab" class="col s12">
+                            <form action="{{ url_for('auth.login_form') }}" method="POST" id="form-login">
+                                <div class="input-field validate col s12">
+                                    <i class="material-icons prefix">face</i>
+                                    <input id="username-login" name="username" type="text" minlength="5" maxlength="30" placeholder="Username" required>
+                                </div>
+                                <div class="input-field validate col s12">
+                                    <i class="material-icons prefix">vpn_key</i>
+                                    <input id="password-login" name="password" type="password" minlength="8" placeholder="Password" required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="button-login" class="btn waves-effect waves-light right teal accent-4" type="submit">Login
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Materialize Javascript-->
+    <script src="{{url_for('static', filename='js/lib/jquery-3.5.0.min.js')}}"></script>
+    <script src="{{url_for('static', filename='/js/lib/materialize.js')}}"></script>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
 
-	{% block javascript %}
+    <script>
+        {% with messages = get_flashed_messages(with_categories = true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    M.toast({html: '<p class="{{ category }}"><strong>{{ category|title }}</strong>: {{ message }}</p>'})
+                {% endfor %}
+            {% endif %}  
+        {% endwith %}
+    </script>
 
-	{% endblock %}
+    {% block javascript %} {% endblock %}
 </body>
 
 </html>
