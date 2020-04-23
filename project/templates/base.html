@@ -33,7 +33,8 @@
                     <li><a href="{{ url_for('base.story_page') }}">Home</a></li>
                     {% if not current_user.is_authenticated %}
                     <li><a href="#modal-signup-login" class="modal-trigger">Signup / Login</a></li>
-                    {% endif %} {% if current_user.is_authenticated %}
+                    {% endif %}
+                    {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('base.profile') }}">Profile</a></li>
                     <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                     {% endif %}
@@ -128,7 +129,8 @@
         {% endwith %}
     </script>
 
-    {% block javascript %} {% endblock %}
+    {% block javascript %}
+    {% endblock %}
 </body>
 
 </html>

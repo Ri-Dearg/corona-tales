@@ -52,6 +52,17 @@ function initStoryModal(id, content, tagList) {
     });
 }
 
+function showDate(id, timeStamp) {
+    var time = Number(timeStamp)
+    var date = new Date(time)
+
+    const options = { day: 'numeric', month: 'short', year: 'numeric'};
+    var dateString = date.toLocaleDateString(undefined, options)
+
+    document.querySelector(`#date-med-${id}`).textContent = dateString
+    document.querySelector(`#date-small-${id}`).textContent = dateString
+}
+
 function initFab() {
     document.addEventListener('DOMContentLoaded', function () {
         var sideFab = document.querySelectorAll('.horizontal-button');
@@ -122,6 +133,7 @@ function addTags(formId, arrayLength, array) {
 
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
+
 
     var singupLogin = document.querySelector('#modal-signup-login');
     var modalTab = M.Modal.init(singupLogin, {

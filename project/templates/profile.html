@@ -22,8 +22,8 @@
 							<div class="card-content no-pad-bot">
 								<div class="row no-m-bot">
 									<span class="card-title col s12 m6 heading">{{ story.title[0] }}</span>
-									<span class="card-title col s12 m6 heading hide-on-small-only right-align">{{ story.date[0] }}</span>
-									<span class="card-title col s12 m6 heading hide-on-med-and-up">{{ story.date[0] }}</span>
+                                    <span id="date-med-{{ story._id }}" class="card-title col s12 m6 heading hide-on-small-only right-align"></span>
+                                    <span id="date-small-{{ story._id }}"class="card-title col s12 m6 heading hide-on-med-and-up"></span>
 									<div class="col s12">
 										<p>By {{ story.name[0].title() }},<br>
                                         Age {{ story.age[0] }}, <br>
@@ -72,8 +72,7 @@
 								</div>
 								<div class="input-field valclassate col s12 m6">
 									<i class="material-icons prefix">cake</i>
-									<input id="age{{ story._id }}" name="age" type="number" min="1" max="120" value="{{ story.age[0] }}" required>
-									<label for="age{{ story._id }}">Age</label>
+									<input id="age{{ story._id }}" name="age" type="number" min="1" max="120" value="{{ story.age[0] }}" placeholder="Age" required>
 								</div>
 								<div class="input-field validate col s12 m6">
 									<i class="material-icons prefix">flag</i>
@@ -515,12 +514,7 @@
                                     <option value="한국어&nbsp;(韓國語)">한국어&nbsp;(韓國語)</option>
                                 </select>
 								</div>
-								<div class="input-field validate col s12 m6">
-									<i class="material-icons prefix">event</i>
-									<input id="date{{ story._id }}" type="text" class="datepicker date" value="{{ story.date[0] }}" required>
-									<label for="date{{ story._id }}">When was it?</label>
-								</div>
-								<div class="input-field validate col s12 m6">
+								<div class="input-field validate col s12 m6 push-m6">
 									<i class="material-icons prefix">palette</i>
 									<select class="color" name="color" required>
                                     <option value="" disabled>Color</option>
@@ -543,10 +537,9 @@
 									<option value="pink">Pink</option>
 									</select>
 								</div>
-								<div class="input-field validate col s12">
+								<div class="input-field validate col s12 m6 pull-m6">
 									<i class="material-icons prefix">import_contacts</i>
-									<input id="title{{ story._id }}" name="title" type="text" value="{{ story.title[0] }}" required>
-									<label for="title{{ story._id }}">Story Title</label>
+									<input id="title{{ story._id }}" name="title" type="text" value="{{ story.title[0] }}" placeholder="Story Title" required>
 								</div>
 								<div class="col s12">
 									<textarea id="editor{{ story._id }}" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
@@ -585,6 +578,7 @@
         }
 
         {% for story in user_stories %}
+                showDate('{{ story._id }}','{{ story.time[0] }}')
                 initTags(tagList, '{{ story._id }}')
                 initStoryModal('{{ story._id }}', {{ story.text|safe }}, {{ story.tags|safe }})
                 formValid('{{ story._id }}');

@@ -82,7 +82,6 @@ def edit_story(story_id):
                         'age.0': request.form.get('age'),
                         'country.0': request.form.get('country'),
                         'language.0': request.form.get('language'),
-                        'date.0': request.form.get('date'),
                         'tags': request.form.getlist('tags'),
                         'color.0': request.form.get('color'),
                         'title.0': request.form.get('title'),

@@ -37,8 +37,8 @@
 					<div class="card-content no-pad-bot">
 						<div class="row no-m-bot">
 							<span class="card-title col s12 m6 heading">{{ story.title[0] }}</span>
-							<span class="card-title col s12 m6 heading hide-on-small-only right-align">{{ story.date[0] }}</span>
-							<span class="card-title col s12 m6 heading hide-on-med-and-up">{{ story.date[0] }}</span>
+							<span id="date-med-{{ story._id }}" class="card-title col s12 m6 heading hide-on-small-only right-align"></span>
+							<span id="date-small-{{ story._id }}"class="card-title col s12 m6 heading hide-on-med-and-up"></span>
 							<div class="col s12">
 								<p>By {{ story.name[0].title() }},<br>
                                     Age {{ story.age[0] }}, <br>
@@ -54,6 +54,7 @@
 			</div>
 		</div>
 		{% endfor %}
+        {% set _stub = story_list.rewind() %}
 	</section>
 
 	<div class="fixed-action-btn no-autoinit" id="buttonindex">
@@ -100,8 +101,7 @@
 										</div>
 						<div class="input-field validate col s12 m6">
 							<i class="material-icons prefix">cake</i>
-							<input id="age" name="age" type="number" min="1" max="120" required>
-							<label for="age">Age</label>
+							<input id="age" name="age" type="number" min="1" max="120" placeholder="Age" required>
 						</div>
 						<div class="input-field validate col s12 m6">
 							<i class="material-icons prefix">flag</i>
@@ -552,12 +552,7 @@
 				                                <option value="한국어&nbsp;(韓國語)">한국어&nbsp;(韓國語)</option>
 				                            </select>
 						</div>
-						<div class="input-field validate col s12 m6">
-							<i class="material-icons prefix">event</i>
-							<input id="date" name="date" type="text" class="datepicker" required>
-							<label for="date">When was it?</label>
-						</div>
-						<div class="input-field  validate col s12 m6">
+						<div class="input-field validate col s12 m6 push-m6">
 							<i class="material-icons prefix">palette</i>
 							<select id="color" name="color" required>
                                 <option value="" disabled selected>Color</option>
@@ -579,10 +574,9 @@
                                 <option value="pink">Pink</option>
                             </select>
 						</div>
-						<div class="input-field validate col s12">
+						<div class="input-field validate col s12 m6 pull-m6">
 							<i class="material-icons prefix">import_contacts</i>
-							<input id="title" name="title" type="text" required>
-							<label for="title">Story Title</label>
+							<input id="title" name="title" type="text" placeholder="Story Title" required>
 						</div>
 						<div class="col s12">
 							<textarea id="editorindex" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
@@ -637,23 +631,13 @@
                     "{{ tag }}": null,
                 {% endfor %}
             };
+            {% for story in story_list %}
+                showDate('{{ story._id }}', '{{ story.time[0] }}')
+            {% endfor %}
             initTags(tagList, 'index');
             initStoryModal('index');
             formValid('index');
             initFab()
 
-        /*$('#testbox').on('keydown', (function(event) {
-            var myEvent = jQuery.Event("keydown");
-            myEvent.which == 13
-            if (event.which == 32) {
-            event.preventDefault()
-            $('#testbox').focus().trigger(myEvent)
-            }
-            if (event.which == 13) {
-            event.preventDefault()
-            $('#testbox').val('okay')
-            }
-        }
-        ))*/
 	</script>
 	{% endblock %}
