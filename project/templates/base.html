@@ -49,7 +49,8 @@
         <li><a href="{{ url_for('base.story_page') }}">Home</a></li>
         {% if not current_user.is_authenticated %}
         <li><a href="#modal-signup-login" class="modal-trigger">Signup / Login</a></li>
-        {% endif %} {% if current_user.is_authenticated %}
+        {% endif %}
+        {% if current_user.is_authenticated %}
         <li><a href="{{ url_for('base.profile') }}">Profile</a></li>
         <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
         {% endif %}
@@ -67,70 +68,77 @@
                         <li class="tab col s6"><a href="#login-tab">Login</a></li>
                     </ul>
                 </div>
-                <div class="container">
-                    <div class="row">
-                        <div id="signup-tab" class="col s12">
-                            <form action="{{ url_for('auth.signup_form') }}" method="POST" id="form-signup">
-                                <div class="input-field validate col s12">
-                                    <i class="material-icons prefix">face</i>
-                                    <input id="username-signup" name="username" type="text" minlength="5" maxlength="30" placeholder="Create Username" required>
-                                </div>
-                                <div class="input-field validate col s12">
-                                    <i class="material-icons prefix">done</i>
-                                    <input id="password-signup" name="password" type="password" minlength="8" placeholder="Create Password" required>
-                                </div>
-                                <div class="input-field validate col s12">
-                                    <i class="material-icons prefix">done_all</i>
-                                    <input id="password-verify" name="password-verify" type="password" minlength="8" placeholder="Repeat Password" required>
-                                </div>
-                                <div class="modal-footer">
-                                    <button id="button-signup" class="btn waves-effect waves-light right teal accent-4" type="submit">Join
-                                        <i class="material-icons right">send</i>
-                                    </button>
-                                </div>
-                            </form>
+
+                <div id="signup-tab" class="col s12">
+                    <div class="container">
+                        <form action="{{ url_for('auth.signup_form') }}" method="POST" id="form-signup">
+                            <div class="input-field validate col s12">
+                                <i class="material-icons prefix">face</i>
+                                <input id="username-signup" name="username" type="text" minlength="5" maxlength="30" placeholder="Create Username" required>
+                            </div>
+                            <div class="input-field validate col s12">
+                                <i class="material-icons prefix">done</i>
+                                <input id="password-signup" name="password" type="password" minlength="8" placeholder="Create Password" required>
+                            </div>
+                            <div class="input-field validate col s12">
+                                <i class="material-icons prefix">done_all</i>
+                                <input id="password-verify" name="password-verify" type="password" minlength="8" placeholder="Repeat Password" required>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button form="form-signup" id="button-signup" class="btn waves-effect waves-light right teal accent-4" type="submit">Join
+                                <i class="material-icons right">send</i>
+                            </button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div id="login-tab" class="col s12">
-                            <form action="{{ url_for('auth.login_form') }}" method="POST" id="form-login">
-                                <div class="input-field validate col s12">
-                                    <i class="material-icons prefix">face</i>
-                                    <input id="username-login" name="username" type="text" minlength="5" maxlength="30" placeholder="Username" required>
-                                </div>
-                                <div class="input-field validate col s12">
-                                    <i class="material-icons prefix">vpn_key</i>
-                                    <input id="password-login" name="password" type="password" minlength="8" placeholder="Password" required>
-                                </div>
-                                <div class="modal-footer">
-                                    <button id="button-login" class="btn waves-effect waves-light right teal accent-4" type="submit">Login
-                                        <i class="material-icons right">send</i>
-                                    </button>
-                                </div>
-                            </form>
+                </div>
+                <div id="login-tab" class="col s12">
+                    <div class="container">
+                        <form action="{{ url_for('auth.login_form') }}" method="POST" id="form-login">
+                            <div class="input-field validate col s12">
+                                <i class="material-icons prefix">face</i>
+                                <input id="username-login" name="username" type="text" minlength="5" maxlength="30" placeholder="Username" required>
+                            </div>
+                            <div class="input-field validate col s12">
+                                <i class="material-icons prefix">vpn_key</i>
+                                <input id="password-login" name="password" type="password" minlength="8" placeholder="Password" required>
+                            </div>
+                            <div class="col s12 pd-b">
+                                <label class="right">
+                                    <input for="remember" id="remember" name="remember" value="remember" type="checkbox" class="filled-in">
+                                    <span>Remember Me</span>
+                                </label>
+                            </div>
+
+                        </form>
+                        <div class="modal-footer">
+                            <button form="form-login" id="button-login" class="btn waves-effect waves-light right teal accent-4" type="submit">Login
+                                <i class="material-icons right">send</i>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Materialize Javascript-->
-    <script src="{{url_for('static', filename='js/lib/jquery-3.5.0.min.js')}}"></script>
-    <script src="{{url_for('static', filename='/js/lib/materialize.js')}}"></script>
-    <script src="{{url_for('static', filename='js/script.js')}}"></script>
 
-    <script>
-        {% with messages = get_flashed_messages(with_categories = true) %}
+	<!-- Materialize Javascript-->
+	<script src="{{url_for('static', filename='js/lib/jquery-3.5.0.min.js')}}"></script>
+	<script src="{{url_for('static', filename='/js/lib/materialize.js')}}"></script>
+	<script src="{{url_for('static', filename='js/script.js')}}"></script>
+
+	<script>
+		{% with messages = get_flashed_messages(with_categories = true) %}
             {% if messages %}
                 {% for category, message in messages %}
                     M.toast({html: '<p class="{{ category }}"><strong>{{ category|title }}</strong>: {{ message }}</p>'})
                 {% endfor %}
             {% endif %}  
         {% endwith %}
-    </script>
+	</script>
 
-    {% block javascript %}
-    {% endblock %}
+	{% block javascript %}
+	{% endblock %}
 </body>
 
 </html>

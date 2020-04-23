@@ -38,8 +38,9 @@ def login_form():
     username = request.form.get('username')
     userID = request.form.get('username').upper()
     password = request.form.get('password')
-    remember = True if request.form.get('remember') else False
     user = users.find_one({"user_id": userID})
+
+    remember = True if request.form.get('remember') else False
 
     if not user or not check_password_hash(user["password"], password):
         flash('The login details are incorrect', 'error')
@@ -54,5 +55,6 @@ def login_form():
 @auth.route('/logout')
 @login_required
 def logout():
+    flash('You have logged out', 'success')
     logout_user()
     return redirect(url_for('base.story_page'))

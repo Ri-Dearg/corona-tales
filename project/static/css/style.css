@@ -27,10 +27,40 @@ hr {
     height: 0.1rem
 }
 
+.tabs .tab a {
+    color: #00796b  ;
+}
 
+.tabs .tab a:hover,
+.tabs .tab a.active,
+.tabs .tab.a {
+    color: #00bfa5;
+}
+
+.tabs .tab a:focus.active {
+  color:#00bfa5;
+  background-color: rgba(81, 201, 165, 0.2);
+}
+
+.tabs .indicator {
+    background-color: #00bfa5;
+}
+
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
+    border-color: #00bfa5;
+    background-color: #00bfa5 
+}
+
+.row .pd-t {
+    padding-top: 0.4rem 
+}
 
 .row form.col {
     padding: 0;
+}
+
+form .col.pd-b {
+    padding-bottom: 0.6rem
 }
 
 .sidenav li>a {
