@@ -100,12 +100,13 @@ nav .brand-logo {
 .section {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
+    min-height: 100vh;
 }
 
 @media only screen and (max-width: 400px) {
 .section {
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 }
 

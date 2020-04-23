@@ -49,6 +49,8 @@ def login_form():
     log_user = User(userID, username, password, _id=user.get('_id'))
     login_user(log_user, remember=remember)
 
+    flash('You have logged in', 'success')
+
     return redirect(url_for('base.profile'))
 
 
