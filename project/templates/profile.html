@@ -613,7 +613,7 @@
     <div class="modal-footer mar-bot-24">
         <div class="center-align">
 
-      <button type="submit" form="form-delete-story" class="btn modal-close waves-effect waves-light red darken-1">Delete Stories
+      <button type="submit" form="form-delete-story" class="btn waves-effect waves-light red darken-1">Delete Stories
 								                            <i class="material-icons right">highlight_off</i>
         </button>
     </div>
@@ -623,15 +623,23 @@
 
     <div id="modal-delete-user" class="modal">
     <div class="modal-content center-align no-pad-bot">
+          <div class="row">
       <h5 class="heading">Delete Account</h5>
       <p>Do you wish to delete your account?<br></p>
       <p>This will delete your account and information but <strong>your stories will remain</strong>.<br>
-      If you want to delete your stories, please use the "Delete Stories" option on your settings page first.</p>
+      If you want to delete your stories, <strong>please use the "Delete Stories"</strong> option on your settings page first.</p>
       <strong>Continue?</strong></p>
+            <form action="{{ url_for('auth.delete_user') }}" method="POST" id="form-delete-user">
+      <div class="input-field validate col s6 offset-s3">
+        <i class="material-icons prefix">vpn_key</i>
+        <input id="password-delete-story" name="password" type="password" minlength="8" placeholder="Password" required>
+      </div>
+      </form>
+          </div>
     </div>
     <div class="modal-footer mar-bot-24">
     <div class="center-align">
-      <a href="#!"><button type="submit" class="btn modal-close waves-effect waves-light red darken-1">Delete Account
+      <a href="#!"><button type="submit" form="form-delete-user" class="btn waves-effect waves-light red darken-1">Delete Account
 								                            <i class="material-icons right">highlight_off</i>
 								                        </button></a>
                                                         </div>   

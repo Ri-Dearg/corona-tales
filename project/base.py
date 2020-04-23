@@ -60,6 +60,7 @@ def contact():
 def profile():
 
     user_stories = stories.find({'user_id': current_user.user_id})
+    username = current_user.username
 
     # Change order of function when adding create story to profile page
 
@@ -67,9 +68,11 @@ def profile():
         taglist = get_tags()
 
         return render_template("profile.html", user_id=current_user.user_id,
-                               user_stories=user_stories, taglist=taglist)
+                               user_stories=user_stories, taglist=taglist,
+                               username=username)
 
-    return render_template("profile.html", user_id=current_user.user_id)
+    return render_template("profile.html", user_id=current_user.user_id,
+                           username=username)
 
 
 @base.route('/edit_story/<story_id>', methods=["POST"])
