@@ -8,7 +8,7 @@ base = Blueprint('base', __name__,
                  template_folder='templates')
 
 stories = mongo.db.stories
-story_list = stories.find()
+story_list = stories.find().sort('time', -1)
 
 
 def get_tags():
@@ -71,7 +71,8 @@ def contact():
 @login_required
 def profile():
 
-    user_stories = stories.find({'user_id': current_user.user_id})
+    user_stories = stories.find(
+        {'user_id': current_user.user_id}).sort('time', -1)
     username = current_user.username
 
     # Change order of function when adding create story to profile page
