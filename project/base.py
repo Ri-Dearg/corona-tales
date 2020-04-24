@@ -1,5 +1,5 @@
 from flask import (Blueprint, current_app, render_template, url_for, request,
-                   redirect)
+                   redirect, flash)
 from flask_login import login_required, current_user
 from .extensions import mongo
 from bson.objectid import ObjectId
@@ -38,21 +38,33 @@ def story_page():
 
 @base.route('/create_story', methods=['POST'])
 def create_story():
-
+    flash('your story has been posted!', 'success')
     stories.insert_one(request.form.to_dict(flat=False))
-    return redirect(url_for('base.story_page'))
+    return redirect(request.referrer)
 
 
 @base.route('/about')
 def about():
 
-    return render_template('about.html')
+    taglist = get_tags()
+
+    if current_user.is_authenticated:
+        return render_template('about.html', taglist=taglist,
+                               user_id=current_user.user_id)
+
+    return render_template('about.html', taglist=taglist)
 
 
 @base.route('/contact')
 def contact():
 
-    return render_template('contact.html')
+    taglist = get_tags()
+
+    if current_user.is_authenticated:
+        return render_template('about.html', taglist=taglist,
+                               user_id=current_user.user_id)
+
+    return render_template('contact.html', taglist=taglist)
 
 
 @base.route('/profile')

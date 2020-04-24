@@ -555,7 +555,7 @@
                 <div class="row">
                     <div class="col s12 center-align heading">
                         <h4>No stories here.</h4><br>
-                        <h5>Add one from the menu button.</h5>
+                        <h5>Create one with the menu button below.</h5>
                     </div>
                 </div>
                 {% endfor %}
@@ -697,9 +697,6 @@
                 initTags(tagList, '{{ story._id }}')
                 initStoryModal('{{ story._id }}', {{ story.text|safe }}, {{ story.tags|safe }})
                 formValid('{{ story._id }}');
-        {% endfor %}
-
-        initFab()
-            
+        {% endfor %}            
 </script>
 {% endblock %}
