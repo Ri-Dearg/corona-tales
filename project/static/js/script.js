@@ -143,9 +143,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    $('#form-signup').on('submit', function (event) {
-        var passFirst = document.querySelector("#password-signup").value
-        var passSecond = document.querySelector("#password-verify").value
+    $('.password-create').on('submit', function (event) {
+        var passFirst = document.querySelector('.passone').value
+        var passSecond = document.querySelector('.passtwo').value
 
         if (passFirst != passSecond) {
             alert('Passwords do not match. Please Try again.')

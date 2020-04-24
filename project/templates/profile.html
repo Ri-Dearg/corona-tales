@@ -561,7 +561,7 @@
                     </div>
                 </div>
                 <div class="row">
-                <form action="{{ url_for('auth.change_password') }}" method="POST" id="form-change-password">
+                <form action="{{ url_for('auth.change_password') }}" method="POST" id="form-change-password" class="password-create">
                     <div class="col s12">
                             <div class="input-field validate col s12 m6">
                                 <i class="material-icons prefix">vpn_key</i>
@@ -571,13 +571,13 @@
                     <div class="col s12">
                         <div class="input-field validate col s12 m6">
                             <i class="material-icons prefix">done</i>
-                            <input id="password-new" name="password-new" type="password" minlength="8" placeholder="New Password" required>
+                            <input id="password-new" class="passone" name="password-new" type="password" minlength="8" placeholder="New Password" required>
                         </div>
                     </div>
                     <div class="col s12">
                         <div class="input-field validate col s12 m6">
                             <i class="material-icons prefix">done_all</i>
-                            <input id="password-newverify" name="password-newverify" type="password" minlength="8" placeholder="Repeat New Password" required>
+                            <input id="password-newverify" class="passtwo" name="password-newverify" type="password" minlength="8" placeholder="Repeat New Password" required>
                         </div>
                     </div>
                     <div class="col s12">
