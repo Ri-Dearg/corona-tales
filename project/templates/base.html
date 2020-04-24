@@ -131,7 +131,7 @@
 		{% with messages = get_flashed_messages(with_categories = true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    M.toast({html: '<p class="{{ category }}"><strong>{{ category|title }}</strong>, {{ message }}</p>'})
+                    M.toast({html: '<p class="{{ category }}"><strong>{{ category|title }}</strong>, {{ message }}</p>', classes: '{{ category }}'})
                 {% endfor %}
             {% endif %}  
         {% endwith %}

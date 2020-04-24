@@ -1,87 +1,77 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <div class="container">
 
-	<section class="section white z-depth-3">
+    <section class="section white z-depth-3">
 
-		<div class="row">
-			<div class="col s12">
-				<ul class="tabs">
-					<li class="tab col s6"><a href="#user-story-list">Your Stories</a></li>
-					<li class="tab col s6"><a href="#user-settings">Your Settings</a></li>
-				</ul>
-			</div>
-			<br>
-			<br>
-			<div id="user-story-list" class="col s12 pd-t">
-				<!-- Function to place each story as a card -->
-				{% for story in user_stories %}
-				<!--   Story Section   -->
-				<div class="row">
-					<div class="col s12">
-						<article class="card {{ story.color[0] }} accent-1 hoverable">
-							<div class="card-content no-pad-bot">
-								<div class="row no-m-bot">
-									<span class="card-title col s12 m6 heading">{{ story.title[0] }}</span>
-									<span id="date-med-{{ story._id }}" class="card-title col s12 m6 heading hide-on-small-only right-align"></span>
-									<span id="date-small-{{ story._id }}" class="card-title col s12 m6 heading hide-on-med-and-up"></span>
-									<div class="col s12">
-										<p>By {{ story.name[0].title() }},
-											<br> Age {{ story.age[0] }},
-											<br> In {{ story.country[0].title() }}.</p>
-											<br>
-											<p>{{ story.text[0]|safe }}</p>
-											<br>
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s6"><a href="#user-story-list">Your Stories</a></li>
+                    <li class="tab col s6"><a href="#user-settings">Your Settings</a></li>
+                </ul>
+            </div>
+            <br>
+            <br>
+            <div id="user-story-list" class="col s12 pd-t">
+                <!-- Function to place each story as a card -->
+                {% for story in user_stories %}
+                <!--   Story Section   -->
+                <div class="row">
+                    <div class="col s12">
+                        <article class="card {{ story.color[0] }} accent-1 hoverable">
+                            <div class="card-content no-pad-bot">
+                                <div class="row no-m-bot">
+                                    <span class="card-title col s12 m6 heading">{{ story.title[0] }}</span>
+                                    <span id="date-med-{{ story._id }}" class="card-title col s12 m6 heading hide-on-small-only right-align"></span>
+                                    <span id="date-small-{{ story._id }}" class="card-title col s12 m6 heading hide-on-med-and-up"></span>
+                                    <div class="col s12">
+                                        <p>By {{ story.name[0].title() }},
+                                            <br> Age {{ story.age[0] }},
+                                            <br> In {{ story.country[0].title() }}.</p>
+                                        <br>
+                                        <p>{{ story.text[0]|safe }}</p>
+                                        <br>
                                     </div>
-											<div id="button{{ story._id }}"
-												class="fixed-action-btn no-autoinit horizontal-button">
-												<a href="#" class="btn-floating btn-large red darken-1 tooltipped"
-													data-position="bottom" data-tooltip="Menu">
-													<i class="large material-icons">menu</i>
-												</a>
-												<ul>
-													<li>
-														<a href="{{ url_for('base.delete_story', story_id=story._id) }}"
-															class="btn-floating purple darken-1 tooltipped"
-															data-position="bottom"
-															data-tooltip="Delete Story"><i class="material-icons">highlight_off</i></a>
-													</li>
-													<li>
-														<a href="#modal{{ story._id }}"
-															class="btn-floating orange darken-1 modal-trigger tooltipped"
-															data-position="bottom"
-															data-tooltip="Edit Story"><i class="material-icons">mode_edit</i></a>
-													</li>
-												</ul>
-											</div>
-											<div class="card-action col s12">
-												<p>Tags: {% for tag in story.tags %}{{ tag }}, {% endfor %}</p>
-											</div>
-									</div>
-								</div>
-						</article>
-					</div>
-				</div>
+                                    <div id="button{{ story._id }}" class="fixed-action-btn no-autoinit horizontal-button">
+                                        <a href="#" class="btn-floating btn-large red darken-1 tooltipped" data-position="bottom" data-tooltip="Menu">
+                                            <i class="large material-icons">menu</i>
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="{{ url_for('base.delete_story', story_id=story._id) }}" class="btn-floating purple darken-1 tooltipped" data-position="bottom" data-tooltip="Delete Story"><i class="material-icons">highlight_off</i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#modal{{ story._id }}" class="btn-floating orange darken-1 modal-trigger tooltipped" data-position="bottom" data-tooltip="Edit Story"><i class="material-icons">mode_edit</i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-action col s12">
+                                        <p>Tags: {% for tag in story.tags %}{{ tag }}, {% endfor %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
 
-				<div id="modal{{ story._id }}" class="modal submit-modal">
-					<div class="modal-content">
-						<h5>Write your story.</h5>
-						<p class="mini-text">Please fill all fields.</p>
-						<div class="row">
-							<form action="{{ url_for('base.edit_story', story_id=story._id) }}" method="POST"
-								class="col s12 edit-story" id="form{{ story._id }}">
-								<div class="input-field validate col s12 m6">
-									<i class="material-icons prefix">face</i>
-									<input id="name{{ story._id }}" name="name" type="text" value="{{ story.name[0] }}" placeholder="Name" required>
+                <div id="modal{{ story._id }}" class="modal submit-modal">
+                    <div class="modal-content">
+                        <h5>Write your story.</h5>
+                        <p class="mini-text">Please fill all fields.</p>
+                        <div class="row">
+                            <form action="{{ url_for('base.edit_story', story_id=story._id) }}" method="POST" class="col s12 edit-story" id="form{{ story._id }}">
+                                <div class="input-field validate col s12 m6">
+                                    <i class="material-icons prefix">face</i>
+                                    <input id="name{{ story._id }}" name="name" type="text" value="{{ story.name[0] }}" placeholder="Name" required>
                                 </div>
-									<div class="input-field valclassate col s12 m6">
-										<i class="material-icons prefix">cake</i>
-										<input id="age{{ story._id }}" name="age" type="number" min="1" max="120" value="{{ story.age[0] }}" placeholder="Age" required>
+                                <div class="input-field valclassate col s12 m6">
+                                    <i class="material-icons prefix">cake</i>
+                                    <input id="age{{ story._id }}" name="age" type="number" min="1" max="120" value="{{ story.age[0] }}" placeholder="Age" required>
                                 </div>
-										<div class="input-field validate col s12 m6">
-											<i class="material-icons prefix">flag</i>
-											<select id="country{{ story._id }}" name="country" required>
+                                <div class="input-field validate col s12 m6">
+                                    <i class="material-icons prefix">flag</i>
+                                    <select id="country{{ story._id }}" name="country" required>
                                         <option value="{{ story.country[0] }}" selected>{{ story.country[0]|title }}</option>
                                         <option value="" disabled>Country</option>
                                         <option value="Afghanistan">Afghanistan</option>
@@ -329,10 +319,10 @@
                                         <option value="Zambia">Zambia</option>
                                         <option value="Zimbabwe">Zimbabwe</option>
                                     </select>
-										</div>
-										<div class="input-field validate col s12 m6">
-											<i class="material-icons prefix">language</i>
-											<select id="language-choice{{ story._id }}" name="language" required>
+                                </div>
+                                <div class="input-field validate col s12 m6">
+                                    <i class="material-icons prefix">language</i>
+                                    <select id="language-choice{{ story._id }}" name="language" required>
                                         <option value="" disabled>Story language</option>
                                         <option value="{{ story.language[0] }}" selected>{{ story.language[0]|title }}</option>
                                         <option value="Afaan Oromoo">Afaan Oromoo</option>
@@ -518,10 +508,10 @@
                                         <option value="ꆈꌠ꒿ Nuosuhxop">ꆈꌠ꒿ Nuosuhxop</option>
                                         <option value="한국어&nbsp;(韓國語)">한국어&nbsp;(韓國語)</option>
                                     </select>
-										</div>
-										<div class="input-field validate col s12 m6 push-m6">
-											<i class="material-icons prefix">palette</i>
-											<select class="color" name="color" required>
+                                </div>
+                                <div class="input-field validate col s12 m6 push-m6">
+                                    <i class="material-icons prefix">palette</i>
+                                    <select class="color" name="color" required>
                                         <option value="" disabled>Color</option>
                                         <option value="{{ story.color[0] }}" selected>{{ story.color[0]|title }}</option>
                                         <option value="red">Red</option>
@@ -541,113 +531,152 @@
                                         <option value="purple">Purple</option>
                                         <option value="pink">Pink</option>
                                     </select>
-										</div>
-										<div class="input-field validate col s12 m6 pull-m6">
-											<i class="material-icons prefix">import_contacts</i>
-											<input id="title{{ story._id }}" name="title" type="text" value="{{ story.title[0] }}" placeholder="Story Title" required>
                                 </div>
-											<div class="col s12">
-												<textarea id="editor{{ story._id }}" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
-											</div>
-											<input type="hidden" id="edit-time{{ story._id }}" name="edit-time" value="">
+                                <div class="input-field validate col s12 m6 pull-m6">
+                                    <i class="material-icons prefix">import_contacts</i>
+                                    <input id="title{{ story._id }}" name="title" type="text" value="{{ story.title[0] }}" placeholder="Story Title" required>
+                                </div>
+                                <div class="col s12">
+                                    <textarea id="editor{{ story._id }}" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
+                                </div>
+                                <input type="hidden" id="edit-time{{ story._id }}" name="edit-time" value="">
                             </form>
-											<div id="chips{{ story._id }}"
-												class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">
-											</div>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button class="post-story btn waves-effect waves-light right" type="submit" form="form{{ story._id }}">Post
+                            <div id="chips{{ story._id }}" class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="post-story btn waves-effect waves-light right" type="submit" form="form{{ story._id }}">Post
                             <i class="material-icons right">playlist_add</i>
                         </button>
-									</div>
-								</div>
-								{% endfor %}
-						</div>
-						{% set _stub = user_stories.rewind() %}
-						<div id="user-settings" class="col s12 pd-t">
-							<div class="row title">
-								<div class="col s12">
-									<h5 class="heading">Delete Information</h5>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% set _stub = user_stories.rewind() %}
+            <div id="user-settings" class="col s12 pd-t">
+                <div class="row title">
+                    <div class="col s12">
+                        <h5 class="heading">Change Password</h5>
+                    </div>
+                </div>
+                <div class="row">
+                <form action="{{ url_for('auth.change_password') }}" method="POST" id="form-change-password">
+                    <div class="col s12">
+                            <div class="input-field validate col s12 m6">
+                                <i class="material-icons prefix">vpn_key</i>
+                                <input id="password-change-original" name="password" type="password" minlength="8" placeholder="Current Password" required>
+                            </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="input-field validate col s12 m6">
+                            <i class="material-icons prefix">done</i>
+                            <input id="password-new" name="password-new" type="password" minlength="8" placeholder="New Password" required>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="input-field validate col s12 m6">
+                            <i class="material-icons prefix">done_all</i>
+                            <input id="password-newverify" name="password-newverify" type="password" minlength="8" placeholder="Repeat New Password" required>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                    <div class="col s12 input-field">
+                <button type="submit" class="btn waves-effect waves-light left">Change Password
+                </button>
+                    </div>
+                </div>
+                </form>
+                </div>
+            <div class="row title">
+                <div class="col s12">
+                    <h5 class="heading">Delete Information</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 mt-1">
+                    <a href="#modal-delete-story" class="modal-trigger">
+                        <button class="btn waves-effect waves-light left red darken-1">Delete Stories
+                            <i class="material-icons left">highlight_off</i>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <a href="#modal-delete-user" class="modal-trigger">
+                        <button class="btn waves-effect waves-light left red darken-1">Delete Account
+                            <i class="material-icons left">highlight_off</i>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
 
-								</div>
-							</div>
-							<div class="row">
-								<div class="col s12">
-									<a href="#modal-delete-story" class="modal-trigger"><button class="btn waves-effect waves-light left red darken-1">Delete Stories
-								                            <i class="material-icons right">highlight_off</i>
-								                        </button></a>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col s12">
-									<a href="#modal-delete-user" class="modal-trigger"><button class="btn waves-effect waves-light left red darken-1">Delete Account
-								                            <i class="material-icons right">highlight_off</i>
-								                        </button></a>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-	</section>
+</section>
 
 </div>
 
-  <div id="modal-delete-story" class="modal">
+<div id="modal-delete-story" class="modal">
     <div class="modal-content center-align no-pad-bot">
-      <div class="row">
-      <h5 class="heading">Delete Stories</h5>
-      <p>Do you want to delete all of your stories?</p>
-      <p>The stories will be <strong>unrecoverable</strong> <br>
-      <strong>Continue?</strong></p>
-      <form action="{{ url_for('auth.delete_stories') }}" method="POST" id="form-delete-story">
-      <div class="input-field validate col s6 offset-s3">
-        <i class="material-icons prefix">vpn_key</i>
-        <input id="password-delete-story" name="password" type="password" minlength="8" placeholder="Password" required>
-      </div>
-      </form>
-      </div>
+        <div class="row">
+            <h5 class="heading">Delete Stories</h5>
+            <p>Do you want to delete all of your stories?</p>
+            <p>The stories will be <strong>unrecoverable</strong>
+                <br>
+                <strong>Continue?</strong></p>
+            <form action="{{ url_for('auth.delete_stories') }}" method="POST" id="form-delete-story">
+                <div class="input-field validate col s6 offset-s3">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <input id="password-delete-story" name="password" type="password" minlength="8" placeholder="Password" required>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="modal-footer mar-bot-24">
         <div class="center-align">
-
-      <button type="submit" form="form-delete-story" class="btn waves-effect waves-light red darken-1">Delete Stories
-								                            <i class="material-icons right">highlight_off</i>
-        </button>
-    </div>
+            <button type="submit" form="form-delete-story" class="btn waves-effect waves-light red darken-1">Delete Stories
+                <i class="material-icons right">highlight_off</i>
+            </button>
         </div>
+    </div>
 
-  </div>
+</div>
 
-    <div id="modal-delete-user" class="modal">
+<div id="modal-delete-user" class="modal">
     <div class="modal-content center-align no-pad-bot">
-          <div class="row">
-      <h5 class="heading">Delete Account</h5>
-      <p>Do you wish to delete your account?<br></p>
-      <p>This will delete your account and information but <strong>your stories will remain</strong>.<br>
-      If you want to delete your stories, <strong>please use the "Delete Stories"</strong> option on your settings page first.</p>
-      <strong>Continue?</strong></p>
+        <div class="row">
+            <h5 class="heading">Delete Account</h5>
+            <p>Do you wish to delete your account?
+                <br>
+            </p>
+            <p>This will delete your account and information but <strong>your stories will remain</strong>.
+                <br> If you want to delete your stories, <strong>please use the "Delete Stories"</strong> option on your settings page first.
+            </p>
+            <strong>Continue?</strong>
+            </p>
             <form action="{{ url_for('auth.delete_user') }}" method="POST" id="form-delete-user">
-      <div class="input-field validate col s6 offset-s3">
-        <i class="material-icons prefix">vpn_key</i>
-        <input id="password-delete-story" name="password" type="password" minlength="8" placeholder="Password" required>
-      </div>
-      </form>
-          </div>
+                <div class="input-field validate col s6 offset-s3">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <input id="password-delete-story" name="password" type="password" minlength="8" placeholder="Password" required>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="modal-footer mar-bot-24">
-    <div class="center-align">
-      <a href="#!"><button type="submit" form="form-delete-user" class="btn waves-effect waves-light red darken-1">Delete Account
-								                            <i class="material-icons right">highlight_off</i>
-								                        </button></a>
-                                                        </div>   
+        <div class="center-align">
+            <a href="#!">
+                <button type="submit" form="form-delete-user" class="btn waves-effect waves-light red darken-1">Delete Account
+                    <i class="material-icons right">highlight_off</i>
+                </button>
+            </a>
+        </div>
     </div>
-  </div>
+</div>
 
 {% endblock %}
-
 {% block javascript %}
 <script>
 	var tagList = {

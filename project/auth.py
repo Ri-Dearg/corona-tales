@@ -8,7 +8,7 @@ from .models import User
 auth = Blueprint('auth', __name__,
                  template_folder='templates')
 
-users = mongo.db.users
+usersdb = mongo.db.users
 
 
 @auth.route('/signup', methods=['POST'])
@@ -16,7 +16,7 @@ def signup_form():
 
     username = request.form.get('username')
     userID = username.upper()
-    user = users.find_one({"user_id": userID})
+    user = usersdb.find_one({"user_id": userID})
 
     if user:
         flash('Username is taken, please try another', 'sorry')
@@ -27,7 +27,7 @@ def signup_form():
                'password': generate_password_hash(request.form.get
                                                   ('password'),
                                                   method='sha256')}
-    users.insert_one(account)
+    usersdb.insert_one(account)
     flash('Please Login, account created.', 'success')
     return redirect(url_for('base.story_page'))
 
@@ -38,7 +38,7 @@ def login_form():
     username = request.form.get('username')
     userID = request.form.get('username').upper()
     password = request.form.get('password')
-    user = users.find_one({"user_id": userID})
+    user = usersdb.find_one({"user_id": userID})
 
     remember = True if request.form.get('remember') else False
 
@@ -50,6 +50,30 @@ def login_form():
     login_user(log_user, remember=remember)
 
     flash(f'Welcome, {username}', 'success')
+
+    return redirect(url_for('base.profile'))
+
+
+@auth.route('/change_password', methods=['POST'])
+@login_required
+def change_password():
+
+    this_user = current_user.user_id
+    user = usersdb.find_one({"user_id": this_user})
+    password = request.form.get('password')
+
+    if not check_password_hash(user["password"], password):
+        flash('The password is incorrect', 'sorry')
+        return redirect(url_for('base.profile'))
+
+    usersdb.update({"user_id": this_user},
+                   {'$set':
+                    {'password': generate_password_hash(request.form.get
+                                                        ('password-new'),
+                                                        method='sha256')}
+                    })
+
+    flash('password has been changed', 'success')
 
     return redirect(url_for('base.profile'))
 
@@ -67,15 +91,15 @@ def logout():
 def delete_stories():
 
     password = request.form.get('password')
-    userID = current_user.user_id
-    user = users.find_one({"user_id": userID})
+    this_user = current_user.user_id
+    user = usersdb.find_one({"user_id": this_user})
 
     if not check_password_hash(user["password"], password):
         flash('The password is incorrect', 'sorry')
         return redirect(url_for('base.profile'))
 
     flash('your stories have been deleted.', 'success')
-    mongo.db.stories.remove({'user_id': userID})
+    mongo.db.stories.remove({'user_id': this_user})
     return redirect(url_for('base.profile'))
 
 
@@ -84,17 +108,17 @@ def delete_stories():
 def delete_user():
 
     password = request.form.get('password')
-    userID = current_user.user_id
-    user = users.find_one({"user_id": userID})
+    this_user = current_user.user_id
+    user = usersdb.find_one({"user_id": this_user})
 
     if not check_password_hash(user["password"], password):
         flash('The password is incorrect', 'sorry')
         return redirect(url_for('base.profile'))
 
-    mongo.db.stories.update_many({'user_id': userID},
+    mongo.db.stories.update_many({'user_id': this_user},
                                  {'$unset': {'user_id': ""}
                                   })
-    mongo.db.users.remove({'user_id': userID})
+    usersdb.remove({'user_id': this_user})
     flash('account deleted', 'success')
 
     return redirect(url_for('base.story_page'))

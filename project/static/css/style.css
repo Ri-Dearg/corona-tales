@@ -94,6 +94,14 @@ nav .brand-logo {
     margin-bottom: 0;
 }
 
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
 .mar-bot-24 {
     margin-bottom: 24px !important;
 }
@@ -119,6 +127,14 @@ nav .brand-logo {
 position:absolute; 
 bottom:-29px; 
 right:10px"
+}
+
+.success {
+    background-color: #00bfa5;
+}
+
+.sorry {
+    background-color: #e53935;
 }
 
 /* fix for no bullet points in editor */
