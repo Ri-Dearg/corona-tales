@@ -61,7 +61,7 @@ def contact():
     taglist = get_tags()
 
     if current_user.is_authenticated:
-        return render_template('about.html', taglist=taglist,
+        return render_template('contact.html', taglist=taglist,
                                user_id=current_user.user_id)
 
     return render_template('contact.html', taglist=taglist)
