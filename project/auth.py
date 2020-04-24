@@ -28,7 +28,7 @@ def signup_form():
                                                   ('password'),
                                                   method='sha256')}
     users.insert_one(account)
-    flash('Account created successfully! Please Login.', 'success')
+    flash('Please Login, account created.', 'success')
     return redirect(url_for('base.story_page'))
 
 
@@ -49,7 +49,7 @@ def login_form():
     log_user = User(userID, username, password, _id=user.get('_id'))
     login_user(log_user, remember=remember)
 
-    flash('Welcome, {{ username }}', 'success')
+    flash(f'Welcome, {username}', 'success')
 
     return redirect(url_for('base.profile'))
 
@@ -74,5 +74,27 @@ def delete_stories():
         flash('The password is incorrect', 'sorry')
         return redirect(url_for('base.profile'))
 
+    flash('your stories have been deleted.', 'success')
     mongo.db.stories.remove({'user_id': userID})
     return redirect(url_for('base.profile'))
+
+
+@auth.route('/delete_user', methods=['POST'])
+@login_required
+def delete_user():
+
+    password = request.form.get('password')
+    userID = current_user.user_id
+    user = users.find_one({"user_id": userID})
+
+    if not check_password_hash(user["password"], password):
+        flash('The password is incorrect', 'sorry')
+        return redirect(url_for('base.profile'))
+
+    mongo.db.stories.update_many({'user_id': userID},
+                                 {'$unset': {'user_id': ""}
+                                  })
+    mongo.db.users.remove({'user_id': userID})
+    flash('account deleted', 'success')
+
+    return redirect(url_for('base.story_page'))
