@@ -80,10 +80,11 @@ function initFab() {
                 hoverEnabled: false
             })
         };
-        if (indexTap != null) {
+        if (indexTap != null && !sessionStorage.Shown) {
             var instancesFeature = M.TapTarget.init(indexTap, {});
                 instancesFeature.open()
                 setTimeout(function(){ instancesFeature.close(); }, 4000)
+                sessionStorage.Shown = 1;
         }
     });
 }

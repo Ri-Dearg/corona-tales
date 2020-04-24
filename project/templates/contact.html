@@ -34,3 +34,21 @@
 </section>
 </div>
 {% endblock %}
+
+	{% block javascript %}
+	<script>
+		var tagList = {
+                {% for tag in taglist %}
+                    "{{ tag }}": null,
+                {% endfor %}
+            };
+            {% for story in story_list %}
+                showDate('{{ story._id }}', '{{ story.time[0] }}')
+            {% endfor %}
+            initTags(tagList, 'index');
+            initStoryModal('index');
+            formValid('index');
+            initFab()
+
+	</script>
+	{% endblock %}
