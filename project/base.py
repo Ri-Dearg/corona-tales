@@ -63,15 +63,10 @@ def profile():
     username = current_user.username
 
     # Change order of function when adding create story to profile page
-
-    if user_stories:
-        taglist = get_tags()
-
-        return render_template("profile.html", user_id=current_user.user_id,
-                               user_stories=user_stories, taglist=taglist,
-                               username=username)
+    taglist = get_tags()
 
     return render_template("profile.html", user_id=current_user.user_id,
+                           user_stories=user_stories, taglist=taglist,
                            username=username)
 
 
