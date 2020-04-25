@@ -58,11 +58,15 @@ def create_story():
 def search():
     taglist = get_tags()
 
-    results = stories.find({'$text':
-                            {'$search': request.args.get('search-text')}})
+    results = stories.find({'$text': {'$search':
+                                      f'{request.args.get("search-text")} \
+                             {request.args.get("search-country")}'
+                                      }},
+                           {'score': {'$meta': 'textScore'}}).sort(
+        [('score', {'$meta': 'textScore'})])
 
     for result in results:
-        print(results)
+        print(result)
 
     return render_template('search.html', results=results, taglist=taglist)
 
