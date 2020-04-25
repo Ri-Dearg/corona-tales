@@ -629,7 +629,15 @@
                     <form action="{{ url_for('base.search') }}" method="GET" id="form-search">
                         <div class="input-field validate col s12">
                             <i class="material-icons prefix">text</i>
-                            <input id="search-text" name="search-text" type="text" maxlength="100" placeholder="Search">
+                            <input id="search-text" name="search-text" type="text" minlength="5" maxlength="100" placeholder="Search">
+                        </div>
+                        <div class="input-field validate col s6">
+                            <i class="material-icons prefix">text</i>
+                            <input id="search-age-f" name="search-age-f" type="number" placeholder="From Age">
+                        </div>
+                                                <div class="input-field validate col s6">
+                            <i class="material-icons prefix">text</i>
+                            <input id="search-age-t" name="search-age-t" type="number" placeholder="To">
                         </div>
                         <div class="input-field validate col s12">
                             <i class="material-icons prefix">text</i>

@@ -58,12 +58,49 @@ def create_story():
 def search():
     taglist = get_tags()
 
-    results = stories.find({'$text': {'$search':
-                                      f'{request.args.get("search-text")} \
-                                        {request.args.get("search-country")}'
-                                      }},
-                           {'score': {'$meta': 'textScore'}}).sort(
-        [('score', {'$meta': 'textScore'})])
+    from_age = request.args.get('search-age-f')
+    to_age = request.args.get('search-age-t')
+
+    if from_age:
+        from_age = int(request.args.get('search-age-f'))
+
+    if to_age:
+        to_age = int(request.args.get('search-age-t'))
+
+    if from_age or to_age:
+        if from_age and to_age:
+            results = stories.find({
+                'age': {'$gt': from_age, '$lt': to_age},
+                '$text': {'$search': f'{request.args.get("search-text")} \
+                                       {request.args.get("search-country")}'}},
+                {'score': {'$meta': 'textScore'}}).sort(
+                [('score', {'$meta': 'textScore'})])
+        elif from_age and not to_age:
+            results = stories.find({
+                'age': {'$gt': from_age},
+                '$text': {'$search': f'{request.args.get("search-text")} \
+                                       {request.args.get("search-country")}'}},
+                {'score': {'$meta': 'textScore'}}).sort(
+                [('score', {'$meta': 'textScore'})])
+        elif to_age and not from_age:
+            results = stories.find({
+                'age': {'$lt': to_age},
+                '$text': {'$search': f'{request.args.get("search-text")} \
+                                       {request.args.get("search-country")}'}},
+                {'score': {'$meta': 'textScore'}}).sort(
+                [('score', {'$meta': 'textScore'})])
+
+    #  stories.find({ '$or': [ { 'age': { '$gt': from_age } }, { price: 10 } ] } )
+
+    def text_results():
+        results = stories.find({'$text': {'$search':
+                                          f'{request.args.get("search-text")} \
+                                            {request.args.get("search-country")}'
+                                          }},
+                               {'score': {'$meta': 'textScore'}}).sort(
+            [('score', {'$meta': 'textScore'})])
+
+        return results
 
     for result in results:
         print(result)
