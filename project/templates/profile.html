@@ -26,7 +26,7 @@
                                         <span id="date-small-{{ story._id }}" class="card-title col s12 m6 heading hide-on-med-and-up"></span>
                                         <div class="col s12">
                                             <p>By {{ story.name.title() }},
-                                                <br> Age {{ story.age }},
+                                                <br> Age {{ story.age|string }},
                                                 <br> In {{ story.country.title() }}.</p>
                                             <br>
                                             <p>{{ story.text|safe }}</p>
@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="input-field valclassate col s12 m6">
                                         <i class="material-icons prefix">cake</i>
-                                        <input id="age{{ story._id }}" name="age" type="number" min="1" max="120" value="{{ story.age }}" placeholder="Age" required>
+                                        <input id="age{{ story._id|string }}" name="age" type="number" min="1" max="120" value="{{ story.age }}" placeholder="Age" required>
                                     </div>
                                     <div class="input-field validate col s12 m6">
                                         <i class="material-icons prefix">flag</i>

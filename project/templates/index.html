@@ -41,7 +41,7 @@
 							<span id="date-small-{{ story._id }}"class="card-title col s12 m6 heading hide-on-med-and-up"></span>
 							<div class="col s12">
 								<p>By {{ story.name.title() }},<br>
-                                    Age {{ story.age }}, <br>
+                                    Age {{ story.age|string }}, <br>
                                     In {{ story.country.title() }}.</p><br>
                                     <p>{{ story.text|safe }}</p> <br>
                                 </div>

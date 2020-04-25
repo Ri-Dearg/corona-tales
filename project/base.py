@@ -42,7 +42,7 @@ def create_story():
     flash('your story has been posted!', 'success')
     stories.insert_one({'user_id': request.form.get('user_id'),
                         'name': request.form.get('name'),
-                        'age': request.form.get('age'),
+                        'age': int(request.form.get('age')),
                         'country': request.form.get('country'),
                         'story_language': request.form.get('language'),
                         'color': request.form.get('color'),
@@ -60,7 +60,7 @@ def search():
 
     results = stories.find({'$text': {'$search':
                                       f'{request.args.get("search-text")} \
-                             {request.args.get("search-country")}'
+                                        {request.args.get("search-country")}'
                                       }},
                            {'score': {'$meta': 'textScore'}}).sort(
         [('score', {'$meta': 'textScore'})])
