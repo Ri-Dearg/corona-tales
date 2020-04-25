@@ -1,7 +1,7 @@
 from flask import (Blueprint, current_app, render_template, url_for, request,
                    redirect, flash)
 from flask_login import login_required, current_user
-from .extensions import mongo
+from .extensions import mongo  # ASCENDING
 from bson.objectid import ObjectId
 
 base = Blueprint('base', __name__,
@@ -41,6 +41,19 @@ def create_story():
     flash('your story has been posted!', 'success')
     stories.insert_one(request.form.to_dict(flat=False))
     return redirect(request.referrer)
+
+
+@base.route('/search', methods=['GET'])
+def search():
+    results = stories.find(
+        {'$text': {'$search': request.args.get('search-text')}})
+
+    print(results)
+
+    for result in results:
+        print(result)
+
+    return render_template('search.html', results=results)
 
 
 @base.route('/about')
