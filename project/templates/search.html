@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="container">
+
+	<section class="section white z-depth-3">
+{% set _stub = results.rewind() %}
+
 		{% for result in results %}
         <hr class="{{ result.color[0] }}">
 		<br>
@@ -25,5 +30,17 @@
 				</article>
 			</div>
 		</div>
+
+
+        {% else %}
+        <div class="row">
+            <div class="col s12 center-align heading">
+                <h4>No Results for the search.</h4><br>
+                <h5>Have another try!</h5>
+            </div>
+        </div>
+
 		{% endfor %}
+        </section>
+</div>
 {% endblock %}
