@@ -1,7 +1,7 @@
 from flask import (Blueprint, current_app, render_template, url_for, request,
                    redirect, flash)
 from flask_login import login_required, current_user
-from .extensions import mongo  # ASCENDING
+from .extensions import mongo
 from bson.objectid import ObjectId
 
 base = Blueprint('base', __name__,
@@ -58,8 +58,11 @@ def create_story():
 def search():
     taglist = get_tags()
 
+    base_text = request.args.get("search-text")
+    country = request.args.get("search-country")
     from_age = request.args.get('search-age-f')
     to_age = request.args.get('search-age-t')
+    story_lang = request.args.get("search-language")
 
     if from_age:
         from_age = int(request.args.get('search-age-f'))
@@ -71,41 +74,46 @@ def search():
         if from_age and to_age:
             results = stories.find({
                 'age': {'$gt': from_age, '$lt': to_age},
-                '$text': {'$search': f'{request.args.get("search-text")} \
-                                       {request.args.get("search-country")}'}},
+                '$text': {'$search': f'{base_text}\
+                                       {country}\
+                                       {story_lang}'}},
                 {'score': {'$meta': 'textScore'}}).sort(
                 [('score', {'$meta': 'textScore'})])
         elif from_age and not to_age:
             results = stories.find({
                 'age': {'$gt': from_age},
-                '$text': {'$search': f'{request.args.get("search-text")} \
-                                       {request.args.get("search-country")}'}},
+                '$text': {'$search': f'{base_text} \
+                                       {country}\
+                                       {story_lang}'}},
                 {'score': {'$meta': 'textScore'}}).sort(
                 [('score', {'$meta': 'textScore'})])
         elif to_age and not from_age:
             results = stories.find({
                 'age': {'$lt': to_age},
-                '$text': {'$search': f'{request.args.get("search-text")} \
-                                       {request.args.get("search-country")}'}},
+                '$text': {'$search': f'{base_text} \
+                                       {country}\
+                                       {story_lang}'}},
                 {'score': {'$meta': 'textScore'}}).sort(
                 [('score', {'$meta': 'textScore'})])
-
-    #  stories.find({ '$or': [ { 'age': { '$gt': from_age } }, { price: 10 } ] } )
-
-    def text_results():
-        results = stories.find({'$text': {'$search':
-                                          f'{request.args.get("search-text")} \
-                                            {request.args.get("search-country")}'
-                                          }},
-                               {'score': {'$meta': 'textScore'}}).sort(
+    else:
+        results = stories.find({
+            '$text': {'$search': f'{base_text} \
+                                {country}\
+                                {story_lang}'}},
+            {'score': {'$meta': 'textScore'}}).sort(
             [('score', {'$meta': 'textScore'})])
 
-        return results
+    final_results = []
 
     for result in results:
-        print(result)
+        if story_lang:
+            if result['story_language'] == story_lang:
+                final_results.append(result)
+        else:
+            final_results.append(result)
 
-    return render_template('search.html', results=results, taglist=taglist)
+    return render_template('search.html', final_results=final_results,
+                           taglist=taglist)
 
 
 @base.route('/about')
