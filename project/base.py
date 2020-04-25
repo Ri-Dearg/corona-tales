@@ -39,21 +39,36 @@ def story_page():
 @base.route('/create_story', methods=['POST'])
 def create_story():
     flash('your story has been posted!', 'success')
-    stories.insert_one(request.form.to_dict(flat=False))
+    stories.insert_one({"user_id": request.form.get('user_id'),
+                        "name": request.form.get('name'),
+                        'age': request.form.get('age'),
+                        'country': request.form.get('country'),
+                        'language': request.form.get('language'),
+                        'color': request.form.get('color'),
+                        'title': request.form.get('title'),
+                        'text': request.form.get('text'),
+                        'time': request.form.get('time'),
+                        'featured': False,
+                        'tags': request.form.getlist('tags')})
     return redirect(request.referrer)
 
 
 @base.route('/search', methods=['GET'])
 def search():
+    """
+        taglist = get_tags()
 
-    taglist = get_tags()
+        results = stories.find({'$or':
+                                [{'country.0': request.args.get('search-country')},
+                                {'$text':
+                                {'$search': request.args.get('search-text')}}
+                                ]
+                                })
 
-    results = stories.find(
-        {'$text': {'$search': request.args.get('search-text')}},
-        {'score': {'$meta': 'textScore'}}).sort(
-            [('score', {'$meta': 'textScore'})])
-
-    return render_template('search.html', results=results, taglist=taglist)
+        for result in results:
+            print(results)
+    """
+    return render_template('search.html') # results=results, taglist=taglist
 
 
 @base.route('/about')

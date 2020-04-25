@@ -6,21 +6,21 @@
 {% set _stub = results.rewind() %}
 
 		{% for result in results %}
-        <hr class="{{ result.color[0] }}">
+        <hr class="{{ result.color }}">
 		<br>
 		<div class="row">
 			<div class="col s12">
-				<article class="card {{ result.color[0] }} accent-1 hoverable">
+				<article class="card {{ result.color }} accent-1 hoverable">
 					<div class="card-content no-pad-bot">
 						<div class="row no-m-bot">
-							<span class="card-title col s12 m6 heading">{{ result.title[0] }}</span>
+							<span class="card-title col s12 m6 heading">{{ result.title }}</span>
 							<span id="date-med-{{ result._id }}" class="card-title col s12 m6 heading hide-on-small-only right-align"></span>
 							<span id="date-small-{{ result._id }}"class="card-title col s12 m6 heading hide-on-med-and-up"></span>
 							<div class="col s12">
-								<p>By {{ result.name[0].title() }},<br>
-                                    Age {{ result.age[0] }}, <br>
-                                    In {{ result.country[0].title() }}.</p><br>
-                                    <p>{{ result.text[0]|safe }}</p> <br>
+								<p>By {{ result.name.title() }},<br>
+                                    Age {{ result.age }}, <br>
+                                    In {{ result.country.title() }}.</p><br>
+                                    <p>{{ result.text|safe }}</p> <br>
                                 </div>
 									<div class="card-action col s12">
 										<p>Tags: {% for tag in result.tags %}{{ tag }}, {% endfor %}</p>

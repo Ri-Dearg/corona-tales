@@ -42,7 +42,7 @@ function initStoryModal(id, content, tagList) {
             },
             onOpenEnd: function () {
                 if (content !== undefined) {
-                    newEditor.setData(content[0])
+                    newEditor.setData(content)
                 }
             },
             onCloseEnd: function () {

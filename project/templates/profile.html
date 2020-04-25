@@ -18,18 +18,18 @@
                     <!--   Story Section   -->
                     <div class="row">
                         <div class="col s12">
-                            <article class="card {{ story.color[0] }} accent-1 hoverable">
+                            <article class="card {{ story.color }} accent-1 hoverable">
                                 <div class="card-content no-pad-bot">
                                     <div class="row no-m-bot">
-                                        <span class="card-title col s12 m6 heading">{{ story.title[0] }}</span>
+                                        <span class="card-title col s12 m6 heading">{{ story.title }}</span>
                                         <span id="date-med-{{ story._id }}" class="card-title col s12 m6 heading hide-on-small-only right-align"></span>
                                         <span id="date-small-{{ story._id }}" class="card-title col s12 m6 heading hide-on-med-and-up"></span>
                                         <div class="col s12">
-                                            <p>By {{ story.name[0].title() }},
-                                                <br> Age {{ story.age[0] }},
-                                                <br> In {{ story.country[0].title() }}.</p>
+                                            <p>By {{ story.name.title() }},
+                                                <br> Age {{ story.age }},
+                                                <br> In {{ story.country.title() }}.</p>
                                             <br>
-                                            <p>{{ story.text[0]|safe }}</p>
+                                            <p>{{ story.text|safe }}</p>
                                             <br>
                                         </div>
                                         <div id="button{{ story._id }}" class="fixed-action-btn no-autoinit horizontal-button">
@@ -62,16 +62,16 @@
                                 <form action="{{ url_for('base.edit_story', story_id=story._id) }}" method="POST" class="col s12 edit-story" id="form{{ story._id }}">
                                     <div class="input-field validate col s12 m6">
                                         <i class="material-icons prefix">face</i>
-                                        <input id="name{{ story._id }}" name="name" type="text" value="{{ story.name[0] }}" placeholder="Name" required>
+                                        <input id="name{{ story._id }}" name="name" type="text" value="{{ story.name }}" placeholder="Name" required>
                                     </div>
                                     <div class="input-field valclassate col s12 m6">
                                         <i class="material-icons prefix">cake</i>
-                                        <input id="age{{ story._id }}" name="age" type="number" min="1" max="120" value="{{ story.age[0] }}" placeholder="Age" required>
+                                        <input id="age{{ story._id }}" name="age" type="number" min="1" max="120" value="{{ story.age }}" placeholder="Age" required>
                                     </div>
                                     <div class="input-field validate col s12 m6">
                                         <i class="material-icons prefix">flag</i>
                                         <select id="country{{ story._id }}" name="country" required>
-                                            <option value="{{ story.country[0] }}" selected>{{ story.country[0]|title }}</option>
+                                            <option value="{{ story.country }}" selected>{{ story.country|title }}</option>
                                             <option value="" disabled>Country</option>
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Åland Islands">Åland Islands</option>
@@ -323,7 +323,7 @@
                                         <i class="material-icons prefix">language</i>
                                         <select id="language-choice{{ story._id }}" name="language" required>
                                             <option value="" disabled>Story language</option>
-                                            <option value="{{ story.language[0] }}" selected>{{ story.language[0]|title }}</option>
+                                            <option value="{{ story.language }}" selected>{{ story.language|title }}</option>
                                             <option value="Afaan Oromoo">Afaan Oromoo</option>
                                             <option value="Afaraf">Afaraf</option>
                                             <option value="Afrikaans">Afrikaans</option>
@@ -512,7 +512,7 @@
                                         <i class="material-icons prefix">palette</i>
                                         <select class="color" name="color" required>
                                             <option value="" disabled>Color</option>
-                                            <option value="{{ story.color[0] }}" selected>{{ story.color[0]|title }}</option>
+                                            <option value="{{ story.color }}" selected>{{ story.color|title }}</option>
                                             <option value="red">Red</option>
                                             <option value="deep-orange">Deep-Orange</option>
                                             <option value="orange">Orange</option>
@@ -533,7 +533,7 @@
                                     </div>
                                     <div class="input-field validate col s12 m6 pull-m6">
                                         <i class="material-icons prefix">import_contacts</i>
-                                        <input id="title{{ story._id }}" name="title" type="text" value="{{ story.title[0] }}" placeholder="Story Title" required>
+                                        <input id="title{{ story._id }}" name="title" type="text" value="{{ story.title }}" placeholder="Story Title" required>
                                     </div>
                                     <div class="col s12">
                                         <textarea id="editor{{ story._id }}" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
@@ -693,9 +693,9 @@
         }
 
         {% for story in user_stories %}
-                showDate('{{ story._id }}','{{ story.time[0] }}')
+                showDate('{{ story._id }}','{{ story.time }}')
                 initTags(tagList, '{{ story._id }}')
-                initStoryModal('{{ story._id }}', {{ story.text|safe }}, {{ story.tags|safe }})
+                initStoryModal('{{ story._id }}', '{{ story.text|safe }}', {{ story.tags|safe }})
                 formValid('{{ story._id }}');
         {% endfor %}            
 </script>
