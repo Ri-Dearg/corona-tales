@@ -15,7 +15,7 @@ def get_tags():
 
     taglist = current_app.config['taglist']
 
-    for story in story_list:
+    for story in stories.find():
         tags = story["tags"]
         for tag in tags:
             taglist.add(tag)
@@ -38,12 +38,13 @@ def story_page():
 
 @base.route('/create_story', methods=['POST'])
 def create_story():
+
     flash('your story has been posted!', 'success')
-    stories.insert_one({"user_id": request.form.get('user_id'),
-                        "name": request.form.get('name'),
+    stories.insert_one({'user_id': request.form.get('user_id'),
+                        'name': request.form.get('name'),
                         'age': request.form.get('age'),
                         'country': request.form.get('country'),
-                        'language': request.form.get('language'),
+                        'story_language': request.form.get('language'),
                         'color': request.form.get('color'),
                         'title': request.form.get('title'),
                         'text': request.form.get('text'),
@@ -55,20 +56,15 @@ def create_story():
 
 @base.route('/search', methods=['GET'])
 def search():
-    """
-        taglist = get_tags()
+    taglist = get_tags()
 
-        results = stories.find({'$or':
-                                [{'country.0': request.args.get('search-country')},
-                                {'$text':
-                                {'$search': request.args.get('search-text')}}
-                                ]
-                                })
+    results = stories.find({'$text':
+                            {'$search': request.args.get('search-text')}})
 
-        for result in results:
-            print(results)
-    """
-    return render_template('search.html') # results=results, taglist=taglist
+    for result in results:
+        print(results)
+
+    return render_template('search.html', results=results, taglist=taglist)
 
 
 @base.route('/about')
@@ -117,15 +113,15 @@ def edit_story(story_id):
     stories.update({'_id': ObjectId(story_id)},
                    {'$set':
                     {
-                        "name.0": request.form.get('name'),
-                        'age.0': request.form.get('age'),
-                        'country.0': request.form.get('country'),
-                        'language.0': request.form.get('language'),
+                        'name': request.form.get('name'),
+                        'age': request.form.get('age'),
+                        'country': request.form.get('country'),
+                        'story_language': request.form.get('language'),
                         'tags': request.form.getlist('tags'),
-                        'color.0': request.form.get('color'),
-                        'title.0': request.form.get('title'),
-                        'text.0': request.form.get('text'),
-                        'edit_time.0': request.form.get('edit-time'),
+                        'color': request.form.get('color'),
+                        'title': request.form.get('title'),
+                        'text': request.form.get('text'),
+                        'edit_time': request.form.get('edit-time'),
                     }
                     })
 
