@@ -49,10 +49,9 @@ def search():
     taglist = get_tags()
 
     results = stories.find(
-        {'$text': {'$search': request.args.get('search-text')}})
-
-    for result in results:
-        print(result)
+        {'$text': {'$search': request.args.get('search-text')}},
+        {'score': {'$meta': 'textScore'}}).sort(
+            [('score', {'$meta': 'textScore'})])
 
     return render_template('search.html', results=results, taglist=taglist)
 
