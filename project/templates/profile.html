@@ -18,7 +18,7 @@
                     <!--   Story Section   -->
                     <div class="row">
                         <div class="col s12">
-                            <article class="card {{ story.color }} accent-1 hoverable">
+                            <article class="card {{ story.color }} lighten-2 hoverable">
                                 <div class="card-content no-pad-bot">
                                     <div class="row no-m-bot">
                                         <span class="card-title col s12 m6 heading">{{ story.title }}</span>
@@ -33,15 +33,15 @@
                                             <br>
                                         </div>
                                         <div id="button{{ story._id }}" class="fixed-action-btn no-autoinit horizontal-button">
-                                            <a href="#" class="btn-floating btn-large red darken-1 tooltipped" data-position="bottom" data-tooltip="Menu">
+                                            <a href="#" class="btn-floating btn-large indigo darken-1 tooltipped" data-position="bottom" data-tooltip="Menu">
                                                 <i class="large material-icons">menu</i>
                                             </a>
                                             <ul>
                                                 <li>
-                                                    <a href="{{ url_for('base.delete_story', story_id=story._id) }}" class="btn-floating purple darken-1 tooltipped" data-position="bottom" data-tooltip="Delete Story"><i class="material-icons">highlight_off</i></a>
+                                                    <a href="{{ url_for('base.delete_story', story_id=story._id) }}" class="btn-floating red darken-1 tooltipped" data-position="bottom" data-tooltip="Delete Story"><i class="material-icons">highlight_off</i></a>
                                                 </li>
                                                 <li>
-                                                    <a href="#modal{{ story._id }}" class="btn-floating orange darken-1 modal-trigger tooltipped" data-position="bottom" data-tooltip="Edit Story"><i class="material-icons">mode_edit</i></a>
+                                                    <a href="#modal{{ story._id }}" class="btn-floating purple lighten-1 modal-trigger tooltipped" data-position="bottom" data-tooltip="Edit Story"><i class="material-icons">mode_edit</i></a>
                                                 </li>
                                             </ul>
                                         </div>

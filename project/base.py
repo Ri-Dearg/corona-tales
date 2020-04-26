@@ -74,7 +74,7 @@ def search():
         if from_age and to_age:
             results = stories.find({
                 'age': {'$gt': from_age, '$lt': to_age},
-                '$text': {'$search': f'{base_text}\
+                '$text': {'$search': f'{base_text} \
                                        {country}\
                                        {story_lang}'}},
                 {'score': {'$meta': 'textScore'}}).sort(

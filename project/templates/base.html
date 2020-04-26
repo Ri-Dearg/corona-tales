@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="light-blue lighten-5">
+<body class="teal lighten-5">
     <div class="navbar-fixed">
         <nav class="navbar-fixed teal accent-4">
             <div class="nav-wrapper">
@@ -62,33 +62,33 @@
     {% endblock %}
 
     	<div class="fixed-action-btn no-autoinit" id="buttonindex">
-		<a href="#" class="btn-floating btn-large red darken-1 tooltipped" data-position="left" data-tooltip="Menu"
+		<a href="#" class="btn-floating btn-large pink accent-2 tooltipped" data-position="left" data-tooltip="Menu"
 			id="fab-index">
 			<i class="large material-icons">menu</i>
 		</a>
 		<ul>
-			<li><a href="#modal-help" class="btn-floating blue darken-1 modal-trigger tooltipped" data-position="left"
+			<li><a href="#modal-help" class="btn-floating orange lighten-1 modal-trigger tooltipped" data-position="left"
 					data-tooltip="Help"><i class="material-icons">help</i></a></li>
 			<li>
                 {% if request.url_rule.endpoint == "base.profile" %}
-                    <a href="{{ url_for('base.story_page') }}" class="btn-floating green darken-1 tooltipped"
+                    <a href="{{ url_for('base.story_page') }}" class="btn-floating teal accent-4 tooltipped"
 					data-position="left" data-tooltip="Home"><i class="material-icons">home</i></a>
                 {% else %}
 
 				{% if current_user.is_authenticated %}
-				<a href="{{ url_for('base.profile') }}" class="btn-floating green darken-1 tooltipped"
+				<a href="{{ url_for('base.profile') }}" class="btn-floating teal accent-4 tooltipped"
 					data-position="left" data-tooltip="Profile"><i class="material-icons">account_circle</i></a>
 					{% endif %}
 					{% if not current_user.is_authenticated %}
-					<a href="#modal-signup-login" class="btn-floating green darken-1 tooltipped modal-trigger"
+					<a href="#modal-signup-login" class="btn-floating teal accent-4 tooltipped modal-trigger"
 						data-position="left" data-tooltip="Signup / Login"><i class="material-icons">account_circle</i></a>
                     {% endif %}
 
                 {% endif %}
 			</li>
-			<li><a href="#modal-search" class="btn-floating yellow darken-1 tooltipped modal-trigger" data-position="left"
+			<li><a href="#modal-search" class="btn-floating light-blue accent-2 tooltipped modal-trigger" data-position="left"
 					data-tooltip="Search"><i class="material-icons">search</i></a></li>
-			<li><a href="#modalindex" class="btn-floating orange darken-1 modal-trigger tooltipped" data-position="left"
+			<li><a href="#modalindex" class="btn-floating purple lighten-1 modal-trigger tooltipped" data-position="left"
 					data-tooltip="Post a Story"><i class="material-icons">mode_edit</i></a></li>
 		</ul>
 	</div>
@@ -614,7 +614,7 @@
 						</div>
 		</div>
 						<div class="modal-footer">
-							<button id="post-story" form="formindex" class="btn waves-effect waves-light right" type="submit">Post
+							<button id="post-story" form="formindex" class="btn waves-effect purple lighten-1 waves-light right" type="submit">Post
 						                            <i class="material-icons right">post_add</i>
 						                        </button>
 						</div>
@@ -1093,7 +1093,7 @@
                 <div class="modal-footer">
                     <div class="row"></div>
                         <div class="col s12">
-                            <button form="form-search" id="button-search" class="btn waves-effect waves-light right teal accent-4" type="submit">Search
+                            <button form="form-search" id="button-search" class="btn waves-effect waves-light right light-blue accent-2" type="submit">Search
                                 <i class="material-icons right">search</i>
                             </button>
                         </div>
