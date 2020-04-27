@@ -123,7 +123,6 @@ def search():
     if request.args.getlist("tags"):
         tag_search = request.args.getlist("tags")
         tag_string = ' '.join(tag_search)
-        print(tag_search, tag_string)
 
     if request.args.get('search-age-f'):
         from_age = int(request.args.get('search-age-f'))
@@ -137,7 +136,7 @@ def search():
 
     if request.args.get('search-date-t'):
         to_date = int(calendar.timegm(time.strptime(
-            request.args.get('search-date-t'), "%b %d, %Y")))*1000
+            request.args.get('search-date-t'), "%b %d, %Y")))*1000 + 86399999
 
     if any(v is not None for v in [from_age, to_age, from_date, to_date]):
         results = ranges(from_age, to_age, from_date, to_date, base_text,

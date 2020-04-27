@@ -602,7 +602,7 @@
 						<div class="col s12">
 							<textarea id="editor-index" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
 						</div>
-						{% if current_user.is_authenticated %}
+ 						{% if current_user.is_authenticated %}
 						<input type="hidden" id="user-id" name="user_id" value="{{ user_id }}">
                         {% endif %}
                         						</form>
@@ -622,31 +622,30 @@
     
     <div id="modal-search" class="modal">
         <div class="modal-content">
-            <div class="container">
+            <h5>Find a story.</h5>
+			<p class="mini-text">All fields are optional<p>
                 <div class="row">
                     <form action="{{ url_for('base.search') }}" method="GET" id="form-search">
                         <div class="input-field validate col s12">
-                            <i class="material-icons prefix">text</i>
+                            <i class="material-icons prefix">title</i>
                             <input id="search-text" name="search-text" type="text" minlength="3" maxlength="100" placeholder="Search">
                         </div>
                         <div class="input-field validate col s6">
-                            <i class="material-icons prefix">text</i>
-                            <input id="search-age-f" name="search-age-f" type="number" placeholder="From Age">
+                            <i class="material-icons prefix">cake</i>
+                            <input id="search-age-f" name="search-age-f" type="number" placeholder="From Age" min="1" max="120">
                         </div>
                                                 <div class="input-field validate col s6">
-                            <i class="material-icons prefix">text</i>
-                            <input id="search-age-t" name="search-age-t" type="number" placeholder="To">
+                            <input id="search-age-t" name="search-age-t" type="number" placeholder="To" min="1" max="120">
                         </div>
                                                 <div class="input-field validate col s6">
-                            <i class="material-icons prefix">text</i>
+                            <i class="material-icons prefix">today</i>
                             <input id="search-date-f" name="search-date-f" type="text" placeholder="From Date" class="datepicker">
                         </div>
                                                 <div class="input-field validate col s6">
-                            <i class="material-icons prefix">text</i>
                             <input id="search-date-t" name="search-date-t" type="text" placeholder="To" class="datepicker">
                         </div>
-                        <div class="input-field validate col s12">
-                            <i class="material-icons prefix">text</i>
+                        <div class="input-field validate col s12 m6">
+                            <i class="material-icons prefix">flag</i>
                             <select id="search-country" name="search-country">       
                             <option value="" disabled selected>Country</option>
                             <option value="Canada">Canada</option>
