@@ -115,7 +115,7 @@
 			<h5>Write your story.</h5>
 			<p class="mini-text">Please fill all fields.</p>
 			<div class="row">
-				<form action="{{ url_for('base.create_story') }}" method="POST" class="col s12" id="formindex">
+				<form action="{{ url_for('base.create_story') }}" method="POST" class="col s12" id="form-index">
 					<div class="input-field validate col s12 m6">
 						<i class="material-icons prefix">face</i>
 						<input id="name" name="name" type="text" placeholder="Name" required>
@@ -1096,6 +1096,8 @@
 				                            </select>
 						</div>
                     </form>
+                        <div id="chips-search" class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">
+						</div>
                 </div>
                 <div class="modal-footer">
                     <div class="row"></div>
@@ -1199,7 +1201,9 @@
                 showDate('{{ story._id }}', '{{ story.time }}')
             {% endfor %}
             initTags(tagList, 'index');
+            initTags(tagList, 'search');
             initStoryModal('index');
+            initStoryModal('search')
             formValid('index');
             initFab()
 	</script>

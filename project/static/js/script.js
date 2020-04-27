@@ -20,16 +20,18 @@ function initStoryModal(id, content, tagList) {
         var modals = document.querySelector(`#modal-${id}`);
         var instances = M.Modal.init(modals, {
             onOpenStart: function () {
-                ClassicEditor
-                    .create(document.querySelector(`#editor-${id}`), {
-                        removePlugins: ['Image', 'EasyImage', 'ImageUpload', 'Link', 'MediaEmbed', 'Heading']
-                    })
-                    .then(editor => {
-                        newEditor = editor;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
+                if (id !== 'search') {
+                    ClassicEditor
+                        .create(document.querySelector(`#editor-${id}`), {
+                            removePlugins: ['Image', 'EasyImage', 'ImageUpload', 'Link', 'MediaEmbed', 'Heading']
+                        })
+                        .then(editor => {
+                            newEditor = editor;
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                }
 
                 if (tagList !== undefined) {
                     var instance = M.Chips.getInstance(document.querySelector(`#chips-${id}`))
@@ -41,12 +43,16 @@ function initStoryModal(id, content, tagList) {
                 }
             },
             onOpenEnd: function () {
-                if (content !== undefined) {
-                    newEditor.setData(content)
+                if (id !== 'search') {
+                    if (content !== undefined) {
+                        newEditor.setData(content)
+                    }
                 }
             },
             onCloseEnd: function () {
-                newEditor.destroy()
+                if (id !== 'search') {
+                    newEditor.destroy()
+                }
             }
         });
     });
@@ -98,11 +104,13 @@ function formValid(formId) {
             var tagDict = M.Chips.getInstance($(`#chips-${formId}`)).chipsData
             var tagDictLength = Object.keys((M.Chips.getInstance($(`#chips-${formId}`)).chipsData)).length
             var editorData = newEditor.getData().length
-
-            if (tagDictLength === 0 || editorData === 0) {
-                event.preventDefault();
-                alert('Please fill Tags and Stories');
-                return false
+                            
+            if (fromId !== 'search') {
+                if (tagDictLength === 0 || editorData === 0) {
+                    event.preventDefault();
+                    alert('Please fill Tags and Stories');
+                    return false
+                }
             }
 
             else {

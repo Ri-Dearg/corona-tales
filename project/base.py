@@ -102,6 +102,8 @@ def search():
     base_text = None
     country = None
     story_lang = None
+    tag_search = None
+
     from_age = None
     to_age = None
     from_date = None
@@ -111,10 +113,13 @@ def search():
         base_text = request.args.get("search-text")
 
     if request.args.get("search-country"):
-        base_text = request.args.get("search-country")
+        country = request.args.get("search-country")
 
     if request.args.get("search-language"):
         story_lang = request.args.get("search-language")
+
+    if request.args.get("tags"):
+        tag_search = request.args.get("tags")
 
     if request.args.get('search-age-f'):
         from_age = int(request.args.get('search-age-f'))
@@ -135,6 +140,7 @@ def search():
                          country, story_lang)
 
     else:
+        print(country)
         results = stories.find({
             '$text': {'$search': f'{base_text} \
                                 {country}\
@@ -146,9 +152,19 @@ def search():
 
     for result in results:
 
-        if story_lang:
-            if result['story_language'] == story_lang:
+        if any(v is not None for v in [country, story_lang]):
+            if country is not None:
+                if story_lang is not None:
+                    if result['country'] == country and \
+                       result['story_language'] == story_lang:
+                        final_results.append(result)
+
+                elif result['country'] == country:
+                    final_results.append(result)
+
+            elif result['story_language'] == story_lang:
                 final_results.append(result)
+
         else:
             final_results.append(result)
 
