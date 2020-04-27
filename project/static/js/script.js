@@ -111,7 +111,7 @@ function formValid(formId) {
                     return false
                 }
             }
-            
+
             addTags(formId, tagDictLength, tagDict)
         });
     });
@@ -128,11 +128,15 @@ function addTags(formId, arrayLength, array) {
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
 
+    var sideNav = document.querySelectorAll('.sidenav');
+    var nav = M.Sidenav.init(sideNav, {
+        edge:'right'
+    });
+
     var datepicker = document.querySelectorAll('.datepicker');
     var dateChoose = M.Datepicker.init(datepicker, {
         container: 'body'
     });
-
 
     var singupLogin = document.querySelector('#modal-signup-login');
     var modalTab = M.Modal.init(singupLogin, {
