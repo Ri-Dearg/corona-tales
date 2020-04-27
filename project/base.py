@@ -62,7 +62,7 @@ def create_story():
 def search():
 
     def ranges(from_age, to_age, from_date, to_date, base_text, country,
-               story_lang):
+               story_lang, tag_string):
 
         if from_age is None:
             from_age = 0
@@ -78,14 +78,15 @@ def search():
 
         print(from_age, to_age, from_date, to_date)
 
-        if any(v is not None for v in [base_text, country, story_lang]):
+        if any(v is not None for v in [base_text, country, tag_string]):
 
             results = stories.find({
                 'time': {'$gte': from_date, '$lte': to_date},
                 'age': {'$gte': from_age, '$lte': to_age},
                 '$text': {'$search': f'{base_text} \
                                     {country}\
-                                    {story_lang}'}},
+                                    {story_lang}\
+                                    {tag_string}'}},
                 {'score': {'$meta': 'textScore'}}).sort(
                 [('score', {'$meta': 'textScore'})])
 
@@ -103,6 +104,7 @@ def search():
     country = None
     story_lang = None
     tag_search = None
+    tag_string = None
 
     from_age = None
     to_age = None
@@ -118,8 +120,10 @@ def search():
     if request.args.get("search-language"):
         story_lang = request.args.get("search-language")
 
-    if request.args.get("tags"):
-        tag_search = request.args.get("tags")
+    if request.args.getlist("tags"):
+        tag_search = request.args.getlist("tags")
+        tag_string = ' '.join(tag_search)
+        print(tag_search, tag_string)
 
     if request.args.get('search-age-f'):
         from_age = int(request.args.get('search-age-f'))
@@ -137,14 +141,14 @@ def search():
 
     if any(v is not None for v in [from_age, to_age, from_date, to_date]):
         results = ranges(from_age, to_age, from_date, to_date, base_text,
-                         country, story_lang)
+                         country, story_lang, tag_string)
 
     else:
-        print(country)
         results = stories.find({
             '$text': {'$search': f'{base_text} \
                                 {country}\
-                                {story_lang}'}},
+                                {story_lang}\
+                                {tag_string}'}},
             {'score': {'$meta': 'textScore'}}).sort(
             [('score', {'$meta': 'textScore'})])
 

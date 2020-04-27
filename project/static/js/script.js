@@ -103,9 +103,8 @@ function formValid(formId) {
         $(`#form-${formId}`).on('submit', function (event) {
             var tagDict = M.Chips.getInstance($(`#chips-${formId}`)).chipsData
             var tagDictLength = Object.keys((M.Chips.getInstance($(`#chips-${formId}`)).chipsData)).length
-            var editorData = newEditor.getData().length
-                            
-            if (fromId !== 'search') {
+            if (formId !== 'search') {
+                var editorData = newEditor.getData().length
                 if (tagDictLength === 0 || editorData === 0) {
                     event.preventDefault();
                     alert('Please fill Tags and Stories');
