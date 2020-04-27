@@ -111,10 +111,8 @@ function formValid(formId) {
                     return false
                 }
             }
-
-            else {
-                addTags(formId, tagDictLength, tagDict)
-            }
+            
+            addTags(formId, tagDictLength, tagDict)
         });
     });
 }
