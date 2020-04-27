@@ -61,11 +61,11 @@
     {% block content %}
     {% endblock %}
 
-    	<div class="fixed-action-btn no-autoinit" id="buttonindex">
-		<a href="#" class="btn-floating btn-large pink accent-2 tooltipped" data-position="left" data-tooltip="Menu"
+    	<div class="fixed-action-btn no-autoinit" id="button-index">
+		<div class="btn-floating btn-large pink accent-2 tooltipped" data-position="left" data-tooltip="Menu"
 			id="fab-index">
 			<i class="large material-icons">menu</i>
-		</a>
+		</div>
 		<ul>
 			<li><a href="#modal-help" class="btn-floating orange lighten-1 modal-trigger tooltipped" data-position="left"
 					data-tooltip="Help"><i class="material-icons">help</i></a></li>
@@ -600,7 +600,7 @@
 							<input id="title" name="title" type="text" placeholder="Story Title" required>
 						</div>
 						<div class="col s12">
-							<textarea id="editorindex" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
+							<textarea id="editor-index" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
 						</div>
 						<input type="hidden" id="featured" name="featured" value="false">
 						{% if current_user.is_authenticated %}
@@ -609,11 +609,11 @@
                         						</form>
                         </div>
 
-						<div id="chipsindex" class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">
+						<div id="chips-index" class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">
 						</div>
 		</div>
 						<div class="modal-footer">
-							<button id="post-story" form="formindex" class="btn waves-effect purple lighten-1 waves-light right" type="submit">Post
+							<button id="post-story" form="form-index" class="btn waves-effect purple lighten-1 waves-light right" type="submit">Post
 						                            <i class="material-icons right">post_add</i>
 						                        </button>
 						</div>

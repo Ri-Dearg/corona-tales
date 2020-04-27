@@ -1,7 +1,7 @@
 function initTags(tagCreate, id) {
     document.addEventListener('DOMContentLoaded', function () {
 
-        var chips = document.querySelectorAll(`#chips${id}`);
+        var chips = document.querySelectorAll(`#chips-${id}`);
 
         var instances = M.Chips.init(chips, {
             limit: 15,
@@ -21,7 +21,7 @@ function initStoryModal(id, content, tagList) {
         var instances = M.Modal.init(modals, {
             onOpenStart: function () {
                 ClassicEditor
-                    .create(document.querySelector(`#editor${id}`), {
+                    .create(document.querySelector(`#editor-${id}`), {
                         removePlugins: ['Image', 'EasyImage', 'ImageUpload', 'Link', 'MediaEmbed', 'Heading']
                     })
                     .then(editor => {
@@ -32,7 +32,7 @@ function initStoryModal(id, content, tagList) {
                     });
 
                 if (tagList !== undefined) {
-                    var instance = M.Chips.getInstance(document.querySelector(`#chips${id}`))
+                    var instance = M.Chips.getInstance(document.querySelector(`#chips-${id}`))
                     for (i = 0; i < tagList.length; i++) {
                         instance.addChip({
                             tag: tagList[i]
@@ -66,7 +66,7 @@ function showDate(id, timeStamp) {
 function initFab() {
     document.addEventListener('DOMContentLoaded', function () {
         var sideFab = document.querySelectorAll('.horizontal-button');
-        var indexFab = document.querySelector('#buttonindex');
+        var indexFab = document.querySelector('#button-index');
         var indexTap = document.querySelector('.tap-target');
 
         if (sideFab != null) {
@@ -94,9 +94,9 @@ function formValid(formId) {
 
         $("select[required]").css({ position: 'absolute', display: 'inline', height: 0, padding: 0, width: 0 });
 
-        $(`#form${formId}`).on('submit', function (event) {
-            var tagDict = M.Chips.getInstance($(`#chips${formId}`)).chipsData
-            var tagDictLength = Object.keys((M.Chips.getInstance($(`#chips${formId}`)).chipsData)).length
+        $(`#form-${formId}`).on('submit', function (event) {
+            var tagDict = M.Chips.getInstance($(`#chips-${formId}`)).chipsData
+            var tagDictLength = Object.keys((M.Chips.getInstance($(`#chips-${formId}`)).chipsData)).length
             var editorData = newEditor.getData().length
 
             if (tagDictLength === 0 || editorData === 0) {
@@ -115,7 +115,7 @@ function formValid(formId) {
 function addTags(formId, arrayLength, array) {
 
     for (i = 0; i < arrayLength; i++) {
-        $(`#form${formId}`).append(`<input type="hidden" name="tags" value="${array[i].tag}">`);
+        $(`#form-${formId}`).append(`<input type="hidden" name="tags" value="${array[i].tag}">`);
     }
     return true
 }
