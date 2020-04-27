@@ -17,7 +17,7 @@ function initTags(tagCreate, id) {
 
 function initStoryModal(id, content, tagList) {
     document.addEventListener('DOMContentLoaded', function () {
-        var modals = document.querySelector(`#modal${id}`);
+        var modals = document.querySelector(`#modal-${id}`);
         var instances = M.Modal.init(modals, {
             onOpenStart: function () {
                 ClassicEditor

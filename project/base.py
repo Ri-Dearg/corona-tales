@@ -61,11 +61,12 @@ def create_story():
 @base.route('/search', methods=['GET'])
 def search():
 
-    def ages(from_age, to_age, from_date, to_date, base_text, country, story_lang):
+    def ranges(from_age, to_age, from_date, to_date, base_text, country,
+               story_lang):
 
         if from_age is None:
             from_age = 0
-   
+
         if to_age is None:
             to_age = 120
 
@@ -111,7 +112,7 @@ def search():
 
     if request.args.get("search-country"):
         base_text = request.args.get("search-country")
-        
+
     if request.args.get("search-language"):
         story_lang = request.args.get("search-language")
 
@@ -122,13 +123,16 @@ def search():
         to_age = int(request.args.get('search-age-t'))
 
     if request.args.get('search-date-f'):
-        from_date = int(calendar.timegm(time.strptime(request.args.get('search-date-f'), "%b %d, %Y")))*1000
+        from_date = int(calendar.timegm(time.strptime(
+            request.args.get('search-date-f'), "%b %d, %Y")))*1000
 
     if request.args.get('search-date-t'):
-        to_date = int(calendar.timegm(time.strptime(request.args.get('search-date-t'), "%b %d, %Y")))*1000
+        to_date = int(calendar.timegm(time.strptime(
+            request.args.get('search-date-t'), "%b %d, %Y")))*1000
 
     if any(v is not None for v in [from_age, to_age, from_date, to_date]):
-        results = ages(from_age, to_age, from_date, to_date, base_text, country, story_lang)
+        results = ranges(from_age, to_age, from_date, to_date, base_text,
+                         country, story_lang)
 
     else:
         results = stories.find({
