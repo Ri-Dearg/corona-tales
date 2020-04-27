@@ -3,6 +3,7 @@ from flask import (Blueprint, current_app, render_template, url_for, request,
 from flask_login import login_required, current_user
 from .extensions import mongo
 from bson.objectid import ObjectId
+import time
 
 base = Blueprint('base', __name__,
                  template_folder='templates')
@@ -28,6 +29,8 @@ def story_page():
 
     taglist = get_tags()
 
+    print(time.time())
+
     if current_user.is_authenticated:
         return render_template('index.html', story_list=story_list,
                                taglist=taglist, user_id=current_user.user_id)
@@ -48,7 +51,7 @@ def create_story():
                         'color': request.form.get('color'),
                         'title': request.form.get('title'),
                         'text': request.form.get('text'),
-                        'time': request.form.get('time'),
+                        'time': int(time.time()*1000),
                         'featured': False,
                         'tags': request.form.getlist('tags')})
     return redirect(request.referrer)
@@ -170,7 +173,7 @@ def edit_story(story_id):
                         'color': request.form.get('color'),
                         'title': request.form.get('title'),
                         'text': request.form.get('text'),
-                        'edit_time': request.form.get('edit-time'),
+                        'edit_time': int(time.time()*1000)
                     }
                     })
 

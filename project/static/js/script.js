@@ -99,18 +99,6 @@ function formValid(formId) {
             var tagDictLength = Object.keys((M.Chips.getInstance($(`#chips${formId}`)).chipsData)).length
             var editorData = newEditor.getData().length
 
-            var now = Date.now()
-            var inputTime = document.querySelector("#time")
-            var editTime = document.querySelector(`#edit-time${formId}`)
-
-            if (inputTime != null) {
-                inputTime.value = now;
-            }
-            
-            if (editTime != null) {
-                editTime.value = now
-            }
-
             if (tagDictLength === 0 || editorData === 0) {
                 event.preventDefault();
                 alert('Please fill Tags and Stories');
