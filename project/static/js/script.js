@@ -123,6 +123,11 @@ function addTags(formId, arrayLength, array) {
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
 
+    var datepicker = document.querySelectorAll('.datepicker');
+    var dateChoose = M.Datepicker.init(datepicker, {
+        container: 'body'
+    });
+
 
     var singupLogin = document.querySelector('#modal-signup-login');
     var modalTab = M.Modal.init(singupLogin, {

@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from .extensions import mongo
 from bson.objectid import ObjectId
 import time
+import calendar
 
 base = Blueprint('base', __name__,
                  template_folder='templates')
@@ -29,7 +30,7 @@ def story_page():
 
     taglist = get_tags()
 
-    print(time.time())
+    print(calendar.timegm(time.strptime("Jan, 15 2018", "%b, %d %Y")))
 
     if current_user.is_authenticated:
         return render_template('index.html', story_list=story_list,
@@ -59,45 +60,76 @@ def create_story():
 
 @base.route('/search', methods=['GET'])
 def search():
+
+    def ages(from_age, to_age, from_date, to_date, base_text, country, story_lang):
+
+        if from_age is None:
+            from_age = 0
+   
+        if to_age is None:
+            to_age = 120
+
+        if from_date is None:
+            from_date = 0
+
+        if to_date is None:
+            to_date = 9999999999999
+
+        print(from_age, to_age, from_date, to_date)
+
+        if any(v is not None for v in [base_text, country, story_lang]):
+
+            results = stories.find({
+                'time': {'$gte': from_date, '$lte': to_date},
+                'age': {'$gte': from_age, '$lte': to_age},
+                '$text': {'$search': f'{base_text} \
+                                    {country}\
+                                    {story_lang}'}},
+                {'score': {'$meta': 'textScore'}}).sort(
+                [('score', {'$meta': 'textScore'})])
+
+        else:
+            results = stories.find({
+                'time': {'$gte': from_date, '$lte': to_date},
+                'age': {'$gte': from_age, '$lte': to_age},
+            })
+
+        return results
+
     taglist = get_tags()
 
-    base_text = request.args.get("search-text")
-    country = request.args.get("search-country")
-    from_age = request.args.get('search-age-f')
-    to_age = request.args.get('search-age-t')
-    story_lang = request.args.get("search-language")
+    base_text = None
+    country = None
+    story_lang = None
+    from_age = None
+    to_age = None
+    from_date = None
+    to_date = None
 
-    if from_age:
+    if request.args.get("search-text"):
+        base_text = request.args.get("search-text")
+
+    if request.args.get("search-country"):
+        base_text = request.args.get("search-country")
+        
+    if request.args.get("search-language"):
+        story_lang = request.args.get("search-language")
+
+    if request.args.get('search-age-f'):
         from_age = int(request.args.get('search-age-f'))
 
-    if to_age:
+    if request.args.get('search-age-t'):
         to_age = int(request.args.get('search-age-t'))
 
-    if from_age or to_age:
-        if from_age and to_age:
-            results = stories.find({
-                'age': {'$gt': from_age, '$lt': to_age},
-                '$text': {'$search': f'{base_text} \
-                                       {country}\
-                                       {story_lang}'}},
-                {'score': {'$meta': 'textScore'}}).sort(
-                [('score', {'$meta': 'textScore'})])
-        elif from_age and not to_age:
-            results = stories.find({
-                'age': {'$gt': from_age},
-                '$text': {'$search': f'{base_text} \
-                                       {country}\
-                                       {story_lang}'}},
-                {'score': {'$meta': 'textScore'}}).sort(
-                [('score', {'$meta': 'textScore'})])
-        elif to_age and not from_age:
-            results = stories.find({
-                'age': {'$lt': to_age},
-                '$text': {'$search': f'{base_text} \
-                                       {country}\
-                                       {story_lang}'}},
-                {'score': {'$meta': 'textScore'}}).sort(
-                [('score', {'$meta': 'textScore'})])
+    if request.args.get('search-date-f'):
+        from_date = int(calendar.timegm(time.strptime(request.args.get('search-date-f'), "%b %d, %Y")))*1000
+
+    if request.args.get('search-date-t'):
+        to_date = int(calendar.timegm(time.strptime(request.args.get('search-date-t'), "%b %d, %Y")))*1000
+
+    if any(v is not None for v in [from_age, to_age, from_date, to_date]):
+        results = ages(from_age, to_age, from_date, to_date, base_text, country, story_lang)
+
     else:
         results = stories.find({
             '$text': {'$search': f'{base_text} \
@@ -109,6 +141,7 @@ def search():
     final_results = []
 
     for result in results:
+
         if story_lang:
             if result['story_language'] == story_lang:
                 final_results.append(result)

@@ -9,7 +9,7 @@
 		<br>
 		<div class="row">
 			<div class="col s12">
-				<article class="card {{ result.color }} accent-1 hoverable">
+				<article class="card {{ result.color }} lighten-2 hoverable">
 					<div class="card-content no-pad-bot">
 						<div class="row no-m-bot">
 							<span class="card-title col s12 m6 heading">{{ result.title }}</span>
@@ -42,4 +42,11 @@
 		{% endfor %}
         </section>
 </div>
+{% endblock %}
+{% block javascript %}
+<script>
+        {% for result in final_results %}
+                showDate('{{ result._id }}','{{ result.time }}')
+        {% endfor %}            
+</script>
 {% endblock %}
