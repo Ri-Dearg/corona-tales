@@ -32,29 +32,38 @@ def story_page():
 
     print(calendar.timegm(time.strptime("Jan, 15 2018", "%b, %d %Y")))
 
-    if current_user.is_authenticated:
-        return render_template('index.html', story_list=story_list,
-                               taglist=taglist, user_id=current_user.user_id)
-
     return render_template('index.html', story_list=story_list,
                            taglist=taglist)
 
 
 @base.route('/create_story', methods=['POST'])
 def create_story():
+    if current_user.is_authenticated:
+        stories.insert_one({'user_id': current_user.user_id,
+                            'name': request.form.get('name'),
+                            'age': int(request.form.get('age')),
+                            'country': request.form.get('country'),
+                            'story_language': request.form.get('language'),
+                            'color': request.form.get('color'),
+                            'title': request.form.get('title'),
+                            'text': request.form.get('text'),
+                            'time': int(time.time()*1000),
+                            'featured': False,
+                            'tags': request.form.getlist('tags')})
+
+    else:
+        stories.insert_one({'name': request.form.get('name'),
+                            'age': int(request.form.get('age')),
+                            'country': request.form.get('country'),
+                            'story_language': request.form.get('language'),
+                            'color': request.form.get('color'),
+                            'title': request.form.get('title'),
+                            'text': request.form.get('text'),
+                            'time': int(time.time()*1000),
+                            'featured': False,
+                            'tags': request.form.getlist('tags')})
 
     flash('your story has been posted!', 'success')
-    stories.insert_one({'user_id': request.form.get('user_id'),
-                        'name': request.form.get('name'),
-                        'age': int(request.form.get('age')),
-                        'country': request.form.get('country'),
-                        'story_language': request.form.get('language'),
-                        'color': request.form.get('color'),
-                        'title': request.form.get('title'),
-                        'text': request.form.get('text'),
-                        'time': int(time.time()*1000),
-                        'featured': False,
-                        'tags': request.form.getlist('tags')})
     return redirect(request.referrer)
 
 
@@ -180,10 +189,6 @@ def about():
 
     taglist = get_tags()
 
-    if current_user.is_authenticated:
-        return render_template('about.html', taglist=taglist,
-                               user_id=current_user.user_id)
-
     return render_template('about.html', taglist=taglist)
 
 
@@ -191,10 +196,6 @@ def about():
 def contact():
 
     taglist = get_tags()
-
-    if current_user.is_authenticated:
-        return render_template('contact.html', taglist=taglist,
-                               user_id=current_user.user_id)
 
     return render_template('contact.html', taglist=taglist)
 
@@ -210,7 +211,7 @@ def profile():
     # Change order of function when adding create story to profile page
     taglist = get_tags()
 
-    return render_template("profile.html", user_id=current_user.user_id,
+    return render_template("profile.html",
                            user_stories=user_stories, taglist=taglist,
                            username=username)
 
