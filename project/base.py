@@ -7,14 +7,16 @@ from flask_mail import Message
 from bson.objectid import ObjectId
 import time
 import calendar
+from flask_paginate import Pagination, get_page_args
 
 base = Blueprint('base', __name__,
                  template_folder='templates')
 
 stories = mongo.db.stories
-story_list = stories.find().sort('time', -1)
 
 mailapp = mail
+
+story_array = []
 
 
 def get_tags():
@@ -32,12 +34,33 @@ def get_tags():
 @base.route('/')
 def story_page():
 
+    story_list = stories.find().sort('time', -1)
+
+    def get_stories(page, offset=0, per_page=10):
+        story_array = []
+        offset = (page-1) * 7
+        for story in story_list:
+            story_array.append(story)
+        return story_array[offset: offset + per_page]
+
     taglist = get_tags()
 
-    print(calendar.timegm(time.strptime("Jan, 15 2018", "%b, %d %Y")))
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
 
-    return render_template('index.html', story_list=story_list,
-                           taglist=taglist)
+    pagination_stories = get_stories(page=page, offset=offset,
+                                     per_page=7)
+
+    total = story_list.count()
+
+    pagination = Pagination(page=page, per_page=7,
+                            total=total)
+
+    return render_template('index.html',
+                           taglist=taglist, story_list=pagination_stories,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 @base.route('/create_story', methods=['POST'])

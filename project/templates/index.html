@@ -23,9 +23,9 @@
         </div>
         <br>
         <br>
-
+{{ pagination.links }}
         <!-- Function to place each story as a card -->
-        {% set _stub = story_list.rewind() %} {% for story in story_list %}
+{% for story in story_list %}
         <!--   Story Section   -->
         <hr class="{{ story.color }}">
         <br>
@@ -53,7 +53,8 @@
                 </article>
             </div>
         </div>
-        {% endfor %} {% set _stub = story_list.rewind() %}
+        {% endfor %} 
+        {{ pagination.links }}
     </section>
 </div>
 
