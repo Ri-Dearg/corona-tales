@@ -146,6 +146,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    var scroll = document.querySelector('.infiniscroll');
+    var infScroll = new InfiniteScroll( scroll, {
+    // options
+    path: '/?page={{#}}',
+    append: '.scroll-append',
+    history: false,
+    });
+
     $('.password-create').on('submit', function (event) {
         var passFirst = document.querySelector('.passone').value
         var passSecond = document.querySelector('.passtwo').value

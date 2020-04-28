@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
 
-    <section class="section white z-depth-3">
+    <section class="section white z-depth-3 infiniscroll">
         <h5 class="center-align heading">A simple site for Sharing.</h5>
         <br>
         <div class="row center">
@@ -23,10 +23,10 @@
         </div>
         <br>
         <br>
-{{ pagination.links }}
         <!-- Function to place each story as a card -->
 {% for story in story_list %}
         <!--   Story Section   -->
+        <div class="scroll-append">
         <hr class="{{ story.color }}">
         <br>
         <div class="row">
@@ -53,8 +53,8 @@
                 </article>
             </div>
         </div>
+        </div>
         {% endfor %} 
-        {{ pagination.links }}
     </section>
 </div>
 
