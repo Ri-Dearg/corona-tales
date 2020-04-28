@@ -146,11 +146,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    var getUrl = window.location;
+    var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+
     var scroll = document.querySelector('.infiniscroll');
     var infScroll = new InfiniteScroll( scroll, {
     // options
-    path: '/?page={{#}}',
+    path: function() {
+        if (window.location.href == baseUrl) {
+            pageNumber = this.loadCount + 1
+            return window.location.href + '?page=' + pageNumber
+        }
+        else {
+            pageNumber = this.loadCount + 1
+            return window.location.href + '&page=' + pageNumber
+        }
+    },
     append: '.scroll-append',
+    checkLastPage: '.scroll-append',
     history: false,
     });
 

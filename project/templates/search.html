@@ -1,9 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
-
-    <section class="section white z-depth-3">
-
+    <section class="section white z-depth-3 infiniscroll">
         {% for result in final_results %}
+        <div class="scroll-append">
         <hr class="{{ result.color }}">
         <br>
         <div class="row">
@@ -30,6 +29,7 @@
                 </article>
             </div>
         </div>
+        </div>
 
         {% else %}
         <div class="row">
@@ -42,6 +42,7 @@
 
         {% endfor %}
     </section>
+
 </div>
 {% endblock %} {% block javascript %}
 <script>

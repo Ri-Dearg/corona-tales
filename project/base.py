@@ -72,7 +72,7 @@ def create_story():
                             'text': request.form.get('text'),
                             'time': int(time.time()*1000),
                             'featured': False,
-                            'tags': request.form.getlist('tags').lower})
+                            'tags': request.form.getlist('tags')})
 
     else:
         stories.insert_one({'name': request.form.get('name'),
@@ -203,8 +203,24 @@ def search():
         else:
             final_results.append(result)
 
-    return render_template('search.html', final_results=final_results,
-                           taglist=taglist)
+    def search_scroll(page, offset=0, per_page=10):
+        offset = (page-1) * 7
+
+        return final_results[offset: offset + per_page]
+
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    pagination_results = search_scroll(page=page, offset=offset,
+                                        per_page=7)
+    total = len(final_results)
+    pagination = Pagination(page=page, per_page=7,
+                            total=total)
+
+    return render_template('search.html', final_results=pagination_results,
+                           taglist=taglist,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 @base.route('/about')
