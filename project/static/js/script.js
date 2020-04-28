@@ -120,7 +120,7 @@ function formValid(formId) {
 function addTags(formId, arrayLength, array) {
 
     for (i = 0; i < arrayLength; i++) {
-        $(`#form-${formId}`).append(`<input type="hidden" name="tags" value="${array[i].tag}">`);
+        $(`#form-${formId}`).append(`<input type="hidden" name="tags" value="${array[i].tag.toLowerCase()}">`);
     }
     return true
 }

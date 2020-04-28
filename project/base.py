@@ -44,15 +44,11 @@ def story_page():
         return story_array[offset: offset + per_page]
 
     taglist = get_tags()
-
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
-
     pagination_stories = get_stories(page=page, offset=offset,
                                      per_page=7)
-
     total = story_list.count()
-
     pagination = Pagination(page=page, per_page=7,
                             total=total)
 
@@ -76,7 +72,7 @@ def create_story():
                             'text': request.form.get('text'),
                             'time': int(time.time()*1000),
                             'featured': False,
-                            'tags': request.form.getlist('tags')})
+                            'tags': request.form.getlist('tags').lower})
 
     else:
         stories.insert_one({'name': request.form.get('name'),
