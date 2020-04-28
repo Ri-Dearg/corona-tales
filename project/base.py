@@ -210,7 +210,7 @@ def send_mail():
                   sender=request.form.get('email'),
                   recipients=[ADMINS])
 
-    msg.body = f'<p>Message from <b>{request.form.get("email-name")}</b> at \
+    msg.html = f'<p>Message from <b>{request.form.get("email-name")}</b> at \
                 <b>{request.form.get("email")}</b><br>\
                 Tel: <b>{request.form.get("number")}</b></p>\
                 <p>{request.form.get("message")}</p>'
