@@ -1,7 +1,9 @@
 from flask import (Blueprint, current_app, render_template, url_for, request,
                    redirect, flash)
 from flask_login import login_required, current_user
-from .extensions import mongo
+from .extensions import mongo, mail
+from config import ADMINS
+from flask_mail import Message
 from bson.objectid import ObjectId
 import time
 import calendar
@@ -11,6 +13,8 @@ base = Blueprint('base', __name__,
 
 stories = mongo.db.stories
 story_list = stories.find().sort('time', -1)
+
+mailapp = mail
 
 
 def get_tags():
@@ -93,8 +97,8 @@ def search():
                 'time': {'$gte': from_date, '$lte': to_date},
                 'age': {'$gte': from_age, '$lte': to_age},
                 '$text': {'$search': f'{base_text} \
-                                    {country}\
-                                    {story_lang}\
+                                    {country} \
+                                    {story_lang} \
                                     {tag_string}'}},
                 {'score': {'$meta': 'textScore'}}).sort(
                 [('score', {'$meta': 'textScore'})])
@@ -200,6 +204,22 @@ def contact():
     return render_template('contact.html', taglist=taglist)
 
 
+@base.route('/send_mail', methods=['POST'])
+def send_mail():
+    msg = Message("Corona-Tales Contact",
+                  sender=request.form.get('email'),
+                  recipients=[ADMINS])
+
+    msg.body = f'<p>Message from <b>{request.form.get("email-name")}</b> at \
+                <b>{request.form.get("email")}</b><br>\
+                Tel: <b>{request.form.get("number")}</b></p>\
+                <p>{request.form.get("message")}</p>'
+
+    mailapp.send(msg)
+    flash('your message has been sent.', 'success')
+    return redirect(url_for('base.contact'))
+
+
 @base.route('/profile')
 @login_required
 def profile():
@@ -237,9 +257,9 @@ def edit_story(story_id):
     return redirect(url_for('base.profile'))
 
 
-@base.route('/delete_story/<story_id>',)
+@base.route('/delete_story/<story_id>')
 @login_required
 def delete_story(story_id):
-    mongo.db.stories.remove({'_id': ObjectId(story_id)})
+    stories.remove({'_id': ObjectId(story_id)})
 
     return redirect(url_for('base.profile'))

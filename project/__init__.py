@@ -1,19 +1,17 @@
 import os
 from flask import Flask
 from flask_login import LoginManager
-from .extensions import mongo
+from .extensions import mongo, mail
 from bson.objectid import ObjectId
 
 
 def create_app():
 
     app = Flask(__name__)
-
-    app.config["SECRET_KEY"] = os.getenv('SECRET_KEY')
-    app.config['MONGO_DBNAME'] = 'corona_tales'
-    app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+    app.config.from_object('config')
 
     mongo.init_app(app)
+    mail.init_app(app)
 
     app.config['taglist'] = set()
 

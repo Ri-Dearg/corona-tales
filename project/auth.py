@@ -81,8 +81,8 @@ def change_password():
 @auth.route('/logout')
 @login_required
 def logout():
-    flash('You have logged out', 'success')
     logout_user()
+    flash('You have logged out', 'success')
     return redirect(url_for('base.story_page'))
 
 
@@ -98,8 +98,8 @@ def delete_stories():
         flash('The password is incorrect', 'sorry')
         return redirect(url_for('base.profile'))
 
-    flash('your stories have been deleted.', 'success')
     mongo.db.stories.remove({'user_id': this_user})
+    flash('your stories have been deleted.', 'success')
     return redirect(url_for('base.profile'))
 
 

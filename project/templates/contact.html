@@ -3,27 +3,27 @@
     <section class="section white z-depth-3 valign-wrapper">
         <article class="container">
             <h2 class="heading center-align">Contact Me</h2>
-            <form id="contact-form">
+            <form id="contact-form" action="{{ url_for('base.send_mail') }}" method="POST">
                 <div class="row">
                     <div class="col s12 input-field validate">
                         <i class="material-icons prefix">face</i>
-                        <input type="text" name="name" placeholder="Name" class="form-control clear" required/>
+                        <input type="text" name="email-name" placeholder="Name" class="validate" required/>
                     </div>
                     <div class="col s12 input-field validate">
                         <i class="material-icons prefix">alternate_email</i>
-                        <input type="email" name="email" placeholder="Email" class="form-control clear" required/>
+                        <input type="email" name="email" placeholder="Email" class="validate" required/>
                     </div>
                     <div class="col s12 input-field validate">
                         <i class="material-icons prefix">call</i>
-                        <input type="tel" name="number" placeholder="Number (Optional)" class="form-control clear" />
+                        <input type="tel" name="number" placeholder="Number (Optional)"/>
                     </div>
                     <div class="col s12 input-field validate">
                         <i class="material-icons prefix">mail</i>
-                        <textarea name="message" placeholder="Send me a message." class="form-control clear materialize-textarea" id="cmessage" maxlength="1000" required></textarea>
+                        <textarea name="message" placeholder="Send me a message." class="materialize-textarea" id="cmessage" maxlength="1000" required></textarea>
                     </div>
                     <div class="col s12">
-                        <button type="submit" class="btn waves-effect waves-light right">Send
-                            <i class="material-icons right">post_add</i>
+                        <button type="submit" class="btn waves-effect waves-light orange lighten-1 right">Send
+                            <i class="material-icons left">send</i>
                         </button>
                     </div>
                 </div>

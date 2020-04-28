@@ -1,6 +1,5 @@
-from flask_pymongo import ASCENDING
 from flask_pymongo import PyMongo
+from flask_mail import Mail
 
-
-ascend = ASCENDING
 mongo = PyMongo()
+mail = Mail()
