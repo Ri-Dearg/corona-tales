@@ -4,10 +4,11 @@ import uuid
 
 
 class User(UserMixin):
-    def __init__(self, username, password, user_id, _id=None):
+    def __init__(self, username, password, prefill, user_id, _id=None):
         self.user_id = user_id
         self.username = username
         self.password = password
+        self.prefill = prefill
         self._id = uuid.uuid4().hex if _id is None else _id
 
     def is_authenticated(self):

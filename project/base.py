@@ -287,6 +287,32 @@ def profile():
                            username=username)
 
 
+@base.route('/fill_info', methods=['POST'])
+@login_required
+def fill_info():
+
+    name_fill = request.form.get('name-fill')
+    age_fill = request.form.get('age-fill')
+    country_fill = request.form.get('country-fill')
+    language_fill = request.form.get('language-fill')
+
+    if name_fill or age_fill or country_fill or langauge_fill:
+        mongo.db.users.update({'user_id': current_user.user_id},
+                              {'$set':
+                               {'prefill': {'name': name_fill,
+                                            'age': age_fill,
+                                            'country': country_fill,
+                                            'story_language': language_fill,
+                                            }
+                                }
+                                })
+
+        flash('your details have been saved', 'success')      
+        return redirect(url_for('base.profile'))
+
+    flash('please fill one field', 'sorry')
+    return redirect(url_for('base.profile'))
+
 
 
 @base.route('/edit_story/<story_id>', methods=["POST"])
