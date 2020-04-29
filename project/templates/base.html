@@ -57,6 +57,26 @@
     </ul>
 
     {% block content %} {% endblock %}
+    <div class="page-load-status">
+    <div class="preload-container infinite-scroll-request">
+    <br>
+  <div class="preloader-wrapper big active">
+    <div class="spinner-layer">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+<div class="center-align teal accent-4 load-box white-text">
+  <p class="infinite-scroll-last heading">End</p>
+  <p class="infinite-scroll-error heading">Connection issues...</p>
+  </div>
+</div>
 
     <div class="fixed-action-btn no-autoinit" id="button-index">
         <div class="btn-floating btn-large pink accent-2 tooltipped" data-position="left" data-tooltip="Menu" id="fab-index">
