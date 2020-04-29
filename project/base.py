@@ -262,6 +262,7 @@ def profile():
     user_stories = stories.find(
         {'user_id': current_user.user_id}).sort('time', -1)
     username = current_user.username
+    prefill = current_user.prefill
 
     def user_pages(page, offset=0, per_page=10):
         user_array = []
@@ -284,7 +285,7 @@ def profile():
                            page=page,
                            per_page=per_page,
                            pagination=pagination,
-                           username=username)
+                           username=username, prefill=prefill)
 
 
 @base.route('/fill_info', methods=['POST'])
@@ -313,6 +314,15 @@ def fill_info():
     flash('please fill one field', 'sorry')
     return redirect(url_for('base.profile'))
 
+
+@base.route('/delete_info', methods=['POST'])
+@login_required
+def delete_info():
+    mongo.db.users.update({'user_id': current_user.user_id},
+                              {'$unset':
+                               {'prefill': ""}})
+    flash('saved info has been deleted', 'success')
+    return redirect(url_for('base.profile'))
 
 
 @base.route('/edit_story/<story_id>', methods=["POST"])

@@ -4,7 +4,7 @@ import uuid
 
 
 class User(UserMixin):
-    def __init__(self, username, password, prefill, user_id, _id=None):
+    def __init__(self, user_id, username, password, prefill, _id=None):
         self.user_id = user_id
         self.username = username
         self.password = password
