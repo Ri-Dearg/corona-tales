@@ -262,7 +262,6 @@ def profile():
     user_stories = stories.find(
         {'user_id': current_user.user_id}).sort('time', -1)
     username = current_user.username
-    prefill = current_user.prefill
 
     def user_pages(page, offset=0, per_page=10):
         user_array = []
@@ -275,7 +274,7 @@ def profile():
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
     pagination_user = user_pages(page=page, offset=offset,
-                                     per_page=7)
+                                 per_page=7)
     total = user_stories.count()
     pagination = Pagination(page=page, per_page=7,
                             total=total)
@@ -285,7 +284,7 @@ def profile():
                            page=page,
                            per_page=per_page,
                            pagination=pagination,
-                           username=username, prefill=prefill)
+                           username=username)
 
 
 @base.route('/fill_info', methods=['POST'])
@@ -306,10 +305,10 @@ def fill_info():
                                             'story_language': language_fill,
                                             }
                                 }
-                                })
+                               })
 
-        flash('your details have been saved', 'success')      
-        return redirect(url_for('base.profile'))
+        flash('your details have been saved', 'success')
+        return redirect(url_for('base.profile', _anchor='user-settings'))
 
     flash('please fill one field', 'sorry')
     return redirect(url_for('base.profile'))
@@ -319,7 +318,12 @@ def fill_info():
 @login_required
 def delete_info():
     mongo.db.users.update({'user_id': current_user.user_id},
-                           {'$unset': {'prefill.name': "", 'prefill.age': "", 'prefill.country': "", 'prefill.story_language': ""}})
+                          {'$unset':
+                           {'prefill.name': "",
+                            'prefill.age': "",
+                            'prefill.country': "",
+                            'prefill.story_language': ""}})
+
     flash('saved info has been deleted', 'success')
     return redirect(url_for('base.profile'))
 
@@ -331,7 +335,7 @@ def edit_story(story_id):
                    {'$set':
                     {
                         'name': request.form.get('name'),
-                        'age': request.form.get('age'),
+                        'age': int(request.form.get('age')),
                         'country': request.form.get('country'),
                         'story_language': request.form.get('language'),
                         'tags': request.form.getlist('tags'),

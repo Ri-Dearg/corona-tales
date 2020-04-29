@@ -612,7 +612,7 @@
 				<div class="row title">
 					<div class="col s12">
 						<h5 class="heading">Your Information</h5>
-                        <p>Enter your information to autofill your story posts. <br>
+                        <p>Enter your information to autofill your story posts. (Get straight to the writing.)<br>
                         It will be used solely for filling the forms.</p>
 					</div>
 				</div>
@@ -621,12 +621,12 @@
 						<div class="col s12">
 							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">face</i>
-								<input id="name-fill" name="name-fill" type="text" placeholder="Name">
+								<input id="name-fill" name="name-fill" type="text" placeholder="Name" value="{{ current_user.prefill.name }}">
                                 <span class="helper-text">Preferred Name</span>
                             </div>
                             <div class="input-field col s12 m6">
                                 <i class="material-icons prefix">cake</i>
-                                <input id="age-fill" name="age-fill" type="number" min="1" max="120" placeholder="Age" placeholder="Age">
+                                <input id="age-fill" name="age-fill" type="number" min="1" max="120" value="{{ current_user.prefill.age }}" placeholder="Age">
                                 <span class="helper-text">Preferred Age</span>
                             </div>
                         </div>
@@ -634,7 +634,12 @@
 							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">flag</i>
                                 <select name="country-fill">
-                                    <option value="" disabled selected>Country</option>
+                            {% if current_user.prefill.country %}
+                            <option value="" disabled>Country</option>
+                            <option value="{{ current_user.prefill.country }}" selected>{{ current_user.prefill.country|title }}</option>
+                            {% else %}
+                            <option value="" selected disabled>Country</option>
+                            {% endif %}
                                     <option value="Canada">Canada</option>
                                     <option value="Australia">Australia</option>
                                     <option value="Ireland">Ireland</option>
@@ -894,7 +899,12 @@
                             <div class="input-field col s12 m6">
                                 <i class="material-icons prefix">language</i>
                         <select name="language-fill">
-                            <option value="" disabled selected>Story language</option>
+                            {% if current_user.prefill.story_language %}
+                            <option value="" disabled>Story language</option>
+                            <option value="{{ current_user.prefill.story_langauge }}" selected>{{ current_user.prefill.story_language|title }}</option>
+                            {% else %}
+                            <option value="" selected disabled>Story language</option>
+                            {% endif %}
                             <option value="English">English</option>
                             <option value="Italiano">Italiano</option>
                             <option value="Afaan Oromoo">Afaan Oromoo</option>
@@ -1090,7 +1100,7 @@
 										</div>
 									</div>
 					</form>
-                    {% if prefill.name or prefill.age or prefill.country or prefill.story_language %}
+                    {% if current_user.prefill.name or current_user.prefill.age or current_user.prefill.country or current_user.prefill.story_language %}
                     <form action="{{ url_for('base.delete_info') }}" method="POST">
                         <div class="col s12">
 										<div class="col s12 input-field">
