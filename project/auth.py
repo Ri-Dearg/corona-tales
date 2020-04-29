@@ -65,7 +65,7 @@ def change_password():
 
     if not check_password_hash(user["password"], password):
         flash('The password is incorrect', 'sorry')
-        return redirect(url_for('base.profile'))
+        return redirect(url_for('base.profile', _anchor='user-settings'))
 
     usersdb.update({"user_id": this_user},
                    {'$set':
@@ -76,7 +76,7 @@ def change_password():
 
     flash('password has been changed', 'success')
 
-    return redirect(url_for('base.profile'))
+    return redirect(url_for('base.profile', _anchor='user-settings'))
 
 
 @auth.route('/logout')
@@ -97,11 +97,11 @@ def delete_stories():
 
     if not check_password_hash(user["password"], password):
         flash('The password is incorrect', 'sorry')
-        return redirect(url_for('base.profile'))
+        return redirect(url_for('base.profile', _anchor='user-settings'))
 
     mongo.db.stories.remove({'user_id': this_user})
     flash('your stories have been deleted.', 'success')
-    return redirect(url_for('base.profile'))
+    return redirect(url_for('base.profile', _anchor='user-settings'))
 
 
 @auth.route('/delete_user', methods=['POST'])
@@ -114,7 +114,7 @@ def delete_user():
 
     if not check_password_hash(user["password"], password):
         flash('The password is incorrect', 'sorry')
-        return redirect(url_for('base.profile'))
+        return redirect(url_for('base.profile', _anchor='user-settings'))
 
     mongo.db.stories.update_many({'user_id': this_user},
                                  {'$unset': {'user_id': ""}

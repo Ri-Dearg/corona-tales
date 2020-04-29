@@ -311,7 +311,7 @@ def fill_info():
         return redirect(url_for('base.profile', _anchor='user-settings'))
 
     flash('please fill one field', 'sorry')
-    return redirect(url_for('base.profile'))
+    return redirect(url_for('base.profile', _anchor='user-settings'))
 
 
 @base.route('/delete_info', methods=['POST'])
@@ -325,7 +325,7 @@ def delete_info():
                             'prefill.story_language': ""}})
 
     flash('saved info has been deleted', 'success')
-    return redirect(url_for('base.profile'))
+    return redirect(url_for('base.profile', _anchor='user-settings'))
 
 
 @base.route('/edit_story/<story_id>', methods=["POST"])
