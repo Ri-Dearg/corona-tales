@@ -287,10 +287,6 @@ def profile():
                            username=username)
 
 
-@base.route('/fill_info', methods=['POST'])
-@login_required
-def fill_info():
-    mongo.db.users.update
 
 
 @base.route('/edit_story/<story_id>', methods=["POST"])

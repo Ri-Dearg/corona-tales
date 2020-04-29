@@ -75,10 +75,14 @@
 									<div class="input-field validate col s12 m6">
 										<i class="material-icons prefix">face</i>
 										<input id="name-{{ story._id }}" name="name" type="text" value="{{ story.name }}" placeholder="Name" required>
+                                        <span class="helper-text">Any Name</span>
+
                                 </div>
 										<div class="input-field valclassate col s12 m6">
 											<i class="material-icons prefix">cake</i>
 											<input id="age-{{ story._id|string }}" name="age" type="number" min="1" max="120" value="{{ story.age }}" placeholder="Age" required>
+                                            <span class="helper-text" data-error="Must be a number betwenn 1 and 120">Between 1 - 120</span>
+
                                 </div>
 											<div class="input-field validate col s12 m6">
 												<i class="material-icons prefix">flag</i>
@@ -339,6 +343,8 @@
                                         <option value="Zambia">Zambia</option>
                                         <option value="Zimbabwe">Zimbabwe</option>
                                     </select>
+                                                            <span class="helper-text">Where?</span>
+
 											</div>
 											<div class="input-field validate col s12 m6">
 												<i class="material-icons prefix">language</i>
@@ -530,6 +536,8 @@
                                         <option value="ꆈꌠ꒿ Nuosuhxop">ꆈꌠ꒿ Nuosuhxop</option>
                                         <option value="한국어&nbsp;(韓國語)">한국어&nbsp;(韓國語)</option>
                                     </select>
+                                                            <span class="helper-text">Which language are you writing in?</span>
+
 											</div>
 											<div class="input-field validate col s12 m6 push-m6">
 												<i class="material-icons prefix">palette</i>
@@ -553,11 +561,16 @@
                                         <option value="purple">Purple</option>
                                         <option value="pink">Pink</option>
                                     </select>
+                                                            <span class="helper-text">A color for your story card.</span>
+
 											</div>
 											<div class="input-field validate col s12 m6 pull-m6">
 												<i class="material-icons prefix">import_contacts</i>
 												<input id="title-{{ story._id }}" name="title" type="text" value="{{ story.title }}" placeholder="Story Title" required>
+                                                                                                        <span class="helper-text">Give your story a title.</span>
+
                                 </div>
+
 												<div class="col s12 ckeditor">
 													<textarea id="editor-{{ story._id }}" name="text" class="materialize-textarea" placeholder="Share your tale."></textarea>
 												</div>
@@ -566,6 +579,8 @@
 									<div id="chips-{{ story._id }}"
 										class="chips chips-autocomplete no-autoinit chips-placeholder col s12 validate">
 									</div>
+                                                    <span class="helper-text-custom">Press <strong>Enter</strong> to add a tag.</span>
+
 								</div>
 							</div>
 						</div>
