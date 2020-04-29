@@ -1113,11 +1113,11 @@
                         <form action="{{ url_for('auth.signup_form') }}" method="POST" id="form-signup" class="password-create">
                             <div class="input-field validate col s12">
                                 <i class="material-icons prefix">face</i>
-                                <input id="username-signup" name="username" type="text" minlength="5" maxlength="30" placeholder="Create Username" required>
+                                <input id="username-signup" name="username" type="text" pattern="[a-zA-Z0-9-_.]{4,30}" placeholder="Create Username" required>
                             </div>
                             <div class="input-field validate col s12">
                                 <i class="material-icons prefix">done</i>
-                                <input id="password-signup" class="passone" name="password" type="password" minlength="8" placeholder="Create Password" required>
+                                <input id="password-signup" class="passone" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Create Password" required>
                             </div>
                             <div class="input-field validate col s12">
                                 <i class="material-icons prefix">done_all</i>
