@@ -156,12 +156,14 @@ document.addEventListener('DOMContentLoaded', function () {
         var infScroll = new InfiniteScroll(scroll, {
             // options
             path: function () {
-                if (window.location.href == baseUrl) {
-                    pageNumber = this.loadCount + 1
+                if (window.location.href === baseUrl) {
+                    pageNumber = this.loadCount + 2
+                    console.log(window.location.href + '?page=' + pageNumber)
                     return window.location.href + '?page=' + pageNumber
                 }
                 else {
-                    pageNumber = this.loadCount + 1
+                    pageNumber = this.loadCount + 2
+                    console.log(window.location.href + '&page=' + pageNumber)
                     return window.location.href + '&page=' + pageNumber
                 }
             },

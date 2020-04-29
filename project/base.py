@@ -211,7 +211,7 @@ def search():
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
     pagination_results = search_scroll(page=page, offset=offset,
-                                        per_page=7)
+                                       per_page=7)
     total = len(final_results)
     pagination = Pagination(page=page, per_page=7,
                             total=total)
@@ -263,11 +263,27 @@ def profile():
         {'user_id': current_user.user_id}).sort('time', -1)
     username = current_user.username
 
-    # Change order of function when adding create story to profile page
+    def user_pages(page, offset=0, per_page=10):
+        user_array = []
+        offset = (page-1) * 7
+        for story in user_stories:
+            user_array.append(story)
+        return user_array[offset: offset + per_page]
+
     taglist = get_tags()
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    pagination_user = user_pages(page=page, offset=offset,
+                                     per_page=7)
+    total = user_stories.count()
+    pagination = Pagination(page=page, per_page=7,
+                            total=total)
 
     return render_template("profile.html",
-                           user_stories=user_stories, taglist=taglist,
+                           user_stories=pagination_user, taglist=taglist,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination,
                            username=username)
 
 
