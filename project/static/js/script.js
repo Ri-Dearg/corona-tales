@@ -146,27 +146,30 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+
     var getUrl = window.location;
     var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
     var scroll = document.querySelector('.infiniscroll');
-    var infScroll = new InfiniteScroll( scroll, {
-    // options
-    path: function() {
-        if (window.location.href == baseUrl) {
-            pageNumber = this.loadCount + 1
-            return window.location.href + '?page=' + pageNumber
-        }
-        else {
-            pageNumber = this.loadCount + 1
-            return window.location.href + '&page=' + pageNumber
-        }
-    },
-    append: '.scroll-append',
-    checkLastPage: '.scroll-append',
-    history: false,
-    });
+    if (scroll != undefined) {
 
+        var infScroll = new InfiniteScroll(scroll, {
+            // options
+            path: function () {
+                if (window.location.href == baseUrl) {
+                    pageNumber = this.loadCount + 1
+                    return window.location.href + '?page=' + pageNumber
+                }
+                else {
+                    pageNumber = this.loadCount + 1
+                    return window.location.href + '&page=' + pageNumber
+                }
+            },
+            append: '.scroll-append',
+            checkLastPage: '.scroll-append',
+            history: false,
+        });
+    }
     $('.password-create').on('submit', function (event) {
         var passFirst = document.querySelector('.passone').value
         var passSecond = document.querySelector('.passtwo').value
