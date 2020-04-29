@@ -115,6 +115,12 @@ form .col.pd-b {
     font-size: 1.2rem
 }
 
+.modal {
+    max-height: 85%;
+    width: 65%;
+    overflow-y: visible;
+}
+
 @media only screen and (max-width: 600px) {
 nav .brand-logo {
     font-size: 8vw;
