@@ -297,7 +297,7 @@ def fill_info():
     country_fill = request.form.get('country-fill')
     language_fill = request.form.get('language-fill')
 
-    if name_fill or age_fill or country_fill or langauge_fill:
+    if name_fill or age_fill or country_fill or language_fill:
         mongo.db.users.update({'user_id': current_user.user_id},
                               {'$set':
                                {'prefill': {'name': name_fill,
@@ -319,8 +319,7 @@ def fill_info():
 @login_required
 def delete_info():
     mongo.db.users.update({'user_id': current_user.user_id},
-                              {'$unset':
-                               {'prefill': ""}})
+                           {'$unset': {'prefill.name': "", 'prefill.age': "", 'prefill.country': "", 'prefill.story_language': ""}})
     flash('saved info has been deleted', 'success')
     return redirect(url_for('base.profile'))
 
