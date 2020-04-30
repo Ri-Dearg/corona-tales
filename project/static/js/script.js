@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var infScroll = new InfiniteScroll(scroll, {
             // options
             path: function () {
-                if (window.location.href === baseUrl || tagUrl) {
+                if (window.location.href === baseUrl || window.location.href === tagUrl) {
                     console.log('hello')
                     pageNumber = this.loadCount + 2
                     return window.location.href + '?page=' + pageNumber
