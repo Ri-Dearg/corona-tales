@@ -223,6 +223,41 @@ def search():
                            pagination=pagination)
 
 
+@base.route('/search_tags/<string:tag>', methods=['GET', 'POST'])
+def search_tags(tag):
+
+    taglist = get_tags()
+    
+    results = stories.find({
+        '$text': {'$search': f'{tag}'}},
+        {'score': {'$meta': 'textScore'}}).sort(
+        [('score', {'$meta': 'textScore'})])
+
+    final_results = []
+
+    for result in results:
+        final_results.append(result)
+
+    def search_scroll(page, offset=0, per_page=10):
+        offset = (page-1) * 7
+
+        return final_results[offset: offset + per_page]
+
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    pagination_results = search_scroll(page=page, offset=offset,
+                                       per_page=7)
+    total = len(final_results)
+    pagination = Pagination(page=page, per_page=7,
+                            total=total)
+
+    return render_template('search.html', final_results=pagination_results,
+                           taglist=taglist,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination)
+
+
 @base.route('/about')
 def about():
 

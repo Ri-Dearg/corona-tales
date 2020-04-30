@@ -149,6 +149,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var getUrl = window.location;
     var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    var reg = new RegExp(".*?", "g")
+    var tagUrl = getUrl .protocol + "//" + getUrl.host + "/" + 'search_tags/' + reg
+
 
     var scroll = document.querySelector('.infiniscroll');
     if (scroll != undefined) {
@@ -156,11 +159,13 @@ document.addEventListener('DOMContentLoaded', function () {
         var infScroll = new InfiniteScroll(scroll, {
             // options
             path: function () {
-                if (window.location.href === baseUrl) {
+                if (window.location.href === baseUrl || tagUrl) {
+                    console.log('hello')
                     pageNumber = this.loadCount + 2
                     return window.location.href + '?page=' + pageNumber
                 }
                 else {
+                    console.log( baseUrl)
                     pageNumber = this.loadCount + 2
                     return window.location.href + '&page=' + pageNumber
                 }
