@@ -125,6 +125,26 @@ function addTags(formId, arrayLength, array) {
     return true
 }
 
+function likeUnlike(id, functionUrl) {
+    document.addEventListener('DOMContentLoaded', function () {
+
+        function like(ev) {
+        ev.preventDefault();
+        $.ajax({
+        method: 'POST',
+        url: functionUrl,
+        data: $(this).serialize(),
+        datatype: 'json',
+        success: function(data) {
+            $(`#like-tip-${id}`).attr('data-tooltip', `${data.toString()} Likes`)
+        }
+        });
+        }
+
+        $(`#form-like-${id}`).on('submit', like)
+    })
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();

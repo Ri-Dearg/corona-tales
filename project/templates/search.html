@@ -24,12 +24,12 @@
                                     <p>{{ result.text|safe }}</p>
                                     <br>
                                 </div>
-                                <div id="button-{{ result._id }}" class="fixed-action-btn no-autoinit horizontal-button">
+                                <div id="button-{{ result._id }}" class="fixed-action-btn heart-button">
                                 <form class="like-button" id="form-like-{{ result._id }}">
-                                <input type="hidden" name="like-id" value="{{ result._id }}">
-                                <button class="btn-floating btn-small indigo darken-1">
-                                    <i class="large material-icons">title</i>
-                                </button>
+                                    <input type="hidden" name="like-id" value="{{ result._id }}">
+                                    <button id="like-tip-{{ result._id }}" class="btn-floating  indigo darken-1 tooltipped" data-position="left" data-tooltip="{{ result.likes }} Likes">
+                                        <i class="large material-icons">favorite_border</i>
+                                    </button>
                                 </form>
                                 </div>
                                 <div class="card-action col s12">
@@ -58,24 +58,9 @@
 {% endblock %} {% block javascript %}
 <script>
 
-    function likeUnlike(id) {
-        
-        function like(ev) {
-        ev.preventDefault();
-        console.log($(this).serialize())
-        $.ajax({
-        method: 'POST',
-        url: {{ url_for('base.like')|tojson }},
-        data: $(this).serialize()
-        });
-        }
-
-        $(`#form-like-${id}`).on('submit', like)
-        }
-
         {% for result in final_results %}
                 showDate('{{ result._id }}','{{ result.time }}')
-                likeUnlike('{{ result._id }}')
+                likeUnlike('{{ result._id }}', "{{ url_for('base.like') }}")
         {% endfor %}
    
 </script>

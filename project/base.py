@@ -1,5 +1,5 @@
 from flask import (Blueprint, current_app, render_template, url_for, request,
-                   redirect, flash)
+                   redirect, flash, jsonify)
 from flask_login import login_required, current_user
 from .extensions import mongo, mail
 from config import ADMINS
@@ -397,11 +397,14 @@ def delete_story(story_id):
 @login_required
 def like():
     post_id = request.form.get('like-id')
-    print(post_id)
     stories.update({'_id': ObjectId(post_id)},
                    {'$inc':
                     {'likes': 1}
                     })
-    likes_number = stories.find({'_id': ObjectId(post_id)},
-                                {'likes': 1})
-    return str(likes_number)
+
+    likes_number = stories.find_one({'_id': ObjectId(post_id)},
+                                    {'likes': 1})
+
+    likes_total = likes_number['likes']
+
+    return jsonify(likes_total)

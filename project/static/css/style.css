@@ -7,7 +7,7 @@
  */
 
 .navbar-fixed {
-    z-index: 998;
+    z-index: 2001;
 }
 
 .d-none {
@@ -136,6 +136,8 @@ nav .brand-logo {
 .modal {
     max-height: 75%;
     width: 90%; 
+    overflow-y: auto;
+
 }
 
 .modal .modal-content {
@@ -185,9 +187,15 @@ nav .brand-logo {
 }
 
 .horizontal-button {
-position:absolute; 
-bottom:-29px; 
-right:10px"
+    position:absolute; 
+    bottom:-29px; 
+    right:10px
+}
+
+.heart-button {
+    position:absolute; 
+    bottom:-17px; 
+    right:55px
 }
 
 .success {
