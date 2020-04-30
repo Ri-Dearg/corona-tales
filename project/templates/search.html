@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
     <section class="section white z-depth-3 infiniscroll">
+        <h4 class="heading center-align">Search results</h4>
         {% for result in final_results %}
         <div class="scroll-append">
         <div class="id-info d-none">{{ result._id}}</div>

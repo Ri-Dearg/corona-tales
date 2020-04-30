@@ -227,7 +227,7 @@ def search():
 def search_tags(tag):
 
     taglist = get_tags()
-    
+
     results = stories.find({
         '$text': {'$search': f'{tag}'}},
         {'score': {'$meta': 'textScore'}}).sort(
