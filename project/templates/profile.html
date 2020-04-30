@@ -59,7 +59,7 @@
                                                 </ul>
                                             </div>
                                             <div class="card-action col s12">
-                                                <p>Tags: {% for tag in story.tags %}{{ tag }}, {% endfor %}</p>
+                                                <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>, {% endfor %}</p>
                                             </div>
 										</div>
 									</div>

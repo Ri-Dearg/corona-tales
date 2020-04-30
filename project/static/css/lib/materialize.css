@@ -4913,16 +4913,17 @@ small {
   border-radius: 0 0 2px 2px;
 }
 
-/*.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
-  color: #ffab40;
-  margin-right: 24px;
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+  color: #000000;
+  text-decoration: underline;
+  /*margin-right: 24px;
   -webkit-transition: color .3s ease;
   transition: color .3s ease;
-  text-transform: uppercase;
-}*/
+  text-transform: uppercase;*/
+}
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
-  color: #000000;
+  color: #039be5;
 }
 
 .card .card-reveal {
