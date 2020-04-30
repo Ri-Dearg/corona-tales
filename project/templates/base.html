@@ -1695,7 +1695,12 @@
             };
             {% for story in story_list %}
                 showDate('{{ story._id }}', '{{ story.time }}')
+                initTags(tagList, '{{ story._id }}')
+                likeUnlike('{{ story._id }}', "{{ url_for('base.like') }}")
+                initStoryModal('{{ story._id }}', '{{ story.text|safe }}', {{ story.tags|safe }})
+                formValid('{{ story._id }}');
             {% endfor %}
+            
             initTags(tagList, 'index');
             initTags(tagList, 'search');
             initStoryModal('index');

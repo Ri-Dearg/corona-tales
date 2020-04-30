@@ -184,7 +184,7 @@ def search():
             {'score': {'$meta': 'textScore'}}).sort(
             [('score', {'$meta': 'textScore'})])
 
-    final_results = []
+    story_list = []
 
     for result in results:
 
@@ -193,31 +193,31 @@ def search():
                 if story_lang is not None:
                     if result['country'] == country and \
                        result['story_language'] == story_lang:
-                        final_results.append(result)
+                        story_list.append(result)
 
                 elif result['country'] == country:
-                    final_results.append(result)
+                    story_list.append(result)
 
             elif result['story_language'] == story_lang:
-                final_results.append(result)
+                story_list.append(result)
 
         else:
-            final_results.append(result)
+            story_list.append(result)
 
     def search_scroll(page, offset=0, per_page=10):
         offset = (page-1) * 7
 
-        return final_results[offset: offset + per_page]
+        return story_list[offset: offset + per_page]
 
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
     pagination_results = search_scroll(page=page, offset=offset,
                                        per_page=7)
-    total = len(final_results)
+    total = len(story_list)
     pagination = Pagination(page=page, per_page=7,
                             total=total)
 
-    return render_template('search.html', final_results=pagination_results,
+    return render_template('search.html', story_list=pagination_results,
                            taglist=taglist,
                            page=page,
                            per_page=per_page,
@@ -234,25 +234,25 @@ def search_tags(tag):
         {'score': {'$meta': 'textScore'}}).sort(
         [('score', {'$meta': 'textScore'})])
 
-    final_results = []
+    story_list = []
 
     for result in results:
-        final_results.append(result)
+        story_list.append(result)
 
     def search_scroll(page, offset=0, per_page=10):
         offset = (page-1) * 7
 
-        return final_results[offset: offset + per_page]
+        return story_list[offset: offset + per_page]
 
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
     pagination_results = search_scroll(page=page, offset=offset,
                                        per_page=7)
-    total = len(final_results)
+    total = len(story_list)
     pagination = Pagination(page=page, per_page=7,
                             total=total)
 
-    return render_template('search.html', final_results=pagination_results,
+    return render_template('search.html', story_list=pagination_results,
                            taglist=taglist,
                            page=page,
                            per_page=per_page,
@@ -295,14 +295,14 @@ def send_mail():
 @login_required
 def profile():
 
-    user_stories = stories.find(
+    story_list = stories.find(
         {'user_id': current_user.user_id}).sort('time', -1)
     username = current_user.username
 
     def user_pages(page, offset=0, per_page=10):
         user_array = []
         offset = (page-1) * 7
-        for story in user_stories:
+        for story in story_list:
             user_array.append(story)
         return user_array[offset: offset + per_page]
 
@@ -311,12 +311,12 @@ def profile():
                                            per_page_parameter='per_page')
     pagination_user = user_pages(page=page, offset=offset,
                                  per_page=7)
-    total = user_stories.count()
+    total = story_list.count()
     pagination = Pagination(page=page, per_page=7,
                             total=total)
 
     return render_template("profile.html",
-                           user_stories=pagination_user, taglist=taglist,
+                           story_list=pagination_user, taglist=taglist,
                            page=page,
                            per_page=per_page,
                            pagination=pagination,
