@@ -32,7 +32,6 @@ function initStoryModal(id, content, tagList) {
                 }
 
                 if (tagList !== undefined) {
-                    console.log('hi')
                     var instance = M.Chips.getInstance(document.querySelector(`#chips-${id}`))
                     for (i = 0; i < tagList.length; i++) {
                         instance.addChip({
@@ -175,15 +174,16 @@ function scrollInit(tagList) {
                 for (i=0; i < items.length; i++) {
                     var info = items[i].children
                     var storyId = info[0].innerText
-                    var tags = JSON.parse(info[2].innerText)
-                    console.log(tags)
-                    var content = $(items).find(`#content-${storyId}`).html()
-                    M.AutoInit();
-                    initFab();
                     showDate(storyId, info[1].innerText)
+                    
+                    if (getUrl.pathname == '/profile') {
+                    var tags = JSON.parse(info[2].innerText)
+                    var content = $(items).find(`#content-${storyId}`).html()
+                    initFab();
                     initTags(tagList, storyId)
                     initStoryModal(storyId, content, tags)
                     formValid(storyId);
+                    }
                 }
             }); 
         }
