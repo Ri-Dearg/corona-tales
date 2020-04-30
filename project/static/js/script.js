@@ -125,6 +125,7 @@ function addTags(formId, arrayLength, array) {
     return true
 }
 
+
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
 

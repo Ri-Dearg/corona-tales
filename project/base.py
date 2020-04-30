@@ -72,6 +72,7 @@ def create_story():
                             'text': request.form.get('text'),
                             'time': int(time.time()*1000),
                             'featured': False,
+                            'likes': 0,
                             'tags': request.form.getlist('tags')})
 
     else:
@@ -390,3 +391,17 @@ def delete_story(story_id):
     stories.remove({'_id': ObjectId(story_id)})
 
     return redirect(url_for('base.profile'))
+
+
+@base.route('/like', methods=['POST'])
+@login_required
+def like():
+    post_id = request.form.get('like-id')
+    print(post_id)
+    stories.update({'_id': ObjectId(post_id)},
+                   {'$inc':
+                    {'likes': 1}
+                    })
+    likes_number = stories.find({'_id': ObjectId(post_id)},
+                                {'likes': 1})
+    return str(likes_number)
