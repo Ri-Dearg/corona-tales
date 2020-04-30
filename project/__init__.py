@@ -1,4 +1,5 @@
 import os
+import re
 from flask import Flask
 from flask_login import LoginManager
 from .extensions import mongo, mail
@@ -24,6 +25,12 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return User.get_by_id(ObjectId(user_id))
+
+    def alpahanumeric_filter(s):
+        symbols = re.compile('[^a-zA-Z\d]')
+        return symbols.sub('', s)
+
+    app.jinja_env.filters['alphanumeric'] = alpahanumeric_filter
 
     from .base import base as base_blueprint
     app.register_blueprint(base_blueprint)
