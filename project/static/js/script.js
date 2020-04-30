@@ -175,7 +175,8 @@ function scrollInit(tagList) {
                 for (i=0; i < items.length; i++) {
                     var info = items[i].children
                     var storyId = info[0].innerText
-                    var tags = info[2].innerHTML
+                    var tags = JSON.parse(info[2].innerText)
+                    console.log(tags)
                     var content = $(items).find(`#content-${storyId}`).html()
                     M.AutoInit();
                     initFab();

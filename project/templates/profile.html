@@ -19,7 +19,7 @@
 				<div class="scroll-append">
                     <div class="id-info d-none">{{ story._id}}</div>
                     <div class="time-info d-none">{{ story.time}}</div>
-                    <div class="tag-info d-none">{{ story.tags|safe }}</div>
+                    <div class="tag-info d-none">{{ story.tags|tojson }}</div>
 					<hr class="{{ story.color }}">
 					<br>
 					<div class="row">
