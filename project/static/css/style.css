@@ -6,6 +6,10 @@
  * Made By MaterializeCSS.com
  */
 
+.navbar-fixed {
+    z-index: 998;
+}
+
 .d-none {
     display: none;
 }
