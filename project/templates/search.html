@@ -1,7 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
     <section class="section white z-depth-3 infiniscroll">
-    {{ pagination.links }}
         {% for result in final_results %}
         <div class="scroll-append">
         <div class="id-info d-none">{{ result._id}}</div>
