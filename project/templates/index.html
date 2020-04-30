@@ -27,6 +27,8 @@
 {% for story in story_list %}
         <!--   Story Section   -->
         <div class="scroll-append">
+        <div class="id-info d-none">{{ story._id}}</div>
+        <div class="time-info d-none">{{ story.time}}</div>
         <hr class="{{ story.color }}">
         <br>
         <div class="row">

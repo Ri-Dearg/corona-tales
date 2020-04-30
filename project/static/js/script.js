@@ -160,12 +160,10 @@ document.addEventListener('DOMContentLoaded', function () {
             // options
             path: function () {
                 if (window.location.href === baseUrl || window.location.href === tagUrl) {
-                    console.log('hello')
                     pageNumber = this.loadCount + 2
                     return window.location.href + '?page=' + pageNumber
                 }
                 else {
-                    console.log( baseUrl)
                     pageNumber = this.loadCount + 2
                     return window.location.href + '&page=' + pageNumber
                 }
@@ -176,6 +174,14 @@ document.addEventListener('DOMContentLoaded', function () {
             status: '.page-load-status'
         });
     }
+
+            infScroll.on( 'append', function( response, path, items ) {
+            for (i=0; i < items.length; i++) {
+                var info = items[i].children
+                showDate(info[0].innerText, info[1].innerText)
+            }
+        });  
+
     $('.password-create').on('submit', function (event) {
         var passFirst = document.querySelector('.passone').value
         var passSecond = document.querySelector('.passtwo').value

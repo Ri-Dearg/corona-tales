@@ -6,6 +6,9 @@
  * Made By MaterializeCSS.com
  */
 
+.d-none {
+    display: none;
+}
 
 html {
     font-family: 'Josefin Slab', serif;

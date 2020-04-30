@@ -4,6 +4,8 @@
     {{ pagination.links }}
         {% for result in final_results %}
         <div class="scroll-append">
+        <div class="id-info d-none">{{ result._id}}</div>
+        <div class="time-info d-none">{{ result.time}}</div>
         <hr class="{{ result.color }}">
         <br>
             <div class="row">
@@ -49,6 +51,7 @@
 <script>
         {% for result in final_results %}
                 showDate('{{ result._id }}','{{ result.time }}')
-        {% endfor %}            
+        {% endfor %}
+   
 </script>
 {% endblock %}
