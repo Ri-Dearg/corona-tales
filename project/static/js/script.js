@@ -1,7 +1,6 @@
 function initTags(tagCreate, id) {
-    document.addEventListener('DOMContentLoaded', function () {
 
-        var chips = document.querySelectorAll(`#chips-${id}`);
+        var chips = document.querySelector(`#chips-${id}`);
 
         var instances = M.Chips.init(chips, {
             limit: 15,
@@ -12,13 +11,12 @@ function initTags(tagCreate, id) {
                 limit: 8,
             }
         });
-    });
 }
 
 function initStoryModal(id, content, tagList) {
-    document.addEventListener('DOMContentLoaded', function () {
-        var modals = document.querySelector(`#modal-${id}`);
-        var instances = M.Modal.init(modals, {
+        
+        modal = document.querySelector(`#modal-${id}`);
+        instance = M.Modal.init(modal, {
             onOpenStart: function () {
                 if (id !== 'search') {
                     ClassicEditor
@@ -34,6 +32,7 @@ function initStoryModal(id, content, tagList) {
                 }
 
                 if (tagList !== undefined) {
+                    console.log('hi')
                     var instance = M.Chips.getInstance(document.querySelector(`#chips-${id}`))
                     for (i = 0; i < tagList.length; i++) {
                         instance.addChip({
@@ -55,7 +54,6 @@ function initStoryModal(id, content, tagList) {
                 }
             }
         });
-    });
 }
 
 function showDate(id, timeStamp) {
@@ -70,7 +68,6 @@ function showDate(id, timeStamp) {
 }
 
 function initFab() {
-    document.addEventListener('DOMContentLoaded', function () {
         var sideFab = document.querySelectorAll('.horizontal-button');
         var indexFab = document.querySelector('#button-index');
         var indexTap = document.querySelector('.tap-target');
@@ -92,7 +89,7 @@ function initFab() {
                 setTimeout(function(){ instancesFeature.close(); }, 4000)
                 sessionStorage.Shown = 1;
         }
-    });
+
 }
 
 function formValid(formId) {
@@ -145,6 +142,52 @@ function likeUnlike(id, functionUrl) {
     })
 }
 
+function scrollInit(tagList) {
+
+        var getUrl = window.location;
+        var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+        var reg = new RegExp(".*?", "g")
+        var tagUrl = getUrl .protocol + "//" + getUrl.host + "/" + 'search_tags/' + reg
+
+
+        var scroll = document.querySelector('.infiniscroll');
+        if (scroll != undefined) {
+
+            var infScroll = new InfiniteScroll(scroll, {
+                // options
+                path: function () {
+                    if (window.location.href === baseUrl || window.location.href === tagUrl) {
+                        pageNumber = this.loadCount + 2
+                        return window.location.href + '?page=' + pageNumber
+                    }
+                    else {
+                        pageNumber = this.loadCount + 2
+                        return window.location.href + '&page=' + pageNumber
+                    }
+                },
+                append: '.scroll-append',
+                checkLastPage: '.scroll-append',
+                history: false,
+                status: '.page-load-status'
+            });
+
+                infScroll.on( 'append', function( response, path, items ) {
+                for (i=0; i < items.length; i++) {
+                    var info = items[i].children
+                    var storyId = info[0].innerText
+                    var tags = info[2].innerHTML
+                    var content = $(items).find(`#content-${storyId}`).html()
+                    M.AutoInit();
+                    initFab();
+                    showDate(storyId, info[1].innerText)
+                    initTags(tagList, storyId)
+                    initStoryModal(storyId, content, tags)
+                    formValid(storyId);
+                }
+            }); 
+        }
+    }
+
 
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
@@ -166,42 +209,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var instance = M.Tabs.init(formTabs, {})
         }
     });
-
-
-    var getUrl = window.location;
-    var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    var reg = new RegExp(".*?", "g")
-    var tagUrl = getUrl .protocol + "//" + getUrl.host + "/" + 'search_tags/' + reg
-
-
-    var scroll = document.querySelector('.infiniscroll');
-    if (scroll != undefined) {
-
-        var infScroll = new InfiniteScroll(scroll, {
-            // options
-            path: function () {
-                if (window.location.href === baseUrl || window.location.href === tagUrl) {
-                    pageNumber = this.loadCount + 2
-                    return window.location.href + '?page=' + pageNumber
-                }
-                else {
-                    pageNumber = this.loadCount + 2
-                    return window.location.href + '&page=' + pageNumber
-                }
-            },
-            append: '.scroll-append',
-            checkLastPage: '.scroll-append',
-            history: false,
-            status: '.page-load-status'
-        });
-    }
-
-            infScroll.on( 'append', function( response, path, items ) {
-            for (i=0; i < items.length; i++) {
-                var info = items[i].children
-                showDate(info[0].innerText, info[1].innerText)
-            }
-        });  
 
     $('.password-create').on('submit', function (event) {
         var passFirst = document.querySelector('.passone').value

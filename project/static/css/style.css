@@ -5,7 +5,9 @@
  *
  * Made By MaterializeCSS.com
  */
-
+.sidenav {
+    z-index: 2002;
+}
 .navbar-fixed {
     z-index: 2001;
 }
@@ -125,7 +127,7 @@ form .col.pd-b {
 .modal {
     max-height: 85%;
     width: 65%;
-    overflow-y: visible;
+    z-index: 2003 !important;
 }
 
 @media only screen and (max-width: 600px) {

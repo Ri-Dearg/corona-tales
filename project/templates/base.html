@@ -1680,6 +1680,7 @@
     <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
 
 	<script>
+    document.addEventListener('DOMContentLoaded', function () {
 		{% with messages = get_flashed_messages(with_categories = true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -1693,14 +1694,16 @@
                     "{{ tag }}": null,
                 {% endfor %}
             };
+
             {% for story in story_list %}
                 showDate('{{ story._id }}', '{{ story.time }}')
                 initTags(tagList, '{{ story._id }}')
-                likeUnlike('{{ story._id }}', "{{ url_for('base.like') }}")
                 initStoryModal('{{ story._id }}', '{{ story.text|safe }}', {{ story.tags|safe }})
                 formValid('{{ story._id }}');
+                likeUnlike('{{ story._id }}', "{{ url_for('base.like') }}")
             {% endfor %}
-            
+
+            scrollInit(tagList)
             initTags(tagList, 'index');
             initTags(tagList, 'search');
             initStoryModal('index');
@@ -1708,6 +1711,7 @@
             formValid('index');
             formValid('search')
             initFab()
+    })
 	</script>
 
 	{% block javascript %}
