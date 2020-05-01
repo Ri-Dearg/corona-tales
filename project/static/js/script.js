@@ -149,20 +149,17 @@ function likeUnlike(id) {
 
 
 function scrollInit(tagList, idList) {
-    console.log(idList)
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     var reg = new RegExp(".*?", "g")
-    var tagUrl = getUrl.protocol + "//" + getUrl.host + "/" + 'search_tags/' + reg
-
+    var tagPath = "search_tags"
 
     var scroll = document.querySelector('.infiniscroll');
     if (scroll != undefined) {
 
         var infScroll = new InfiniteScroll(scroll, {
-            // options
             path: function () {
-                if (window.location.href === baseUrl || window.location.href === tagUrl) {
+                if (window.location.href === baseUrl || window.location.pathname.split('/')[1] === tagPath) {
                     pageNumber = this.loadCount + 2
                     return window.location.href + '?page=' + pageNumber
                 }

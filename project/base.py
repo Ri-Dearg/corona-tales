@@ -231,7 +231,7 @@ def search():
                            pagination=pagination)
 
 
-@base.route('/search_tags/<string:tag>', methods=['GET', 'POST'])
+@base.route('/search_tags/<string:tag>', methods=['GET'])
 def search_tags(tag):
 
     taglist = get_tags()
