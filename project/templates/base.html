@@ -83,15 +83,23 @@
             <i class="large material-icons">menu</i>
         </div>
         <ul>
+            <span class="mobile-fab-tip left-tip">Help</span>
             <li><a href="#modal-help" class="btn-floating orange lighten-1 modal-trigger tooltipped" data-position="left" data-tooltip="Help"><i class="material-icons">help</i></a></li>
             <li>
                 {% if request.url_rule.endpoint == "base.profile" %}
+                <span class="mobile-fab-tip left-tip">Home</span>
                 <a href="{{ url_for('base.story_page') }}" class="btn-floating teal accent-4 tooltipped" data-position="left" data-tooltip="Home"><i class="material-icons">home</i></a> {% else %} {% if current_user.is_authenticated %}
+                <span class="mobile-fab-tip left-tip">Profile</span>
                 <a href="{{ url_for('base.profile') }}" class="btn-floating teal accent-4 tooltipped" data-position="left" data-tooltip="Profile"><i class="material-icons">account_circle</i></a> {% endif %} {% if not current_user.is_authenticated %}
+                <span class="mobile-fab-tip left-tip">Signup / Login</span>
                 <a href="#modal-signup-login" class="btn-floating teal accent-4 tooltipped modal-trigger" data-position="left" data-tooltip="Signup / Login"><i class="material-icons">account_circle</i></a> {% endif %} {% endif %}
             </li>
-            <li><a href="#modal-search" class="btn-floating light-blue accent-2 tooltipped modal-trigger" data-position="left" data-tooltip="Search"><i class="material-icons">search</i></a></li>
-            <li><a href="#modal-index" class="btn-floating purple lighten-1 modal-trigger tooltipped" data-position="left" data-tooltip="Post a Story"><i class="material-icons">mode_edit</i></a></li>
+            <li>
+            <span class="mobile-fab-tip left-tip">Search</span>
+            <a href="#modal-search" class="btn-floating light-blue accent-2 tooltipped modal-trigger" data-position="left" data-tooltip="Search"><i class="material-icons">search</i></a></li>
+            <li>
+            <span class="mobile-fab-tip left-tip">Post a Story</span>
+            <a href="#modal-index" class="btn-floating purple lighten-1 modal-trigger tooltipped" data-position="left" data-tooltip="Post a Story"><i class="material-icons">mode_edit</i></a></li>
         </ul>
     </div>
 

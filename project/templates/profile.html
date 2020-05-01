@@ -47,12 +47,14 @@
                                                 </div>
                                                 <ul>
                                                     <li>
+                                                        <span class="mobile-fab-tip bot-tip-2">Delete</span>
                                                         <a href="{{ url_for('base.delete_story', story_id=story._id) }}"
                                                             class="btn-floating red darken-1 tooltipped"
                                                             data-position="bottom"
                                                             data-tooltip="Delete Story"><i class="material-icons">highlight_off</i></a>
                                                     </li>
                                                     <li>
+                                                        <span class="mobile-fab-tip bot-tip-1">Edit</span>
                                                         <a href="#modal-{{ story._id }}"
                                                             class="btn-floating purple lighten-1 modal-trigger tooltipped"
                                                             data-position="bottom"

@@ -131,20 +131,20 @@ form .col.pd-b {
 }
 
 @media only screen and (max-width: 600px) {
-nav .brand-logo {
-    font-size: 8vw;
-}
+    nav .brand-logo {
+        font-size: 8vw;
+    }
 
-.modal {
-    max-height: 75%;
-    width: 90%; 
-    overflow-y: auto;
+    .modal {
+        max-height: 75%;
+        width: 90%; 
+        overflow-y: auto;
 
-}
+    }
 
-.modal .modal-content {
-    padding: 12px
-}
+    .modal .modal-content {
+        padding: 12px
+    }
 }
 
 .icon-block {
@@ -182,10 +182,10 @@ nav .brand-logo {
 }
 
 @media only screen and (max-width: 400px) {
-.section {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-}
+    .section {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
 }
 
 .horizontal-button {
@@ -216,4 +216,79 @@ nav .brand-logo {
 
 .ck.ck-content ul {
   padding-left: 2.5rem;
+}
+
+.fixed-action-btn ul {
+display: none;
+}
+
+.fixed-action-btn:hover ul {
+display: block;
+}
+
+.material-tooltip {
+display: none !important;
+}
+
+.like-tip {
+    display: none;
+}
+
+.left-tip {
+position: fixed;
+right: 85px;
+}
+
+.bot-tip-1 {
+position: fixed;
+right: 15px;
+top: 54px;
+}
+
+.bot-tip-2 {
+position: fixed;
+top: 54px;
+right: 67px;
+}
+
+.mobile-fab-tip {
+padding: 7px 5px 4px 5px;
+text-align: right;
+background-color: #323232;
+border-radius: 2px;
+color: #FFF;
+opacity: 0;
+}
+.mobile-fab-tip {
+-webkit-animation: fadein 1s;
+-moz-animation: fadein 1s;
+-o-animation: fadein 1s;
+animation: fadein 1s;
+-webkit-animation-fill-mode: forwards;
+-moz-animation-fill-mode: forwards;
+-o-animation-fill-mode: forwards;
+animation-fill-mode: forwards;
+-webkit-animation-delay: 0.5s;
+-moz-animation-delay: 0.5s;
+-o-animation-delay: 0.5s;
+animation-delay: 0.5s;
+}
+@keyframes fadein {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+@-moz-keyframes fadein {
+/* Firefox */
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+@-webkit-keyframes fadein {
+/* Safari and Chrome */
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+@-o-keyframes fadein {
+/* Opera */
+0% { opacity: 0; }
+100% { opacity: 1; }
 }

@@ -74,13 +74,10 @@ function initFab() {
         if (sideFab != null) {
             var instanceUser = M.FloatingActionButton.init(sideFab, {
                 direction: 'left',
-                hoverEnabled: false
             })
         };
         if (indexFab != null) {
-            var instanceIndex = M.FloatingActionButton.init(indexFab, {
-                hoverEnabled: false
-            })
+            var instanceIndex = M.FloatingActionButton.init(indexFab, {})
         };
         if (indexTap != null && !sessionStorage.Shown) {
             var instancesFeature = M.TapTarget.init(indexTap, {});
@@ -122,7 +119,6 @@ function addTags(formId, arrayLength, array) {
 }
 
 function likeUnlike(id, functionUrl) {
-    document.addEventListener('DOMContentLoaded', function () {
 
         function like(ev) {
         ev.preventDefault();
@@ -138,7 +134,6 @@ function likeUnlike(id, functionUrl) {
         }
 
         $(`#form-like-${id}`).on('submit', like)
-    })
 }
 
 function scrollInit(tagList) {
