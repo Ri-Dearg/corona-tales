@@ -27,9 +27,9 @@
                                 <div id="button-{{ story._id }}" class="fixed-action-btn heart-button">
                                 <form class="like-button" id="form-like-{{ story._id }}">
                                     <input type="hidden" name="like-id" value="{{ story._id }}">
-                                    <span class="mobile-fab-tip like-tip">{{ story.likes }} Likes</span>
-                                    <button id="like-tip-{{ story._id }}" class="btn-floating  indigo darken-1 tooltipped" data-position="left" data-tooltip="{{ story.likes }} Likes">
-                                        <i class="large material-icons">favorite_border</i>
+                                    <span class="mobile-fab-tip like-tip" id="like-tip-{{ story._id }}">{{ story.likes }} likes</span>
+                                    <button id="like-info-{{ story._id }}" class="btn-floating indigo darken-1 tooltipped" data-position="left" data-tooltip="{{ story.likes }} likes">
+                                        <i id="heart-{{ story._id }}" class="large material-icons">favorite_border</i>
                                     </button>
                                 </form>
                                 </div>

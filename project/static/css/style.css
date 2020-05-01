@@ -196,7 +196,7 @@ form .col.pd-b {
 
 .heart-button {
     position:absolute; 
-    bottom:-17px; 
+    bottom:-25px; 
     right:55px
 }
 
@@ -230,8 +230,16 @@ display: block;
 display: none !important;
 }
 
-.like-tip {
+.mobile-fab-tip.like-tip {
+position: relative;
+top:4px;
     display: none;
+    -webkit-animation-fill-mode: none;
+    -moz-animation-fill-mode: none;
+    -o-animation-fill-mode: none;
+    animation-fill-mode: none;
+    opacity: 100;
+    animation-delay: 0s;
 }
 
 .left-tip {

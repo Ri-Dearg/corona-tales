@@ -128,7 +128,14 @@ function likeUnlike(id, functionUrl) {
         data: $(this).serialize(),
         datatype: 'json',
         success: function(data) {
-            $(`#like-tip-${id}`).attr('data-tooltip', `${data.toString()} Likes`)
+            $(`#heart-${id}`).text('favorite')
+            $(`#like-info-${id}`).attr('data-tooltip', `${data.toString()} likes`);
+            $(`#like-tip-${id}`).text(`${data.toString()} likes`);
+            $(`#like-tip-${id}`).fadeIn(600, function() {
+                setTimeout(function() {
+                    $(`#like-tip-${id}`).fadeOut(600);
+                }, 2000)
+            });
         }
         });
         }
