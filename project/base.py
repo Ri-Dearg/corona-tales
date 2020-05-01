@@ -334,7 +334,7 @@ def fill_info():
     language_fill = request.form.get('language-fill')
 
     if name_fill or age_fill or country_fill or language_fill:
-        mongo.db.users.update({'user_id': current_user.user_id},
+        mongo.db.users.update_one({'user_id': current_user.user_id},
                               {'$set':
                                {'prefill': {'name': name_fill,
                                             'age': age_fill,
@@ -354,7 +354,7 @@ def fill_info():
 @base.route('/delete_info', methods=['POST'])
 @login_required
 def delete_info():
-    mongo.db.users.update({'user_id': current_user.user_id},
+    mongo.db.users.update_one({'user_id': current_user.user_id},
                           {'$unset':
                            {'prefill.name': "",
                             'prefill.age': "",
@@ -368,7 +368,7 @@ def delete_info():
 @base.route('/edit_story/<story_id>', methods=["POST"])
 @login_required
 def edit_story(story_id):
-    stories.update({'_id': ObjectId(story_id)},
+    stories.update_one({'_id': ObjectId(story_id)},
                    {'$set':
                     {
                         'name': request.form.get('name'),
@@ -403,13 +403,16 @@ def like():
                                           {'liked': 1}))
     pprint.pprint(user_likes)
     if ObjectId(post_id) not in user_likes['liked']:
-        mongo.db.users.update({'user_id': current_user.user_id},
+
+
+    if ObjectId(post_id) not in user_likes['liked']:
+        mongo.db.users.update_one({'user_id': current_user.user_id},
                               {'$push':
                                {'liked': ObjectId(post_id)
                                 }
                                })
 
-        stories.update({'_id': ObjectId(post_id)},
+        stories.update_one({'_id': ObjectId(post_id)},
                    {'$inc':
                     {'likes': 1}
                     })

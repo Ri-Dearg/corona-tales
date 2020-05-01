@@ -69,7 +69,7 @@ def change_password():
         flash('The password is incorrect', 'sorry')
         return redirect(url_for('base.profile', _anchor='user-settings'))
 
-    usersdb.update({"user_id": this_user},
+    usersdb.update_one({"user_id": this_user},
                    {'$set':
                     {'password': generate_password_hash(request.form.get
                                                         ('password-new'),
