@@ -49,7 +49,8 @@ def login_form():
         flash('The login details are incorrect', 'sorry')
         return redirect(url_for('base.story_page'))
 
-    log_user = User(userID, username, password, prefill, liked, _id=user.get('_id'))
+    log_user = User(userID, username, password, prefill, liked,
+                    _id=user.get('_id'))
     login_user(log_user, remember=remember)
 
     flash(f'Welcome, {username}', 'success')
@@ -70,11 +71,11 @@ def change_password():
         return redirect(url_for('base.profile', _anchor='user-settings'))
 
     usersdb.update_one({"user_id": this_user},
-                   {'$set':
-                    {'password': generate_password_hash(request.form.get
-                                                        ('password-new'),
-                                                        method='sha256')}
-                    })
+                       {'$set':
+                        {'password': generate_password_hash(request.form.get
+                                                            ('password-new'),
+                                                            method='sha256')}
+                        })
 
     flash('password has been changed', 'success')
 

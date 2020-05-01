@@ -29,7 +29,12 @@
                                     <input type="hidden" name="like-id" value="{{ story._id }}">
                                     <span class="mobile-fab-tip like-tip" id="like-tip-{{ story._id }}">{{ story.likes }} likes</span>
                                     <button id="like-info-{{ story._id }}" class="btn-floating indigo darken-1 tooltipped" data-position="left" data-tooltip="{{ story.likes }} likes">
-                                        <i id="heart-{{ story._id }}" class="large material-icons">favorite_border</i>
+                                    {% if story._id in current_user.liked %}
+                                        <i id="heart-{{ story._id }}" class="large material-icons">favorite</i>
+                                    {% else %}
+                                    <i id="heart-{{ story._id }}" class="large material-icons">favorite_border</i>
+                                    {% endif %}
+
                                     </button>
                                 </form>
                                 </div>

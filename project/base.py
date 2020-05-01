@@ -20,6 +20,12 @@ mailapp = mail
 story_array = []
 
 
+def like_check():
+    user_likes = (mongo.db.users.find_one({'user_id': current_user.user_id},
+                                          {'liked': 1}))
+    return jsonify(user_likes['liked'])
+
+
 def get_tags():
 
     taglist = current_app.config['taglist']
@@ -397,11 +403,11 @@ def delete_story(story_id):
 @base.route('/like', methods=['POST'])
 @login_required
 def like():
+    print('hello')
     post_id = request.form.get('like-id')
 
     user_likes = (mongo.db.users.find_one({'user_id': current_user.user_id},
                                           {'liked': 1}))
-    pprint.pprint(user_likes)
 
     if ObjectId(post_id) in user_likes['liked']:
         mongo.db.users.update_one({'user_id': current_user.user_id},

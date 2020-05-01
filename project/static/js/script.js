@@ -1,65 +1,65 @@
 function initTags(tagCreate, id) {
 
-        var chips = document.querySelector(`#chips-${id}`);
+    var chips = document.querySelector(`#chips-${id}`);
 
-        var instances = M.Chips.init(chips, {
-            limit: 15,
-            placeholder: 'Add Tags',
-            secondaryPlaceholder: '+Tag',
-            autocompleteOptions: {
-                data: tagCreate,
-                limit: 8,
-            }
-        });
+    var instances = M.Chips.init(chips, {
+        limit: 15,
+        placeholder: 'Add Tags',
+        secondaryPlaceholder: '+Tag',
+        autocompleteOptions: {
+            data: tagCreate,
+            limit: 8,
+        }
+    });
 }
 
 function initStoryModal(id, content, tagList) {
-        
-        modal = document.querySelector(`#modal-${id}`);
-        instance = M.Modal.init(modal, {
-            onOpenStart: function () {
-                if (id !== 'search') {
-                    ClassicEditor
-                        .create(document.querySelector(`#editor-${id}`), {
-                            removePlugins: ['Image', 'EasyImage', 'ImageUpload', 'Link', 'MediaEmbed', 'Heading']
-                        })
-                        .then(editor => {
-                            newEditor = editor;
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
-                }
 
-                if (tagList !== undefined) {
-                    var instance = M.Chips.getInstance(document.querySelector(`#chips-${id}`))
-                    for (i = 0; i < tagList.length; i++) {
-                        instance.addChip({
-                            tag: tagList[i]
-                        });
-                    }
-                }
-            },
-            onOpenEnd: function () {
-                if (id !== 'search') {
-                    if (content !== undefined) {
-                        newEditor.setData(content)
-                    }
-                }
-            },
-            onCloseEnd: function () {
-                if (id !== 'search') {
-                    newEditor.destroy()
+    modal = document.querySelector(`#modal-${id}`);
+    instance = M.Modal.init(modal, {
+        onOpenStart: function () {
+            if (id !== 'search') {
+                ClassicEditor
+                    .create(document.querySelector(`#editor-${id}`), {
+                        removePlugins: ['Image', 'EasyImage', 'ImageUpload', 'Link', 'MediaEmbed', 'Heading']
+                    })
+                    .then(editor => {
+                        newEditor = editor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+
+            if (tagList !== undefined) {
+                var instance = M.Chips.getInstance(document.querySelector(`#chips-${id}`))
+                for (i = 0; i < tagList.length; i++) {
+                    instance.addChip({
+                        tag: tagList[i]
+                    });
                 }
             }
-        });
+        },
+        onOpenEnd: function () {
+            if (id !== 'search') {
+                if (content !== undefined) {
+                    newEditor.setData(content)
+                }
+            }
+        },
+        onCloseEnd: function () {
+            if (id !== 'search') {
+                newEditor.destroy()
+            }
+        }
+    });
 }
 
 function showDate(id, timeStamp) {
     var time = Number(timeStamp)
     var date = new Date(time)
 
-    const options = { day: 'numeric', month: 'short', year: 'numeric'};
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
     var dateString = date.toLocaleDateString(undefined, options)
 
     document.querySelector(`#date-med-${id}`).textContent = dateString
@@ -67,24 +67,24 @@ function showDate(id, timeStamp) {
 }
 
 function initFab() {
-        var sideFab = document.querySelectorAll('.horizontal-button');
-        var indexFab = document.querySelector('#button-index');
-        var indexTap = document.querySelector('.tap-target');
+    var sideFab = document.querySelectorAll('.horizontal-button');
+    var indexFab = document.querySelector('#button-index');
+    var indexTap = document.querySelector('.tap-target');
 
-        if (sideFab != null) {
-            var instanceUser = M.FloatingActionButton.init(sideFab, {
-                direction: 'left',
-            })
-        };
-        if (indexFab != null) {
-            var instanceIndex = M.FloatingActionButton.init(indexFab, {})
-        };
-        if (indexTap != null && !sessionStorage.Shown) {
-            var instancesFeature = M.TapTarget.init(indexTap, {});
-                instancesFeature.open()
-                setTimeout(function(){ instancesFeature.close(); }, 4000)
-                sessionStorage.Shown = 1;
-        }
+    if (sideFab != null) {
+        var instanceUser = M.FloatingActionButton.init(sideFab, {
+            direction: 'left',
+        })
+    };
+    if (indexFab != null) {
+        var instanceIndex = M.FloatingActionButton.init(indexFab, {})
+    };
+    if (indexTap != null && !sessionStorage.Shown) {
+        var instancesFeature = M.TapTarget.init(indexTap, {});
+        instancesFeature.open()
+        setTimeout(function () { instancesFeature.close(); }, 4000)
+        sessionStorage.Shown = 1;
+    }
 
 }
 
@@ -118,91 +118,91 @@ function addTags(formId, arrayLength, array) {
     return true
 }
 
-function likeUnlike(id, functionUrl) {
-
-        function like(ev) {
+function likeUnlike(id) {
+    function like(ev) {
         ev.preventDefault();
         $.ajax({
-        method: 'POST',
-        url: functionUrl,
-        data: $(this).serialize(),
-        datatype: 'json',
-        success: function(data) {
-            if ($(`#heart-${id}`).text() === 'favorite') {
-                $(`#heart-${id}`).text('favorite_border')
+            method: 'POST',
+            url: '/like',
+            data: $(this).serialize(),
+            datatype: 'json',
+            success: function (data) {
+                if ($(`#heart-${id}`).text() === 'favorite') {
+                    $(`#heart-${id}`).text('favorite_border')
+                }
+                else {
+                    $(`#heart-${id}`).text('favorite')
+                }
+                $(`#like-info-${id}`).attr('data-tooltip', `${data.toString()} likes`);
+                $(`#like-tip-${id}`).text(`${data.toString()} likes`);
+                $(`#like-tip-${id}`).fadeIn(600, function () {
+                    setTimeout(function () {
+                        $(`#like-tip-${id}`).fadeOut(600);
+                    }, 2000)
+                });
             }
-            else {
-                $(`#heart-${id}`).text('favorite')
-            }
-            $(`#like-info-${id}`).attr('data-tooltip', `${data.toString()} likes`);
-            $(`#like-tip-${id}`).text(`${data.toString()} likes`);
-            $(`#like-tip-${id}`).fadeIn(600, function() {
-                setTimeout(function() {
-                    $(`#like-tip-${id}`).fadeOut(600);
-                }, 2000)
-            });
-        }
         });
-        }
+    }
 
-        $(`#form-like-${id}`).on('submit', like)
+    $(`#form-like-${id}`).on('submit', like)
 }
 
-function scrollInit(tagList) {
 
-        var getUrl = window.location;
-        var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-        var reg = new RegExp(".*?", "g")
-        var tagUrl = getUrl .protocol + "//" + getUrl.host + "/" + 'search_tags/' + reg
+function scrollInit(tagList, idList) {
+    console.log(idList)
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+    var reg = new RegExp(".*?", "g")
+    var tagUrl = getUrl.protocol + "//" + getUrl.host + "/" + 'search_tags/' + reg
 
 
-        var scroll = document.querySelector('.infiniscroll');
-        if (scroll != undefined) {
+    var scroll = document.querySelector('.infiniscroll');
+    if (scroll != undefined) {
 
-            var infScroll = new InfiniteScroll(scroll, {
-                // options
-                path: function () {
-                    if (window.location.href === baseUrl || window.location.href === tagUrl) {
-                        pageNumber = this.loadCount + 2
-                        return window.location.href + '?page=' + pageNumber
-                    }
-                    else {
-                        pageNumber = this.loadCount + 2
-                        return window.location.href + '&page=' + pageNumber
-                    }
-                },
-                append: '.scroll-append',
-                checkLastPage: '.scroll-append',
-                history: false,
-                status: '.page-load-status'
-            });
+        var infScroll = new InfiniteScroll(scroll, {
+            // options
+            path: function () {
+                if (window.location.href === baseUrl || window.location.href === tagUrl) {
+                    pageNumber = this.loadCount + 2
+                    return window.location.href + '?page=' + pageNumber
+                }
+                else {
+                    pageNumber = this.loadCount + 2
+                    return window.location.href + '&page=' + pageNumber
+                }
+            },
+            append: '.scroll-append',
+            checkLastPage: '.scroll-append',
+            history: false,
+            status: '.page-load-status'
+        });
 
-                infScroll.on( 'append', function( response, path, items ) {
-                for (i=0; i < items.length; i++) {
-                    var info = items[i].children
-                    var storyId = info[0].innerText
-                    showDate(storyId, info[1].innerText)
-                    
-                    if (getUrl.pathname == '/profile') {
+        infScroll.on('append', function (response, path, items) {
+            for (i = 0; i < items.length; i++) {
+                var info = items[i].children
+                var storyId = info[0].innerText
+                showDate(storyId, info[1].innerText);
+                likeUnlike(storyId);
+
+                if (getUrl.pathname == '/profile') {
                     var tags = JSON.parse(info[2].innerText)
                     var content = $(items).find(`#content-${storyId}`).html()
                     initFab();
                     initTags(tagList, storyId)
                     initStoryModal(storyId, content, tags)
                     formValid(storyId);
-                    }
                 }
-            }); 
-        }
+            }
+        });
     }
-
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
 
     var sideNav = document.querySelectorAll('.sidenav');
     var nav = M.Sidenav.init(sideNav, {
-        edge:'right'
+        edge: 'right'
     });
 
     var datepicker = document.querySelectorAll('.datepicker');

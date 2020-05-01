@@ -1708,10 +1708,14 @@
                 initTags(tagList, '{{ story._id }}')
                 initStoryModal('{{ story._id }}', '{{ story.text|safe }}', {{ story.tags|safe }})
                 formValid('{{ story._id }}');
-                likeUnlike('{{ story._id }}', "{{ url_for('base.like') }}")
+                likeUnlike('{{ story._id }}')
             {% endfor %}
 
-            scrollInit(tagList)
+            scrollInit(tagList, {% if current_user.is_authenticated %} [{% for like in current_user.liked %}
+                        "{{like}}",
+                        {% endfor %}
+                        ]
+            {% endif %})
             initTags(tagList, 'index');
             initTags(tagList, 'search');
             initStoryModal('index');
