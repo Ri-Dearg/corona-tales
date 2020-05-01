@@ -128,7 +128,12 @@ function likeUnlike(id, functionUrl) {
         data: $(this).serialize(),
         datatype: 'json',
         success: function(data) {
-            $(`#heart-${id}`).text('favorite')
+            if ($(`#heart-${id}`).text() === 'favorite') {
+                $(`#heart-${id}`).text('favorite_border')
+            }
+            else {
+                $(`#heart-${id}`).text('favorite')
+            }
             $(`#like-info-${id}`).attr('data-tooltip', `${data.toString()} likes`);
             $(`#like-tip-${id}`).text(`${data.toString()} likes`);
             $(`#like-tip-${id}`).fadeIn(600, function() {

@@ -335,14 +335,14 @@ def fill_info():
 
     if name_fill or age_fill or country_fill or language_fill:
         mongo.db.users.update_one({'user_id': current_user.user_id},
-                              {'$set':
-                               {'prefill': {'name': name_fill,
-                                            'age': age_fill,
-                                            'country': country_fill,
-                                            'story_language': language_fill,
-                                            }
-                                }
-                               })
+                                  {'$set':
+                                   {'prefill': {'name': name_fill,
+                                                'age': age_fill,
+                                                'country': country_fill,
+                                                'story_language': language_fill,
+                                                }
+                                    }
+                                   })
 
         flash('your details have been saved', 'success')
         return redirect(url_for('base.profile', _anchor='user-settings'))
@@ -355,11 +355,11 @@ def fill_info():
 @login_required
 def delete_info():
     mongo.db.users.update_one({'user_id': current_user.user_id},
-                          {'$unset':
-                           {'prefill.name': "",
-                            'prefill.age': "",
-                            'prefill.country': "",
-                            'prefill.story_language': ""}})
+                              {'$unset':
+                               {'prefill.name': "",
+                                'prefill.age': "",
+                                'prefill.country': "",
+                                'prefill.story_language': ""}})
 
     flash('saved info has been deleted', 'success')
     return redirect(url_for('base.profile', _anchor='user-settings'))
@@ -369,19 +369,19 @@ def delete_info():
 @login_required
 def edit_story(story_id):
     stories.update_one({'_id': ObjectId(story_id)},
-                   {'$set':
-                    {
-                        'name': request.form.get('name'),
-                        'age': int(request.form.get('age')),
-                        'country': request.form.get('country'),
-                        'story_language': request.form.get('language'),
-                        'tags': request.form.getlist('tags'),
-                        'color': request.form.get('color'),
-                        'title': request.form.get('title'),
-                        'text': request.form.get('text'),
-                        'edit_time': int(time.time()*1000)
-                    }
-                    })
+                       {'$set':
+                        {
+                            'name': request.form.get('name'),
+                            'age': int(request.form.get('age')),
+                            'country': request.form.get('country'),
+                            'story_language': request.form.get('language'),
+                            'tags': request.form.getlist('tags'),
+                            'color': request.form.get('color'),
+                            'title': request.form.get('title'),
+                            'text': request.form.get('text'),
+                            'edit_time': int(time.time()*1000)
+                        }
+                        })
 
     return redirect(url_for('base.profile'))
 
@@ -402,20 +402,30 @@ def like():
     user_likes = (mongo.db.users.find_one({'user_id': current_user.user_id},
                                           {'liked': 1}))
     pprint.pprint(user_likes)
-    if ObjectId(post_id) not in user_likes['liked']:
 
+    if ObjectId(post_id) in user_likes['liked']:
+        mongo.db.users.update_one({'user_id': current_user.user_id},
+                                  {'$pull':
+                                   {'liked': ObjectId(post_id)
+                                    }
+                                   })
+
+        stories.update_one({'_id': ObjectId(post_id)},
+                           {'$inc':
+                            {'likes': -1}
+                            })
 
     if ObjectId(post_id) not in user_likes['liked']:
         mongo.db.users.update_one({'user_id': current_user.user_id},
-                              {'$push':
-                               {'liked': ObjectId(post_id)
-                                }
-                               })
+                                  {'$push':
+                                   {'liked': ObjectId(post_id)
+                                    }
+                                   })
 
         stories.update_one({'_id': ObjectId(post_id)},
-                   {'$inc':
-                    {'likes': 1}
-                    })
+                           {'$inc':
+                            {'likes': 1}
+                            })
 
     likes_number = stories.find_one({'_id': ObjectId(post_id)},
                                     {'likes': 1})
