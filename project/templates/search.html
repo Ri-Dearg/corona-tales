@@ -24,6 +24,7 @@
                                     <p>{{ story.text|safe }}</p>
                                     <br>
                                 </div>
+                                {% if current_user.is_authenticated %}
                                 <div id="button-{{ story._id }}" class="fixed-action-btn heart-button">
                                 <form class="like-button" id="form-like-{{ story._id }}">
                                     <input type="hidden" name="like-id" value="{{ story._id }}">
@@ -38,6 +39,7 @@
                                     </button>
                                 </form>
                                 </div>
+                                {% endif %}
                                 <div class="card-action col s12">
                                     <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>, {% endfor %}</p>
                                 </div>

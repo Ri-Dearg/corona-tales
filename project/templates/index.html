@@ -47,6 +47,22 @@
                                 <p>{{ story.text|safe }}</p>
                                 <br>
                             </div>
+                                                            {% if current_user.is_authenticated %}
+                                <div id="button-{{ story._id }}" class="fixed-action-btn heart-button">
+                                <form class="like-button" id="form-like-{{ story._id }}">
+                                    <input type="hidden" name="like-id" value="{{ story._id }}">
+                                    <span class="mobile-fab-tip like-tip" id="like-tip-{{ story._id }}">{{ story.likes }} likes</span>
+                                    <button id="like-info-{{ story._id }}" class="btn-floating pink tooltipped" data-position="left" data-tooltip="{{ story.likes }} likes">
+                                    {% if story._id in current_user.liked %}
+                                        <i id="heart-{{ story._id }}" class="large material-icons">favorite</i>
+                                    {% else %}
+                                    <i id="heart-{{ story._id }}" class="large material-icons">favorite_border</i>
+                                    {% endif %}
+
+                                    </button>
+                                </form>
+                                </div>
+                                {% endif %}
                             <div class="card-action col s12">
                                 <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>, {% endfor %}</p>
                             </div>

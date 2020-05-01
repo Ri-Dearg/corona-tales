@@ -43,14 +43,14 @@ def login_form():
     password = request.form.get('password')
     user = usersdb.find_one({"user_id": userID})
     prefill = usersdb.find_one({"user_id": userID}, {'prefill'})
+    liked = usersdb.find_one({"user_id": userID}, {'liked'})
     remember = True if request.form.get('remember') else False
 
     if not user or not check_password_hash(user["password"], password):
         flash('The login details are incorrect', 'sorry')
         return redirect(url_for('base.story_page'))
 
-    log_user = User(userID, username, password, prefill, liked,
-                    _id=user.get('_id'))
+    log_user = User(userID, username, password, prefill, liked, _id=user.get('_id'))
     login_user(log_user, remember=remember)
 
     flash(f'Welcome, {username}', 'success')
