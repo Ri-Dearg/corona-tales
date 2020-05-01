@@ -7,7 +7,6 @@ from flask_mail import Message
 from bson.objectid import ObjectId
 import time
 import calendar
-import pprint
 from flask_paginate import Pagination, get_page_args
 
 base = Blueprint('base', __name__,
@@ -345,7 +344,8 @@ def fill_info():
                                    {'prefill': {'name': name_fill,
                                                 'age': age_fill,
                                                 'country': country_fill,
-                                                'story_language': language_fill,
+                                                'story_language':
+                                                language_fill,
                                                 }
                                     }
                                    })

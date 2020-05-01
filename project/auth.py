@@ -50,7 +50,8 @@ def login_form():
         flash('The login details are incorrect', 'sorry')
         return redirect(url_for('base.story_page'))
 
-    log_user = User(userID, username, password, prefill, liked, _id=user.get('_id'))
+    log_user = User(userID, username, password, prefill, liked,
+                    _id=user.get('_id'))
     login_user(log_user, remember=remember)
 
     flash(f'Welcome, {username}', 'success')
