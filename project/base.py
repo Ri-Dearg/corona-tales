@@ -7,6 +7,7 @@ from flask_mail import Message
 from bson.objectid import ObjectId
 import time
 import calendar
+import pprint
 from flask_paginate import Pagination, get_page_args
 
 base = Blueprint('base', __name__,
@@ -397,7 +398,18 @@ def delete_story(story_id):
 @login_required
 def like():
     post_id = request.form.get('like-id')
-    stories.update({'_id': ObjectId(post_id)},
+
+    user_likes = (mongo.db.users.find_one({'user_id': current_user.user_id},
+                                          {'liked': 1}))
+    pprint.pprint(user_likes)
+    if ObjectId(post_id) not in user_likes['liked']:
+        mongo.db.users.update({'user_id': current_user.user_id},
+                              {'$push':
+                               {'liked': ObjectId(post_id)
+                                }
+                               })
+
+        stories.update({'_id': ObjectId(post_id)},
                    {'$inc':
                     {'likes': 1}
                     })

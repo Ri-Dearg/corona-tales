@@ -27,7 +27,9 @@ def signup_form():
                'password': generate_password_hash(request.form.get
                                                   ('password'),
                                                   method='sha256'),
-               'prefill': {}}
+               'prefill': {},
+               'liked': []
+               }
     usersdb.insert_one(account)
     flash('Please Login, account created.', 'success')
     return redirect(url_for('base.story_page'))
@@ -47,7 +49,7 @@ def login_form():
         flash('The login details are incorrect', 'sorry')
         return redirect(url_for('base.story_page'))
 
-    log_user = User(userID, username, password, prefill, _id=user.get('_id'))
+    log_user = User(userID, username, password, prefill, liked, _id=user.get('_id'))
     login_user(log_user, remember=remember)
 
     flash(f'Welcome, {username}', 'success')
