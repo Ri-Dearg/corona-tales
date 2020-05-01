@@ -73,7 +73,7 @@
 
 					<div id="modal-{{ story._id }}" class="modal submit-modal">
 						<div class="modal-content">
-							<h5>Write your story.</h5>
+                            <h5 class="heading purple-text lighten-1">Write your story.</h5>
 							<p class="mini-text">Please fill all fields.</p>
 							<div class="row">
 								<form action="{{ url_for('base.edit_story', story_id=story._id) }}" method="POST"
@@ -1148,7 +1148,7 @@
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">done_all</i>
 										<input id="password-newverify" class="passtwo validate" name="password-newverify" type="password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Repeat New Password" required>
-                                                                        <span class="helper-text" data-error="8 characters minimum, one uppercase letter, one lowercase letter and a number">Repeat the password</span>
+                                                                        <span class="helper-text">Repeat the password</span>
 
                             </div>
 									</div>

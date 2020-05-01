@@ -105,7 +105,7 @@
 
     <div id="modal-help" class="modal">
         <div class="modal-content flow-text">
-            <h4 class="heading">How does it work?</h4>
+            <h4 class="heading orange-text text-lighten-1">How does it work?</h4>
             <ol>
                 <li>Select the create story option from the menu (The orange pencil button).</li>
                 <li>Fill in all fields.</li>
@@ -120,7 +120,7 @@
 
     <div id="modal-index" class="modal no-autoinit">
         <div class="modal-content">
-            <h5>Write your story.</h5>
+            <h5 class="heading purple-text text-lighten-1">Write your story.</h5>
             <p class="mini-text">Please fill all fields.</p>
             <div class="row">
                 <form action="{{ url_for('base.create_story') }}" method="POST" class="col s12" id="form-index">
@@ -1115,9 +1115,8 @@
 
     <div id="modal-search" class="modal">
         <div class="modal-content">
-            <h5>Find a story.</h5>
-            <p class="mini-text">All fields are optional
-                <p>
+            <h5 class="heading light-blue-text text-accent-2">Find a story.</h5>
+            <p class="mini-text">All fields are optional<p>
                     <div class="row">
                         <form action="{{ url_for('base.search') }}" method="GET" id="form-search">
                             <div class="input-field col s12">
@@ -1625,7 +1624,7 @@
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">face</i>
                                 <input id="username-signup" name="username" type="text" pattern="[a-zA-Z0-9-_.]{1,30}" placeholder="Create Username" class="validate" required>
-                                <span class="helper-text" data-error="Please use use a-z, 0-9 and -_. only" data-success="Perfect!">Use letters, numbers and -_.</span>
+                                <span class="helper-text" data-error="a-z, 0-9 and -_. only. No spaces." data-success="Perfect!">Use letters, numbers and -_.</span>
                             </div>
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">done</i>
@@ -1636,7 +1635,7 @@
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">done_all</i>
                                 <input id="password-verify" class="passtwo validate" name="password-verify" type="password" minlength="8" placeholder="Repeat Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
-                                <span class="helper-text" data-error="8 characters minimum, one uppercase letter, one lowercase letter and a number">Repeat the password</span>
+                                <span class="helper-text">Repeat the password</span>
                             </div>
                         </form>
                     </div>

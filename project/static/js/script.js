@@ -89,7 +89,6 @@ function initFab() {
 }
 
 function formValid(formId) {
-    document.addEventListener('DOMContentLoaded', function () {
 
         $("select[required]").css({ position: 'absolute', display: 'inline', height: 0, padding: 0, width: 0 });
 
@@ -107,7 +106,6 @@ function formValid(formId) {
 
             addTags(formId, tagDictLength, tagDict)
         });
-    });
 }
 
 function addTags(formId, arrayLength, array) {

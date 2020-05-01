@@ -19,12 +19,6 @@ mailapp = mail
 story_array = []
 
 
-def like_check():
-    user_likes = (mongo.db.users.find_one({'user_id': current_user.user_id},
-                                          {'liked': 1}))
-    return jsonify(user_likes['liked'])
-
-
 def get_tags():
 
     taglist = current_app.config['taglist']
@@ -114,8 +108,6 @@ def search():
 
         if to_date is None:
             to_date = 9999999999999
-
-        print(from_age, to_age, from_date, to_date)
 
         if any(v is not None for v in [base_text, country, tag_string]):
 
@@ -403,7 +395,6 @@ def delete_story(story_id):
 @base.route('/like', methods=['POST'])
 @login_required
 def like():
-    print('hello')
     post_id = request.form.get('like-id')
 
     user_likes = (mongo.db.users.find_one({'user_id': current_user.user_id},
@@ -437,5 +428,10 @@ def like():
                                     {'likes': 1})
 
     likes_total = likes_number['likes']
+    print(likes_total)
+
+    if likes_total == 20:
+        stories.update_one({'_id': ObjectId(post_id)},
+                           {'$set': {'featured': True}})
 
     return jsonify(likes_total)
