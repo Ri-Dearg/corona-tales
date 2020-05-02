@@ -3,6 +3,8 @@ from .extensions import mongo
 import uuid
 
 
+# Uses this class to log in a User, pulls fields form database for use in
+# dynamic content
 class User(UserMixin):
     def __init__(self, user_id, username, password, prefill, liked, _id=None):
         self.user_id = user_id
@@ -12,6 +14,7 @@ class User(UserMixin):
         self.liked = liked
         self._id = uuid.uuid4().hex if _id is None else _id
 
+    # Below is necessary functionality for flask-login
     def is_authenticated(self):
         return True
 
