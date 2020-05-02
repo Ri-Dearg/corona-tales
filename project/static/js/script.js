@@ -30,7 +30,6 @@ function initStoryModal(id, content, tagList) {
                         console.error(error);
                     });
             }
-
             if (tagList !== undefined) {
                 var instance = M.Chips.getInstance(document.querySelector(`#chips-${id}`))
                 for (i = 0; i < tagList.length; i++) {
@@ -183,14 +182,23 @@ function scrollInit(tagList, idList) {
                     var tags = JSON.parse(info[2].innerText)
                     var content = $(items).find(`#content-${storyId}`).html()
                     initFab();
-                    initTags(tagList, storyId)
-                    initStoryModal(storyId, content, tags)
+                    initTags(tagList, storyId);
+                    initStoryModal(storyId, content, tags);
+                    initSelect();
                     formValid(storyId);
                 }
             }
         });
     }
 }
+
+
+function initSelect() {
+
+    var select = document.querySelectorAll('select');
+    var selectEdits = M.FormSelect.init(select, {});
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();
