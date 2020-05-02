@@ -24,7 +24,8 @@
         <br>
         <br>
         <!-- Function to place each story as a card -->
-{% for story in story_list %}
+        {% for story in story_list %}
+        {% if story.featured %}
         <!--   Story Section   -->
         <div class="scroll-append">
         <div class="id-info d-none">{{ story._id}}</div>
@@ -72,6 +73,55 @@
             </div>
         </div>
         </div>
+        {% endif %}
+        {% if not story.featured %}
+        <div class="scroll-append">
+        <div class="id-info d-none">{{ story._id}}</div>
+        <div class="time-info d-none">{{ story.time}}</div>
+        <hr class="{{ story.color }}">
+        <br>
+        <div class="row">
+            <div class="col s12">
+                <article class="card {{ story.color }} lighten-2 hoverable">
+                    <div class="card-content no-pad-bot">
+                        <div class="row no-m-bot">
+                            <span class="card-title col s12 m6 heading">{{ story.title }}</span>
+                            <span id="date-med-{{ story._id }}" class="card-title col s12 m6 heading hide-on-small-only right-align"></span>
+                            <span id="date-small-{{ story._id }}" class="card-title col s12 m6 heading hide-on-med-and-up"></span>
+                            <div class="col s12">
+                                <p>By {{ story.name.title() }},
+                                    <br> Age {{ story.age|string }},
+                                    <br> In {{ story.country.title() }}.</p>
+                                <br>
+                                <p>{{ story.text|safe }}</p>
+                                <br>
+                            </div>
+                                                            {% if current_user.is_authenticated %}
+                                <div id="button-{{ story._id }}" class="fixed-action-btn heart-button">
+                                <form class="like-button" id="form-like-{{ story._id }}">
+                                    <input type="hidden" name="like-id" value="{{ story._id }}">
+                                    <span class="mobile-fab-tip like-tip" id="like-tip-{{ story._id }}">{{ story.likes }} likes</span>
+                                    <button id="like-info-{{ story._id }}" class="btn-floating pink tooltipped" data-position="left" data-tooltip="{{ story.likes }} likes">
+                                    {% if story._id in current_user.liked %}
+                                        <i id="heart-{{ story._id }}" class="large material-icons">favorite</i>
+                                    {% else %}
+                                    <i id="heart-{{ story._id }}" class="large material-icons">favorite_border</i>
+                                    {% endif %}
+
+                                    </button>
+                                </form>
+                                </div>
+                                {% endif %}
+                            <div class="card-action col s12">
+                                <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>, {% endfor %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        </div>
+        {% endif %}
         {% endfor %}
 
     </section>

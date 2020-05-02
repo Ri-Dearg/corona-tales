@@ -40,7 +40,12 @@ def story_page():
         story_array = []
         offset = (page-1) * 7
         for story in story_list:
-            story_array.append(story)
+            if story['featured']:
+                story_array.append(story)
+        story_list.rewind()
+        for story in story_list:
+            if not story['featured']:
+                story_array.append(story)
         return story_array[offset: offset + per_page]
 
     taglist = get_tags()
