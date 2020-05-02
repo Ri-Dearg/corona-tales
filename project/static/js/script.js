@@ -156,14 +156,13 @@ function createScroll(getUrl, baseUrl, elem, tagPath, tagList) {
                 return getUrl.pathname + '?page=' + pageNumber
             } else {
                 var pageNumber = this.loadCount + 2
-                return getUrl.pathname + '&page=' + pageNumber
+                return getUrl.href + '&page=' + pageNumber
             }
         },
         append: '.scroll-append',
         checkLastPage: '.scroll-append',
         history: false,
         status: '.page-load-status',
-
     });
 
     infScroll.on('append', function (response, path, items) {
