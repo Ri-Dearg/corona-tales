@@ -14,12 +14,12 @@ base = Blueprint('base', __name__,
                  template_folder='templates')
 
 stories = mongo.db.stories  # Database for story posts
-
+users = mongo.db.users  # Database for users
 mailapp = mail
 
 
 def get_tags():
-    """Used to recieve tags from all stories and 
+    """Used to recieve tags from all stories and
     create an autocomplete list."""
     taglist = current_app.config['taglist']
 
@@ -31,6 +31,14 @@ def get_tags():
     return taglist
 
 
+def paginate(array, page, offset=0, per_page=10):
+    """Creates an ordered list with details for pagination."""
+    offset = (page-1) * 7  # Stories to display per page]
+    return array[offset: offset + per_page]
+
+# ---------------------------------------------------------------------
+# Index Page
+# ---------------------------------------------------------------------
 @base.route('/')
 def story_page():
     """Generates the content for the index page. Creates an iterable which
@@ -38,22 +46,17 @@ def story_page():
     the content for use by Infinite Scroll."""
     # Sorts order by newest post first
     story_list = stories.find().sort('time', -1)
+    story_array = []  # story_list to be paginated
+    index = 0  # used to limit story_list
 
-    def get_stories(page, offset=0, per_page=10):
-        """Creates an ordered story list with details for pagination."""
-        index = 0  # used to limit story_list
-        story_array = []  # story_list to be paginated
-        offset = (page-1) * 7  # Stories to display per page]
+    for story in story_list:
+        if story['featured']:  # psuhes featured stories first
+            story_array.append(story)
+    story_list.rewind()  # Resets iterable to push normal stories second
 
-        for story in story_list:
-            if story['featured']:  # psuhes featured stories first
-                story_array.append(story)
-        story_list.rewind()  # Resets iterable to push normal stories second
-
-        for index, story in zip(range(100), story_list):
-            if not story['featured']:
-                story_array.append(story)
-        return story_array[offset: offset + per_page]
+    for index, story in zip(range(100), story_list):
+        if not story['featured']:
+            story_array.append(story)
 
     taglist = get_tags()
 
@@ -62,7 +65,8 @@ def story_page():
                                            per_page_parameter='per_page')
 
     # runs functions to get stories and paginate them
-    pagination_stories = get_stories(page=page, offset=offset, per_page=7)
+    pagination_stories = paginate(story_array, page=page, offset=offset,
+                                  per_page=7)
     total = story_list.count()
     pagination = Pagination(page=page, per_page=7, total=total)
 
@@ -73,7 +77,7 @@ def story_page():
 
 @base.route('/create_story', methods=['POST'])
 def create_story():
-    """Adds a story document to the database. Attaches the user info if they 
+    """Adds a story document to the database. Attaches the user info if they
     are logged in. Every story gets one like on creation, my like."""
     if current_user.is_authenticated:
         stories.insert_one({'user_id': current_user.user_id,
@@ -106,6 +110,160 @@ def create_story():
     return redirect(request.referrer)
 
 
+# ---------------------------------------------------------------------
+# Profile Page
+# ---------------------------------------------------------------------
+@base.route('/profile')
+@login_required
+def profile():
+    """Renders the profile page for authenticated users, searching the
+    database for all stories written by the user"""
+    story_list = stories.find(
+        {'user_id': current_user.user_id}).sort('time', -1)
+    username = current_user.username
+
+    user_array = []
+    for story in story_list:
+        user_array.append(story)
+
+    # Paginate results
+    taglist = get_tags()
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    pagination_user = paginate(
+        user_array, page=page, offset=offset, per_page=7)
+    total = story_list.count()
+    pagination = Pagination(page=page, per_page=7, total=total)
+
+    return render_template('profile.html', story_list=pagination_user,
+                           taglist=taglist, page=page, per_page=per_page,
+                           pagination=pagination, username=username)
+
+
+@base.route('/fill_info', methods=['POST'])
+@login_required
+def fill_info():
+    """Saves information in an embedded document that automaticallly fills
+    form fields for the user so if they want to write more stories, they don't
+    have to repeat the info"""
+    name_fill = request.form.get('name-fill')
+    age_fill = request.form.get('age-fill')
+    country_fill = request.form.get('country-fill')
+    language_fill = request.form.get('language-fill')
+
+    # If any info is entered, creates the document fields
+    if name_fill or age_fill or country_fill or language_fill:
+        users.update_one({'user_id': current_user.user_id},
+                         {'$set':
+                          {'prefill':
+                           {'name': name_fill,
+                            'age': age_fill,
+                            'country': country_fill,
+                            'story_language': language_fill, }}})
+
+        flash('your details have been saved', 'success')
+        return redirect(url_for('base.profile', _anchor='user-settings'))
+
+    # if no information was entered, alerts the user.
+    flash('please fill one field', 'sorry')
+    return redirect(url_for('base.profile', _anchor='user-settings'))
+
+
+@base.route('/delete_info', methods=['POST'])
+@login_required
+def delete_info():
+    """Deletes the fields in the embedded document that saves info for
+    prefilling forms"""
+    users.update_one({'user_id': current_user.user_id},
+                     {'$unset':
+                      {'prefill.name': "",
+                       'prefill.age': "",
+                       'prefill.country': "",
+                       'prefill.story_language': ""}})
+
+    flash('saved info has been deleted', 'success')
+    return redirect(url_for('base.profile', _anchor='user-settings'))
+
+
+@base.route('/edit_story/<story_id>', methods=['POST'])
+@login_required
+def edit_story(story_id):
+    """Updates user stories with edited details """
+    stories.update_one({'_id': ObjectId(story_id)},
+                       {'$set':
+                        {'name': request.form.get('name'),
+                         'age': int(request.form.get('age')),
+                         'country': request.form.get('country'),
+                         'story_language': request.form.get('language'),
+                         'tags': request.form.getlist('tags'),
+                         'color': request.form.get('color'),
+                         'title': request.form.get('title'),
+                         'text': request.form.get('text'),
+                         'edit_time': int(time.time()*1000)}})
+
+    return redirect(url_for('base.profile'))
+
+
+@base.route('/delete_story/<story_id>')
+@login_required
+def delete_story(story_id):
+    """Deletes a single story"""
+    stories.remove({'_id': ObjectId(story_id)})
+
+    return redirect(url_for('base.profile'))
+
+
+@base.route('/like', methods=['POST'])
+@login_required
+def like():
+    """Either saves a liked stories's objectID to an array in a user document,
+    and increases the value of like field in the story document, or removes
+    the objectid from the user document and decreases the like value. If the
+    likes reaches 21 likes, the story is 'featured', and it will be shown at
+    the top of the index page before other stories. The choice to not return
+    featured to 'False' if unliked below 21 likes is deliberate. It then
+    passes the number of likes back to the ajax function to display it to the
+    user."""
+    post_id = request.form.get('like-id')
+
+    user_likes = (users.find_one({'user_id': current_user.user_id},
+                                 {'liked': 1}))
+    # Condition checks if the story is liked, removes it, lowering likes
+    if ObjectId(post_id) in user_likes['liked']:
+        users.update_one({'user_id': current_user.user_id},
+                         {'$pull':
+                          {'liked': ObjectId(post_id)}})
+
+        stories.update_one({'_id': ObjectId(post_id)},
+                           {'$inc':
+                            {'likes': -1}})
+    # Condition likes story, saving it to user document and increses likes
+    if ObjectId(post_id) not in user_likes['liked']:
+        users.update_one({'user_id': current_user.user_id},
+                         {'$push':
+                          {'liked': ObjectId(post_id)}})
+
+        stories.update_one({'_id': ObjectId(post_id)},
+                           {'$inc':
+                            {'likes': 1}})
+
+    # Gets story likes
+    likes_number = stories.find_one({'_id': ObjectId(post_id)},
+                                    {'likes': 1})
+
+    likes_total = likes_number['likes']
+
+    # Features stories with more than 21 likes
+    if likes_total == 21:
+        stories.update_one({'_id': ObjectId(post_id)},
+                           {'$set': {'featured': True}})
+
+    return jsonify(likes_total)
+
+
+# ---------------------------------------------------------------------
+# Search Page
+# ---------------------------------------------------------------------
 @base.route('/search', methods=['GET'])
 def search():
     """Searches entire database for matching documents using a text index
@@ -130,7 +288,7 @@ def search():
 
         # Checks for text, if there is text in the search this condition runs
         if any(t is not None for t in [base_text, country, tag_string]):
-            
+
             results = stories.find({
                 'time': {'$gte': from_date, '$lte': to_date},
                 'age': {'$gte': from_age, '$lte': to_age},
@@ -232,14 +390,10 @@ def search():
             story_array.append(result)
 
     # paginates results for infinite scroll
-    def search_scroll(page, offset=0, per_page=10):
-        offset = (page-1) * 7
-
-        return story_array[offset: offset + per_page]
-
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
-    pagination_results = search_scroll(page=page, offset=offset, per_page=7)
+    pagination_results = paginate(story_array, page=page, offset=offset,
+                                  per_page=7)
     total = len(story_array)
     pagination = Pagination(page=page, per_page=7, total=total)
 
@@ -267,14 +421,10 @@ def search_tags(tag):
         story_array.append(result)
 
     # paginate results
-    def search_scroll(page, offset=0, per_page=10):
-        offset = (page-1) * 7
-
-        return story_array[offset: offset + per_page]
-
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
-    pagination_results = search_scroll(page=page, offset=offset, per_page=7)
+    pagination_results = paginate(
+        story_array, page=page, offset=offset, per_page=7)
     total = len(story_array)
     pagination = Pagination(page=page, per_page=7, total=total)
 
@@ -283,14 +433,9 @@ def search_tags(tag):
                            pagination=pagination)
 
 
-@base.route('/about')
-def about():
-    """Renders about page."""
-    taglist = get_tags()
-
-    return render_template('about.html', taglist=taglist)
-
-
+# ---------------------------------------------------------------------
+# Contact Page
+# ---------------------------------------------------------------------
 @base.route('/contact')
 def contact():
     """Renders contatc page"""
@@ -316,151 +461,12 @@ def send_mail():
     return redirect(url_for('base.contact'))
 
 
-@base.route('/profile')
-@login_required
-def profile():
-    """Renders the profile page for authenticated users, searching the
-    database for all stories written by the user"""
-    story_list = stories.find(
-        {'user_id': current_user.user_id}).sort('time', -1)
-    username = current_user.username
-
-    # Paginate results
-    def user_pages(page, offset=0, per_page=10):
-        user_array = []
-        offset = (page-1) * 7
-        for story in story_list:
-            user_array.append(story)
-        return user_array[offset: offset + per_page]
-
+# ---------------------------------------------------------------------
+# About Page
+# ---------------------------------------------------------------------
+@base.route('/about')
+def about():
+    """Renders about page."""
     taglist = get_tags()
-    page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    pagination_user = user_pages(page=page, offset=offset, per_page=7)
-    total = story_list.count()
-    pagination = Pagination(page=page, per_page=7, total=total)
 
-    return render_template('profile.html', story_list=pagination_user,
-                           taglist=taglist, page=page, per_page=per_page,
-                           pagination=pagination, username=username)
-
-
-@base.route('/fill_info', methods=['POST'])
-@login_required
-def fill_info():
-    """Saves information in an embedded document that automaticallly fills
-    form fields for the user so if they want to write more stories, they don't
-    have to repeat the info"""
-    name_fill = request.form.get('name-fill')
-    age_fill = request.form.get('age-fill')
-    country_fill = request.form.get('country-fill')
-    language_fill = request.form.get('language-fill')
-
-    # If any info is entered, creates the document fields
-    if name_fill or age_fill or country_fill or language_fill:
-        mongo.db.users.update_one({'user_id': current_user.user_id},
-                                  {'$set':
-                                   {'prefill':
-                                    {'name': name_fill,
-                                     'age': age_fill,
-                                     'country': country_fill,
-                                     'story_language': language_fill, }}})
-
-        flash('your details have been saved', 'success')
-        return redirect(url_for('base.profile', _anchor='user-settings'))
-
-    # if no information was entered, alerts the user.
-    flash('please fill one field', 'sorry')
-    return redirect(url_for('base.profile', _anchor='user-settings'))
-
-
-@base.route('/delete_info', methods=['POST'])
-@login_required
-def delete_info():
-    """Deletes the fields in the embedded document that saves info for
-    prefilling forms"""
-    mongo.db.users.update_one({'user_id': current_user.user_id},
-                              {'$unset':
-                               {'prefill.name': "",
-                                'prefill.age': "",
-                                'prefill.country': "",
-                                'prefill.story_language': ""}})
-
-    flash('saved info has been deleted', 'success')
-    return redirect(url_for('base.profile', _anchor='user-settings'))
-
-
-@base.route('/edit_story/<story_id>', methods=['POST'])
-@login_required
-def edit_story(story_id):
-    """Updates user stories with edited details """
-    stories.update_one({'_id': ObjectId(story_id)},
-                       {'$set':
-                        {'name': request.form.get('name'),
-                         'age': int(request.form.get('age')),
-                         'country': request.form.get('country'),
-                         'story_language': request.form.get('language'),
-                         'tags': request.form.getlist('tags'),
-                         'color': request.form.get('color'),
-                         'title': request.form.get('title'),
-                         'text': request.form.get('text'),
-                         'edit_time': int(time.time()*1000)}})
-
-    return redirect(url_for('base.profile'))
-
-
-@base.route('/delete_story/<story_id>')
-@login_required
-def delete_story(story_id):
-    """Deletes a single story"""
-    stories.remove({'_id': ObjectId(story_id)})
-
-    return redirect(url_for('base.profile'))
-
-
-@base.route('/like', methods=['POST'])
-@login_required
-def like():
-    """Either saves a liked stories's objectID to an array in a user document,
-    and increases the value of like field in the story document, or removes
-    the objectid from the user document and decreases the like value. If the 
-    likes reaches 21 likes, the story is 'featured', and it will be shown at
-    the top of the index page before other stories. The choice to not return 
-    featured to 'False' if unliked below 21 likes is deliberate. It then 
-    passes the number of likes back to the ajax function to display it to the 
-    user."""
-    post_id = request.form.get('like-id')
-
-    user_likes = (mongo.db.users.find_one({'user_id': current_user.user_id},
-                                          {'liked': 1}))
-    # Condition checks if the story is already liked, and removes it, lowering liks
-    if ObjectId(post_id) in user_likes['liked']:
-        mongo.db.users.update_one({'user_id': current_user.user_id},
-                                  {'$pull':
-                                   {'liked': ObjectId(post_id)}})
-
-        stories.update_one({'_id': ObjectId(post_id)},
-                           {'$inc':
-                            {'likes': -1}})
-    # Condition likes story, saving it to user document and increses likes
-    if ObjectId(post_id) not in user_likes['liked']:
-        mongo.db.users.update_one({'user_id': current_user.user_id},
-                                  {'$push':
-                                   {'liked': ObjectId(post_id)}})
-
-        stories.update_one({'_id': ObjectId(post_id)},
-                           {'$inc':
-                            {'likes': 1}})
-
-    # Gets story likes
-    likes_number = stories.find_one({'_id': ObjectId(post_id)},
-                                    {'likes': 1})
-
-    likes_total = likes_number['likes']
-
-    # Features stories with more than 21 likes
-    if likes_total == 21:
-        stories.update_one({'_id': ObjectId(post_id)},
-                           {'$set': {'featured': True}})
-
-    return jsonify(likes_total)
+    return render_template('about.html', taglist=taglist)
