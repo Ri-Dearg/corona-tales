@@ -77,7 +77,7 @@ def create_story():
                             'text': request.form.get('text'),
                             'time': int(time.time()*1000),
                             'featured': False,
-                            'likes': 0,
+                            'likes': 1,
                             'tags': request.form.getlist('tags')})
 
     else:
@@ -90,6 +90,7 @@ def create_story():
                             'text': request.form.get('text'),
                             'time': int(time.time()*1000),
                             'featured': False,
+                            'likes': 1,
                             'tags': request.form.getlist('tags')})
 
     flash('your story has been posted!', 'success')
@@ -433,9 +434,8 @@ def like():
                                     {'likes': 1})
 
     likes_total = likes_number['likes']
-    print(likes_total)
 
-    if likes_total == 20:
+    if likes_total == 21:
         stories.update_one({'_id': ObjectId(post_id)},
                            {'$set': {'featured': True}})
 

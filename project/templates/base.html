@@ -406,7 +406,7 @@
                         <select class="language-choice" name="language" required>
                             {% if current_user.prefill.story_language %}
                             <option value="" disabled>Story language</option>
-                            <option value="{{ current_user.prefill.story_langauge }}" selected>{{ current_user.prefill.story_language|title }}</option>
+                            <option value="{{ current_user.prefill.story_language }}" selected>{{ current_user.prefill.story_language|title }}</option>
                             {% else %}
                             <option value="" selected disabled>Story language</option>
                             {% endif %}
