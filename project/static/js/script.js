@@ -145,51 +145,69 @@ function likeUnlike(id) {
 }
 
 
-function scrollInit(tagList, idList) {
+function createScroll(getUrl, baseUrl, elem, tagPath, tagList) {
+    var infScroll = new InfiniteScroll(elem, {
+        path: function () {
+            if (getUrl.href === baseUrl || getUrl.pathname.split('/')[1] === tagPath) {
+                var pageNumber = this.loadCount + 2
+                return getUrl.href + '?page=' + pageNumber
+            } else if (getUrl.hash == '#user-settings') {
+                var pageNumber = this.loadCount + 2
+                return getUrl.pathname + '?page=' + pageNumber
+            } else {
+                var pageNumber = this.loadCount + 2
+                return getUrl.pathname + '&page=' + pageNumber
+            }
+        },
+        append: '.scroll-append',
+        checkLastPage: '.scroll-append',
+        history: false,
+        status: '.page-load-status',
+
+    });
+
+    infScroll.on('append', function (response, path, items) {
+        for (i = 0; i < items.length; i++) {
+            var info = items[i].children
+            var storyId = info[0].innerText
+            showDate(storyId, info[1].innerText);
+            likeUnlike(storyId);
+
+            if (getUrl.pathname == '/profile') {
+                var tags = JSON.parse(info[2].innerText)
+                var content = $(items).find(`#content-${storyId}`).html()
+                initFab();
+                initTags(tagList, storyId);
+                initStoryModal(storyId, content, tags);
+                initSelect();
+                formValid(storyId);
+            }
+        }
+    });
+
+    return infScroll
+}
+
+
+function scrollInit(tagList) {
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-    var reg = new RegExp(".*?", "g")
     var tagPath = "search_tags"
 
     var scroll = document.querySelector('.infiniscroll');
-    if (scroll != undefined) {
 
-        var infScroll = new InfiniteScroll(scroll, {
-            path: function () {
-                if (window.location.href === baseUrl || window.location.pathname.split('/')[1] === tagPath) {
-                    pageNumber = this.loadCount + 2
-                    return window.location.href + '?page=' + pageNumber
-                }
-                else {
-                    pageNumber = this.loadCount + 2
-                    return window.location.href + '&page=' + pageNumber
-                }
-            },
-            append: '.scroll-append',
-            checkLastPage: '.scroll-append',
-            history: false,
-            status: '.page-load-status'
-        });
-
-        infScroll.on('append', function (response, path, items) {
-            for (i = 0; i < items.length; i++) {
-                var info = items[i].children
-                var storyId = info[0].innerText
-                showDate(storyId, info[1].innerText);
-                likeUnlike(storyId);
-
-                if (getUrl.pathname == '/profile') {
-                    var tags = JSON.parse(info[2].innerText)
-                    var content = $(items).find(`#content-${storyId}`).html()
-                    initFab();
-                    initTags(tagList, storyId);
-                    initStoryModal(storyId, content, tags);
-                    initSelect();
-                    formValid(storyId);
-                }
-            }
-        });
+    if (scroll != undefined && getUrl.hash !== '#user-settings') {
+        infScroll = new createScroll(getUrl, baseUrl, scroll, tagPath, tagList);
     }
+    
+    $('#tab-settings').on('click', function() {
+                infScroll.destroy()
+    })
+
+    $('#tab-user-stories').on('click', function() {
+            createScroll(getUrl, baseUrl, scroll)
+    })
+
 }
 
 
