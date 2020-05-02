@@ -77,8 +77,8 @@ def story_page():
 
 @base.route('/create_story', methods=['POST'])
 def create_story():
-    """Adds a story document to the database. Attaches the user info if they
-    are logged in. Every story gets one like on creation, my like."""
+    """Adds a story document to the database. Attaches the user ID if they
+    are logged in. Every story gets one like on creation, my like. :-)"""
     if current_user.is_authenticated:
         stories.insert_one({'user_id': current_user.user_id,
                             'name': request.form.get('name'),
