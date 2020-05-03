@@ -211,16 +211,93 @@ Positioning
 Colours
 ------------------------------------------------------------------------*/
 
+.red-sel {
+    color: #000 !important;
+    background-color: #e57373;
+}
+
+.dorange-sel {
+    color: #000 !important;
+    background-color: #ff8a65;
+}
+
+.orange-sel {
+    color: #000 !important;
+    background-color: #ffb74d;
+}
+
+.amber-sel {
+    color: #000 !important;
+    background-color: #ffd54f;
+}
+
+.yellow-sel {
+    color: #000 !important;
+    background-color: #fff176;
+}
+
+.lime-sel {
+    color: #000 !important;
+    background-color: #dce775;
+}
+
+.lgreen-sel {
+    color: #000 !important;
+    background-color: #aed581;
+}
+
+.green-sel {
+    color: #000 !important;
+    background-color: #81c784;
+}
+
+.teal-sel {
+    color: #000 !important;
+    background-color: #4db6ac;
+}
+
+.cyan-sel {
+    color: #000 !important;
+    background-color: #4dd0e1;
+}
+
+.lblue-sel {
+    color: #000 !important;
+    background-color: #4fc3f7;
+}
+
+.blue-sel {
+    color: #000 !important;
+    background-color: #64b5f6;
+}
+
+.indigo-sel {
+    color: #000 !important;
+    background-color: #7986cb;
+}
+
+.dpurple-sel {
+    color: #000 !important;
+    background-color: #9575cd;
+}
+
+.purple-sel {
+    color: #000 !important;
+    background-color: #ba68c8;
+}
+
+.pink-sel {
+    color: #000 !important;
+    background-color: #f06292;
+}
 
 /* Colors the spinner */
-
 .spinner-layer {
 	border-color: #ff4081;
 }
 
 
 /* Colors the option tabs */
-
 .tabs .tab a {
 	color: #00796b;
 }

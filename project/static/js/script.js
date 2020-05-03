@@ -57,6 +57,92 @@ function initSelect() {
 }
 
 
+function colorChange() {
+    console.log('change')
+    $("span:contains('Red')").hover(function() {
+        $(this).addClass('red-sel')
+        }, function(){
+        $(this).removeClass('red-sel');
+    });
+    $("span:contains('Deep-Orange')").hover(function() {
+        $(this).addClass('dorange-sel')
+        }, function(){
+        $(this).removeClass('dorange-sel');
+    });
+    $("span:contains('Orange')").hover(function() {
+        $(this).addClass('orange-sel')
+        }, function(){
+        $(this).removeClass('orange-sel');
+    });
+    $("span:contains('Amber')").hover(function() {
+        $(this).addClass('amber-sel')
+        }, function(){
+        $(this).removeClass('amber-sel');
+    });
+    $("span:contains('Yellow')").hover(function() {
+        $(this).addClass('yellow-sel')
+        }, function(){
+        $(this).removeClass('yellow-sel');
+    });
+    $("span:contains('Lime')").hover(function() {
+        $(this).addClass('lime-sel')
+        }, function(){
+        $(this).removeClass('lime-sel');
+    });
+    $("span:contains('Light-Green')").hover(function() {
+        $(this).addClass('lgreen-sel')
+        }, function(){
+        $(this).removeClass('lgreen-sel');
+    });
+    $("span:contains('Green')").hover(function() {
+        $(this).addClass('green-sel')
+        }, function(){
+        $(this).removeClass('green-sel');
+    });
+    $("span:contains('Teal')").hover(function() {
+        $(this).addClass('teal-sel')
+        }, function(){
+        $(this).removeClass('teal-sel');
+    });
+    $("span:contains('Cyan')").hover(function() {
+        $(this).addClass('cyan-sel')
+        }, function(){
+        $(this).removeClass('cyan-sel');
+    });
+    $("span:contains('Light-Blue')").hover(function() {
+        $(this).addClass('lblue-sel')
+        }, function(){
+        $(this).removeClass('lblue-sel');
+    });
+    $("span:contains('Blue')").hover(function() {
+        $(this).addClass('blue-sel')
+        }, function(){
+        $(this).removeClass('blue-sel');
+    });
+    $("span:contains('Indigo')").hover(function() {
+        $(this).addClass('indigo-sel')
+        }, function(){
+        $(this).removeClass('indigo-sel');
+    });
+    $("span:contains('Deep-Purple')").hover(function() {
+        $(this).addClass('dpurple-sel')
+        }, function(){
+        $(this).removeClass('dpurple-sel');
+    });
+    $("span:contains('Purple')").hover(function() {
+        $(this).addClass('purple-sel')
+        }, function(){
+        $(this).removeClass('purple-sel');
+    });
+    $("span:contains('Pink')").hover(function() {
+        $(this).addClass('pink-sel')
+        }, function(){
+        $(this).removeClass('pink-sel');
+    });
+
+}
+
+
 /** Initiates the materialize 'chips' component
  * @param {Object<string, null>} tagList - takes a dictionary of tags to fill the autocomplete for that chips instance
  * @param {string} id - a unique id for that story which can be used to create that chips instance
@@ -245,6 +331,7 @@ function createScroll(getUrl, baseUrl, elem, tagList) {
                 var content = $(items).find(`#content-${storyId}`).html()
                 initEditStory(tagList, storyId, content, storyTags)
                 initSelect();
+                colorChange();
             }
         }
     });
@@ -327,6 +414,7 @@ function initEditStory(tagList, id, content, storyTags) {
 document.addEventListener('DOMContentLoaded', function () {
     M.AutoInit();  // Initiates all auto-initiated Materialize components
 
+    colorChange();
 
     var sideNav = document.querySelectorAll('.sidenav');  // initiates the sidenav on the right side
     var nav = M.Sidenav.init(sideNav, {

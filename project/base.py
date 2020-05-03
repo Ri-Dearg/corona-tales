@@ -210,6 +210,7 @@ def delete_story(story_id):
     """Deletes a single story"""
     stories.remove({'_id': ObjectId(story_id)})
 
+    flash('the story has been deleted.', 'success')
     return redirect(url_for('base.profile'))
 
 
