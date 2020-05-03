@@ -204,7 +204,7 @@ def edit_story(story_id):
     return redirect(url_for('base.profile'))
 
 
-@base.route('/delete_story/<story_id>')
+@base.route('/delete_story/<story_id>', methods=['POST'])
 @login_required
 def delete_story(story_id):
     """Deletes a single story"""

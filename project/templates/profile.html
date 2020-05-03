@@ -48,13 +48,13 @@
                                                 <ul>
                                                     <li>
                                                         <!-- Tooltip -->
-                                                        <span class="mobile-fab-tip bot-tip-2">Delete</span>
+                                                        <span class="mobile-fab-tip bot-tip-2 red darken-1 white-text">Delete</span>
                                                         <!-- Allows deletion of a story-->
-                                                        <a href="{{ url_for('base.delete_story', story_id=story._id) }}" class="btn-floating red darken-1 tooltipped" data-position="bottom" data-tooltip="Delete Story"><i class="material-icons">highlight_off</i></a>
+                                                        <a href="#delete-{{ story._id }}" class="btn-floating red darken-1 tooltipped modal-trigger" data-position="bottom" data-tooltip="Delete Story"><i class="material-icons">highlight_off</i></a>
                                                     </li>
                                                     <li>
                                                         <!-- Tooltip -->
-                                                        <span class="mobile-fab-tip bot-tip-1">Edit</span>
+                                                        <span class="mobile-fab-tip bot-tip-1 purple lighten-1 white-text">Edit</span>
                                                         <!-- Allows editing of a story-->
                                                         <a href="#modal-{{ story._id }}" class="btn-floating purple lighten-1 modal-trigger tooltipped" data-position="bottom" data-tooltip="Edit Story"><i class="material-icons">mode_edit</i></a>
                                                     </li>
@@ -70,7 +70,7 @@
                             </div>
                         </div>
 
-                        <!-- The modal follws the same structure as th storyu post modal, but has all the values prefilled with the story values. The modal will dynamically generate per story. I am considering having the modal generated on a click on the edit button instead of for each story -->
+                        <!-- The modal follows the same structure as th storyu post modal, but has all the values prefilled with the story values. The modal will dynamically generate per story. I am considering having the modal generated on a click on the edit button instead of for each story -->
                         <div id="modal-{{ story._id }}" class="modal submit-modal">
                             <div class="modal-content">
                                 <h5 class="heading purple-text lighten-1">Write your story.</h5>
@@ -597,6 +597,19 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div id="delete-{{ story._id }}" class="modal">
+                            <div class="modal-content flow-text">
+                                <h4 class="heading center-align">Delete Story?</h4>
+                                <p>Are you sure you wish to delete this story?<p>
+                                <form action="{{ url_for('base.delete_story', story_id=story._id) }}" method="POST" id="form-delete-{{ story._id }}">
+                                </form>
+                                <div class="center-align">
+                                    <button type="submit" form="form-delete-{{ story._id }}" class="btn waves-effect waves-light red darken-1">Delete Stories
+                                        <i class="material-icons right">highlight_off</i>
+                                    </button>
+                                </div>   
+                            </div>     
                         </div>
                     </div>
 

@@ -123,6 +123,8 @@ function initStoryModal(id, content, storyTags) {
             }
         }
     });
+    deleteModal = document.querySelector(`#delete-${id}`);
+    deleteInstance = M.Modal.init(deleteModal, {});
 }
 
 

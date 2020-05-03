@@ -94,10 +94,6 @@ Spacing and Sizing
     padding-right: 0;
 }
 
-/*.card-action {
-    width: 100%;
-    background-color: #fafafa !important; 
-}*/
 
 hr {
 	height: 0.1rem
@@ -180,7 +176,6 @@ Positioning
 
 
 /* Centers the preloader */
-
 .preloader-wrapper {
 	position: relative;
 	top: 0;
@@ -195,7 +190,6 @@ Positioning
 *The have been increased only by a minimum to place them
 *above floating buttons or other components
 */
-
 .navbar-fixed {
 	z-index: 2001;
 }
