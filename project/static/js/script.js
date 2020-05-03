@@ -58,10 +58,10 @@ function initSelect() {
 
 
 /** Initiates the materialize 'chips' component
- * @param {Object<string, null>} tagCreate - takes a dictionary of tags to fill the autocomplete for that chips instance
+ * @param {Object<string, null>} tagList - takes a dictionary of tags to fill the autocomplete for that chips instance
  * @param {string} id - a unique id for that story which can be used to create that chips instance
  */
-function initTags(tagCreate, id) {
+function initTags(tagList, id) {
 
     var chips = document.querySelector(`#chips-${id}`);  // identifies a place for a necessary chips instance
 
@@ -70,7 +70,7 @@ function initTags(tagCreate, id) {
         placeholder: 'Add Tags',
         secondaryPlaceholder: 'Press Enter',
         autocompleteOptions: {
-            data: tagCreate, // Uses tag object for autofill info
+            data: tagList, // Uses tag object for autofill info
             limit: 8,
         }
     });
@@ -80,9 +80,9 @@ function initTags(tagCreate, id) {
 /** Initiates the modal used for creating and editing stories
  * @param {string} id - a unique id for that story which can be used to create that modal instance
  * @param {string} [content] - retrieves info for a written story and populates CKeditor with that info
- * @param {Object.[]} [tagList] - an array containing the tags used in a given story
+ * @param {Object[]} [storyTags] - an array containing the tags used in a given story
  */
-function initStoryModal(id, content, tagList) {
+function initStoryModal(id, content, storyTags) {
 
     modal = document.querySelector(`#modal-${id}`);  // Selects a story modal div
     instance = M.Modal.init(modal, {  // initiates modal on that div
@@ -99,12 +99,12 @@ function initStoryModal(id, content, tagList) {
                         console.error(error);
                     });
             }
-            if (tagList !== undefined) {  // Checks to see if tag data has been passed for that story
+            if (storyTags !== undefined) {  // Checks to see if tag data has been passed for that story
                                           // and populates the chips tagdata with it
                 var instance = M.Chips.getInstance(document.querySelector(`#chips-${id}`))
-                for (i = 0; i < tagList.length; i++) {
+                for (i = 0; i < storyTags.length; i++) {
                     instance.addChip({
-                        tag: tagList[i]
+                        tag: storyTags[i]
                     });
                 }
             }
@@ -129,12 +129,12 @@ function initStoryModal(id, content, tagList) {
 /**
  * Appends the tags as hidden input in the forms before it is sent off with the form
  * @param {string} id - a unique id for that story which can be used to send those specific tags and form
- * @param {int} arrayLength - Length of tag array
- * @param {object} array - the list of tags
+ * @param {int} tagDictLength - Length of tag array
+ * @param {Object[]} tagDict - the list of tags
  */
-function addTags(id, arrayLength, array) {
-    for (i = 0; i < arrayLength; i++) {  // Cycles through each dictionary pair and appends the tag as a value
-        $(`#form-${id}`).append(`<input type="hidden" name="tags" value="${array[i].tag.toLowerCase()}">`);
+function addTags(id, tagDictLength, tagDict) {
+    for (i = 0; i < tagDictLength; i++) {  // Cycles through each dictionary pair and appends the tag as a value
+        $(`#form-${id}`).append(`<input type="hidden" name="tags" value="${tagDict[i].tag.toLowerCase()}">`);
     }
     return true
 }
@@ -209,8 +209,8 @@ function likeUnlike(id) {
  * function
  * @param {string} getUrl - identifies current full url so it can load pagination correctly 
  * @param {string} baseUrl - The url to the base pathname
- * @param {object} elem - the element to attach the scroll to
- * @param {object} tagList - An array of tags to use for chips autocomplete
+ * @param {Object} elem - the element to attach the scroll to
+ * @param {Object[]} tagList - An array of tags to use for chips autocomplete
  */
 function createScroll(getUrl, baseUrl, elem, tagList) {
     var infScroll = new InfiniteScroll(elem, {
@@ -240,11 +240,11 @@ function createScroll(getUrl, baseUrl, elem, tagList) {
             likeUnlike(storyId);
 
             if (getUrl.pathname == '/profile') {  // reinitiates materialize components for the profile page edit button
-                var tags = JSON.parse(info[2].innerText)
+                var storyTags = JSON.parse(info[2].innerText)
                 var content = $(items).find(`#content-${storyId}`).html()
                 initEditFab(storyId);
                 initTags(tagList, storyId);
-                initStoryModal(storyId, content, tags);
+                initStoryModal(storyId, content, storyTags);
                 initSelect();
                 formValid(storyId);
             }
@@ -262,7 +262,7 @@ function createScroll(getUrl, baseUrl, elem, tagList) {
  * To rectify this it isn't initialised on redirect to that page, additionally, on switching
  * to that tab, the instance is destoyed, so it won't fire at the bottom of that page.
  * it is recreated when switching to the user story feed, so it can append on the correct tab only.
- * @param {tagList} tagList - An array of tags to use for chips autocomplete
+ * @param {Object<string, null>} tagList - An array of tags to use for chips autocomplete
  */
 function scrollInit(tagList) {
     var getUrl = window.location;
@@ -282,6 +282,43 @@ function scrollInit(tagList) {
         infScroll = new createScroll(getUrl, baseUrl, scroll)
     });
 
+}
+
+/**
+ * Initiates the modals used for searching and posring stories on every page
+ * @param {Object<string, null>} tagList - An array of tags to use for chips autocomplete
+ * @param {string} id - a unique id for that story which identifies the correct like button
+ */
+function initMenu(tagList, id) {
+    initTags(tagList, id);
+    initStoryModal(id);
+    formValid(id);
+}
+
+
+/**
+ * Initiates the dates and the like system for the stories on the index and the search page.
+ * @param {string} id - a unique id for that story which identifies the correct like button
+ * @param {string} timestamp - a string passed from python that is the date in milliseconds
+ */
+function initBaseStory(id, timestamp) {
+    showDate(id, timestamp);
+    likeUnlike(id)
+}
+
+
+/**
+ * Initiates functions for story editing on the user's profile page
+ * @param {Object<string, null>} tagList - An array of tags to use for chips autocomplete
+ * @param {string} id - a unique id for that story which identifies the correct like button
+ * @param {string} [content] - retrieves info for a written story and populates CKeditor with that info
+ * @param {Object[]} [storyTags] - an array containing the tags used in a given story
+ */
+function initEditStory(tagList, id, content, storyTags) {
+    initEditFab(id);
+    initTags(tagList, id);
+    initStoryModal(id, content, storyTags);
+    formValid(id);
 }
 
 
@@ -312,7 +349,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var instance = M.Tabs.init(formTabs, {})
         }
     });
-
 
     $('.password-create').on('submit', function (event) { // confirms that the two entered passwords are the same.
         var passFirst = document.querySelector('.passone').value

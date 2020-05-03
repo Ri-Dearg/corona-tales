@@ -71,7 +71,7 @@ def story_page():
     pagination = Pagination(page=page, per_page=7, total=total)
 
     return render_template('index.html', taglist=taglist,
-                           story_list=pagination_stories, page=page,
+                           base_story_list=pagination_stories, page=page,
                            per_page=per_page, pagination=pagination)
 
 
@@ -135,7 +135,7 @@ def profile():
     total = story_list.count()
     pagination = Pagination(page=page, per_page=7, total=total)
 
-    return render_template('profile.html', story_list=pagination_user,
+    return render_template('profile.html', edit_story_list=pagination_user,
                            taglist=taglist, page=page, per_page=per_page,
                            pagination=pagination, username=username)
 
@@ -397,7 +397,7 @@ def search():
     total = len(story_array)
     pagination = Pagination(page=page, per_page=7, total=total)
 
-    return render_template('search.html', story_list=pagination_results,
+    return render_template('search.html', base_story_list=pagination_results,
                            taglist=taglist, page=page, per_page=per_page,
                            pagination=pagination)
 

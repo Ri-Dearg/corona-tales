@@ -1698,36 +1698,27 @@
             {% endif %}  
         {% endwith %}
 
-            // Creates the taglist from the stories to be added to the autocomplete
-    		var tagList = {
-                {% for tag in taglist %}
-                    "{{ tag }}": null,
-                {% endfor %}
-            };
-
-            
-            {% for story in story_list %}
-                showDate('{{ story._id }}', '{{ story.time }}')
-                initEditFab('{{ story._id }}')
-                initTags(tagList, '{{ story._id }}')
-                initStoryModal('{{ story._id }}', '{{ story.text|safe }}', {{ story.tags|safe }})
-                formValid('{{ story._id }}');
-                likeUnlike('{{ story._id }}')
+        // Creates the taglist from the stories to be added to the autocomplete
+        var tagList = {
+            {% for tag in taglist %}
+                "{{ tag }}": null,
             {% endfor %}
+        };
+            
+        {% for story in base_story_list %}
+            initBaseStory('{{ story._id }}', '{{ story.time }}');
+        {% endfor %}
 
-            scrollInit(tagList, {% if current_user.is_authenticated %} [{% for like in current_user.liked %}
-                        "{{like}}",
-                        {% endfor %}
-                        ]
-            {% endif %})
-            initTags(tagList, 'index');
-            initTags(tagList, 'search');
-            initStoryModal('index');
-            initStoryModal('search')
-            formValid('index');
-            formValid('search')
-            initFab()
-    })
+        {% for story in edit_story_list %}
+            initBaseStory('{{ story._id }}', '{{ story.time }}');
+            initEditStory(tagList, '{{ story._id }}', '{{ story.text|safe }}', {{ story.tags|safe }})
+        {% endfor %}
+
+        initMenu(tagList, 'index');
+        initMenu(tagList, 'search');
+        initFab();
+        scrollInit(tagList);
+    });
 	</script>
 
 	{% block javascript %}
