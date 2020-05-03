@@ -1688,6 +1688,8 @@
 
 	<script>
     document.addEventListener('DOMContentLoaded', function () {
+
+        // Runs popup notification for each message that gets flashed by flask
 		{% with messages = get_flashed_messages(with_categories = true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -1696,14 +1698,17 @@
             {% endif %}  
         {% endwith %}
 
+            // Creates the taglist from the stories to be added to the autocomplete
     		var tagList = {
                 {% for tag in taglist %}
                     "{{ tag }}": null,
                 {% endfor %}
             };
 
+            
             {% for story in story_list %}
                 showDate('{{ story._id }}', '{{ story.time }}')
+                initEditFab('{{ story._id }}')
                 initTags(tagList, '{{ story._id }}')
                 initStoryModal('{{ story._id }}', '{{ story.text|safe }}', {{ story.tags|safe }})
                 formValid('{{ story._id }}');

@@ -1,3 +1,62 @@
+/**
+ * Changes the timestamp from milliseconds to a readable format and places it within the story card
+ * @param {string} id - a unique id for that story which can be used to identify the correct div
+ * @param {string} timeStamp - a string passed from python that is the date in milliseconds
+ */
+function showDate(id, timeStamp) {
+    var time = Number(timeStamp)
+    var date = new Date(time)
+
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };  // Sets format for dates
+    var dateString = date.toLocaleDateString(undefined, options)
+
+    document.querySelector(`#date-med-${id}`).textContent = dateString  // Places the dates on the cards
+    document.querySelector(`#date-small-${id}`).textContent = dateString
+}
+
+
+/**
+ * Initiates Materialize's floating action buttons.
+ * Initiates the alert that draws attention to the menu on the first page viewing.
+ */
+function initFab() {
+    var indexFab = document.querySelector('#button-index');  // Selects the FAB that is on every page
+    var indexTap = document.querySelector('.tap-target');  // The one-time alert
+
+    var instanceIndex = M.FloatingActionButton.init(indexFab, {});
+
+    if (indexTap != null && !sessionStorage.Shown) {  // Runs only if it hasn't been run before
+        var instancesFeature = M.TapTarget.init(indexTap, {});  // Creates the alert
+        instancesFeature.open()
+        setTimeout(function () { instancesFeature.close(); }, 5000);
+        sessionStorage.Shown = 1;  // Saves value after it is run once for this session
+    }
+}
+
+
+/**
+ * Initializes the edit button fab on the profile page. Does each seperately so intiated buttons
+ * do not reinitiate when new content is added to the page.
+ */
+function initEditFab(id) {
+    var sideFab = document.querySelector(`#button-${id}`);  // Selects the edit story button
+    if (sideFab != null) { // Initiates only if it is present
+        var instanceUser = M.FloatingActionButton.init(sideFab, { 
+            direction: 'left',
+        });
+    }
+}
+
+
+/**
+ * Initiates the select drop downs on the appended edit modals for the profile page
+ */
+function initSelect() {
+    var select = document.querySelectorAll('select');
+    var selectEdits = M.FormSelect.init(select, {});
+}
+
+
 /** Initiates the materialize 'chips' component
  * @param {Object<string, null>} tagCreate - takes a dictionary of tags to fill the autocomplete for that chips instance
  * @param {string} id - a unique id for that story which can be used to create that chips instance
@@ -64,48 +123,6 @@ function initStoryModal(id, content, tagList) {
             }
         }
     });
-}
-
-
-/**
- * Changes the timestamp from milliseconds to a readable format and places it within the story card
- * @param {string} id - a unique id for that story which can be used to identify the correct div
- * @param {string} timeStamp - a string passed from python that is the date in milliseconds
- */
-function showDate(id, timeStamp) {
-    var time = Number(timeStamp)
-    var date = new Date(time)
-
-    const options = { day: 'numeric', month: 'short', year: 'numeric' };  // Sets format for dates
-    var dateString = date.toLocaleDateString(undefined, options)
-
-    document.querySelector(`#date-med-${id}`).textContent = dateString  // Places the dates on the cards
-    document.querySelector(`#date-small-${id}`).textContent = dateString
-}
-
-
-/**
- * Initiates Materialize's floating action buttons.
- * Initiates the alert that draws attention to the menu on the first page viewing.
- */
-function initFab() {
-    var sideFab = document.querySelectorAll('.horizontal-button');  // Selects the edit story button
-    var indexFab = document.querySelector('#button-index');  // Selects the FAB that is on every page
-    var indexTap = document.querySelector('.tap-target');  // The one-time alert
-
-    var instanceIndex = M.FloatingActionButton.init(indexFab, {});
-
-    if (sideFab != null) { // Initiates only if it is present
-        var instanceUser = M.FloatingActionButton.init(sideFab, { 
-            direction: 'left',
-        });
-    }
-    if (indexTap != null && !sessionStorage.Shown) {  // Runs only if it hasn't been run before
-        var instancesFeature = M.TapTarget.init(indexTap, {});  // Creates the alert
-        instancesFeature.open()
-        setTimeout(function () { instancesFeature.close(); }, 5000);
-        sessionStorage.Shown = 1;  // Saves value after it is run once for this session
-    }
 }
 
 
@@ -225,7 +242,7 @@ function createScroll(getUrl, baseUrl, elem, tagList) {
             if (getUrl.pathname == '/profile') {  // reinitiates materialize components for the profile page edit button
                 var tags = JSON.parse(info[2].innerText)
                 var content = $(items).find(`#content-${storyId}`).html()
-                initFab();
+                initEditFab(storyId);
                 initTags(tagList, storyId);
                 initStoryModal(storyId, content, tags);
                 initSelect();
@@ -265,15 +282,6 @@ function scrollInit(tagList) {
         infScroll = new createScroll(getUrl, baseUrl, scroll)
     });
 
-}
-
-
-/**
- * Initiates the select drop downs on the appended edit modals for the profile page
- */
-function initSelect() {
-    var select = document.querySelectorAll('select');
-    var selectEdits = M.FormSelect.init(select, {});
 }
 
 
