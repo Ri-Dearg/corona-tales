@@ -58,7 +58,6 @@ function initSelect() {
 
 
 function colorChange() {
-    console.log('change')
     $("span:contains('Red')").hover(function() {
         $(this).addClass('red-sel')
         }, function(){
@@ -445,5 +444,13 @@ document.addEventListener('DOMContentLoaded', function () {
             return false
         }
     });
+    $.getJSON('static/js/quotes.json', function (data) {
+        var quoteLength = data.length
+        i = Math.floor(Math.random() * quoteLength)
+        console.log(quoteLength)
+        console.log(i)
+        $('#splash-text').text(data[i].text)
+        $('#splash-author').text(`- ${data[i].author}`)
+    })
 });
 

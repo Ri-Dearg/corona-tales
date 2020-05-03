@@ -32,6 +32,10 @@ strong {
 	font-size: 1.2rem
 }
 
+h6 {
+    font-size: 1.4rem;
+}
+
 
 /* Used for text under chips entry */
 .helper-text-custom {

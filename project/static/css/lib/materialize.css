@@ -4921,7 +4921,7 @@ small {
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
-  color: #039be5;
+  color: #000;
 }
 
 .card .card-reveal {
