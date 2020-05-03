@@ -1,3 +1,6 @@
+function fadePreload() {
+    $('.preloader').fadeOut(1500)
+}
 /**
  * Changes the timestamp from milliseconds to a readable format and places it within the story card
  * @param {string} id - a unique id for that story which can be used to identify the correct div
@@ -410,6 +413,10 @@ function initEditStory(tagList, id, content, storyTags) {
  * Also used for password verification
  */
 document.addEventListener('DOMContentLoaded', function () {
+    
+    window.addEventListener('load', fadePreload());
+
+
     M.AutoInit();  // Initiates all auto-initiated Materialize components
 
     colorChange();
