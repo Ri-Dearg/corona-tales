@@ -21,7 +21,7 @@
     <!-- CKEditor CDN -->
     <script src="../static/js/ckeditor5/build/ckeditor.js"></script>
 
-    <title>{% title block %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 
 </head>
 
@@ -1719,6 +1719,14 @@
         </div>
     </div>
     {% endif %}
+
+<!-- Alert to the menu button location and use-->
+<div class="tap-target no-autoinit purple lighten-1" data-target="fab-index">
+    <div class="tap-target-content">
+        <h5 class="white-text">Post a Story here!</h5>
+        <p class="white-text">Use this menu to post a story, search, login or get help.</p>
+    </div>
+</div>
 
     <!-- JQuery library -->
     <script src="{{url_for('static', filename='js/lib/jquery-3.5.0.min.js')}}"></script>

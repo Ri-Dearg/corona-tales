@@ -1,11 +1,14 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block title %}Corona Tales|Home{% endblock %} 
+{% block content %}
 <div class="container">
 
+    <!--Infinite Scroll will append to the end of this element-->
     <section class="section white z-depth-3 infiniscroll">
         <h5 class="center-align heading purple-text text-lighten-1">A simple site for Sharing.</h5>
         <br>
         <div class="row center">
-            <!-- Updating Map from Datawrapper.com -->
+            <!-- Self-Updating Map from Datawrapper.com -->
             <iframe title="Coronavirus COVID-19 confirmed &amp;amp; recovered cases" aria-label="World Symbol map" id="datawrapper-chart-nTild" src="//datawrapper.dwcdn.net/nTild/3/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="525"></iframe>
 
             <script type="text/javascript">
@@ -23,10 +26,11 @@
         </div>
         <br>
         <br>
+        <!--   Story Section   -->
         <!-- Function to place each story as a card -->
         {% for story in base_story_list %}
+        <!-- Places any featured stories first -->
         {% if story.featured %}
-        <!--   Story Section   -->
         <div class="scroll-append">
         <div class="id-info d-none">{{ story._id}}</div>
         <div class="time-info d-none">{{ story.time}}</div>
@@ -48,6 +52,7 @@
                                 <p>{{ story.text|safe }}</p>
                                 <br>
                             </div>
+                                                            <!-- Shows the like button if the user is logged in. Button varies depending on whether the story is liked or not -->
                                                             {% if current_user.is_authenticated %}
                                 <div id="button-{{ story._id }}" class="fixed-action-btn heart-button">
                                 <form class="like-button" id="form-like-{{ story._id }}">
@@ -65,6 +70,7 @@
                                 </div>
                                 {% endif %}
                             <div class="card-action col s12">
+                            <!-- List all the tags on the story-->
                                 <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>, {% endfor %}</p>
                             </div>
                         </div>
@@ -74,6 +80,8 @@
         </div>
         </div>
         {% endif %}
+
+        <!--Lists all the non-featured stories second-->
         {% if not story.featured %}
         <div class="scroll-append">
         <div class="id-info d-none">{{ story._id}}</div>
@@ -96,6 +104,7 @@
                                 <p>{{ story.text|safe }}</p>
                                 <br>
                             </div>
+                                                                                        <!-- Shows the like button if the user is logged in. Button varies depending on whether the story is liked or not -->
                                                             {% if current_user.is_authenticated %}
                                 <div id="button-{{ story._id }}" class="fixed-action-btn heart-button">
                                 <form class="like-button" id="form-like-{{ story._id }}">
@@ -107,12 +116,13 @@
                                     {% else %}
                                     <i id="heart-{{ story._id }}" class="large material-icons">favorite_border</i>
                                     {% endif %}
-
                                     </button>
                                 </form>
                                 </div>
                                 {% endif %}
                             <div class="card-action col s12">
+                                                        <!-- List all the tags on the story-->
+
                                 <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>, {% endfor %}</p>
                             </div>
                         </div>
@@ -126,13 +136,4 @@
 
     </section>
 </div>
-
-<div class="tap-target no-autoinit purple lighten-1" data-target="fab-index">
-    <div class="tap-target-content">
-        <h5 class="white-text">Post a Story here!</h5>
-        <p class="white-text">Use this menu to post a story, search, login or get help.</p>
-    </div>
-</div>
-
-
 {% endblock %}
