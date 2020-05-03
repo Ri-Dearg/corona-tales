@@ -1,302 +1,379 @@
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
-.sidenav {
-    z-index: 2002;
-}
-.navbar-fixed {
-    z-index: 2001;
-}
+/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.26, autoprefixer: v9.7.3) */
 
-.d-none {
-    display: none;
-}
+
+/*------------------------------------------------------------------------
+Custom styles for the site.
+rem or px are utilised based on the original values from Materialize CSS
+------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------
+Fonts and Text
+------------------------------------------------------------------------*/
 
 html {
-    font-family: 'Josefin Slab', serif;
-    font-size: 1.1rem 
+	font-family: 'Josefin Slab', serif;
+	font-size: 1.1rem
 }
 
 .heading {
-font-family: 'IM Fell English SC', serif;
+	font-family: 'IM Fell English SC', serif;
+}
+
+strong {
+	font-weight: bold;
 }
 
 .mini-text {
-    font-size: 0.8rem
+	font-size: 0.8rem
 }
 
+.sidenav li>a {
+	font-size: 1.2rem
+}
+
+
+/* Used for text under chips entry */
+
+.helper-text-custom {
+	min-height: 18px;
+	display: block;
+	font-size: 12px;
+	color: rgba(0, 0, 0, 0.54);
+}
+
+
+/* The box surrounding text when infitescroll is finished loading*/
+
+.load-box {
+	font-size: 2.1rem;
+	-webkit-box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, 0.14), 0 -3px 1px -2px rgba(0, 0, 0, 0.12), 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, 0.14), 0 -3px 1px -2px rgba(0, 0, 0, 0.12), 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+
+/*------------------------------------------------------------------------
+Spacing and Sizing
+------------------------------------------------------------------------*/
+
+.icon-block {
+	padding: 0 0.9rem;
+}
+
+
+/* spacing for the text editor */
+
 .ckeditor {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 
 .input-field {
-    margin-top: 0.2rem;
-    margin-bottom: 0.2rem;
+	margin-top: 0.2rem;
+	margin-bottom: 0.2rem;
 }
 
-.helper-text-custom {
-    min-height: 18px;
-    display: block;
-    font-size: 12px;
-    color: rgba(0,0,0,0.54);
-}
 
-.load-box {
-    font-size: 2.1rem;
-    box-shadow: 0 -2px 2px 0 rgba(0,0,0,0.14),
-                0 -3px 1px -2px rgba(0,0,0,0.12),
-                0 -1px 5px 0 rgba(0,0,0,0.2);
-}
+/* Helps Keeps the preloader centered on screen*/
 
 .preload-container {
-    width: 64px;
-    height: 64px;
-    margin: auto;
+	width: 64px;
+	height: 64px;
+	margin: auto;
 }
 
-.preloader-wrapper {
-position: relative;
-top :0;
-left: 0;
-right: 0;
-bottom: 0;
-margin: auto;
-}
 
-.spinner-layer {
-    border-color: #ff4081;
-}
+/* Maintains correct spacing for the infinitescroll notifications */
 
 .load-box p {
-    margin-block-end: 0;
-}
-
-strong { 
-    font-weight: bold;
+	-webkit-margin-after: 0;
+	margin-block-end: 0;
 }
 
 hr {
-    height: 0.1rem
+	height: 0.1rem
 }
 
+.row .pd-t {
+	padding-top: 0.4rem
+}
+
+.row form.col {
+	padding: 0;
+}
+
+form .col.pd-b {
+	padding-bottom: 0.6rem
+}
+
+.modal {
+	max-height: 85%;
+	width: 65%;
+}
+
+.no-m-bot,
+.title {
+	margin-bottom: 0;
+}
+
+.mt-1 {
+	margin-top: 1rem;
+}
+
+.mb-1 {
+	margin-bottom: 1rem;
+}
+
+.mar-bot-24 {
+	margin-bottom: 24px !important;
+}
+
+.no-pad-bot {
+	padding-bottom: 0 !important;
+}
+
+.section {
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+	min-height: 100vh;
+}
+
+
+/* Lowers padding for smaller devices */
+
+@media only screen and (max-width: 400px) {
+	.section {
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	/* Keeps the logo the correct size for smaller screens*/
+	nav .brand-logo {
+		font-size: 8vw;
+	}
+	/* Maked the modal bigger for filling forms */
+	.modal {
+		max-height: 75%;
+		width: 90%;
+		overflow-y: auto;
+	}
+	/* lowers the amount of pading for smaller screens*/
+	.modal .modal-content {
+		padding: 12px
+	}
+}
+
+
+/*------------------------------------------------------------------------
+Positioning
+------------------------------------------------------------------------*/
+
+
+/* Centers the preloader */
+
+.preloader-wrapper {
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+
+/** Numbers are chosen base on Materialize Css
+*The have been increased only by a minimum to place them
+*above floating buttons or other components
+*/
+
+.navbar-fixed {
+	z-index: 2001;
+}
+
+.sidenav {
+	z-index: 2002;
+}
+
+.modal {
+	z-index: 2003 !important;
+}
+
+.d-none {
+	display: none;
+}
+
+
+/*------------------------------------------------------------------------
+Colours
+------------------------------------------------------------------------*/
+
+
+/* Colors the spinner */
+
+.spinner-layer {
+	border-color: #ff4081;
+}
+
+
+/* Colors the option tabs */
+
 .tabs .tab a {
-    color: #00796b  ;
+	color: #00796b;
 }
 
 .tabs .tab a:hover,
 .tabs .tab a.active,
 .tabs .tab.a {
-    color: #00bfa5;
+	color: #00bfa5;
 }
 
 .tabs .tab a:focus.active {
-  color:#00bfa5;
-  background-color: rgba(81, 201, 165, 0.2);
+	color: #00bfa5;
+	background-color: rgba(81, 201, 165, 0.2);
 }
 
 .tabs .indicator {
-    background-color: #00bfa5;
+	background-color: #00bfa5;
 }
+
+
+/* Colors the remember me checkbox */
 
 [type="checkbox"].filled-in:checked+span:not(.lever):after {
-    border-color: #00bfa5;
-    background-color: #00bfa5 
+	border-color: #00bfa5;
+	background-color: #00bfa5
 }
 
-.row .pd-t {
-    padding-top: 0.4rem 
-}
 
-.row form.col {
-    padding: 0;
-}
-
-form .col.pd-b {
-    padding-bottom: 0.6rem
-}
-
-.sidenav li>a {
-    font-size: 1.2rem
-}
-
-.modal {
-    max-height: 85%;
-    width: 65%;
-    z-index: 2003 !important;
-}
-
-@media only screen and (max-width: 600px) {
-    nav .brand-logo {
-        font-size: 8vw;
-    }
-
-    .modal {
-        max-height: 75%;
-        width: 90%; 
-        overflow-y: auto;
-
-    }
-
-    .modal .modal-content {
-        padding: 12px
-    }
-}
-
-.icon-block {
-  padding: 0 0.9rem;
-}
-.icon-block .material-icons {
-	font-size: inherit;
-}
-
-.no-m-bot,
-.title {
-    margin-bottom: 0;
-}
-
-.mt-1 {
-    margin-top: 1rem;
-}
-
-.mb-1 {
-    margin-bottom: 1rem;
-}
-
-.mar-bot-24 {
-    margin-bottom: 24px !important;
-}
-
-.no-pad-bot {
-  padding-bottom: 0 !important;
-}
-
-.section {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    min-height: 100vh;
-}
-
-@media only screen and (max-width: 400px) {
-    .section {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-}
+/* Positions the edit button on the stories*/
 
 .horizontal-button {
-    position:absolute; 
-    bottom:-29px; 
-    right:10px
+	position: absolute;
+	bottom: -29px;
+	right: 10px
 }
+
+
+/* Positions the like */
 
 .heart-button {
-    position:absolute; 
-    bottom:-25px; 
-    right:55px
+	position: absolute;
+	bottom: -25px;
+	right: 55px
 }
 
+
+/* Colors the flashed messages popups */
+
 .success {
-    background-color: #00bfa5;
+	background-color: #00bfa5;
 }
 
 .sorry {
-    background-color: #e53935;
+	background-color: #e53935;
 }
 
+
+/*------------------------------------------------------------------------
+Fixes and Features
+------------------------------------------------------------------------*/
+
+
 /* fix for no bullet points in editor */
+
 .ck.ck-content ul,
-.ck.ck-content ul li{
-  list-style-type: inherit;
+.ck.ck-content ul li {
+	list-style-type: inherit;
 }
 
 .ck.ck-content ul {
-  padding-left: 2.5rem;
+	padding-left: 2.5rem;
 }
 
+
+/* Tooltip fixes as the Materialize tooltips don't have a fixed position on the buttons
+* Adapted for my site from https://codepen.io/T-P/pen/qZwLmB
+*/
+
 .fixed-action-btn ul {
-display: none;
+	display: none;
 }
 
 .fixed-action-btn:hover ul {
-display: block;
+	display: block;
 }
 
 .material-tooltip {
-display: none !important;
+	display: none !important;
 }
 
 .mobile-fab-tip.like-tip {
-position: relative;
-top:4px;
-    display: none;
-    -webkit-animation-fill-mode: none;
-    -moz-animation-fill-mode: none;
-    -o-animation-fill-mode: none;
-    animation-fill-mode: none;
-    opacity: 100;
-    animation-delay: 0s;
+	position: relative;
+	top: 4px;
+	display: none;
+	-webkit-animation-fill-mode: none;
+	animation-fill-mode: none;
+	opacity: 100;
+	-webkit-animation-delay: 0s;
+	animation-delay: 0s;
 }
 
 .left-tip {
-position: fixed;
-right: 85px;
+	position: fixed;
+	right: 85px;
 }
 
 .bot-tip-1 {
-position: fixed;
-right: 15px;
-top: 54px;
+	position: fixed;
+	right: 15px;
+	top: 54px;
 }
 
 .bot-tip-2 {
-position: fixed;
-top: 54px;
-right: 67px;
+	position: fixed;
+	top: 54px;
+	right: 67px;
 }
 
 .mobile-fab-tip {
-padding: 7px 5px 4px 5px;
-text-align: right;
-background-color: #323232;
-border-radius: 2px;
-color: #FFF;
-opacity: 0;
+	padding: 7px 5px 4px 5px;
+	text-align: right;
+	background-color: #323232;
+	border-radius: 2px;
+	color: #FFF;
+	opacity: 0;
 }
+
 .mobile-fab-tip {
--webkit-animation: fadein 1s;
--moz-animation: fadein 1s;
--o-animation: fadein 1s;
-animation: fadein 1s;
--webkit-animation-fill-mode: forwards;
--moz-animation-fill-mode: forwards;
--o-animation-fill-mode: forwards;
-animation-fill-mode: forwards;
--webkit-animation-delay: 0.5s;
--moz-animation-delay: 0.5s;
--o-animation-delay: 0.5s;
-animation-delay: 0.5s;
+	-webkit-animation: fadein 1s;
+	animation: fadein 1s;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;
+	-webkit-animation-delay: 0.5s;
+	animation-delay: 0.5s;
 }
+
 @keyframes fadein {
-0% { opacity: 0; }
-100% { opacity: 1; }
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
-@-moz-keyframes fadein {
-/* Firefox */
-0% { opacity: 0; }
-100% { opacity: 1; }
-}
+
 @-webkit-keyframes fadein {
-/* Safari and Chrome */
-0% { opacity: 0; }
-100% { opacity: 1; }
-}
-@-o-keyframes fadein {
-/* Opera */
-0% { opacity: 0; }
-100% { opacity: 1; }
+	/* Safari and Chrome */
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
