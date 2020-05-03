@@ -236,17 +236,13 @@ function createScroll(getUrl, baseUrl, elem, tagList) {
         for (i = 0; i < items.length; i++) {
             var info = items[i].children
             var storyId = info[0].innerText
-            showDate(storyId, info[1].innerText); // reinitiates functions for new dynamic content
-            likeUnlike(storyId);
+            initBaseStory(storyId, info[1].innerText)  // reinitiates functions for new dynamic content
 
             if (getUrl.pathname == '/profile') {  // reinitiates materialize components for the profile page edit button
                 var storyTags = JSON.parse(info[2].innerText)
                 var content = $(items).find(`#content-${storyId}`).html()
-                initEditFab(storyId);
-                initTags(tagList, storyId);
-                initStoryModal(storyId, content, storyTags);
+                initEditStory(tagList, storyId, content, storyTags)
                 initSelect();
-                formValid(storyId);
             }
         }
     });
@@ -264,7 +260,7 @@ function createScroll(getUrl, baseUrl, elem, tagList) {
  * it is recreated when switching to the user story feed, so it can append on the correct tab only.
  * @param {Object<string, null>} tagList - An array of tags to use for chips autocomplete
  */
-function scrollInit(tagList) {
+function initScroll(tagList) {
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
