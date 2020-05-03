@@ -292,9 +292,9 @@ def search():
             results = stories.find({
                 'time': {'$gte': from_date, '$lte': to_date},
                 'age': {'$gte': from_age, '$lte': to_age},
-                '$text': {'$search': f'{base_text} \
-                                    {country} \
-                                    {story_lang} \
+                '$text': {'$search': f'{base_text}\
+                                    {country}\
+                                    {story_lang}\
                                     {tag_string}'}},
                 {'score': {'$meta': 'textScore'}}).sort(
                 [('score', {'$meta': 'textScore'})])
