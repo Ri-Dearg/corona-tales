@@ -29,7 +29,7 @@
         {% for story in base_story_list %}
         <!-- Places any featured stories first -->
         {% if story.featured %}
-        <!-- Infinite scroll will append this a story card on load-->
+        <!-- Infinite scroll will append this story card on load-->
         <div class="scroll-append">
             <div class="id-info d-none">{{ story._id}}</div>
             <div class="time-info d-none">{{ story.time}}</div>

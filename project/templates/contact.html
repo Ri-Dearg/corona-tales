@@ -1,8 +1,9 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block title %}Corona Tales|Contact{% endblock %} {% block content %}
 <div class="container">
     <section class="section white z-depth-3 valign-wrapper">
         <article class="container">
             <h2 class="heading center-align orange-text text-lighten-1">Contact Me</h2>
+            <!-- Form utilising flask-mail to send messages -->
             <form id="contact-form" action="{{ url_for('base.send_mail') }}" method="POST">
                 <div class="row">
                     <div class="col s12 input-field validate">
@@ -15,7 +16,7 @@
                     </div>
                     <div class="col s12 input-field validate">
                         <i class="material-icons prefix">call</i>
-                        <input type="tel" name="number" placeholder="Number (Optional)"/>
+                        <input type="tel" name="number" placeholder="Number (Optional)" />
                     </div>
                     <div class="col s12 input-field validate">
                         <i class="material-icons prefix">mail</i>

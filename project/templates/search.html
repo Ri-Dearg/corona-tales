@@ -1,13 +1,14 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block title %}Corona Tales|Search{% endblock %} {% block content %}
 <div class="container">
+    <!--Infinite Scroll will append to the end of this element-->
     <section class="section white z-depth-3 infiniscroll">
-        <h4 class="heading center-align light-blue-text accent-2">Results</h4>
-        {% for story in base_story_list %}
+        <h4 class="heading center-align light-blue-text accent-2">Results</h4> {% for story in base_story_list %}
+        <!-- Infinite scroll will append this story card on load-->
         <div class="scroll-append">
-        <div class="id-info d-none">{{ story._id}}</div>
-        <div class="time-info d-none">{{ story.time}}</div>
-        <hr class="{{ story.color }}">
-        <br>
+            <div class="id-info d-none">{{ story._id}}</div>
+            <div class="time-info d-none">{{ story.time}}</div>
+            <hr class="{{ story.color }}">
+            <br>
             <div class="row">
                 <div class="col s12">
                     <article class="card {{ story.color }} lighten-2 hoverable">
@@ -26,18 +27,16 @@
                                 </div>
                                 {% if current_user.is_authenticated %}
                                 <div id="button-{{ story._id }}" class="fixed-action-btn heart-button">
-                                <form class="like-button" id="form-like-{{ story._id }}">
-                                    <input type="hidden" name="like-id" value="{{ story._id }}">
-                                    <span class="mobile-fab-tip like-tip" id="like-tip-{{ story._id }}">{{ story.likes }} likes</span>
-                                    <button id="like-info-{{ story._id }}" class="btn-floating pink accent-3 tooltipped" data-position="left" data-tooltip="{{ story.likes }} likes">
-                                    {% if story._id in current_user.liked %}
-                                        <i id="heart-{{ story._id }}" class="large material-icons">favorite</i>
-                                    {% else %}
-                                    <i id="heart-{{ story._id }}" class="large material-icons">favorite_border</i>
-                                    {% endif %}
+                                    <form class="like-button" id="form-like-{{ story._id }}">
+                                        <input type="hidden" name="like-id" value="{{ story._id }}">
+                                        <span class="mobile-fab-tip like-tip" id="like-tip-{{ story._id }}">{{ story.likes }} likes</span>
+                                        <button id="like-info-{{ story._id }}" class="btn-floating pink accent-3 tooltipped" data-position="left" data-tooltip="{{ story.likes }} likes">
+                                            {% if story._id in current_user.liked %}
+                                            <i id="heart-{{ story._id }}" class="large material-icons">favorite</i> {% else %}
+                                            <i id="heart-{{ story._id }}" class="large material-icons">favorite_border</i> {% endif %}
 
-                                    </button>
-                                </form>
+                                        </button>
+                                    </form>
                                 </div>
                                 {% endif %}
                                 <div class="card-action col s12">
@@ -52,6 +51,7 @@
 
         {% else %}
         <div class="row">
+            <!-- Heading if no results are found -->
             <div class="col s12 center-align heading">
                 <h4>Nothing found.</h4>
                 <br>
