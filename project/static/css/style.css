@@ -34,7 +34,6 @@ strong {
 
 
 /* Used for text under chips entry */
-
 .helper-text-custom {
 	min-height: 18px;
 	display: block;
@@ -44,7 +43,6 @@ strong {
 
 
 /* The box surrounding text when infitescroll is finished loading*/
-
 .load-box {
 	font-size: 2.1rem;
 	-webkit-box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, 0.14), 0 -3px 1px -2px rgba(0, 0, 0, 0.12), 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
@@ -66,7 +64,6 @@ Spacing and Sizing
 
 
 /* spacing for the text editor */
-
 .ckeditor {
 	margin-top: 0.5rem;
 	margin-bottom: 0.5rem;
@@ -79,7 +76,6 @@ Spacing and Sizing
 
 
 /* Helps Keeps the preloader centered on screen*/
-
 .preload-container {
 	width: 64px;
 	height: 64px;
@@ -88,11 +84,20 @@ Spacing and Sizing
 
 
 /* Maintains correct spacing for the infinitescroll notifications */
-
 .load-box p {
 	-webkit-margin-after: 0;
 	margin-block-end: 0;
 }
+
+.card-content .row {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/*.card-action {
+    width: 100%;
+    background-color: #fafafa !important; 
+}*/
 
 hr {
 	height: 0.1rem
@@ -144,7 +149,6 @@ form .col.pd-b {
 
 
 /* Lowers padding for smaller devices */
-
 @media only screen and (max-width: 400px) {
 	.section {
 		padding-left: 0.5rem;
@@ -256,7 +260,7 @@ Colours
 .horizontal-button {
 	position: absolute;
 	bottom: -29px;
-	right: 10px
+	right: 50px
 }
 
 
@@ -264,7 +268,7 @@ Colours
 
 .heart-button {
 	position: absolute;
-	bottom: -25px;
+	bottom: -19px;
 	right: 55px
 }
 
