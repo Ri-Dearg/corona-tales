@@ -351,7 +351,6 @@ function createScroll(getUrl, baseUrl, elem, tagList) {
 function initScroll(tagList) {
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
-
     var scroll = document.querySelector('.infiniscroll');
 
     if (scroll != undefined && getUrl.hash !== '#user-settings') {  // will not fire on user settings
@@ -444,13 +443,14 @@ document.addEventListener('DOMContentLoaded', function () {
             return false
         }
     });
-    $.getJSON('static/js/quotes.json', function (data) {
-        var quoteLength = data.length
-        i = Math.floor(Math.random() * quoteLength)
-        console.log(quoteLength)
-        console.log(i)
-        $('#splash-text').text(data[i].text)
-        $('#splash-author').text(`- ${data[i].author}`)
-    })
+
+    if (window.location.pathname == '/') {
+        $.getJSON('static/js/quotes.json', function (data) {
+            var quoteLength = data.length
+            i = Math.floor(Math.random() * quoteLength)
+            $('#splash-text').text(data[i].text)
+            $('#splash-author').text(`- ${data[i].author}`)
+        })
+    }
 });
 
