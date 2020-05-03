@@ -419,6 +419,7 @@ def search_tags(tag):
 
     for result in results:
         story_array.append(result)
+        print(result)
 
     # paginate results
     page, per_page, offset = get_page_args(page_parameter='page',
@@ -428,7 +429,7 @@ def search_tags(tag):
     total = len(story_array)
     pagination = Pagination(page=page, per_page=7, total=total)
 
-    return render_template('search.html', story_list=pagination_results,
+    return render_template('search.html', base_story_list=pagination_results,
                            taglist=taglist, page=page, per_page=per_page,
                            pagination=pagination)
 
