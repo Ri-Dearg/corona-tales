@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block title %}Corona Tales|Home{% endblock %} {% block content %}
+{% extends 'base.html' %} {% block title %}Corona Tales | Home{% endblock %} {% block content %}
 <div class="container">
 
     <!--Infinite Scroll will append to the end of this element-->
@@ -28,7 +28,7 @@
                     <article class="card hoverable">
                         <div class="card-content {{ story.color }} lighten-2 no-pad-bot">
                             <div class="row no-m-bot">
-                                <span class="card-title col s12 m6 heading">{{ story.title }}</span>
+                                <h6 class="card-title col s12 m6 heading">{{ story.title }}</h6>
                                 <span id="date-med-{{ story._id }}" class="card-title col s12 m6 heading hide-on-small-only right-align"></span>
                                 <span id="date-small-{{ story._id }}" class="card-title col s12 m6 heading hide-on-med-and-up"></span>
                                 <div class="col s12">
@@ -36,7 +36,7 @@
                                         <br> Age {{ story.age|string }},
                                         <br> In {{ story.country.title() }}.</p>
                                     <br>
-                                    <p>{{ story.text|safe }}</p>
+                                    {{ story.text|safe }}
                                     <br>
                                 </div>
                                 <!-- Shows the like button if the user is logged in. Button varies depending on whether the story is liked or not -->
@@ -77,7 +77,7 @@
                     <article class="card {{ story.color }} lighten-2 hoverable">
                         <div class="card-content no-pad-bot">
                             <div class="row no-m-bot">
-                                <span class="card-title col s12 m6 heading">{{ story.title }}</span>
+                                <h6 class="card-title col s12 m6 heading">{{ story.title }}</h6>
                                 <span id="date-med-{{ story._id }}" class="card-title col s12 m6 heading hide-on-small-only right-align"></span>
                                 <span id="date-small-{{ story._id }}" class="card-title col s12 m6 heading hide-on-med-and-up"></span>
                                 <div class="col s12">
@@ -85,7 +85,7 @@
                                         <br> Age {{ story.age|string }},
                                         <br> In {{ story.country.title() }}.</p>
                                     <br>
-                                    <p>{{ story.text|safe }}</p>
+                                    {{ story.text|safe }}
                                     <br>
                                 </div>
                                 <!-- Shows the like button if the user is logged in. Button varies depending on whether the story is liked or not -->
