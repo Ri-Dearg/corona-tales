@@ -24,7 +24,7 @@ def create_app():
     app.config['taglist'] = set()  # Used for tag entry autocomplete
 
     login_manager = LoginManager()  # functions for flask-login
-    login_manager.login_view = 'auth.login'
+    login_manager.login_view = 'base.story_page'
     login_manager.init_app(app)
 
     from .models import User  # a model for users for flask-login
