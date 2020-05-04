@@ -1138,7 +1138,7 @@
                             <option value="purple">Purple</option>
                             <option value="pink">Pink</option>
                         </select>
-                        <span class="helper-text">A color for your story card.</span>
+                        <span class="helper-text">Hold down on mobile to see the color.</span>
                     </div>
                     <div class="input-field col s12 m6 pull-m6">
                         <i class="material-icons prefix">import_contacts</i>
@@ -1789,7 +1789,7 @@
             // Initiates functions necessary for the user page, only on the user page
             {% for story in edit_story_list %}
             initBaseStory('{{ story._id }}', '{{ story.time }}');
-            initEditStory(tagList, '{{ story._id }}', '{{ story.text|safe }}', {{ story.tags | safe }});
+            initEditStory(tagList, '{{ story._id }}', `{{ story.text|safe }}`, {{ story.tags | safe }});
             {% endfor %}
 
             // initiates functions necessary for the menu button's features
