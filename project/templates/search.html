@@ -41,8 +41,7 @@
                             </div>
                         </div>
                         <div class="card-action {{ story.color }} lighten-5">
-                            <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>,{% if loop.last %}
-                            <a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>{% endif %} {% endfor %}</p>
+                            <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
                         </div>
                     </article>
                 </div>

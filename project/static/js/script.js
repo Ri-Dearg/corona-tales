@@ -293,7 +293,7 @@ function likeUnlike(id) {
                 $(`#like-tip-${id}`).fadeIn(600, function () {
                     setTimeout(function () {
                         $(`#like-tip-${id}`).fadeOut(600);
-                    }, 2000);
+                    }, 3000);
                 });
             }
         });

@@ -41,7 +41,7 @@
                                                 <br>
                                             </div>
                                             <!-- Shows the edit button for more story options -->
-                                            <div id="button-{{ story._id }}" class="fixed-action-btn no-autoinit horizontal-button">
+                                            <div id="button-{{ story._id }}" class="fixed-action-btn menu-btn no-autoinit horizontal-button">
                                                 <div class="btn-floating btn-large indigo darken-1 tooltipped" data-position="bottom" data-tooltip="Menu">
                                                     <i class="large material-icons">menu</i>
                                                 </div>
@@ -64,8 +64,7 @@
                                     </div>
                                     <div class="card-action {{ story.color }} lighten-5">
                                         <!-- List all the tags on the story-->
-                                        <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>,{% if loop.last %}
-                            <a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>{% endif %} {% endfor %}</p>
+                                        <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
                                     </div>
                                 </article>
                             </div>
