@@ -361,6 +361,10 @@ Colours
 Fixes and Features
 ------------------------------------------------------------------------*/
 
+.ck.ck-reset, .ck.ck-reset_all, .ck.ck-reset_all * {
+    position: sticky !important;
+}
+
 .preloader {
   background: #e0f2f1;
   display: flex;
