@@ -391,10 +391,6 @@ Fixes and Features
 * Adapted for my site from https://codepen.io/T-P/pen/qZwLmB
 */
 
-.fixed-action-btn ul {
-	display: none;
-}
-
 .fixed-action-btn:hover ul {
 	display: block;
 }
@@ -406,7 +402,6 @@ Fixes and Features
 .mobile-fab-tip.like-tip {
 	position: relative;
 	top: 4px;
-	display: none;
 	-webkit-animation-fill-mode: none;
 	animation-fill-mode: none;
 	opacity: 100;

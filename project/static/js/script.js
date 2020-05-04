@@ -1,5 +1,5 @@
 function fadePreload() {
-    $('.preloader').fadeOut(1500)
+    $('.preloader').fadeOut(1800)
 }
 /**
  * Changes the timestamp from milliseconds to a readable format and places it within the story card
@@ -50,6 +50,15 @@ function initEditFab(id) {
     }
 }
 
+function tipAnim() {
+    $('.fixed-action-btn').hover(
+        function() {
+            $('.mobile-fab-tip').addClass('scale-in')
+        },
+        function() {
+            $('.mobile-fab-tip').removeClass('scale-in')
+        });
+}
 
 /**
  * Initiates the select drop downs on the appended edit modals for the profile page
@@ -334,6 +343,7 @@ function createScroll(getUrl, baseUrl, elem, tagList) {
                 initEditStory(tagList, storyId, content, storyTags)
                 initSelect();
                 colorChange();
+                tipAnim();
             }
         }
     });
@@ -418,6 +428,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     M.AutoInit();  // Initiates all auto-initiated Materialize components
+
+    tipAnim()
 
     colorChange();
 
