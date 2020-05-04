@@ -283,9 +283,13 @@ function likeUnlike(id) {
             datatype: 'json',
             success: function (data) {
                 if ($(`#heart-${id}`).text() === 'favorite') {
+                    var unlikeAudio = new Audio('/static/audio/pop-cork.wav');
+                    unlikeAudio.play();
                     $(`#heart-${id}`).text('favorite_border');
                 }
                 else {
+                    var likeAudio = new Audio('/static/audio/blop.wav');
+                    likeAudio.play();
                     $(`#heart-${id}`).text('favorite');
                 }
                 $(`#like-info-${id}`).attr('data-tooltip', `${data.toString()} likes`);
