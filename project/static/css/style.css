@@ -360,9 +360,13 @@ Colours
 /*------------------------------------------------------------------------
 Fixes and Features
 ------------------------------------------------------------------------*/
+.hide-content {
+    height: 180px;
+    overflow-y: hidden;
+}
 
-.ck.ck-reset, .ck.ck-reset_all, .ck.ck-reset_all * {
-    position: sticky !important;
+.show-content {
+    height: auto;
 }
 
 .preloader {

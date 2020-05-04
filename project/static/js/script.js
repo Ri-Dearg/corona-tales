@@ -18,6 +18,30 @@ function showDate(id, timeStamp) {
 }
 
 
+function clickToShow(id) {
+    $(`#show-${id}.click-to-show`).on('click', function () {
+        var truncate = $(`#truncate-${id}`)
+        if ($(`#show-${id}`).hasClass('toggled')) {
+            console.log('toggled')
+            $(`#show-${id}`).removeClass('toggled').html('<a>Read More</a>')
+            truncate.stop().animate({
+                height: '180px'
+            }, 1200);
+        } else {
+            console.log($(`#show-${id}`))
+            $(`#show-${id}`).addClass('toggled').html('<a>Close</a>')
+            var truncate = $(`#truncate-${id}`)
+            var previewHeight = truncate.height()
+            var contentHeight = truncate.css('height', 'auto').height()
+            truncate.height(previewHeight)
+            truncate.stop().animate({
+                height: contentHeight
+            }, 1200)
+        }
+    })
+}
+
+
 /**
  * Initiates Materialize's floating action buttons.
  * Initiates the alert that draws attention to the menu on the first page viewing.
@@ -404,6 +428,7 @@ function initMenu(tagList, id) {
 function initBaseStory(id, timestamp) {
     showDate(id, timestamp);
     likeUnlike(id)
+    clickToShow(id)
 }
 
 
@@ -420,7 +445,7 @@ function initEditStory(tagList, id, content, storyTags) {
     initStoryModal(id, content, storyTags);
     formValid(id);
 }
-
+       
 
 /**
  * Functions to fire off on page load. Mostly initiating Materialize components.
@@ -429,7 +454,6 @@ function initEditStory(tagList, id, content, storyTags) {
 document.addEventListener('DOMContentLoaded', function () {
     
     window.addEventListener('load', fadePreload());
-
 
     M.AutoInit();  // Initiates all auto-initiated Materialize components
 
