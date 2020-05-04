@@ -22,13 +22,11 @@ function clickToShow(id) {
     $(`#show-${id}.click-to-show`).on('click', function () {
         var truncate = $(`#truncate-${id}`)
         if ($(`#show-${id}`).hasClass('toggled')) {
-            console.log('toggled')
             $(`#show-${id}`).removeClass('toggled').html('<a>Read More</a>')
             truncate.stop().animate({
                 height: '180px'
             }, 1200);
         } else {
-            console.log($(`#show-${id}`))
             $(`#show-${id}`).addClass('toggled').html('<a>Close</a>')
             var truncate = $(`#truncate-${id}`)
             var previewHeight = truncate.height()
