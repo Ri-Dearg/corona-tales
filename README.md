@@ -96,7 +96,7 @@ Wireframe: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 
 - Content
     - Story Creation
-        - Edit text using a custom-built CKEditor for font styles, colors, sizes and other features.
+        - Edit text using a custom-built CKEditor for font styles, colors, sizes and other features
         - Post anonymously without logging in, but cannot like stories
         - Choose from a range of colors for the post
         - Text limit of 40,000 characters
@@ -104,10 +104,11 @@ Wireframe: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
     - Story Display
         - Featured stories displayed above others after passing a set number of likes
         - Stories are ordered chronologically by a millisecond timestamp, and converted to a readable date
-        - Stories auto size height, that can be truncated with long stories.
-        - Trucated text that can be expanded and closed.
+        - Stories auto size height, that can be truncated with long stories
+        - Trucated text that can be expanded and closed
         - Like stories asynchronously, with sound and notification for the action
         - Simple card format, all evenly sized for uniformity when scrolling
+        - I give everything one like as a thanks for posting
     - Search
         - Form requires data which is then used to search through stories
         - Add tags, which are linked to search facility
@@ -130,9 +131,9 @@ Wireframe: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
         - Can delete account while leaving posted stories, user information is stripped from the story
     - Content
         - Registered users can like stories
-        - Ragistered users have their stories saved to their account.
+        - Ragistered users have their stories saved to their account
         - Users can edit or delete any created stories
-        - Users can fill in autofill info to use when posting a story.
+        - Users can fill in autofill info to use when posting a story
         - Users can delete their autofill info
 
 - General

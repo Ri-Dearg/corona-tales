@@ -569,7 +569,7 @@
                                                 <option value="purple">Purple</option>
                                                 <option value="pink">Pink</option>
                                             </select>
-                                            <span class="helper-text">Hold down on mobile to see the color.</span>
+                                            <span class="helper-text">On mobile, hold down to see the color.</span>
 
                                         </div>
                                         <div class="input-field col s12 m6 pull-m6">
@@ -1216,7 +1216,7 @@
                 <br>
                 <strong>Continue?</strong></p>
             <form action="{{ url_for('auth.delete_stories') }}" method="POST" id="form-delete-story">
-                <div class="input-field col s6 offset-s3">
+                <div class="input-field col s12 m6 offset-m3">
                     <i class="material-icons prefix">vpn_key</i>
                     <input id="password-delete-story" name="password" type="password" minlength="8" placeholder="Password" required>
                 </div>
@@ -1246,7 +1246,7 @@
             </p>
             <strong>Continue?</strong>
             <form action="{{ url_for('auth.delete_user') }}" method="POST" id="form-delete-user">
-                <div class="input-field col s6 offset-s3">
+                <div class="input-field col s12 m6 offset-m3">
                     <i class="material-icons prefix">vpn_key</i>
                     <input id="password-delete-user" name="password" type="password" minlength="8" placeholder="Password" required>
                 </div>
