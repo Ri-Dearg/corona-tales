@@ -1,4 +1,4 @@
-# Horizon Photography
+# Corona Tales
 
 The site is desgined as a text-base story sharing platform based around the coronavirus epidemic. Its goal is to allow people to post, share and search experiences and opinions on the site. The inspiration came from the various ways people have begun to use social networking during the epidemic, in manners not sen before. I wanted to create a site which is based more on thoughtful exploration rather than instant gratification, such as Instagram or Facebook, but still allow for personalisation. Certain design choices which would be out of line with similar systems were made deliberately and will be explained.
 
@@ -85,7 +85,6 @@ As a user interested in writing, I expect to be able to share my stories.
 
 ### Wireframes
 Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
-
 
 ## Features
 
