@@ -176,6 +176,7 @@ Wireframe: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
     - Email entry for password recovery using flask-mail
     - A tab that displays like stories
     - A friend / follow system
+    - edit and like buttons for users on their own cards on all pages
 
 - General
     - Change to Bootstrap / Foundation CSS

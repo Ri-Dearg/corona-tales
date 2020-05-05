@@ -61,6 +61,14 @@ h6 {
 Spacing and Sizing
 ------------------------------------------------------------------------*/
 
+#about-page {
+    padding: 1rem;
+}
+
+#contact-page {
+    margin-bottom: 3rem;
+}
+
 .icon-block {
 	padding: 0 0.9rem;
 }
