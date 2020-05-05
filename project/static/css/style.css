@@ -194,7 +194,7 @@ Positioning
 }
 
 /*Numbers used to position the objects above other Materialize components but below the preloader*/
-.menu-btn {
+#button-index {
     z-index: 9001;
 }
 

@@ -38,7 +38,7 @@
                                                     <br> Age {{ story.age|string }},
                                                     <br> In {{ story.country.title() }}.</p>
                                                 <br>
-                                                <div id="truncate-{{ story._id }}" class="hide-content">{{ story.text|safe }}</div>   
+                                                <div id="truncate-{{ story._id }}">{{ story.text|safe }}</div>   
                                                 <br>
                                             </div>
                                             <!-- Shows the edit button for more story options -->
@@ -65,7 +65,7 @@
                                         </div>
                                     </div>
                                     <div class="card-action {{ story.color }} lighten-5">
-                                        <div id="show-{{ story._id }}" class="click-to-show center-align mb-1"><a>Read More</a></div>
+                                        <div id="show-{{ story._id }}" class="click-to-show center-align mb-1"></div>
                                         <div class="divider"></div>
                                         <!-- List all the tags on the story-->
                                         <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>

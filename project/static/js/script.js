@@ -25,6 +25,22 @@ function showDate(id, timeStamp) {
 }
 
 
+
+/**
+ * Applies the relevant classes to long stories that reqire truncating, so that the story is cut
+ * It also places the button to read more. On other stories, while the div is present, it cannot
+ * be clicked.
+ * @param {string} id - a unique id for that story which can be used to identify the correct div
+ */
+function truncate(id) {
+    var truncate = $(`#truncate-${id}`);
+    var readButton = $(`#show-${id}`);
+    if (truncate.height() > 180) {
+        truncate.addClass('hide-content')
+        readButton.html('<a>Read More</a>')
+    }
+}
+
 /**
  * Animates the change from truncated content to fully displayed content
  *  code adapted from https://stackoverflow.com/questions/5003220/animate-element-to-auto-height-with-jquery
@@ -33,6 +49,7 @@ function showDate(id, timeStamp) {
 function clickToShow(id) {
     $(`#show-${id}.click-to-show`).on('click', function () {
         var truncate = $(`#truncate-${id}`);
+        console.log('div')
         // The 'toggled' class is added after the content is opened, so if it is toggled it closes to the same height.
         if ($(`#show-${id}`).hasClass('toggled')) {
             $(`#show-${id}`).removeClass('toggled').html('<a>Read More</a>');
@@ -484,6 +501,7 @@ function initMenu(tagList, id) {
 function initBaseStory(id, timestamp) {
     showDate(id, timestamp);
     likeUnlike(id);
+    truncate(id);
     clickToShow(id);
 }
 
