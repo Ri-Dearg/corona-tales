@@ -151,7 +151,7 @@ form .col.pd-b {
 }
 
 /* Lowers padding for smaller devices */
-@media only screen and (max-width: 560px) {
+@media only screen and (max-width: 580px) {
 	.section {
 		padding-left: 0.2rem;
 		padding-right: 0.2rem;
