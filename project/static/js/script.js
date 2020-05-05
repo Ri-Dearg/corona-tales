@@ -435,7 +435,7 @@ function createScroll(getUrl, baseUrl, elem, tagList) {
             // reinitiates materialize components for the profile page edit button
             if (getUrl.pathname == '/profile') {  
                 var storyTags = JSON.parse(info[2].innerText);
-                var content = $(items).find(`#content-${storyId}`).html();
+                var content = $(items).find(`#truncate-${storyId}`).html();
                 initEditStory(tagList, storyId, content, storyTags);
                 initSelect();
                 colorChange();
