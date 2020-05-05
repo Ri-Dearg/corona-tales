@@ -157,7 +157,11 @@ form .col.pd-b {
 	}
 
     .card .card-content {
-        padding: 12px;
+        padding: 16px;
+    }
+
+    .scroll-append .row .col {
+        padding: 0 0.55rem
     }
 }
 

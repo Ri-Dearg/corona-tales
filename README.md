@@ -247,7 +247,7 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
     - I regret that, due to the amount of troubleshooting I had to do with the CSS, I was unable to fully utilise pythons's unittest framework. I made some simple views, but the CSS troubleshooting slowed down my app development to the point where I had to move forward with features to make the deadline. More testing is necessary in this area.
     - Each time a feature was added all the functions were tested to see if there was an impact.
     - The python module structure has been tested and implemented, adding config.py, setup.py and some tests.
-    
+
 - Troubleshooting
     - Throughout devlopment I found my largest issues were caused by difficulties with Materialize CSS components. I sincerely regret using it, as I spent a lot of time debugging the CSS instead of developing features or creating test views. Bootstrap and Foundation are both more complex and therefore more flexible, perhaps more study is rewuired to utilise them well, but that suits me. The simplicity of Materialize may suit some developers, but I found it to be a hinderance.
     - The tags feature in Materialize "Chips" was something I implemented early on as the tag system, only to find out that when I began testing using real devices as opposed to developer mode, that it had fairly unfixalke bugs on android. To enter a tag, you must use the "Enter" key, however on android, within a form, the enter button becomes a "Tab" button. I edited the Materialize.js to allow using spaces, including keys for space on android, but it still would not register. This has been a known issue since 2018 In the end I found a workaround by implementing the Chips outside of the form, pulling the data from the tags and reinserting it as a list, key by key, into the form. This was just one of many issues I found and still have with the Materialize CSS.
@@ -284,6 +284,7 @@ There are a number of methods for deployment
 
 ### Content
 Any code utilised from another programmer is documented and credited within the code.
+Infinite Scroll is utilised under its Open SOurce license for personal projects.
 
 ### Media
 - Sound:
