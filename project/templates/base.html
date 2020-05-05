@@ -10,13 +10,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Materialise CSS -->
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/lib/materialize.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/lib/materialize.min.css')}}">
 
     <!-- Custom Styles -->
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Eczar&family=IM+Fell+DW+Pica&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Eczar&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -167,12 +167,12 @@
         <div class="modal-content flow-text">
             <h4 class="heading orange-text text-lighten-1">How does it work?</h4>
             <ol>
-                <li>Select the create story option from the menu (The orange pencil button).</li>
+                <li>Select the create story option from the menu (The purple pencil button).</li>
                 <li>Fill in all fields.</li>
                 <li>Compose a story in the editor and add tags after.</li>
                 <li>Post! It will be shared publicly.</li>
                 <li>If you want to save, edit and delete stories, please signup and then login.</li>
-                <li>You can search through stories in the menu (The yellow magnifying glass button)</li>
+                <li>You can search through stories in the menu (The blue magnifying glass button)</li>
             </ol>
             <p>For more information, please feel free to check the <a href="{{ url_for('base.about') }}" class="modal-close">About Page</a> or <a href="{{ url_for('base.contact') }}" class="modal-close">Contact Us</a></p>
         </div>
@@ -1759,7 +1759,7 @@
     <script src="{{url_for('static', filename='js/lib/jquery-3.5.0.min.js')}}"></script>
 
     <!-- Materialize Javascript-->
-    <script src="{{url_for('static', filename='/js/lib/materialize.js')}}"></script>
+    <script src="{{url_for('static', filename='/js/lib/materialize.min.js')}}"></script>
 
     <!--Custom JS script-->
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
