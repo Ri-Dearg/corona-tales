@@ -27,6 +27,7 @@ function showDate(id, timeStamp) {
 
 /**
  * Animates the change from truncated content to fully displayed content
+ *  code adapted from https://stackoverflow.com/questions/5003220/animate-element-to-auto-height-with-jquery
  * @param {string} id - a unique id for that story which can be used to identify the correct div
  */
 function clickToShow(id) {

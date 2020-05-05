@@ -267,10 +267,11 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
 There are a number of methods for deployment
 1. Setup.py
     1. A setup.py file has been created for easy deployment.
-    0. At a terminal you can run "python setup.py sdist" to create a source distributable
+    0. At a python terminal you can run "python setup.py sdist" to create a source distributable
     0. This can then be unpacked, and the module be installed by running python "setup.py install" from its directory.
     0. This will install the package for modification.
-    0. To deploy the app you will have to utilise a PaaS, such as Heroku, or an alternative.
+    0. This will allow you to run the program locally, if you wish
+    0. To deploy the app online you will have to utilise a PaaS, such as Heroku, or an alternative.
     0. Ensure debug is set to False, and take a look at the config.py to see which environment variables will need to be set.
     0. Set the config variables as you need in you chosen PaaS.
     0. Ensure all packages from requirements.txt are installed.
@@ -285,8 +286,9 @@ There are a number of methods for deployment
 ## Credits
 
 ### Content
+Stories provided by actual people.
 Any code utilised from another programmer is documented and credited within the code.
-Infinite Scroll is utilised under its Open SOurce license for personal projects.
+Infinite Scroll is utilised under its Open Source license for personal projects.
 
 ### Media
 - Sound:

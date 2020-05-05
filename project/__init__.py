@@ -50,6 +50,11 @@ def create_app():
     if __name__ == '__main__':
         app.run(host=os.environ.get('IP'),
                 port=int(os.environ.get('PORT')),
-                ssl_context='adhoc')
+                ssl_context='adhoc', debug=False)
+
+    if app.debug:
+        print("debug is on")
+    else:
+        print("debug is off")
 
     return app
