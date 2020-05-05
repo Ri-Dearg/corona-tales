@@ -132,6 +132,17 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
         - Users can fill in autofill info to use when posting a story.
         - Users can delete their autofill info
 - General
+    - App structure
+        - The app has been designed as a module, utilising an __init__.py file for configuration of the app
+        - The site utilises blueprints that are imported into the main app creation, one for the majority of views, and the other for views requiring secure authourisation
+        - Extensions.py has been utilised, along with blueprint, to avoid circular imports
+        - config.py has been created for environment variable storage
+        - models.py has been utilised to create a User Class for flask-login.
+        - The other details follow standard practice for a flask app
+        - a gitgnore file is included
+        - environment variables have never been written in the app, let alone committed
+        - the procfile utilises gunicorn for initialisation
+        - The distribution includes a custom-built CKEditor API with a particular set of plugins.
     - Utility
         - Infinite Scroll has been applied to all feeds.
         - Preloader placed over content but under menus
@@ -227,6 +238,7 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
     - Some tests were performed on views and were tested manually throuroughly. For example, every possible combination on search was tested.
     - I regret that, due to the amount of troubleshooting I had to do with the CSS, I was unable to fully utilise pythons's unittest framework. I made some simple views, but the CSS troubleshooting slowed down my app development to the point where I had to move forward with features to make the deadline. More testing is necessary in this area.
     - Each time a feature was added all the functions were tested to see if there was an impact.
+    - The python module structure has been tested and implemented, adding config.py, setup.py and some tests.
 - Troubleshooting
     - Throughout devlopment I found my largest issues were caused by difficulties with Materialize CSS components. I sincerely regret using it, as I spent a lot of time debugging the CSS instead of developing features or creating test views. Bootstrap and Foundation are both more complex and therefore more flexible, perhaps more study is rewuired to utilise them well, but that suits me. The simplicity of Materialize may suit some developers, but I found it to be a hinderance.
     - The tags feature in Materialize "Chips" was something I implemented early on as the tag system, only to find out that when I began testing using real devices as opposed to developer mode, that it had fairly unfixalke bugs on android. To enter a tag, you must use the "Enter" key, however on android, within a form, the enter button becomes a "Tab" button. I edited the Materialize.js to allow using spaces, including keys for space on android, but it still would not register. This has been a known issue since 2018 In the end I found a workaround by implementing the Chips outside of the form, pulling the data from the tags and reinserting it as a list, key by key, into the form. This was just one of many issues I found and still have with the Materialize CSS.
@@ -236,21 +248,28 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
     - Z-indexes have a bizzare order, placing less relevant components under or over others, seemingly randomly. The action buttons themselves had z-indexes above the Nav, as well as modals, so scrolling on the user page left buttons clipping, I had to edit z-indexes.
     - Some form components recognise "required" attribute, other do not, validation only functions on some of fields, requiring custom code. The list goes on.
     - Documentation was missing, ouright incorrect, or messy in many parts. There were classes that didn not function as described, and examples that weren't connected to the information.
-    - Troubleshooting database wasissues was relatively easy. As this is my first project utilising the database, a little bit of study in the dcumentation to learn syntax was usually enough.
+    - Troubleshooting database issues was relatively easy. As this is my first project utilising the database, a little bit of study in the dcumentation to learn syntax was usually enough.
+    - I came accross issues with cirular imports when writing the app, and found that the best solution was to scale the app up a little from a single app.py, to a module. This allowed me to avoid circular imports, keep the the app information organised and make the app nicely distributable.
+    - I began trying out creating an app-factory but found it was overkill for my purposes.
 
 ## Deployment
-1. A setup.py file has been created for easy deployment.
-0. Push the master branch to the Github Repository. The site will update automatically from the master branch.
-0. Go to the settings of the repository and select the Github pages section.
-0. Validate and test HTML, CSS and Javascript.
-0. Published the site from the master branch, ensure index.html is the landing page.
+There are a number of methods for deployment
+1. Setup.py
+    1. A setup.py file has been created for easy deployment.
+    0. At a terminal you can run "python setup.py sdist" to create a source distributable
+    0. This can then be unpacked, and the module be installed by running python "setup.py install" from its directory.
+    0. This will install the package for modification.
+    0. To deploy the app you will have to utilise a PaaS, such as Heroku, or an alternative.
+    0. Ensure debug is set to False, and take a look at the config.py to see which environment variables will need to be set.
+    0. Set the config variables as you need in you chosen PaaS.
+    0. Ensure all packages from requirements.txt are installed.
+    0. Push the files to the PaaS and deploy.
 
-### User Deployment
-1. Download Master Branch.
-0. Unzip contents into a folder.
-0. Open up index.html in a web browser. Site will function offline.
-
-To run locally, you can clone this repository by clicking the clone button on the repository or by typing ```git clone https://github.com/Ri-Dearg/horizon-photo``` into your terminal. To disconnect from this repository, type ```git remote rm origin``` into the terminal.
+0. Github
+    1. Fork the repo on github.
+    0. Push the repo to a PaaS, such as Heroku.
+    0. Set the environment variables, ensure debug is False.
+    0. Deploy and your good to go.
 
 ## Credits
 
@@ -258,4 +277,12 @@ To run locally, you can clone this repository by clicking the clone button on th
 Any code utilised from another programmer is documented and credited within the code.
 
 ### Media
-Sound is taken from.
+- Sound:
+    - Title: Blop
+        Uploaded: 03.27.13
+        License: Attribution 3.0
+        Recorded by Mark DiAngelo
+    - Title: Pop Cork
+        Uploaded: 06.09.09
+        License: Attribution 3.0
+        Recorded by Mike Koenig
