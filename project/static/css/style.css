@@ -192,6 +192,10 @@ Positioning
 
 
 /*Numbers used to position the objects above other Materialize components but below the preloader*/
+.menu-btn {
+    z-index: 9001;
+}
+
 .navbar-fixed {
 	z-index: 9001;
 }
