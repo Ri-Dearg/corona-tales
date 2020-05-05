@@ -150,11 +150,15 @@ form .col.pd-b {
 
 
 /* Lowers padding for smaller devices */
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 420px) {
 	.section {
-		padding-left: 0.5rem;
-		padding-right: 0.5rem;
+		padding-left: 0.2rem;
+		padding-right: 0.2rem;
 	}
+
+    .card .card-content {
+        padding: 12px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
