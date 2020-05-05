@@ -1,6 +1,11 @@
+/**
+ * Fades the preloader once content is loaded.
+ */
 function fadePreload() {
     $('.preloader').fadeOut(1800);
 }
+
+
 /**
  * Changes the timestamp from milliseconds to a readable format and places it within the story card
  * @param {string} id - a unique id for that story which can be used to identify the correct div
@@ -10,22 +15,30 @@ function showDate(id, timeStamp) {
     var time = Number(timeStamp);
     var date = new Date(time);
 
-    const options = { day: 'numeric', month: 'short', year: 'numeric' };  // Sets format for dates
+    // Sets format for dates
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
     var dateString = date.toLocaleDateString(undefined, options);
 
-    document.querySelector(`#date-med-${id}`).textContent = dateString;  // Places the dates on the cards
+    // Places the dates on the cards
+    document.querySelector(`#date-med-${id}`).textContent = dateString;
     document.querySelector(`#date-small-${id}`).textContent = dateString;
 }
 
 
+/**
+ * Animates the change from truncated content to fully displayed content
+ * @param {string} id - a unique id for that story which can be used to identify the correct div
+ */
 function clickToShow(id) {
     $(`#show-${id}.click-to-show`).on('click', function () {
         var truncate = $(`#truncate-${id}`);
+        // The 'toggled' class is added after the content is opened, so if it is toggled it closes to the same height.
         if ($(`#show-${id}`).hasClass('toggled')) {
             $(`#show-${id}`).removeClass('toggled').html('<a>Read More</a>');
             truncate.stop().animate({
                 height: '180px'
             }, 1200);
+        // Otherwise it opens the content to the correct height by setting content to auto before animation
         } else {
             $(`#show-${id}`).addClass('toggled').html('<a>Close</a>');
             var previewHeight = truncate.height();
@@ -44,16 +57,21 @@ function clickToShow(id) {
  * Initiates the alert that draws attention to the menu on the first page viewing.
  */
 function initFab() {
-    var indexFab = document.querySelector('#button-index');  // Selects the FAB that is on every page
-    var indexTap = document.querySelector('.tap-target');  // The one-time alert
+    // Selects the FAB that is on every page  
+    var indexFab = document.querySelector('#button-index');
+    // The one-time alert
+    var indexTap = document.querySelector('.tap-target'); 
 
     var instanceIndex = M.FloatingActionButton.init(indexFab, {});
 
-    if (indexTap != null && !sessionStorage.Shown) {  // Runs only if it hasn't been run before
-        var instancesFeature = M.TapTarget.init(indexTap, {});  // Creates the alert
+    // Runs only if it hasn't been run before
+    if (indexTap != null && !sessionStorage.Shown) { 
+        // Creates the alert
+        var instancesFeature = M.TapTarget.init(indexTap, {});  
         instancesFeature.open();
         setTimeout(function () { instancesFeature.close(); }, 5000);
-        sessionStorage.Shown = 1;  // Saves value after it is run once for this session
+        // Saves value after it is run once for this session
+        sessionStorage.Shown = 1;  
     }
 }
 
@@ -63,23 +81,32 @@ function initFab() {
  * do not reinitiate when new content is added to the page.
  */
 function initEditFab(id) {
-    var sideFab = document.querySelector(`#button-${id}`);  // Selects the edit story button
-    if (sideFab != null) { // Initiates only if it is present
+    // Selects the edit story button
+    var sideFab = document.querySelector(`#button-${id}`);  
+    // Initiates only if it is present
+    if (sideFab != null) { 
         var instanceUser = M.FloatingActionButton.init(sideFab, {
             direction: 'left',
         });
     }
 }
 
+
+/**
+ * ANimates the tooltips on open and close using classes from Materialize CSS
+ */
 function tipAnim() {
     $('.fixed-action-btn').hover(
         function () {
+            // Tooltip becomes visible
             $('.mobile-fab-tip').addClass('scale-in');
         },
         function () {
+            // Tooltip disappears
             $('.mobile-fab-tip').removeClass('scale-in');
         });
 }
+
 
 /**
  * Initiates the select drop downs on the appended edit modals for the profile page
@@ -90,6 +117,9 @@ function initSelect() {
 }
 
 
+/**
+ * Changes background color of the select menu color select dropdown
+ */
 function colorChange() {
     $("span:contains('Red')").hover(function () {
         $(this).addClass('red-sel');
@@ -171,7 +201,6 @@ function colorChange() {
     }, function () {
         $(this).removeClass('pink-sel');
     });
-
 }
 
 
@@ -201,13 +230,17 @@ function initTags(tagList, id) {
  * @param {Object[]} [storyTags] - an array containing the tags used in a given story
  */
 function initStoryModal(id, content, storyTags) {
-
-    modal = document.querySelector(`#modal-${id}`);  // Selects a story modal div
-    instance = M.Modal.init(modal, {  // initiates modal on that div
-        onOpenStart: function () {  // Creates a CKeditor instance on the modal textarea when opened
-            if (id !== 'search') {  // as long as the modal isn't the search modal
+    // Selects a story modal div
+    modal = document.querySelector(`#modal-${id}`);  
+    // initiates modal on that div
+    instance = M.Modal.init(modal, { 
+        // Creates a CKeditor instance on the modal textarea when opened
+        onOpenStart: function () { 
+            // as long as the modal isn't the search modal
+            if (id !== 'search') {  
                 ClassicEditor
-                    .create(document.querySelector(`#editor-${id}`), {  // removes unused plugins
+                    // removes unused plugins
+                    .create(document.querySelector(`#editor-${id}`), {  
                         removePlugins: ['Image', 'EasyImage', 'ImageUpload', 'Link', 'MediaEmbed', 'Heading']
                     })
                     .then(editor => {
@@ -217,7 +250,8 @@ function initStoryModal(id, content, storyTags) {
                         console.error(error);
                     });
             }
-            if (storyTags !== undefined) {  // Checks to see if tag data has been passed for that story
+            // Checks to see if tag data has been passed for that story
+            if (storyTags !== undefined) {  
                 // and populates the chips tagdata with it
                 var instance = M.Chips.getInstance(document.querySelector(`#chips-${id}`));
                 for (i = 0; i < storyTags.length; i++) {
@@ -229,13 +263,15 @@ function initStoryModal(id, content, storyTags) {
         },
         onOpenEnd: function () {
             if (id !== 'search') {
-                if (content !== undefined) {  // Sets the CKEditor content to the story content
+                // Sets the CKEditor content to the story content
+                if (content !== undefined) {  
                     newEditor.setData(content);
                 }
             }
         },
         onCloseEnd: function () {
-            if (id !== 'search') {  // Destoys the CKEditor instance on close so there will only
+            // Destoys the CKEditor instance on close so there will only
+            if (id !== 'search') {  
                 // ever be one instance
                 newEditor.destroy();
             }
@@ -253,7 +289,8 @@ function initStoryModal(id, content, storyTags) {
  * @param {Object[]} tagDict - the list of tags
  */
 function addTags(id, tagDictLength, tagDict) {
-    for (i = 0; i < tagDictLength; i++) {  // Cycles through each dictionary pair and appends the tag as a value
+    // Cycles through each dictionary pair and appends the tag as a value
+    for (i = 0; i < tagDictLength; i++) {  
         $(`#form-${id}`).append(`<input type="hidden" name="tags" value="${tagDict[i].tag.toLowerCase()}">`);
     }
     return true;
@@ -272,18 +309,21 @@ function formValid(id) {
     $("select[required]").css({ position: 'absolute', display: 'inline', height: 0, padding: 0, width: 0 });
 
     $(`#form-${id}`).on('submit', function (event) {
-        var tagDict = M.Chips.getInstance($(`#chips-${id}`)).chipsData;  // Gets entered tag data
+        // Gets entered tag data
+        var tagDict = M.Chips.getInstance($(`#chips-${id}`)).chipsData;  
         var tagDictLength = Object.keys((M.Chips.getInstance($(`#chips-${id}`)).chipsData)).length;
 
         if (id !== 'search') {
             var editorData = newEditor.getData().length;
-            if (tagDictLength === 0 || editorData === 0) { // Checks to see if either the tags or textarea have no content
+            // Checks to see if either the tags or textarea have no content
+            if (tagDictLength === 0 || editorData === 0) { 
                 event.preventDefault();
                 alert('Please fill Tags and Stories');
                 return false;
             }
         }
-        addTags(id, tagDictLength, tagDict);  // Adds tags to be submitted to form
+        // Adds tags to be submitted to form
+        addTags(id, tagDictLength, tagDict);  
     });
 }
 
@@ -295,24 +335,33 @@ function formValid(id) {
  * @param {string} id - a unique id for that story which identifies the correct like button
  */
 function likeUnlike(id) {
+
+    /**
+     * Runs the form to like the post through an ajax function.
+     */
     function like(ev) {
+        // stops form from sending
         ev.preventDefault();
+        // Sends form to flask view
         $.ajax({
             method: 'POST',
             url: '/like',
             data: $(this).serialize(),
             datatype: 'json',
             success: function (data) {
+                // If content is already liked, swaps the icon and plays the unlike sound on successful response
                 if ($(`#heart-${id}`).text() === 'favorite') {
                     var unlikeAudio = new Audio('/static/audio/pop-cork.wav');
                     unlikeAudio.play();
                     $(`#heart-${id}`).text('favorite_border');
                 }
+                // Otherwise it likes it and plays the corresponding sound
                 else {
                     var likeAudio = new Audio('/static/audio/blop.wav');
                     likeAudio.play();
                     $(`#heart-${id}`).text('favorite');
                 }
+                // Displays the number of strings and animates the fade-in and out
                 $(`#like-info-${id}`).attr('data-tooltip', `${data.toString()} likes`);
                 $(`#like-tip-${id}`).text(`${data.toString()} likes`);
                 $(`#like-tip-${id}`).fadeIn(600, function () {
@@ -323,6 +372,7 @@ function likeUnlike(id) {
             }
         });
     }
+    // Waits for the like button press before firing off the function
     $(`#form-like-${id}`).on('submit', like);
 }
 
@@ -338,29 +388,35 @@ function likeUnlike(id) {
  */
 function createScroll(getUrl, baseUrl, elem, tagList) {
     var infScroll = new InfiniteScroll(elem, {
-        path: function () {  // correctly chooses pagination url depending on page
+        // correctly chooses pagination url depending on page
+        path: function () { 
             var pageNumber = this.loadCount + 2;
             if (getUrl.href === baseUrl || getUrl.pathname.split('/')[1] === "search_tags") {
                 return getUrl.href + '?page=' + pageNumber;
-            } else if (getUrl.hash == '#user-settings') {  // necessary for url recognition as flask can redirect to this tab
+            // necessary for url recognition as flask can redirect to this tab
+            } else if (getUrl.hash == '#user-settings') {  
                 return getUrl.pathname + '?page=' + pageNumber;
             } else {
                 return getUrl.href + '&page=' + pageNumber;
             }
         },
-        append: '.scroll-append',  // appends story cards to the section
+        // appends story cards to the section
+        append: '.scroll-append',  
         checkLastPage: '.scroll-append',
         history: false,
         status: '.page-load-status',
     });
 
-    infScroll.on('append', function (response, path, items) {  // Fires funtions when items are appended
+    // Fires funtions when items are appended
+    infScroll.on('append', function (response, path, items) {  
         for (i = 0; i < items.length; i++) {
             var info = items[i].children;
             var storyId = info[0].innerText;
-            initBaseStory(storyId, info[1].innerText);  // reinitiates functions for new dynamic content
+            // reinitiates functions for new dynamic content
+            initBaseStory(storyId, info[1].innerText);
 
-            if (getUrl.pathname == '/profile') {  // reinitiates materialize components for the profile page edit button
+            // reinitiates materialize components for the profile page edit button
+            if (getUrl.pathname == '/profile') {  
                 var storyTags = JSON.parse(info[2].innerText);
                 var content = $(items).find(`#content-${storyId}`).html();
                 initEditStory(tagList, storyId, content, storyTags);
@@ -385,11 +441,13 @@ function createScroll(getUrl, baseUrl, elem, tagList) {
  * @param {Object<string, null>} tagList - An array of tags to use for chips autocomplete
  */
 function initScroll(tagList) {
+    // Declares locations for URLs so Infinite Scroll can correctly append stories from paginated content
     var getUrl = window.location;
     var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
     var scroll = document.querySelector('.infiniscroll');
 
-    if (scroll != undefined && getUrl.hash !== '#user-settings') {  // will not fire on user settings
+    // will not fire on user settings
+    if (scroll != undefined && getUrl.hash !== '#user-settings') {  
         infScroll = new createScroll(getUrl, baseUrl, scroll, tagList);
     }
 
@@ -397,6 +455,7 @@ function initScroll(tagList) {
         infScroll.destroy();
     });
 
+    
     $('#tab-user-stories').on('click', function () {
         infScroll = new createScroll(getUrl, baseUrl, scroll);
     });
@@ -416,7 +475,8 @@ function initMenu(tagList, id) {
 
 
 /**
- * Initiates the dates and the like system for the stories on the index and the search page.
+ * Initiates the dates, color and the like system for the stories on the index and the search page.
+ * If a function is necessary for every story, it can be added here.
  * @param {string} id - a unique id for that story which identifies the correct like button
  * @param {string} timestamp - a string passed from python that is the date in milliseconds
  */
@@ -428,7 +488,8 @@ function initBaseStory(id, timestamp) {
 
 
 /**
- * Initiates functions for story editing on the user's profile page
+ * Initiates functions for story editing on the user's profile page.
+ * If a function is necessary only for editing stories, it can be added here.
  * @param {Object<string, null>} tagList - An array of tags to use for chips autocomplete
  * @param {string} id - a unique id for that story which identifies the correct like button
  * @param {string} [content] - retrieves info for a written story and populates CKeditor with that info
@@ -448,44 +509,57 @@ function initEditStory(tagList, id, content, storyTags) {
  */
 document.addEventListener('DOMContentLoaded', function () {
 
+    // Runs the fade for the preloader once content has loaded.
     window.addEventListener('load', fadePreload());
 
-    M.AutoInit();  // Initiates all auto-initiated Materialize components
+    // Initiates all auto-initiated Materialize components
+    M.AutoInit();  
 
+    // ANimates the tooltips on menues
     tipAnim();
 
+    // Colors change while hovering over select menus.
     colorChange();
 
-    var sideNav = document.querySelectorAll('.sidenav');  // initiates the sidenav on the right side
+    // initiates the sidenav on the right side
+    var sideNav = document.querySelectorAll('.sidenav');
     var nav = M.Sidenav.init(sideNav, {
         edge: 'right'
     });
 
-
-    var datepicker = document.querySelectorAll('.datepicker');  // initiates the datepicker
+    // initiates the datepicker
+    var datepicker = document.querySelectorAll('.datepicker');  
     var dateChoose = M.Datepicker.init(datepicker, {
         container: 'body'
     });
 
 
-    var singupLogin = document.querySelector('#modal-signup-login');  // Initiates the modal for signup / login
-    var modalTab = M.Modal.init(singupLogin, {  // necesarry as there is a bug when you use tabs within a modal
+    // Initiates the modal for signup / login
+    var singupLogin = document.querySelector('#modal-signup-login');
+    // necesarry as there is a bug when you use tabs within a modal  
+    var modalTab = M.Modal.init(singupLogin, {  
         onOpenEnd: function () {
-            var formTabs = document.querySelector('#form-tabs');  // initiates the tabs
+            // initiates the tabs
+            var formTabs = document.querySelector('#form-tabs');  
             var instance = M.Tabs.init(formTabs, {});
         }
     });
 
-    $('.password-create').on('submit', function (event) { // confirms that the two entered passwords are the same.
+    // confirms that the two entered passwords are the same.
+    $('.password-create').on('submit', function (event) { 
         var passFirst = document.querySelector('.passone').value;
         var passSecond = document.querySelector('.passtwo').value;
 
-        if (passFirst != passSecond) {  // Prevents form entry of they are not
+        // Prevents form entry of they are not identical
+        if (passFirst != passSecond) {  
             alert('Passwords do not match. Please Try again.');
             return false;
         }
     });
 
+    /**
+     * If we are on the index page, this runs to select a random quote from the JSON file to place on the main site page.
+     */
     if (window.location.pathname == '/') {
         $.getJSON('static/js/quotes.json', function (data) {
             var quoteLength = data.length;

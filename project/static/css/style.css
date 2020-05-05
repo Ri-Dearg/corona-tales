@@ -37,7 +37,6 @@ h6 {
     margin-top: 0;
 }
 
-
 /* Used for text under chips entry */
 .helper-text-custom {
 	min-height: 18px;
@@ -45,7 +44,6 @@ h6 {
 	font-size: 12px;
 	color: rgba(0, 0, 0, 0.54);
 }
-
 
 /* The box surrounding text when infitescroll is finished loading*/
 .load-box {
@@ -67,7 +65,6 @@ Spacing and Sizing
 	padding: 0 0.9rem;
 }
 
-
 /* spacing for the text editor */
 .ckeditor {
 	margin-top: 0.5rem;
@@ -79,14 +76,12 @@ Spacing and Sizing
 	margin-bottom: 0.2rem;
 }
 
-
 /* Helps Keeps the preloader centered on screen*/
 .preload-container {
 	width: 64px;
 	height: 64px;
 	margin: auto;
 }
-
 
 /* Maintains correct spacing for the infinitescroll notifications */
 .load-box p {
@@ -98,7 +93,6 @@ Spacing and Sizing
     padding-left: 0;
     padding-right: 0;
 }
-
 
 hr {
 	height: 0.1rem
@@ -148,7 +142,6 @@ form .col.pd-b {
 	min-height: 100vh;
 }
 
-
 /* Lowers padding for smaller devices */
 @media only screen and (max-width: 420px) {
 	.section {
@@ -166,16 +159,19 @@ form .col.pd-b {
 }
 
 @media only screen and (max-width: 600px) {
+
 	/* Keeps the logo the correct size for smaller screens*/
 	nav .brand-logo {
 		font-size: 8vw;
 	}
+
 	/* Maked the modal bigger for filling forms */
 	.modal {
 		max-height: 75%;
 		width: 90%;
 		overflow-y: auto;
 	}
+
 	/* lowers the amount of pading for smaller screens*/
 	.modal .modal-content {
 		padding: 12px
@@ -187,7 +183,6 @@ form .col.pd-b {
 Positioning
 ------------------------------------------------------------------------*/
 
-
 /* Centers the preloader */
 .preloader-wrapper {
 	position: relative;
@@ -197,7 +192,6 @@ Positioning
 	bottom: 0;
 	margin: auto;
 }
-
 
 /*Numbers used to position the objects above other Materialize components but below the preloader*/
 .menu-btn {
@@ -220,11 +214,11 @@ Positioning
 	display: none;
 }
 
-
 /*------------------------------------------------------------------------
 Colours
 ------------------------------------------------------------------------*/
 
+/* Classes used to color the background of the color select dropdown
 .red-sel {
     color: #000 !important;
     background-color: #e57373;
@@ -310,7 +304,6 @@ Colours
 	border-color: #ff4081;
 }
 
-
 /* Colors the option tabs */
 .tabs .tab a {
 	color: #00796b;
@@ -331,35 +324,27 @@ Colours
 	background-color: #00bfa5;
 }
 
-
 /* Colors the remember me checkbox */
-
 [type="checkbox"].filled-in:checked+span:not(.lever):after {
 	border-color: #00bfa5;
 	background-color: #00bfa5
 }
 
-
 /* Positions the edit button on the stories*/
-
 .horizontal-button {
 	position: absolute;
 	bottom: -29px;
 	right: 50px
 }
 
-
 /* Positions the like */
-
 .heart-button {
 	position: absolute;
 	bottom: -19px;
 	right: 55px
 }
 
-
 /* Colors the flashed messages popups */
-
 .success {
 	background-color: #00bfa5;
 }
@@ -372,6 +357,8 @@ Colours
 /*------------------------------------------------------------------------
 Fixes and Features
 ------------------------------------------------------------------------*/
+
+/* Content  Truncating*/
 .hide-content {
     height: 180px;
     overflow-y: hidden;
@@ -381,6 +368,7 @@ Fixes and Features
     height: auto;
 }
 
+/* Preloader positioning*/
 .preloader {
   background: #e0f2f1;
   display: flex;
@@ -394,9 +382,7 @@ Fixes and Features
   z-index: 8999;
 }
 
-
 /* fix for no bullet points in editor */
-
 .ck.ck-content ul,
 .ck.ck-content ul li {
 	list-style-type: inherit;
@@ -407,9 +393,7 @@ Fixes and Features
 }
 
 
-/* Tooltip fixes as the Materialize tooltips don't have a fixed position on the buttons
-* Adapted for my site from https://codepen.io/T-P/pen/qZwLmB
-*/
+/* Tooltip fixes as the Materialize tooltips don't have a fixed position on the buttons*/
 
 .fixed-action-btn:hover ul {
 	display: block;
@@ -449,4 +433,3 @@ Fixes and Features
 	border-radius: 2px;
 	color: #FFF;
 }
-

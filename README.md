@@ -100,6 +100,7 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
         - Post anonymously without logging in, but cannot like stories
         - Choose from a range of colors for the post
         - Text limit of 40,000 characters
+        - Card colors can be previewed on the select dropdown by hover, or holding on mobile
     - Story Display
         - Featured stories displayed above others after passing a set number of likes
         - Stories are ordered chronologically by a millisecond timestamp, and converted to a readable date
@@ -255,6 +256,7 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
     - Tabs within a modal, for example, didn't have the active tab selected properly so I had to reinitiate it with specific settings.
     - Tooltips weren't fixed on the page for the action buttons, scrolling upwards on mobile devices, I simply had to create my own.
     - Z-indexes have a bizzare order, placing less relevant components under or over others, seemingly randomly. The action buttons themselves had z-indexes above the Nav, as well as modals, so scrolling on the user page left buttons clipping, I had to edit z-indexes.
+    - Bullet points removed by default in styles
     - Some form components recognise "required" attribute, other do not, validation only functions on some of fields, requiring custom code. The list goes on.
     - Documentation was missing, ouright incorrect, or messy in many parts. There were classes that didn not function as described, and examples that weren't connected to the information.
     - Troubleshooting database issues was relatively easy. As this is my first project utilising the database, a little bit of study in the dcumentation to learn syntax was usually enough.
