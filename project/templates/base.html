@@ -125,32 +125,39 @@
         <ul>
             <!-- Tootlip -->
             <li>
+            <a href="#modal-help" class="modal-trigger">
             <span class="mobile-fab-tip left-tip orange lighten-1 white-text scale-transition scale-out">Help</span>
+            </a>
             <a href="#modal-help" class="btn-floating orange lighten-1 modal-trigger tooltipped" data-position="left" data-tooltip="Help"><i class="material-icons">help</i></a></li>
             <li>
                 <!-- If you are on the profile page it is to a home button -->
                 {% if request.url_rule.endpoint == "base.profile" %}
                 <!-- Tootlip -->
-                <span class="mobile-fab-tip left-tip teal accent-4 white-text scale-transition scale-out">Home</span>
+                <a href="{{ url_for('base.story_page') }}">
+                <span class="mobile-fab-tip left-tip teal accent-4 white-text scale-transition scale-out">Home</span></a>
                 <a href="{{ url_for('base.story_page') }}" class="btn-floating teal accent-4 tooltipped" data-position="left" data-tooltip="Home"><i class="material-icons">home</i></a>
                 <!-- If they are logged in it is a profile button -->
                 {% else %} {% if current_user.is_authenticated %}
                 <!-- Tootlip -->
-                <span class="mobile-fab-tip left-tip teal accent-4 white-text scale-transition scale-out">Profile</span>
+                <a href="{{ url_for('base.profile') }}">
+                <span class="mobile-fab-tip left-tip teal accent-4 white-text scale-transition scale-out">Profile</span></a>
                 <a href="{{ url_for('base.profile') }}" class="btn-floating teal accent-4 tooltipped" data-position="left" data-tooltip="Profile"><i class="material-icons">account_circle</i></a>
                 <!-- if they are not logged in it is a signup/login button -->
                 {% endif %} {% if not current_user.is_authenticated %}
                 <!-- Tootlip -->
-                <span class="mobile-fab-tip left-tip teal accent-4 white-text scale-transition scale-out">Signup / Login</span>
+                <a href="#modal-signup-login" class="modal-trigger">
+                <span class="mobile-fab-tip left-tip teal accent-4 white-text scale-transition scale-out">Signup / Login</span></a>
                 <a href="#modal-signup-login" class="btn-floating teal accent-4 tooltipped modal-trigger" data-position="left" data-tooltip="Signup / Login"><i class="material-icons">account_circle</i></a> {% endif %} {% endif %}
             </li>
             <li>
                 <!-- Tootlip -->
-                <span class="mobile-fab-tip left-tip light-blue accent-2 white-text scale-transition scale-out">Search</span>
+                <a href="#modal-search" class="modal-trigger">
+                <span class="mobile-fab-tip left-tip light-blue accent-2 white-text scale-transition scale-out">Search</span></a>
                 <a href="#modal-search" class="btn-floating light-blue accent-2 tooltipped modal-trigger" data-position="left" data-tooltip="Search"><i class="material-icons">search</i></a></li>
             <li>
                 <!-- Tootlip -->
-                <span class="mobile-fab-tip left-tip purple lighten-1 white-text scale-transition scale-out">Post a Story</span>
+                <a href="#modal-index" class="modal-trigger">
+                <span class="mobile-fab-tip left-tip purple lighten-1 white-text scale-transition scale-out">Post a Story</span></a>
                 <a href="#modal-index" class="btn-floating purple lighten-1 modal-trigger tooltipped" data-position="left" data-tooltip="Post a Story"><i class="material-icons">mode_edit</i></a></li>
         </ul>
     </div>
