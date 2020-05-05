@@ -114,6 +114,7 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
         - All search field are optional, mix any details
         - Country and language search filter the results
         - The database makes use of arrays, integers, booleans and embedded documents to fully utilise the search abilities.
+
 - Users
     - Authentication
         - flask-login manages users
@@ -131,6 +132,7 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
         - Users can edit or delete any created stories
         - Users can fill in autofill info to use when posting a story.
         - Users can delete their autofill info
+
 - General
     - App structure
         - The app has been designed as a module, utilising an __init__.py file for configuration of the app
@@ -166,10 +168,12 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
     - Share button for each card
     - Tag-specific more restricted search
     - More quotes for index
+
 - Users
     - Email entry for password recovery using flask-mail
     - A tab that displays like stories
     - A friend / follow system
+
 - General
     - Change to Bootstrap / Foundation CSS
     - Implement alternative tagging system - Materialize Chips is buggy
@@ -190,9 +194,11 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
         * Running functions to initalize components
     - [JQuery](https://jquery.com/)
         * Animations and click functions
+
 - Framework
     - [Materialize](https://materializecss.com/)
         * Used for basic styles and outline
+
 - Resources
     - [Material Design Icons](https://material.io/resources/icons/?style=baseline)
         * Used for icons
@@ -202,6 +208,7 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
         * More complex text editing in the stories
     - [Infinite Scroll](https://infinite-scroll.com/)
         * Used for infinite scroll on feed pages
+
 - Packages
     - [Flask](https://flask.palletsprojects.com/en/1.1.x/)
         * The main app technology for the views
@@ -225,6 +232,7 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
     - Each javascript file was tested on the site for errors and fucntionality using the console and with [JSHint](https://jshint.com/)
     - gitignore file has been included to prevent system file commits
     - requirements.txt updated
+
 - Testing.
     - The views have been thoroughly manually tested and refined over time, utilising  python features to create documents in the database in a useful, flexible structure.
     - The documents in the database have been examined and structured in a manner so that the information is well defined, checking how the views effect documents.
@@ -239,6 +247,7 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
     - I regret that, due to the amount of troubleshooting I had to do with the CSS, I was unable to fully utilise pythons's unittest framework. I made some simple views, but the CSS troubleshooting slowed down my app development to the point where I had to move forward with features to make the deadline. More testing is necessary in this area.
     - Each time a feature was added all the functions were tested to see if there was an impact.
     - The python module structure has been tested and implemented, adding config.py, setup.py and some tests.
+    
 - Troubleshooting
     - Throughout devlopment I found my largest issues were caused by difficulties with Materialize CSS components. I sincerely regret using it, as I spent a lot of time debugging the CSS instead of developing features or creating test views. Bootstrap and Foundation are both more complex and therefore more flexible, perhaps more study is rewuired to utilise them well, but that suits me. The simplicity of Materialize may suit some developers, but I found it to be a hinderance.
     - The tags feature in Materialize "Chips" was something I implemented early on as the tag system, only to find out that when I began testing using real devices as opposed to developer mode, that it had fairly unfixalke bugs on android. To enter a tag, you must use the "Enter" key, however on android, within a form, the enter button becomes a "Tab" button. I edited the Materialize.js to allow using spaces, including keys for space on android, but it still would not register. This has been a known issue since 2018 In the end I found a workaround by implementing the Chips outside of the form, pulling the data from the tags and reinserting it as a list, key by key, into the form. This was just one of many issues I found and still have with the Materialize CSS.
