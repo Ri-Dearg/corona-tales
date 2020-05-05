@@ -1,5 +1,5 @@
 function fadePreload() {
-    $('.preloader').fadeOut(1800)
+    $('.preloader').fadeOut(1800);
 }
 /**
  * Changes the timestamp from milliseconds to a readable format and places it within the story card
@@ -7,36 +7,35 @@ function fadePreload() {
  * @param {string} timeStamp - a string passed from python that is the date in milliseconds
  */
 function showDate(id, timeStamp) {
-    var time = Number(timeStamp)
-    var date = new Date(time)
+    var time = Number(timeStamp);
+    var date = new Date(time);
 
     const options = { day: 'numeric', month: 'short', year: 'numeric' };  // Sets format for dates
-    var dateString = date.toLocaleDateString(undefined, options)
+    var dateString = date.toLocaleDateString(undefined, options);
 
-    document.querySelector(`#date-med-${id}`).textContent = dateString  // Places the dates on the cards
-    document.querySelector(`#date-small-${id}`).textContent = dateString
+    document.querySelector(`#date-med-${id}`).textContent = dateString;  // Places the dates on the cards
+    document.querySelector(`#date-small-${id}`).textContent = dateString;
 }
 
 
 function clickToShow(id) {
     $(`#show-${id}.click-to-show`).on('click', function () {
-        var truncate = $(`#truncate-${id}`)
+        var truncate = $(`#truncate-${id}`);
         if ($(`#show-${id}`).hasClass('toggled')) {
-            $(`#show-${id}`).removeClass('toggled').html('<a>Read More</a>')
+            $(`#show-${id}`).removeClass('toggled').html('<a>Read More</a>');
             truncate.stop().animate({
                 height: '180px'
             }, 1200);
         } else {
-            $(`#show-${id}`).addClass('toggled').html('<a>Close</a>')
-            var truncate = $(`#truncate-${id}`)
-            var previewHeight = truncate.height()
-            var contentHeight = truncate.css('height', 'auto').height()
-            truncate.height(previewHeight)
+            $(`#show-${id}`).addClass('toggled').html('<a>Close</a>');
+            var previewHeight = truncate.height();
+            var contentHeight = truncate.css('height', 'auto').height();
+            truncate.height(previewHeight);
             truncate.stop().animate({
                 height: contentHeight
-            }, 1200)
+            }, 1200);
         }
-    })
+    });
 }
 
 
@@ -52,7 +51,7 @@ function initFab() {
 
     if (indexTap != null && !sessionStorage.Shown) {  // Runs only if it hasn't been run before
         var instancesFeature = M.TapTarget.init(indexTap, {});  // Creates the alert
-        instancesFeature.open()
+        instancesFeature.open();
         setTimeout(function () { instancesFeature.close(); }, 5000);
         sessionStorage.Shown = 1;  // Saves value after it is run once for this session
     }
@@ -66,7 +65,7 @@ function initFab() {
 function initEditFab(id) {
     var sideFab = document.querySelector(`#button-${id}`);  // Selects the edit story button
     if (sideFab != null) { // Initiates only if it is present
-        var instanceUser = M.FloatingActionButton.init(sideFab, { 
+        var instanceUser = M.FloatingActionButton.init(sideFab, {
             direction: 'left',
         });
     }
@@ -74,11 +73,11 @@ function initEditFab(id) {
 
 function tipAnim() {
     $('.fixed-action-btn').hover(
-        function() {
-            $('.mobile-fab-tip').addClass('scale-in')
+        function () {
+            $('.mobile-fab-tip').addClass('scale-in');
         },
-        function() {
-            $('.mobile-fab-tip').removeClass('scale-in')
+        function () {
+            $('.mobile-fab-tip').removeClass('scale-in');
         });
 }
 
@@ -92,84 +91,84 @@ function initSelect() {
 
 
 function colorChange() {
-    $("span:contains('Red')").hover(function() {
-        $(this).addClass('red-sel')
-        }, function(){
+    $("span:contains('Red')").hover(function () {
+        $(this).addClass('red-sel');
+    }, function () {
         $(this).removeClass('red-sel');
     });
-    $("span:contains('Deep-Orange')").hover(function() {
-        $(this).addClass('dorange-sel')
-        }, function(){
+    $("span:contains('Deep-Orange')").hover(function () {
+        $(this).addClass('dorange-sel');
+    }, function () {
         $(this).removeClass('dorange-sel');
     });
-    $("span:contains('Orange')").hover(function() {
-        $(this).addClass('orange-sel')
-        }, function(){
+    $("span:contains('Orange')").hover(function () {
+        $(this).addClass('orange-sel');
+    }, function () {
         $(this).removeClass('orange-sel');
     });
-    $("span:contains('Amber')").hover(function() {
-        $(this).addClass('amber-sel')
-        }, function(){
+    $("span:contains('Amber')").hover(function () {
+        $(this).addClass('amber-sel');
+    }, function () {
         $(this).removeClass('amber-sel');
     });
-    $("span:contains('Yellow')").hover(function() {
-        $(this).addClass('yellow-sel')
-        }, function(){
+    $("span:contains('Yellow')").hover(function () {
+        $(this).addClass('yellow-sel');
+    }, function () {
         $(this).removeClass('yellow-sel');
     });
-    $("span:contains('Lime')").hover(function() {
-        $(this).addClass('lime-sel')
-        }, function(){
+    $("span:contains('Lime')").hover(function () {
+        $(this).addClass('lime-sel');
+    }, function () {
         $(this).removeClass('lime-sel');
     });
-    $("span:contains('Light-Green')").hover(function() {
-        $(this).addClass('lgreen-sel')
-        }, function(){
+    $("span:contains('Light-Green')").hover(function () {
+        $(this).addClass('lgreen-sel');
+    }, function () {
         $(this).removeClass('lgreen-sel');
     });
-    $("span:contains('Green')").hover(function() {
-        $(this).addClass('green-sel')
-        }, function(){
+    $("span:contains('Green')").hover(function () {
+        $(this).addClass('green-sel');
+    }, function () {
         $(this).removeClass('green-sel');
     });
-    $("span:contains('Teal')").hover(function() {
-        $(this).addClass('teal-sel')
-        }, function(){
+    $("span:contains('Teal')").hover(function () {
+        $(this).addClass('teal-sel');
+    }, function () {
         $(this).removeClass('teal-sel');
     });
-    $("span:contains('Cyan')").hover(function() {
-        $(this).addClass('cyan-sel')
-        }, function(){
+    $("span:contains('Cyan')").hover(function () {
+        $(this).addClass('cyan-sel');
+    }, function () {
         $(this).removeClass('cyan-sel');
     });
-    $("span:contains('Light-Blue')").hover(function() {
-        $(this).addClass('lblue-sel')
-        }, function(){
+    $("span:contains('Light-Blue')").hover(function () {
+        $(this).addClass('lblue-sel');
+    }, function () {
         $(this).removeClass('lblue-sel');
     });
-    $("span:contains('Blue')").hover(function() {
-        $(this).addClass('blue-sel')
-        }, function(){
+    $("span:contains('Blue')").hover(function () {
+        $(this).addClass('blue-sel');
+    }, function () {
         $(this).removeClass('blue-sel');
     });
-    $("span:contains('Indigo')").hover(function() {
-        $(this).addClass('indigo-sel')
-        }, function(){
+    $("span:contains('Indigo')").hover(function () {
+        $(this).addClass('indigo-sel');
+    }, function () {
         $(this).removeClass('indigo-sel');
     });
-    $("span:contains('Deep-Purple')").hover(function() {
-        $(this).addClass('dpurple-sel')
-        }, function(){
+    $("span:contains('Deep-Purple')").hover(function () {
+        $(this).addClass('dpurple-sel');
+    }, function () {
         $(this).removeClass('dpurple-sel');
     });
-    $("span:contains('Purple')").hover(function() {
-        $(this).addClass('purple-sel')
-        }, function(){
+    $("span:contains('Purple')").hover(function () {
+        $(this).addClass('purple-sel');
+    }, function () {
         $(this).removeClass('purple-sel');
     });
-    $("span:contains('Pink')").hover(function() {
-        $(this).addClass('pink-sel')
-        }, function(){
+    $("span:contains('Pink')").hover(function () {
+        $(this).addClass('pink-sel');
+    }, function () {
         $(this).removeClass('pink-sel');
     });
 
@@ -219,8 +218,8 @@ function initStoryModal(id, content, storyTags) {
                     });
             }
             if (storyTags !== undefined) {  // Checks to see if tag data has been passed for that story
-                                          // and populates the chips tagdata with it
-                var instance = M.Chips.getInstance(document.querySelector(`#chips-${id}`))
+                // and populates the chips tagdata with it
+                var instance = M.Chips.getInstance(document.querySelector(`#chips-${id}`));
                 for (i = 0; i < storyTags.length; i++) {
                     instance.addChip({
                         tag: storyTags[i]
@@ -231,14 +230,14 @@ function initStoryModal(id, content, storyTags) {
         onOpenEnd: function () {
             if (id !== 'search') {
                 if (content !== undefined) {  // Sets the CKEditor content to the story content
-                    newEditor.setData(content)
+                    newEditor.setData(content);
                 }
             }
         },
         onCloseEnd: function () {
             if (id !== 'search') {  // Destoys the CKEditor instance on close so there will only
-                                    // ever be one instance
-                newEditor.destroy()
+                // ever be one instance
+                newEditor.destroy();
             }
         }
     });
@@ -257,7 +256,7 @@ function addTags(id, tagDictLength, tagDict) {
     for (i = 0; i < tagDictLength; i++) {  // Cycles through each dictionary pair and appends the tag as a value
         $(`#form-${id}`).append(`<input type="hidden" name="tags" value="${tagDict[i].tag.toLowerCase()}">`);
     }
-    return true
+    return true;
 }
 
 
@@ -272,19 +271,19 @@ function formValid(id) {
     // Validates select fields on forms as Materialize does not natively support this.
     $("select[required]").css({ position: 'absolute', display: 'inline', height: 0, padding: 0, width: 0 });
 
-    $(`#form-${id}`).on('submit', function (event) { 
-        var tagDict = M.Chips.getInstance($(`#chips-${id}`)).chipsData  // Gets entered tag data
-        var tagDictLength = Object.keys((M.Chips.getInstance($(`#chips-${id}`)).chipsData)).length
-        
+    $(`#form-${id}`).on('submit', function (event) {
+        var tagDict = M.Chips.getInstance($(`#chips-${id}`)).chipsData;  // Gets entered tag data
+        var tagDictLength = Object.keys((M.Chips.getInstance($(`#chips-${id}`)).chipsData)).length;
+
         if (id !== 'search') {
-            var editorData = newEditor.getData().length
+            var editorData = newEditor.getData().length;
             if (tagDictLength === 0 || editorData === 0) { // Checks to see if either the tags or textarea have no content
                 event.preventDefault();
                 alert('Please fill Tags and Stories');
-                return false
+                return false;
             }
         }
-        addTags(id, tagDictLength, tagDict)  // Adds tags to be submitted to form
+        addTags(id, tagDictLength, tagDict);  // Adds tags to be submitted to form
     });
 }
 
@@ -340,15 +339,13 @@ function likeUnlike(id) {
 function createScroll(getUrl, baseUrl, elem, tagList) {
     var infScroll = new InfiniteScroll(elem, {
         path: function () {  // correctly chooses pagination url depending on page
+            var pageNumber = this.loadCount + 2;
             if (getUrl.href === baseUrl || getUrl.pathname.split('/')[1] === "search_tags") {
-                var pageNumber = this.loadCount + 2
-                return getUrl.href + '?page=' + pageNumber
+                return getUrl.href + '?page=' + pageNumber;
             } else if (getUrl.hash == '#user-settings') {  // necessary for url recognition as flask can redirect to this tab
-                var pageNumber = this.loadCount + 2
-                return getUrl.pathname + '?page=' + pageNumber
+                return getUrl.pathname + '?page=' + pageNumber;
             } else {
-                var pageNumber = this.loadCount + 2
-                return getUrl.href + '&page=' + pageNumber
+                return getUrl.href + '&page=' + pageNumber;
             }
         },
         append: '.scroll-append',  // appends story cards to the section
@@ -359,21 +356,21 @@ function createScroll(getUrl, baseUrl, elem, tagList) {
 
     infScroll.on('append', function (response, path, items) {  // Fires funtions when items are appended
         for (i = 0; i < items.length; i++) {
-            var info = items[i].children
-            var storyId = info[0].innerText
-            initBaseStory(storyId, info[1].innerText)  // reinitiates functions for new dynamic content
+            var info = items[i].children;
+            var storyId = info[0].innerText;
+            initBaseStory(storyId, info[1].innerText);  // reinitiates functions for new dynamic content
 
             if (getUrl.pathname == '/profile') {  // reinitiates materialize components for the profile page edit button
-                var storyTags = JSON.parse(info[2].innerText)
-                var content = $(items).find(`#content-${storyId}`).html()
-                initEditStory(tagList, storyId, content, storyTags)
+                var storyTags = JSON.parse(info[2].innerText);
+                var content = $(items).find(`#content-${storyId}`).html();
+                initEditStory(tagList, storyId, content, storyTags);
                 initSelect();
                 colorChange();
                 tipAnim();
             }
         }
     });
-    return infScroll
+    return infScroll;
 }
 
 
@@ -395,13 +392,13 @@ function initScroll(tagList) {
     if (scroll != undefined && getUrl.hash !== '#user-settings') {  // will not fire on user settings
         infScroll = new createScroll(getUrl, baseUrl, scroll, tagList);
     }
-    
-    $('#tab-settings').on('click', function() { 
+
+    $('#tab-settings').on('click', function () {
         infScroll.destroy();
     });
 
-    $('#tab-user-stories').on('click', function() {
-        infScroll = new createScroll(getUrl, baseUrl, scroll)
+    $('#tab-user-stories').on('click', function () {
+        infScroll = new createScroll(getUrl, baseUrl, scroll);
     });
 
 }
@@ -425,8 +422,8 @@ function initMenu(tagList, id) {
  */
 function initBaseStory(id, timestamp) {
     showDate(id, timestamp);
-    likeUnlike(id)
-    clickToShow(id)
+    likeUnlike(id);
+    clickToShow(id);
 }
 
 
@@ -443,19 +440,19 @@ function initEditStory(tagList, id, content, storyTags) {
     initStoryModal(id, content, storyTags);
     formValid(id);
 }
-       
+
 
 /**
  * Functions to fire off on page load. Mostly initiating Materialize components.
  * Also used for password verification
  */
 document.addEventListener('DOMContentLoaded', function () {
-    
+
     window.addEventListener('load', fadePreload());
 
     M.AutoInit();  // Initiates all auto-initiated Materialize components
 
-    tipAnim()
+    tipAnim();
 
     colorChange();
 
@@ -474,28 +471,27 @@ document.addEventListener('DOMContentLoaded', function () {
     var singupLogin = document.querySelector('#modal-signup-login');  // Initiates the modal for signup / login
     var modalTab = M.Modal.init(singupLogin, {  // necesarry as there is a bug when you use tabs within a modal
         onOpenEnd: function () {
-            var formTabs = document.querySelector('#form-tabs')  // initiates the tabs
-            var instance = M.Tabs.init(formTabs, {})
+            var formTabs = document.querySelector('#form-tabs');  // initiates the tabs
+            var instance = M.Tabs.init(formTabs, {});
         }
     });
 
     $('.password-create').on('submit', function (event) { // confirms that the two entered passwords are the same.
-        var passFirst = document.querySelector('.passone').value
-        var passSecond = document.querySelector('.passtwo').value
+        var passFirst = document.querySelector('.passone').value;
+        var passSecond = document.querySelector('.passtwo').value;
 
         if (passFirst != passSecond) {  // Prevents form entry of they are not
             alert('Passwords do not match. Please Try again.');
-            return false
+            return false;
         }
     });
 
     if (window.location.pathname == '/') {
         $.getJSON('static/js/quotes.json', function (data) {
-            var quoteLength = data.length
-            i = Math.floor(Math.random() * quoteLength)
-            $('#splash-text').text(data[i].text)
-            $('#splash-author').text(`- ${data[i].author}`)
-        })
+            var quoteLength = data.length;
+            i = Math.floor(Math.random() * quoteLength);
+            $('#splash-text').text(data[i].text);
+            $('#splash-author').text(`- ${data[i].author}`);
+        });
     }
 });
-
