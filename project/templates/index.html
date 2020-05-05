@@ -1,0 +1,126 @@
+{% extends 'base.html' %} {% block title %}Corona Tales | Home{% endblock %} {% block content %}
+<div class="container">
+
+    <!--Infinite Scroll will append to the end of this element-->
+    <section class="section white z-depth-3 infiniscroll">
+        <h6 class="center-align heading">A simple site for Sharing.</h6>
+        <br><br>
+        <div id="splash-quote">
+        <h6 id="splash-text" class="heading center-align purple-text text-lighten-1">
+        </h6>
+        <p id='splash-author' class="center-align"></p>
+        </div>
+        <br>
+        <!--   Story Section   -->
+        <!-- Function to place each story as a card -->
+        <h5 class="heading center-align">Featured</h5>
+        {% for story in base_story_list %}
+        <!-- Places any featured stories first -->
+        {% if story.featured %}
+        <!-- Infinite scroll will append this story card on load-->
+        <div class="scroll-append">
+            <div class="id-info d-none">{{ story._id}}</div>
+            <div class="time-info d-none">{{ story.time}}</div>
+            <hr class="{{ story.color }}">
+            <br>
+            <div class="row">
+                <div class="col s12">
+                    <article class="card hoverable">
+                        <div class="card-content {{ story.color }} lighten-2 no-pad-bot">
+                            <div class="row no-m-bot">
+                                <h6 class="card-title col s12 m6 heading">{{ story.title }}</h6>
+                                <span id="date-med-{{ story._id }}" class="card-title col s12 m6 heading hide-on-small-only right-align"></span>
+                                <span id="date-small-{{ story._id }}" class="card-title col s12 m6 heading hide-on-med-and-up"></span>
+                                <div class="col s12">
+                                    <p>By {{ story.name.title() }},
+                                        <br> Age {{ story.age|string }},
+                                        <br> In {{ story.country.title() }}.</p>
+                                    <br>
+                                    <div id="truncate-{{ story._id }}">{{ story.text|safe }}</div>
+                                    <br>
+                                </div>
+                                <!-- Shows the like button if the user is logged in. Button varies depending on whether the story is liked or not -->
+                                {% if current_user.is_authenticated %}
+                                <div id="button-{{ story._id }}" class="fixed-action-btn heart-button">
+                                    <form class="like-button" id="form-like-{{ story._id }}">
+                                        <input type="hidden" name="like-id" value="{{ story._id }}">
+                                        <span class="mobile-fab-tip like-tip {{ story.color }} accent-3 white-text" id="like-tip-{{ story._id }}">{{ story.likes }} likes</span>
+                                        <button id="like-info-{{ story._id }}" class="btn-floating {{ story.color }} accent-3 tooltipped" data-position="left" data-tooltip="{{ story.likes }} likes">
+                                            {% if story._id in current_user.liked %}
+                                            <i id="heart-{{ story._id }}" class="large material-icons">favorite</i> {% else %}
+                                            <i id="heart-{{ story._id }}" class="large material-icons">favorite_border</i> {% endif %}
+                                        </button>
+                                    </form>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-action {{ story.color }} lighten-5">
+                            <div id="show-{{ story._id }}" class="click-to-show center-align mb-1"></div>
+                            <div class="divider"></div>
+                            <!-- List all the tags on the story-->
+                            <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+                            {% endfor %}</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <div class="divider"></div>
+        <!--Lists all the non-featured stories second-->
+        {% for story in base_story_list %}
+        {% if not story.featured %}
+        <div class="scroll-append">
+            <div class="id-info d-none">{{ story._id}}</div>
+            <div class="time-info d-none">{{ story.time}}</div>
+            <hr class="{{ story.color }}">
+            <br>
+            <div class="row">
+                <div class="col s12">
+                    <article class="card {{ story.color }} lighten-2 hoverable">
+                        <div class="card-content no-pad-bot">
+                            <div class="row no-m-bot">
+                                <h6 class="card-title col s12 m6 heading">{{ story.title }}</h6>
+                                <span id="date-med-{{ story._id }}" class="card-title col s12 m6 heading hide-on-small-only right-align"></span>
+                                <span id="date-small-{{ story._id }}" class="card-title col s12 m6 heading hide-on-med-and-up"></span>
+                                <div class="col s12">
+                                    <p>By {{ story.name.title() }},
+                                        <br> Age {{ story.age|string }},
+                                        <br> In {{ story.country.title() }}.</p>
+                                    <br>
+                                    <div id="truncate-{{ story._id }}">{{ story.text|safe }}</div>                                    
+                                    <br>
+                                </div>
+                                <!-- Shows the like button if the user is logged in. Button varies depending on whether the story is liked or not -->
+                                {% if current_user.is_authenticated %}
+                                <div id="button-{{ story._id }}" class="fixed-action-btn heart-button">
+                                    <form class="like-button" id="form-like-{{ story._id }}">
+                                        <input type="hidden" name="like-id" value="{{ story._id }}">
+                                        <span class="mobile-fab-tip like-tip {{ story.color }} accent-3 white-text" id="like-tip-{{ story._id }}">{{ story.likes }} likes</span>
+                                        <button id="like-info-{{ story._id }}" class="btn-floating {{ story.color }} accent-3 tooltipped" data-position="left" data-tooltip="{{ story.likes }} likes">
+                                            {% if story._id in current_user.liked %}
+                                            <i id="heart-{{ story._id }}" class="large material-icons">favorite</i> {% else %}
+                                            <i id="heart-{{ story._id }}" class="large material-icons">favorite_border</i> {% endif %}
+                                        </button>
+                                    </form>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-action {{ story.color }} lighten-5">
+                            <div id="show-{{ story._id }}" class="click-to-show center-align mb-1"></div>
+                            <div class="divider"></div>
+                            <!-- List all the tags on the story-->
+                            <p>Tags: {% for tag in story.tags %}<a href="/search_tags/{{ tag | alphanumeric }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        {% endif %} {% endfor %}
+
+    </section>
+</div>
+{% endblock %}

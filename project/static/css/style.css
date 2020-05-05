@@ -1,0 +1,443 @@
+/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.26, autoprefixer: v9.7.3) */
+
+
+/*------------------------------------------------------------------------
+Custom styles for the site.
+rem or px are utilised based on the original values from Materialize CSS
+------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------
+Fonts and Text
+------------------------------------------------------------------------*/
+
+html {
+	font-family: 'Eczar', serif;
+	font-size: 1.1rem
+}
+
+.heading {
+	font-family: 'IM Fell English SC', serif;
+}
+
+strong {
+	font-weight: bold;
+}
+
+.mini-text {
+	font-size: 0.8rem
+}
+
+.sidenav li>a {
+	font-size: 1.2rem
+}
+
+h6 {
+    font-size: 1.4rem;
+    margin-top: 0;
+}
+
+/* Used for text under chips entry */
+.helper-text-custom {
+	min-height: 18px;
+	display: block;
+	font-size: 12px;
+	color: rgba(0, 0, 0, 0.54);
+}
+
+/* The box surrounding text when infitescroll is finished loading*/
+.load-box {
+	font-size: 2.1rem;
+	-webkit-box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, 0.14), 0 -3px 1px -2px rgba(0, 0, 0, 0.12), 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, 0.14), 0 -3px 1px -2px rgba(0, 0, 0, 0.12), 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+
+/*------------------------------------------------------------------------
+Spacing and Sizing
+------------------------------------------------------------------------*/
+
+#about-page {
+    padding: 1rem;
+}
+
+#contact-page {
+    margin-bottom: 3rem;
+}
+
+.icon-block {
+	padding: 0 0.9rem;
+}
+
+/* spacing for the text editor */
+.ckeditor {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.input-field {
+	margin-top: 0.2rem;
+	margin-bottom: 0.2rem;
+}
+
+/* Helps Keeps the preloader centered on screen*/
+.preload-container {
+	width: 64px;
+	height: 64px;
+	margin: auto;
+}
+
+/* Maintains correct spacing for the infinitescroll notifications */
+.load-box p {
+	-webkit-margin-after: 0;
+	margin-block-end: 0;
+}
+
+.card-content .row {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+hr {
+	height: 0.1rem
+}
+
+.row .pd-t {
+	padding-top: 0.4rem
+}
+
+.row form.col {
+	padding: 0;
+}
+
+form .col.pd-b {
+	padding-bottom: 0.6rem
+}
+
+.modal {
+	max-height: 85%;
+	width: 65%;
+}
+
+.no-m-bot,
+.title {
+	margin-bottom: 0;
+}
+
+.mt-1 {
+	margin-top: 1rem;
+}
+
+.mb-1 {
+	margin-bottom: 1rem;
+}
+
+.mar-bot-24 {
+	margin-bottom: 24px !important;
+}
+
+.no-pad-bot {
+	padding-bottom: 0 !important;
+}
+
+.section {
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+	min-height: 100vh;
+}
+
+/* Lowers padding for smaller devices */
+@media only screen and (max-width: 420px) {
+	.section {
+		padding-left: 0.2rem;
+		padding-right: 0.2rem;
+	}
+
+    .card .card-content {
+        padding: 16px;
+    }
+
+    .scroll-append .row .col {
+        padding: 0 0.55rem
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+	/* Keeps the logo the correct size for smaller screens*/
+	nav .brand-logo {
+		font-size: 8vw;
+	}
+
+	/* Maked the modal bigger for filling forms */
+	.modal {
+		max-height: 75%;
+		width: 90%;
+		overflow-y: auto;
+	}
+
+	/* lowers the amount of pading for smaller screens*/
+	.modal .modal-content {
+		padding: 12px
+	}
+}
+
+
+/*------------------------------------------------------------------------
+Positioning
+------------------------------------------------------------------------*/
+
+/* Centers the preloader */
+.preloader-wrapper {
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+/*Numbers used to position the objects above other Materialize components but below the preloader*/
+#button-index {
+    z-index: 9001;
+}
+
+.navbar-fixed {
+	z-index: 9001;
+}
+
+.sidenav {
+	z-index: 9002;
+}
+
+.modal {
+	z-index: 9003 !important;
+}
+
+.d-none {
+	display: none;
+}
+
+/*------------------------------------------------------------------------
+Colours
+------------------------------------------------------------------------*/
+
+/* Classes used to color the background of the color select dropdown*/
+.red-sel {
+    color: #000 !important;
+    background-color: #e57373;
+}
+
+.dorange-sel {
+    color: #000 !important;
+    background-color: #ff8a65;
+}
+
+.orange-sel {
+    color: #000 !important;
+    background-color: #ffb74d;
+}
+
+.amber-sel {
+    color: #000 !important;
+    background-color: #ffd54f;
+}
+
+.yellow-sel {
+    color: #000 !important;
+    background-color: #fff176;
+}
+
+.lime-sel {
+    color: #000 !important;
+    background-color: #dce775;
+}
+
+.lgreen-sel {
+    color: #000 !important;
+    background-color: #aed581;
+}
+
+.green-sel {
+    color: #000 !important;
+    background-color: #81c784;
+}
+
+.teal-sel {
+    color: #000 !important;
+    background-color: #4db6ac;
+}
+
+.cyan-sel {
+    color: #000 !important;
+    background-color: #4dd0e1;
+}
+
+.lblue-sel {
+    color: #000 !important;
+    background-color: #4fc3f7;
+}
+
+.blue-sel {
+    color: #000 !important;
+    background-color: #64b5f6;
+}
+
+.indigo-sel {
+    color: #000 !important;
+    background-color: #7986cb;
+}
+
+.dpurple-sel {
+    color: #000 !important;
+    background-color: #9575cd;
+}
+
+.purple-sel {
+    color: #000 !important;
+    background-color: #ba68c8;
+}
+
+.pink-sel {
+    color: #000 !important;
+    background-color: #f06292;
+}
+
+/* Colors the spinner */
+.spinner-layer {
+	border-color: #ff4081;
+}
+
+/* Colors the option tabs */
+.tabs .tab a {
+	color: #00796b;
+}
+
+.tabs .tab a:hover,
+.tabs .tab a.active,
+.tabs .tab.a {
+	color: #00bfa5;
+}
+
+.tabs .tab a:focus.active {
+	color: #00bfa5;
+	background-color: rgba(81, 201, 165, 0.2);
+}
+
+.tabs .indicator {
+	background-color: #00bfa5;
+}
+
+/* Colors the remember me checkbox */
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
+	border-color: #00bfa5;
+	background-color: #00bfa5
+}
+
+/* Positions the edit button on the stories*/
+.horizontal-button {
+	position: absolute;
+	bottom: -29px;
+	right: 70px
+}
+
+/* Positions the like */
+.heart-button {
+	position: absolute;
+	bottom: -19px;
+	right: 70px
+}
+
+/* Colors the flashed messages popups */
+.success {
+	background-color: #00bfa5;
+}
+
+.sorry {
+	background-color: #e53935;
+}
+
+
+/*------------------------------------------------------------------------
+Fixes and Features
+------------------------------------------------------------------------*/
+
+/* Content  Truncating*/
+.hide-content {
+    height: 180px;
+    overflow-y: hidden;
+}
+
+.show-content {
+    height: auto;
+}
+
+/* Preloader positioning*/
+.preloader {
+  background: #e0f2f1;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: opacity 0.3s linear;
+  width: 100%;
+  z-index: 8999;
+}
+
+/* fix for no bullet points in editor */
+.ck.ck-content ul,
+.ck.ck-content ul li {
+	list-style-type: inherit;
+}
+
+.ck.ck-content ul {
+	padding-left: 2.5rem;
+}
+
+/* Tooltip fixes as the Materialize tooltips don't have a fixed position on the buttons*/
+.fixed-action-btn:hover ul {
+	display: block;
+}
+
+.material-tooltip {
+	display: none !important;
+}
+
+.mobile-fab-tip.like-tip {
+	position: relative;
+	top: 4px;
+    display: none
+}
+
+.left-tip {
+	position: fixed;
+	right: 85px;
+}
+
+.bot-tip-1 {
+	position: fixed;
+	right: 15px;
+	top: 54px;
+}
+
+.bot-tip-2 {
+	position: fixed;
+	top: 54px;
+	right: 67px;
+}
+
+/* Tooltip design and span implementation from https://codepen.io/T-P/pen/qZwLmB
+* animation and javascript, implemented my own*/
+.mobile-fab-tip {
+	padding: 5px 5px 4px 5px;
+	text-align: right;
+	background-color: #323232;
+	border-radius: 2px;
+	color: #FFF;
+}
