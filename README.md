@@ -88,7 +88,7 @@ As a user interested in reading stories, I expect to see a many different perspe
 As a user interested in writing, I expect to be able to share my stories.
 
 ### Wireframes
-Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
+Wireframe: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 
 ## Features
 
@@ -104,7 +104,8 @@ Wireframe: https://drive.google.com/open?id=17ZBPFFBDwHyMecXJiWNz-r5LhEaP79as
     - Story Display
         - Featured stories displayed above others after passing a set number of likes
         - Stories are ordered chronologically by a millisecond timestamp, and converted to a readable date
-        - Trucated text that can be expanded
+        - Stories auto size height, that can be truncated with long stories.
+        - Trucated text that can be expanded and closed.
         - Like stories asynchronously, with sound and notification for the action
         - Simple card format, all evenly sized for uniformity when scrolling
     - Search

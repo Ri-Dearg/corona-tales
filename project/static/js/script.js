@@ -49,7 +49,6 @@ function truncate(id) {
 function clickToShow(id) {
     $(`#show-${id}.click-to-show`).on('click', function () {
         var truncate = $(`#truncate-${id}`);
-        console.log('div')
         // The 'toggled' class is added after the content is opened, so if it is toggled it closes to the same height.
         if ($(`#show-${id}`).hasClass('toggled')) {
             $(`#show-${id}`).removeClass('toggled').html('<a>Read More</a>');
