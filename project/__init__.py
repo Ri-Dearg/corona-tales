@@ -17,7 +17,7 @@ def create_app():
     """Creates the app using configuration from config.py and blueprints."""
     app = Flask(__name__)
     app.config.from_object('config')  # The secret key, database and mail
-
+    print(str(app.config['FLASK_ENV']))
     mongo.init_app(app)  # Starts pymongo
     mail.init_app(app)  # starts flask-mail
 
@@ -49,7 +49,6 @@ def create_app():
 
     if __name__ == '__main__':
         app.run(host=os.environ.get('IP'),
-                port=int(os.environ.get('PORT')),
-                debug=True)
+                port=int(os.environ.get('PORT')))
 
     return app
