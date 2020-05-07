@@ -24,15 +24,29 @@ def signup_form():
 
     # The scheme for the user document. The User class follows this scheme
     # so all fields are necessary.
-    account = {'username': username,
-               'user_id': username.upper(),
-               'password': generate_password_hash(request.form.get('password'),
-                                                  method='sha256'),
-               'prefill': {},
-               'liked': []}
-    usersdb.insert_one(account)
-    flash('please Login, account created.', 'success')
-    return redirect(url_for('base.story_page'))
+    else:
+        account = {'username': username,
+                   'user_id': username.upper(),
+                   'password': generate_password_hash(request.form.get
+                                                      ('password'),
+                                                      method='sha256'),
+                   'prefill': {},
+                   'liked': []}
+        usersdb.insert_one(account)
+
+        user = usersdb.find_one({"user_id": userID})
+        flash('account created.', 'success')
+        password = request.form.get('password')
+        prefill = usersdb.find_one({"user_id": userID}, {'prefill'})
+        liked = usersdb.find_one({"user_id": userID}, {'liked'})
+        remember = False
+
+        log_user = User(userID, username, password, prefill, liked,
+                        _id=user.get('_id'))
+        login_user(log_user, remember=remember)
+        flash(f'Welcome, {username}', 'success')
+
+        return redirect(url_for('base.profile'))
 
 
 @auth.route('/login', methods=['POST'])
