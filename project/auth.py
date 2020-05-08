@@ -36,12 +36,11 @@ def signup_form():
 
         user = usersdb.find_one({"user_id": userID})
         flash('account created.', 'success')
-        password = request.form.get('password')
         prefill = usersdb.find_one({"user_id": userID}, {'prefill'})
         liked = usersdb.find_one({"user_id": userID}, {'liked'})
         remember = False
 
-        log_user = User(userID, username, password, prefill, liked,
+        log_user = User(userID, username, user["password"], prefill, liked,
                         _id=user.get('_id'))
         login_user(log_user, remember=remember)
         flash(f'Welcome, {username}', 'success')
@@ -66,7 +65,7 @@ def login_form():
         return redirect(url_for('base.story_page'))
 
     # logs user in with flask-login, following the User model
-    log_user = User(userID, username, password, prefill, liked,
+    log_user = User(userID, username, user["password"], prefill, liked,
                     _id=user.get('_id'))
     login_user(log_user, remember=remember)
 
