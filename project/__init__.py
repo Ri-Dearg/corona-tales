@@ -47,9 +47,10 @@ def create_app():
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
+    return app
+
     if __name__ == '__main__':
+        app = create_app()
         app.run(host=os.environ.get('IP'),
                 port=int(os.environ.get('PORT')),
                 ssl_context='adhoc', debug=False)
-
-    return app
