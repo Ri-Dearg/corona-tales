@@ -15,7 +15,7 @@
         <br>
         <!--   Story Section   -->
         <!-- Function to place each story as a card -->
-        <h5 class="heading center-align">Featured</h5>
+        <h5 class="heading center-align">Featured Stories</h5>
         {% for story in base_story_list %}
         <!-- Places any featured stories first -->
         {% if story.featured %}
@@ -70,7 +70,8 @@
         </div>
         {% endif %}
         {% endfor %}
-        <div class="divider"></div>
+        <hr class="teal lighten-5"></hr>
+        <h5 class="heading center-align">All Stories</h5>
         <!--Lists all the non-featured stories second-->
         {% for story in base_story_list %}
         {% if not story.featured %}
