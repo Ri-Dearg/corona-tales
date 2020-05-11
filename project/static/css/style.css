@@ -45,6 +45,10 @@ h6 {
 	color: rgba(0, 0, 0, 0.54);
 }
 
+.ck-content p {
+    margin: 0;
+}
+
 /* The box surrounding text when infitescroll is finished loading*/
 .load-box {
 	font-size: 2.1rem;
