@@ -79,6 +79,12 @@ def story_page():
 def create_story():
     """Adds a story document to the database. Attaches the user ID if they
     are logged in. Every story gets one like on creation, my like. :-)"""
+
+    tag_values = []
+    for tag in request.form.getlist('tags'):
+        clean_tag = tag.lstrip('#')
+        tag_values.append(clean_tag)
+
     if current_user.is_authenticated:
         stories.insert_one({'user_id': current_user.user_id,
                             'name': request.form.get('name'),
@@ -91,7 +97,7 @@ def create_story():
                             'time': int(time.time()*1000),
                             'featured': False,
                             'likes': 1,
-                            'tags': request.form.getlist('tags')})
+                            'tags': tag_values})
 
     else:
         stories.insert_one({'name': request.form.get('name'),
@@ -104,7 +110,7 @@ def create_story():
                             'time': int(time.time()*1000),
                             'featured': False,
                             'likes': 1,
-                            'tags': request.form.getlist('tags')})
+                            'tags': tag_values})
 
     flash('your story has been posted!', 'success')
     return redirect(request.referrer)
@@ -189,13 +195,19 @@ def delete_info():
 @login_required
 def edit_story(story_id):
     """Updates user stories with edited details """
+
+    tag_values = []
+    for tag in request.form.getlist('tags'):
+        clean_tag = tag.lstrip('#')
+        tag_values.append(clean_tag)
+
     stories.update_one({'_id': ObjectId(story_id)},
                        {'$set':
                         {'name': request.form.get('name'),
                          'age': int(request.form.get('age')),
                          'country': request.form.get('country'),
                          'story_language': request.form.get('language'),
-                         'tags': request.form.getlist('tags'),
+                         'tags': tag_values,
                          'color': request.form.get('color'),
                          'title': request.form.get('title'),
                          'text': request.form.get('text'),
