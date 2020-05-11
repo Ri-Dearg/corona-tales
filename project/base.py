@@ -82,8 +82,10 @@ def create_story():
 
     tag_values = []
     for tag in request.form.getlist('tags'):
-        clean_tag = tag.lstrip('#')
-        tag_values.append(clean_tag)
+        no_space = tag.split(' ')
+        for new_tag in no_space:
+            clean_tag = new_tag.lstrip('#')
+            tag_values.append(clean_tag)
 
     if current_user.is_authenticated:
         stories.insert_one({'user_id': current_user.user_id,
@@ -198,8 +200,10 @@ def edit_story(story_id):
 
     tag_values = []
     for tag in request.form.getlist('tags'):
-        clean_tag = tag.lstrip('#')
-        tag_values.append(clean_tag)
+        no_space = tag.split(' ')
+        for new_tag in no_space:
+            clean_tag = new_tag.lstrip('#')
+            tag_values.append(clean_tag)
 
     stories.update_one({'_id': ObjectId(story_id)},
                        {'$set':
