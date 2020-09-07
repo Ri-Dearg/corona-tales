@@ -574,7 +574,7 @@
                                         </div>
                                         <div class="input-field col s12 m6 pull-m6">
                                             <i class="material-icons prefix">import_contacts</i>
-                                            <input id="title-{{ story._id }}" name="title" type="text" value="{{ story.title }}" placeholder="Story Title" required>
+                                            <input id="title-{{ story._id }}" name="title" type="text" value="{{ story.title }}" placeholder="Story Title" maxlength="100" required>
                                             <span class="helper-text">Give your story a title.</span>
 
                                         </div>
@@ -609,7 +609,7 @@
                                 <form action="{{ url_for('base.delete_story', story_id=story._id) }}" method="POST" id="form-delete-{{ story._id }}">
                                 </form>
                                 <div class="center-align">
-                                    <button type="submit" form="form-delete-{{ story._id }}" class="btn waves-effect waves-light red darken-1">Delete Stories
+                                    <button type="submit" form="form-delete-{{ story._id }}" class="btn waves-effect waves-light red darken-1">Delete Story
                                         <i class="material-icons left">highlight_off</i>
                                     </button>
                                 </div>   

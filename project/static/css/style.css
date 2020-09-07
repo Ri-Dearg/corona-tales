@@ -45,6 +45,10 @@ h6 {
 	color: rgba(0, 0, 0, 0.54);
 }
 
+.ck-content p {
+    margin: 0;
+}
+
 /* The box surrounding text when infitescroll is finished loading*/
 .load-box {
 	font-size: 2.1rem;
@@ -151,7 +155,7 @@ form .col.pd-b {
 }
 
 /* Lowers padding for smaller devices */
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 580px) {
 	.section {
 		padding-left: 0.2rem;
 		padding-right: 0.2rem;
