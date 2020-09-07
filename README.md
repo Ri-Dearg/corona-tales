@@ -5,7 +5,7 @@
   <img src="https://user-images.githubusercontent.com/44118951/92393335-07c7bf00-f120-11ea-881b-543875d38d5b.png" alt="Home Page">
 </div>
 
-[Corona Tales](https://corona-tales.herokuapp.com/) is designed as a text-base story sharing platform based around the coronavirus epidemic. Its goal is to allow people to post, share and search experiences and opinions on the site. The inspiration came from the various ways people have begun to use social networking during the epidemic, in manners not sen before. I wanted to create a site which is based more on thoughtful exploration rather than instant gratification, such as Instagram or Facebook, but still allow for personalisation. Certain design choices which would be out of line with similar systems were made deliberately and will be explained.
+[Corona Tales](https://corona-tales.herokuapp.com/) is designed as a text-base story-sharing platform based around the coronavirus epidemic. Its goal is to allow people to post, share and search experiences and opinions on the site. The inspiration came from the various ways people have begun to use social networking during the epidemic, in a manner not seen before. I wanted to create a site which is based more on thoughtful exploration rather than instant gratification, such as Instagram or Facebook, but still allow for personalisation. Certain design choices which would be out of line with similar systems were made deliberately and will be explained.
 
 ## Table of Contents
 1. <details open>
@@ -158,7 +158,7 @@
 The target audience for Corona Tales is:
 - People who want to share their experience publicly.
 - People who are interested in reading other people's experiences.
-- People that want  a simpler kind of social network.
+- People that want a simpler kind of social network.
 - People that want to search for a particular idea or theme.
 - People that want to create a log of their own stories.
 
@@ -171,14 +171,14 @@ User goals are:
 
 Corona Tales fills these needs by:
 - Creating a system similar to social feeds with likes, infinite scroll and tags, for people to feel familiar posting.
-- Allow user to both post anonymously and with an account.
-- Displaying stories from around the world, with he most interesting featured first.
+- Allow user to both posts anonymously and with an account.
+- Displaying stories from around the world, with the most interesting featured first.
 - Providing a search function to browse through the site.
 
 ### Project Goals
 The Project Goals of Corona Tales are:
-- Create an interesting place to to explore other people's experiences.
-- Have people relate to others through reading new experiences.
+- Create an interesting place to explore other people's experiences.
+- Have people relate to others by reading new experiences.
 - Create a database where people's stories are stored securely.
 - Allow people to create a secure account.
 - Allow people to post their own thoughts.
@@ -210,7 +210,7 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
   <img src="https://user-images.githubusercontent.com/44118951/92395862-55dec180-f124-11ea-927e-665258e480a5.png" alt="Fonts">
 </div>
 
-- The primary font, [Eczar](https://fonts.google.com/specimen/Eczar) was chosen because it has an appearance similar to fonts used in books, magazines and printed text, however is not too distracting or stylised. It is serif, so it is has some flair but remains clear and simple. It was chosen also to compliment the secondary font which is a very stylised serif font.
+- The primary font, [Eczar](https://fonts.google.com/specimen/Eczar) was chosen because it has an appearance similar to fonts used in books, magazines and printed text, however, is not too distracting or stylised. It is serif, so it has some flair but remains clear and simple. It was chosen also to compliment the secondary font which is a very stylised serif font.
 - The secondary font, [IM Fell English SC](https://fonts.google.com/specimen/IM+Fell+English+SC) was chosen because it is reminiscent of a typewriter or classic printed text. It gives a sense of reading a book or the feeling of touching paper. It is stylised quite a bit as a serif font, so it stands out from the other text, perfect for a heading.
 
 <div align="center">
@@ -225,7 +225,7 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
   <img src="https://user-images.githubusercontent.com/44118951/92397986-039f9f80-f128-11ea-8431-ab9b01c4dd69.png" alt="Icons">
 </div>
 
-- Icons are taken from the [Material Design Icons](https://material.io/resources/icons/?style=baseline) library and and are utilised as classes in the `<i>` tag.
+- Icons are taken from the [Material Design Icons](https://material.io/resources/icons/?style=baseline) library and are utilised as classes in the `<i>` tag.
 - As they are utilised as classes, they can easily be styled using other classes or IDs in the same tag. I often used Bootstrap classes to style them uniformly.
 - The icons are used for the 'like' button, next to forms as indicators and in the floating menu button.
 - If an item is liked, the icons are swapped out on the fly after a successful ajax response to indicate the change.
@@ -239,7 +239,7 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 ![Story Card 1](https://user-images.githubusercontent.com/44118951/81062707-c2c41f80-8ed6-11ea-86b0-355dd042702c.png)
 ![Story Card 2](https://user-images.githubusercontent.com/44118951/81062698-c061c580-8ed6-11ea-843c-78bd4eb94521.png)
 
-- Colors were chosen from the Materialize CSS palette for ease of use with classes in dynamic content.I mainly targeted bright, bubbly colors to give life to what is essentially a slow, patient content. 
+- Colors were chosen from the Materialize CSS palette for ease of use with classes in dynamic content. I mainly targeted bright, bubbly colors to give life to what is essentially a slow, patient content. 
 - The main background color and the nav color are utilised to give a sense of clam.
 - The main menu button colors are used to represent certain ideas throughout the entire site, so you'll find them reused in forms and menus. For example, posting is purple, home/profile is teal, the main theme color, search is blue, etc.
 - The cards have a set palette of colors to choose from. I chose a subset that was a balance between impact, boldness and readability.
@@ -247,7 +247,7 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 - The colors are kept simple and clean and the use of dark tones is avoided, reserved for text. Shadows are used appropriately to give a sense of depth.
 
 ### Styling
-- For this project I have utilised - [Materialize](https://materializecss.com/) as the style framework.
+- For this project, I have utilised - [Materialize](https://materializecss.com/) as the style framework.
 - The above palette has been used in toasts, messages, error warnings as well.
 - Responsive text sizing has also been utilised on certain elements.
 - Shadows give an impression of depth.
@@ -255,7 +255,7 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 - The menu nav button is made evident the first time you visit the site with a large circle drawing attention to it.
 - Everything has nice universal icons so the meaning can be conveyed through symbols.
 - Tooltips are utilised throughout for clarity.
-**Note** WHile SASS was considered for this project, I faced a large amount of issues with Materialize CSS and so opted not to attempt using SASS.
+**Note** WHile SASS was considered for this project, I faced a large number of issues with Materialize CSS and so opted not to attempt using SASS.
 
 ## Seamless Design
 ### Preloader
@@ -265,10 +265,10 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 - The preloader is also underneath toasts, so it won't block them.
 
 ### AJAX
-- AJAX forms are used throughout the site, as this is a basic modern expectation of users when browsing a site, otherwise there would be serious flow and UX issues.
+- AJAX forms are used throughout the site, as this is a basic modern expectation of users when browsing a site, otherwise, there would be serious flow and UX issues.
 - If logged in, an ajax like button will be present.
 - The Like button utilizes AJAX to encourage easy interaction.
-- On click the icon will send the form in the background to register a like in the database.
+- On click, the icon will send the form in the background to register a like in the database.
 - On success change and deliver a short recognition sound. 
 - The button's default image is decided on whether the like is attached to your account in the database or not.
 
@@ -276,8 +276,8 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 - Infinite Scroll has been implemented to the site using [Infinite Scroll](https://infinite-scroll.com/).
 - Infinite Scroll is applied to story pages to create a social media-like feed.
 - The same preloader icon is used for loading new items.
-- On append re-initialising functions are fire by Infinite Scroll in order to ensure all features work correctly.
-- Initialising features have been grouped into two functions, based on whether they are required for all appended stories, or only stories on the profile page that require editing functions. If a new function needs to be created, it can easily be slipped into one of the two grouped functions, and it will easily function correctly on all pages.
+- On append, re-initialising functions are fire by Infinite Scroll to ensure all features work correctly.
+- Initialising features have been grouped into two functions, based on whether they are required for all appended stories or only stories on the profile page that require editing functions. If a new function needs to be created, it can easily be slipped into one of the two grouped functions, and it will easily function correctly on all pages.
 - [Flask-Paginate](https://pythonhosted.org/Flask-paginate/) automatically provides the page list for the next set of items.
 
 ----
@@ -306,12 +306,12 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 
 - On the very first load of each session, an alert will pop out from the floating menu to alert the user of its presence.
 - I'm utilising this menu as the main point of interaction and navigation for the site.
-- All pages on the site can be accessed through this menu and some features are exclusive to it. On desktop it opens on hover, on mobile with a tap, positioned bottom-right for easy right-hand access.
+- All pages on the site can be accessed through this menu and some features are exclusive to it. On desktop, it opens on hover, on mobile with a tap, positioned bottom-right for easy right-hand access.
 - It hovers above the preloader to maintain importance to the same degree of the nav.
 - It uses a bright and colorful palette to catch the eye. 
-- This is to encourage interaction with these functions in particular, as well as create preference for, and push users towards, the colorful, eye-catching floating menu button, where the key site functions are, while simultaneously diminishing the importance of the basic navbar items.
-- The menu items are tool-tipped and color coordinated for clarity.
-- The green button  changes on context between signup/login/profile/home.
+- This is to encourage interaction with these functions in particular, as well as create a preference for, and push users towards, the colorful, eye-catching floating menu button, where the key site functions are, while simultaneously diminishing the importance of the basic navbar items.
+- The menu items are tool-tipped and color-coordinated for clarity.
+- The green button changes on context between signup/login/profile/home.
 - Each button opens a modal except the button for the aforementioned green button.
 - All forms in the modals have helper text and validation where necessary for user feedback.
 
@@ -322,7 +322,7 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 
 - Active on every page so you can create a post from anywhere.
 - Uses icons, hints on form fields and live validation because the form is a bit longer than the most basic social media forms.
-- If a user is signed in, the form will auto fill with your info if it is saved to the account.
+- If a user is signed in, the form will auto-fill with your info if it is saved to the account.
 - The Post a story option allows people to preview a color by holding down on it before posting.
 - Utilises [CKEditor5](https://ckeditor.com/ckeditor-5/) for the message field, allowing a range of customisability options to make your post stand out.
 - The editor has been rebuilt and customised to include coloring fonts, amongst other additional features.
@@ -330,7 +330,7 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 - Tag field has an autocomplete function that pulls the tags from other stories to be reused.
 - Tag field will automatically cut out any hash symbols added to the tags in the backend, as they are not recognised as the same.
 - Text limit of 40,000 characters
-- Card colors can be previewed on the select dropdown by hover, or holding on mobile
+- Card colors can be previewed on the select dropdown by hover or holding on mobile
 
 #### Search Modal
 <div align="center">
@@ -340,12 +340,12 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 - Utilises the same icons from the Post Modal for coherence.
 - All fields are optional, even for the range fields.
 - The search function is thorough enough to filter through each field sent and return results based.
-- Combines a full text search with integers and timestamps, working through each singly to return results.
+- Combines a full-text search with integers and timestamps, working through each singly to return results.
 - Text search is weighted in the DB, valuing tags higher than other text.
 - Some fields function more explicitly like filters, such as language, rather than a text search, removing stories in other languages.
 - Indexes for times, dates and ages have been included, ensuring that in search both full days are included.
 - The database makes use of arrays, integers, booleans and embedded documents to fully utilise the search abilities.
-- The text index has been tested to include all string info, and excludes common text word searches.
+- The text index has been tested to include all string info and excludes common text word searches.
 
 #### Sign up and Log in Modal
 <div align="center">
@@ -353,7 +353,7 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 </div>
 
 - Log In and SIgnup are available on the same modal as different tabs.
-- Log In is default tab.
+- Log In is the default tab.
 - Has a functional "Remember Me" option.
 - Form validation is used for the Sign Up form.
 - Gives instead validation feedback.
@@ -383,15 +383,15 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 
 - A different random quote on the topic of sharing is pulled from a hand-picked selection will be displayed as the Home page central graphic.
 - I hope will help set the tone by having visitors reflect before reacting.
-- Quotes are pulled from `project/static/js/quotes.json`. It is a custom file I built for to choose quotes.
+- Quotes are pulled from `project/static/js/quotes.json`. It is a custom file I built to choose quotes.
 - New quotes can be easily added by inputting a few small details into this file.
 - I wanted to utilise an API, but the ability to select quotes myself always required paid commitment.
-- I previously had a chart with information on the virus, but the further I developed the site, the less it was in theme. Something written felt much more coherent.
+- I previously had a chart with information on the virus, but the further I developed the site, the less it was in theme. Something was written felt much more coherent.
 
 #### Story Feed
 - Featured stories display at the top of the feed before other stories.
-- Feature stories are automatically set at 21 likes, but for the purpose of this project I have manually set some for display purposes.
-- Under this all other stories are displayed.
+- Feature stories are automatically set at 21 likes, but for this project, I have manually set some for display purposes.
+- Under this, all other stories are displayed.
 - The stories in each section are ordered reverse chronologically, most recent first.
 - The story list from the database will pull 100 stories maximum, featured and non-featured inclusive.
 - Infinite Scroll is used to avoid pagination and create the social media-like feed.
@@ -410,21 +410,21 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 - Tags are always on display so the viewer can get an idea of the theme.
 - Each one is a link to a search page on that tag.
 - The search uses a text index and does not filter posts by tag.
-- This was a choice as to also include content which may have the keywords but not list the tag, however the tags carry a higher importance weight in the index, so they will always be prioritised. 
+- This was a choice as to also include content which may have the keywords but not list the tag, however, the tags carry a higher importance weight in the index, so they will always be prioritised. 
 - If logged in, a 'like' button will be displayed.
-- The button uses ajax for seamless experience and registered the like to the database on click.
+- The button uses ajax for a seamless experience and registered the like to the database on click.
 - Likes are deliberately obfuscated until clicked, at which point they are shown briefly by a tooltip.
 - Simple card format, all evenly sized for uniformity when scrolling
-- I give everything one like as a thanks for posting
+- I give everything one like as a thank you for posting
 
 ### Profile Page
 #### User Feed
 - The profile page is made of two tabs. A user story feed and a user settings section.
-- The user story feed functions similarly to the main feed but with a drew differences.
+- The user story feed functions similarly to the main feed but with a few differences.
 - All stories are filtered to only user-created stories. 
 - Each story has an edit button instead of a like button.
 - The edit button has a different color to differentiate it from the main menu and will sit just to the right of the main menu button on small screens.
-- It displays a menu perpendicular to the main menu, to not have menu tooltips clip.
+- It displays a menu perpendicular to the main menu, to not have the menu tooltips clip.
 - It has two color-coordinated options, edit and delete.
 <div align="center">
   <img src="https://user-images.githubusercontent.com/44118951/92407617-60f11c00-f13b-11ea-9106-ad698e345441.png" alt="Edit Menu">
@@ -440,16 +440,16 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 
 - The layout is standard with the rest of the site with buttons sitting on the right.
 - All forms have validation and helper text.
-- Sections have dividers for clarity and the delete buttons are centered for clarity.
-- User can opt to input basic data that will pre-fill their data when posting a story, if any info is saved, a button to delete the info is shown.
+- Sections have dividers for clarity and the delete buttons are centred for clarity.
+- User can opt to input basic data that will pre-fill their data when posting a story if any info is saved, a button to delete the info is shown.
 - Users can also change their password securely here.
-- Alternatively it is possible to delete the account and stories separately. A choice made as it is possible to post stories both logged in and anonymously.
+- Alternatively, it is possible to delete the account and stories separately. A choice made as it is possible to post stories both logged in and anonymously.
 - Delete options all have confirmation modals.
 
 ### Other Pages
 #### Search Page
 - The page is essentially the homepage feed, with all the same features but with filtered results.
-- The  search page returns results either sorted by text-score if text was entered, or within the range requested in the search form.
+- The search page returns results either sorted by text-score if the text was entered or within the range requested in the search form.
 - Shows a message if no results are found.
 - A specific per-tag search was tried but I preferred the weighted text search.
 
@@ -486,7 +486,7 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 - Work on mobile font-size formatting (I don't currently have access to enough phones for this)
 - More testing on views and debugging 
 - Italian language site
-- Optimize Edit Modal creation on user page.
+- Optimize Edit Modal creation on the user page.
 
 ### Content 
 - Share button for each card
@@ -510,14 +510,14 @@ Wireframes: https://drive.google.com/open?id=1qIyntbCbm1Q0vOoC849uHAyfC5QICYAL
 ### Details
 - I have utilised a **NoSQL** database, [MongoDB](https://www.mongodb.com/) throughout the entire project development.
 - I have tried to use different field types for the documents to experiment with the database.
-- I have used tried to manipilate the data using different command in Python views to explore their use.
+- I have used tried to manipulate the data using different commands in Python views to explore their use.
 
 ## Data models
 ### Users
 | Field Name | Field Type | Info |
  --- | --- | ---
  username | string | Mostly used for display purposes.
- user_id | string | The username in capitals to prevent capitilisation having an effect on login and account creation.
+ user_id | string | The username in capitals to prevent capitalisation affecting login and account creation.
  password | string | the protected password hash.
  prefill | object | Used to prefill forms. Keys: name, age, country, story_language. Type: String.
  liked | array | Contains the doc IDs of each liked story. Used to remember liked stories.
@@ -532,7 +532,7 @@ country | string | Lists the country they are in. Used as a filter in search.
 story_language | string | Lists the story language. Used as a filter in search.
 color | string | Saves the story card color. Must be an appropriate HTML class.
 title | string | Title of the stories.
-text | string | The text of the story. Saved as a HTML string.
+text | string | The text of the story. Saved as an HTML string.
 time | int64 | Javascript timestamp in seconds.
 featured | boolean | Places the story in the featured section if true.
 likes | int32 | Number of likes the story has received. Featured changes to true at 21 likes.
@@ -576,7 +576,7 @@ edit_time | int64 | If the story has been edited it saves the timestamp in secon
 - [Flask-Paginate](https://pythonhosted.org/Flask-paginate/)
     * Paginates content with my settings, allowing Infinite Scroll to append items and recognise page limits 
 - [Gunicorn](https://gunicorn.org/)
-    * Server deployment on heroku
+    * Server deployment on Heroku
 
 ## Platforms
 - [Github](https://github.com/)
@@ -607,14 +607,14 @@ edit_time | int64 | If the story has been edited it saves the timestamp in secon
 - CSS has been validated with [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) and auto-prefixed with [CSS Autoprefixer](https://autoprefixer.github.io/).
 - Links checked with [W3C Link Checker](https://validator.w3.org/checklink).
 - Each javascript file was tested on the site for errors and functionality using the console and with [JSHint](https://jshint.com/).
-- gitignore file has been included to prevent system file commits
+- .gitignore file has been included to prevent system file commits
 - requirements.txt updated
 
 ### General Testing
 - Each feature was developed and tested in its own branch before being merged with master. Branches were subsequently deleted.
-- The views have been thoroughly manually tested and refined over time, utilising  python features to create documents in the database in a useful, flexible structure.
-- The documents in the database have been examined and structured in a manner so that the information is well defined, checking how the views effect documents.
-- Some tests were performed on views and were tested manually throuroughly. For example, every possible combination on search was tested.
+- The views have been thoroughly manually tested and refined over time, utilising python features to create documents in the database in a useful, flexible structure.
+- The documents in the database have been examined and structured in a manner so that the information is well defined, checking how the views affect documents.
+- Some tests were performed on views and were tested manually thoroughly. For example, every possible combination of the search feature was tested.
 - Each time a feature was added, all the functions were tested to see if there was an impact.
 - The python module structure has been tested and implemented, adding config.py, setup.py and some tests.
 - The site was sent to friends for feedback and testing.
@@ -624,7 +624,7 @@ edit_time | int64 | If the story has been edited it saves the timestamp in secon
 - Backup Map functions have been tested in a local deployment.
 - Email error functions have been tested offline as well.
 - External links open in a new tab.
-- I regret that, due to the amount of troubleshooting I had to do with the CSS, I was unable to fully utilise pythons's unittest framework. I made some simple views, but the CSS troubleshooting slowed down my app development to the point where I had to move forward with features to make the deadline. More testing is necessary in this area.
+- I regret that, due to the amount of troubleshooting I had to do with the CSS, I was unable to fully utilise pythons' unittest framework. I made some simple views, but the CSS troubleshooting slowed down my app development to the point where I had to move forward with features to make the deadline. More testing is necessary in this area.
 
 ### Mobile Testing
 - I tested the site personally on my Android device, going through the entire process, checking buttons, functions, checking out, etc. I was personally unable to test on iOS.
@@ -640,27 +640,27 @@ edit_time | int64 | If the story has been edited it saves the timestamp in secon
 
 ## Bugs
 ### Known Bugs
-- On android devices, when writing incredibly long stories, the CKEditor formatting bar gets stuck at the top of the screen even after scrolling.
+- On Android devices, when writing incredibly long stories, the CKEditor formatting bar gets stuck at the top of the screen even after scrolling.
 - It seems there a certain combination of characters in certain stories that act as a wildcard for the text search index in the database, with the story being in the results for each search. Needs further investigation.
 
 ### Fixed Bugs
-**Note: Throughout development I found my largest issues were caused by difficulties with Materialize CSS components. I sincerely regret using it, as I spent a lot of time debugging the CSS instead of developing features or creating test views. Bootstrap and Foundation are both more complex and therefore more flexible, perhaps more study is required to utilise them well, but that suits me. The simplicity of Materialize may suit some developers, but I found it to be a hinderance.
+**Note: Throughout development, I found my largest issues were caused by difficulties with Materialize CSS components. I sincerely regret using it, as I spent a lot of time debugging the CSS instead of developing features or creating test views. Bootstrap and Foundation are both more complex and therefore more flexible, perhaps more study is required to utilise them well, but that suits me. The simplicity of Materialize may suit some developers, but I found it to be a hindrance.
 
 #### Materialize CSS
-- The tags feature in Materialize "Chips" was something I implemented early on as the tag system, only to find out that when I began testing using real devices as opposed to developer mode, that it had [unfixable bugs](https://github.com/Dogfalo/materialize/issues/5722) on android. To enter a tag, you must use the "Enter" key, however on android, within a form, the enter button becomes a "Tab" button. I edited the Materialize.js to allow using spaces, including keys for space on android, but it still would not register. This has been a known issue since 2018 In the end I found a workaround by implementing the Chips outside of the form, pulling the data from the tags and reinserting it as a list, key by key, into the form. This was just one of many issues I found and still have with the Materialize CSS.
+- The tags feature in Materialize "Chips" was something I implemented early on as the tag system, only to find out that when I began testing using real devices as opposed to developer mode, that it had [unfixable bugs](https://github.com/Dogfalo/materialize/issues/5722) on android. To enter a tag, you must use the "Enter" key, however on android, within a form, the enter button becomes a "Tab" button. I edited the Materialize.js to allow using spaces, including keys for space on android, but it still would not register. This has been a known issue since 2018. In the end, I found a workaround by implementing the Chips outside of the form, pulling the data from the tags and reinserting it as a list, key by key, into the form. This was just one of many issues I found and still have with the Materialize CSS.
 - Many of the components are inflexible, functioning well while used singly but buggy and requiring a lot of specific code editing when used in conjunction with one another
 - Tabs within a modal, for example, didn't have the active tab selected properly so I had to reinitiate it with specific settings.
 - Tooltips weren't fixed on the page for the action buttons, scrolling upwards on mobile devices, I simply had to create my own.
-- Z-indexes have a bizzare order, placing less relevant components under or over others, seemingly randomly. The action buttons themselves had z-indexes above the Nav, as well as modals, so scrolling on the user page left buttons clipping, I had to edit z-indexes.
+- Z-indexes have a bizarre order, placing less relevant components under or over others, seemingly randomly. The action buttons themselves had z-indexes above the Nav, as well as modals, so scrolling on the user page left buttons clipping, I had to edit z-indexes.
 - Bullet points removed by default in styles
-- Some form components recognise "required" attribute, other do not, validation only functions on some of fields, requiring custom code. The list goes on.
-- Documentation was missing, ouright incorrect, or messy in many parts. There were classes that didn not function as described, and examples that weren't connected to the information.
+- Some form components recognise "required" attribute, others do not, validation only functions on some of the fields, requiring custom code. The list goes on.
+- Documentation was missing, outright incorrect, or messy in many parts. Many classes did not function as described, and examples that weren't connected to the information.
 
 #### Others
-- Troubleshooting database issues was relatively easy. As this is my first project utilising the database, a little bit of study in the dcumentation to learn syntax was usually enough.
-- I came accross issues with cirular imports when writing the app, and found that the best solution was to scale the app up a little from a single app.py, to a module. This allowed me to avoid circular imports, keep the the app information organised and make the app nicely distributable.
+- Troubleshooting database issues was relatively easy. As this is my first project utilising the database, a little bit of study in the documentation to learn syntax was usually enough.
+- I came across issues with circular imports when writing the app, and found that the best solution was to scale the app up a little from a single app.py to a module. This allowed me to avoid circular imports, keep the app information organised and make the app nicely distributable.
 - I began trying out creating an app-factory but found it was overkill for my purposes.
-- The search function had a number of iterations before it was fully functional. The main issue was the presence or lack of variables in the search. The main way to resolve it was to declare all the variables as `None` and only change them if present in the form.
+- The search function had several iterations before it was fully functional. The main issue was the presence or lack of variables in the search. The main way to resolve it was to declare all the variables as `None` and only change them if present in the form.
 
 ----
    
@@ -706,14 +706,14 @@ edit_time | int64 | If the story has been edited it saves the timestamp in secon
     'IP', <key>
     'PORT', <key>
     ```
-    - Certain variables may not be necessary based on your setup, but the some files will need to be modified accordingly.
+    - Certain variables may not be necessary based on your setup, but some files will need to be modified accordingly.
     - The `DEBUG` variable can be added if in development.
 
 9. Run the local server:
     ```
     flask run
     ```
-    This command may need to be altered depending on your setup, for example I use:
+    This command may need to be altered depending on your setup, for example, I use:
     ```
     flask run -h localhost -p 8080
     ```
@@ -723,10 +723,10 @@ edit_time | int64 | If the story has been edited it saves the timestamp in secon
 
 #### Setup.py
 1. A setup.py file has been created for easy deployment.
-0. At a python terminal you can run `python setup.py sdist` to create a source distributable
-0. This can then be unpacked, and the module be installed by running python `setup.py install` from its directory.
+0. At a python terminal, you can run `python setup.py sdist` to create a source distributable
+0. This can then be unpacked, and the module is installed by running python `setup.py install` from its directory.
 0. This will install the package for modification.
-0. This will allow you to run the program locally, if you wish
+0. This will allow you to run the program locally if you wish
 0. The steps from 6 onwards from the above instructions will still have to be followed.
 
 ## Heroku Deployment
